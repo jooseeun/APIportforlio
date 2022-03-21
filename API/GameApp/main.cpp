@@ -21,13 +21,5 @@ int __stdcall WinMain(_In_ HINSTANCE hInstance,
     _In_ int       nCmdShow)
 {
 
-    GameEngineDebug::LeakCheckOn();
-    GameEngineWindow::GetInst().CreateGameWindow(hInstance, "GameWindow");
-    GameEngineWindow::GetInst().ShowGameWindow();
-    GameEngineWindow::GetInst().MessageLoop(GameInit, GameLoop);
-
-    GameEngineWindow::Destroy();
-
- 
-    GameEngineWindow::Destroy();
+    GameEngine::Start<StardewVallyGame>();
 }
