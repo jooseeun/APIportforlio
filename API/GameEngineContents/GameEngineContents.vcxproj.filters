@@ -8,14 +8,8 @@
     <ClInclude Include="EndingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Play</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
       <Filter>Title</Filter>
@@ -23,13 +17,70 @@
     <ClInclude Include="TitleBackGround.h">
       <Filter>Title</Filter>
     </ClInclude>
-    <ClInclude Include="BotUI.h">
-      <Filter>Play\Global</Filter>
-    </ClInclude>
     <ClInclude Include="TopUI.h">
       <Filter>Play\Global</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCreateLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="narrationLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmerHouseLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="BusStopLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TownLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Town2Level.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MineEntryLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine1Level.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine2Level.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LobinHouseLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MarnieHouseLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CoopLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolUI.h">
+      <Filter>Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="EnergyUI.h">
+      <Filter>Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
       <Filter>Play\Global</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,14 +92,8 @@
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Play</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
       <Filter>Title</Filter>
@@ -56,13 +101,70 @@
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>Title</Filter>
     </ClCompile>
-    <ClCompile Include="BotUI.cpp">
-      <Filter>Play\Global</Filter>
-    </ClCompile>
     <ClCompile Include="TopUI.cpp">
       <Filter>Play\Global</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCreateLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="narrationLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmerHouseLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="BusStopLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TownLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Town2Level.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MineEntryLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine1Level.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine2Level.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LobinHouseLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MarnieHouseLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CoopLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolUI.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="EnergyUI.cpp">
+      <Filter>Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
       <Filter>Play\Global</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,6 +183,9 @@
     </Filter>
     <Filter Include="Play\Global">
       <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Mine">
+      <UniqueIdentifier>{c96028d3-02da-46dd-9daf-6ef5dcb71a35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

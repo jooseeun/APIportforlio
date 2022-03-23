@@ -3,7 +3,6 @@
 #include <string>
 #include <GameEngineBase/GameEngineDebug.h>
 
-// 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당하는 녀석이다.
 // 설명 :
 class GameEngineImage;
 class GameEngineLevel;
@@ -72,8 +71,8 @@ private:
 	static GameEngineLevel* NextLevel_;
 	static GameEngine* UserContents_;
 
-	static GameEngineImage* WindowMainImage_; // 그려지면 화면에 진짜 나오게 되는 이미지
-	static GameEngineImage* BackBufferImage_; // 깜빡임을 해결하려고 버퍼로 사용하는 이미지
+	static GameEngineImage* WindowMainImage_;
+	static GameEngineImage* BackBufferImage_;
 
 	static void WindowCreate();
 	static void EngineInit();

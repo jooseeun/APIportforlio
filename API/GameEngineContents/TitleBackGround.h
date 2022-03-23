@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class TitleBackGround
+class TitleBackGround : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,8 +16,12 @@ public:
 	TitleBackGround& operator=(TitleBackGround&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+
+	void Render() override;
 
 private:
+
 
 };
 
