@@ -14,6 +14,10 @@ void ToolUI::Start()
 	SetScale({ 800,96 });
 }
 
+
+
+
+
 void ToolUI::Render()
 {
 	DebugRectRender();

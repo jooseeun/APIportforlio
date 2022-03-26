@@ -14,11 +14,13 @@ TitleLogo::~TitleLogo()
 
 void TitleLogo::Start()
 {
-	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 500, 500 });
+	SetPosition({ 640,258 });
+	SetScale({ 796, 366 });
+	CreateRendererToScale("TitleLogo.bmp", float4(796.0f, 366.0f));
+
 }
 
 void TitleLogo::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
 }

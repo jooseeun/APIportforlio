@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class TopUI
+class TopUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +18,7 @@ public:
 protected:
 
 private:
-
+	void Start() override;
+	void Render() override;
 };
 

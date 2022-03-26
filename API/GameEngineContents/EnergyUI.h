@@ -1,7 +1,7 @@
 #pragma once
-
+#include <GameEngine/GameEngineActor.h>
 // Ό³Έν :
-class EnergyUI
+class EnergyUI :public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +17,7 @@ public:
 protected:
 
 private:
-
+	void Start() override;
+	void Render() override;
 };
 

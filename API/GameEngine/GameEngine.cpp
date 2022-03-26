@@ -3,6 +3,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineImageManager.h"
 
+
 std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
 GameEngineLevel* GameEngine::CurrentLevel_ = nullptr;
 GameEngineLevel* GameEngine::NextLevel_ = nullptr;
@@ -58,6 +59,8 @@ void GameEngine::EngineInit()
 }
 void GameEngine::EngineLoop()
 {
+
+
     // 엔진수준에서 매 프레임마다 체크하고 싶은거
     UserContents_->GameLoop();
 
@@ -84,6 +87,7 @@ void GameEngine::EngineLoop()
     {
         MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
     }
+
 
 
     // 레벨수준 시간제한이 있는 게임이라면
