@@ -18,6 +18,8 @@ public:
 protected:
 
 private:
+	float Speed_;
+	void Update() override;
 	void Start() override;
 	void Render() override;
 };

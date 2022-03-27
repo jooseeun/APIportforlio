@@ -32,7 +32,7 @@
     <ClInclude Include="narrationLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="FarmerHouseLevel.h">
+    <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="FarmLevel.h">
@@ -116,7 +116,7 @@
     <ClCompile Include="narrationLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="FarmerHouseLevel.cpp">
+    <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="FarmLevel.cpp">

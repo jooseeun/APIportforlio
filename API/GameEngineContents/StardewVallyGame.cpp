@@ -1,7 +1,5 @@
 #include "StardewVallyGame.h"
-#include "FarmerHouseLevel.h"
-#include "StardewVallyGame.h"
-#include "FarmerhouseLevel.h"
+#include "PlayLevel.h"
 #include "EndingLevel.h"
 #include "TitleLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
@@ -37,10 +35,10 @@ void StardewVallyGame::GameInit()
 
 
 	CreateLevel<TitleLevel>("Title");
-	CreateLevel<FarmerHouseLevel>("FarmerHouse");
+	CreateLevel<PlayLevel>("FarmerHouse");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Title");
-	//ChangeLevel("FarmerHouse");
+	//ChangeLevel("Title");
+	ChangeLevel("FarmerHouse");
 }
 
 void StardewVallyGame::GameLoop()

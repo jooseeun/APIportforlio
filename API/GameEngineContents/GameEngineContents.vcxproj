@@ -179,7 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="FarmerHouseLevel.h">
+    <ClInclude Include="PlayLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -293,7 +293,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="FarmerHouseLevel.cpp">
+    <ClCompile Include="PlayLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
