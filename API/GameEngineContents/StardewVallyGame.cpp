@@ -38,7 +38,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<PlayLevel>("FarmerHouse");
 	CreateLevel<EndingLevel>("Ending");
 	//ChangeLevel("Title");
-	ChangeLevel("FarmerHouse");
+	ChangeLevel("FarmerHouse"); 
 }
 
 void StardewVallyGame::GameLoop()
