@@ -7,8 +7,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
 
-Player::Player() 
-	:Speed_(90.0f)
+
+Player::Player()
+	:Speed_(125.0f)
 {
 }
 
@@ -17,11 +18,19 @@ Player::~Player()
 }
 
 void Player::Start()
-{
+{	
+
 	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 100, 100 });
-	GameEngineRenderer* Render = CreateRendererToScale("Body.bmp", { 64, 128 });
-	Render->SetIndex(1);
+	GameEngineRenderer* Body = CreateRendererToScale("Body.bmp", { 64, 128 });
+	Body->SetIndex(0);
+	GameEngineRenderer* Arm = CreateRendererToScale("Body.bmp", { 64, 128 });
+	Arm->SetIndex(6);
+	GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, RenderPivot::CENTER, { 0,4 });
+	Hair->SetIndex(101);
+	GameEngineRenderer* Pants = CreateRendererToScale("Pants.bmp", { 64, 128 });
+	Pants->SetIndex(0);
+	GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, RenderPivot::CENTER, { 0,16 });
+	Shirts->SetIndex(387);
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{

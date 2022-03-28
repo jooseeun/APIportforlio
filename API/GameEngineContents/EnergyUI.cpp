@@ -13,10 +13,8 @@ EnergyUI::~EnergyUI()
 
 void EnergyUI::Start()
 {
-	SetPosition({1248,592});
-	SetScale({ 48, 224 });
-
-	CreateRendererToScale("EnergyUI.bmp", float4(48.0f, 224.0f));
+	SetPosition({1247,593});
+	CreateRenderer("EnergyUI.bmp");
 
 }
 

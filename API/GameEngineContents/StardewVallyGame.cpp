@@ -43,8 +43,16 @@ void StardewVallyGame::GameInit()
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 	}
 
-	GameEngineImage* Image = GameEngineImageManager::GetInst()->Find("Body.bmp");
-	Image->Cut({ 64, 128 });
+	GameEngineImage* Body = GameEngineImageManager::GetInst()->Find("Body.bmp");
+	Body->Cut({ 64, 128 });
+	GameEngineImage* Hair = GameEngineImageManager::GetInst()->Find("Hair.bmp");
+	Hair->Cut({ 64, 128 });
+	GameEngineImage* Pants = GameEngineImageManager::GetInst()->Find("Pants.bmp");
+	Pants->Cut({ 64, 128 });
+	GameEngineImage* Shirts = GameEngineImageManager::GetInst()->Find("Shirts.bmp");
+	Shirts->Cut({ 32, 32 });
+	GameEngineImage* TitleButton = GameEngineImageManager::GetInst()->Find("TitleButton.bmp");
+	TitleButton->Cut({ 222, 174 });
 
 	if (false == GameEngineInput::GetInst()->IsKey("FarmHouseLevel"))
 	{

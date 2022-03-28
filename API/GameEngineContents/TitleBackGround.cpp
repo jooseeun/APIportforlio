@@ -13,9 +13,8 @@ TitleBackGround::~TitleBackGround()
 void TitleBackGround::Start()
 {
 	SetPosition({ 640, 600});
-	SetScale({1280,1440});
 
-	CreateRendererToScale("TitleBackground.bmp", float4(1280.0f, 1440.0f));
+	CreateRenderer("TitleBackground.bmp");
 }
 
 void TitleBackGround::Render()
