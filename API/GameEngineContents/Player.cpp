@@ -20,17 +20,16 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale({ 100, 100 });
+	GameEngineRenderer* Render = CreateRendererToScale("Body.bmp", { 64, 128 });
+	Render->SetIndex(1);
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
-		// 이때 대문자여야 합니다.
 		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
 		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
 		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
-		GameEngineInput::GetInst()->CreateKey("Jump", VK_LSHIFT);
-		GameEngineInput::GetInst()->CreateKey("Fire", VK_SPACE);
-		// VK_LBUTTON;
+
 	}
 
 }
@@ -59,14 +58,9 @@ void Player::Update()
 	}
 
 
-	// 내가 키를 눌렀다면 움직여라.
-	//if (0 != GetAsyncKeyState('A'))
-	//{
-	//	int a = 0;
-	//}
 
 }
 void Player::Render()
 {
-	DebugRectRender();
+
 }

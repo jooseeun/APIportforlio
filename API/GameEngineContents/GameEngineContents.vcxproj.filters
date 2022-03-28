@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="StardewVallyGame.h" />
-    <ClInclude Include="EndingLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -29,7 +26,7 @@
     <ClInclude Include="narrationLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="FarmHouseLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="FarmLevel.h">
@@ -83,9 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
-    <ClCompile Include="EndingLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -110,7 +104,7 @@
     <ClCompile Include="narrationLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="FarmHouseLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="FarmLevel.cpp">

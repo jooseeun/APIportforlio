@@ -167,15 +167,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EnergyUI.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="FarmHouseLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -277,15 +273,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="EnergyUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="FarmHouseLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
