@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="StardewVallyGame.h" />
-    <ClInclude Include="EndingCredit.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
     <ClInclude Include="EndingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -18,10 +15,10 @@
       <Filter>Title</Filter>
     </ClInclude>
     <ClInclude Include="TopUI.h">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
@@ -69,10 +66,10 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ToolUI.h">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="EnergyUI.h">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Play</Filter>
@@ -81,14 +78,11 @@
       <Filter>Play\Mine</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
-    <ClCompile Include="EndingCredit.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -102,10 +96,10 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="TopUI.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
@@ -153,10 +147,10 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ToolUI.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="EnergyUI.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Play</Filter>
@@ -165,13 +159,10 @@
       <Filter>Play\Mine</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>Play\Global</Filter>
+      <Filter>Play\Playdefault</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Ending">
-      <UniqueIdentifier>{6bd41c0d-5163-487e-b4c3-f873b74f7e20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{7485c8d2-d493-49c9-9d3c-cb4875e4528e}</UniqueIdentifier>
     </Filter>
@@ -181,11 +172,11 @@
     <Filter Include="Title">
       <UniqueIdentifier>{5df20397-b445-49a8-ab9c-50ab93349bbd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play\Global">
-      <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Play\Mine">
       <UniqueIdentifier>{c96028d3-02da-46dd-9daf-6ef5dcb71a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Playdefault">
+      <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -167,10 +167,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EndingCredit.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EndingLevel.h">
       <SubType>
       </SubType>
@@ -278,10 +274,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CoopLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EndingCredit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
