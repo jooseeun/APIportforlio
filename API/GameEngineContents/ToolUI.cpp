@@ -13,10 +13,8 @@ ToolUI::~ToolUI()
 
 void ToolUI::Start()
 {
-	SetPosition({ 260,664 });
-
-	GameEngineRenderer* ren1 = CreateRendererToScale("Menutile.bmp", {256,256});
-	ren1->SetIndex(16);
+	SetPosition({ 640,664 });
+	CreateRenderer("ToolUI.bmp");
 
 }
 
