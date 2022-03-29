@@ -7,7 +7,6 @@
 #include "CoopLevel.h"
 #include "Mine1Level.h"
 #include "Mine2Level.h"
-#include "PlayerCreateLevel.h"
 #include "ShopLevel.h"
 #include "TownLevel.h"
 #include "Town2Level.h"
@@ -27,13 +26,14 @@ StardewVallyGame::~StardewVallyGame()
 void StardewVallyGame::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
-	
 
+	{
 	// 현재 디렉토리
 	GameEngineDirectory ResourcesDir;
 	ResourcesDir.MoveParent("API");
 	ResourcesDir.Move("Resources");
 	ResourcesDir.Move("Image");
+	ResourcesDir.Move("Player");
 
 	// 폴더안에 모든 이미지 파일을 찾는다.
 	std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
@@ -41,6 +41,40 @@ void StardewVallyGame::GameInit()
 	for (size_t i = 0; i < AllImageFileList.size(); i++)
 	{
 		GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+	}
+	}
+	{
+
+		// 현재 디렉토리
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
+		ResourcesDir.Move("Title");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+	}
+	{
+		// 현재 디렉토리
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
+		ResourcesDir.Move("UI");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
 	}
 
 	GameEngineImage* Body = GameEngineImageManager::GetInst()->Find("Body.bmp");
@@ -56,15 +90,14 @@ void StardewVallyGame::GameInit()
 
 	if (false == GameEngineInput::GetInst()->IsKey("FarmHouseLevel"))
 	{
-		// 이때 대문자여야 합니다.
-		GameEngineInput::GetInst()->CreateKey("FarmHouseLevel", '1');
-		GameEngineInput::GetInst()->CreateKey("TitleLevel", '2');
+		GameEngineInput::GetInst()->CreateKey("PlayerCreate", '1');
+		GameEngineInput::GetInst()->CreateKey("FarmHouseLevel", '2');
+		GameEngineInput::GetInst()->CreateKey("TitleLevel", '0');
 	}
 
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
-	CreateLevel<PlayerCreateLevel>("PlayerCreateLevel");
 	CreateLevel<IntroLevel>("IntroLevel");
 	CreateLevel<FarmLevel>("FarmLevel");
 	CreateLevel<CoopLevel>("CoopLevel");

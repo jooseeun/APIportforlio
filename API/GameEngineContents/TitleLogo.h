@@ -15,11 +15,14 @@ public:
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
 	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;
 
+
 protected:
 	void Start();
-	void Render();
+	void Update() override;
 
 private:
+	bool hide_;
+	bool show_;
 
 };
 

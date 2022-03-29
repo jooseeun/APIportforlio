@@ -105,6 +105,12 @@ public:
 
 		return *this;
 	}
+	///////////세은만든코드
+	/*bool operator==(const float _Value) const
+	{
+		return(x == _Value && y == _Value && z == _Value);
+
+	}*/
 
 
 public:

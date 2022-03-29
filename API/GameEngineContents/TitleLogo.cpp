@@ -1,4 +1,5 @@
 #include "TitleLogo.h"
+#include "PlayerCreate.h"
 #include <Windows.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngine.h>
@@ -6,9 +7,11 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
-
+#include <GameEngineBase/GameEngineTime.h>
 
 TitleLogo::TitleLogo()
+	:hide_(false),
+	show_(false)
 {
 }
 
@@ -38,8 +41,27 @@ void TitleLogo::Start()
 		{ 369,359 });
 	ExitButton->SetIndex(3);
 
+
 }
-void TitleLogo::Render()
+void TitleLogo::Update()
 {
-	//DebugRectRender();
+	if (true == GameEngineInput::GetInst()->IsDown("PlayerCreate"))
+	{
+		hide_ = true;
+
+	}
+
+	if (hide_ == true)
+	{
+		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 900.0f);
+		float4 GetPos_ = GetPosition();
+		if (1800 <= GetPos_.x)
+		{
+			PlayerCreate* Ptr = GetLevel()->CreateActor<PlayerCreate>();
+			Ptr->SetPosition(GameEngineWindow::GetScale().Half());
+			hide_==false;
+		}
+	}
+
+	
 }

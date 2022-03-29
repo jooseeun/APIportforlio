@@ -14,9 +14,6 @@
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerCreateLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="narrationLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -74,14 +71,14 @@
     <ClInclude Include="ContentsEnums.h">
       <Filter>Level\Global</Filter>
     </ClInclude>
-    <ClInclude Include="CreatePlayerLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleBackGround.h">
-      <Filter>Actor</Filter>
+      <Filter>Actor\Title</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Actor</Filter>
+      <Filter>Actor\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCreate.h">
+      <Filter>Actor\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +93,6 @@
       <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCreateLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="narrationLevel.cpp">
@@ -155,14 +149,14 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
-    <ClCompile Include="CreatePlayerLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TitleBackGround.cpp">
-      <Filter>Actor</Filter>
+      <Filter>Actor\Title</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor</Filter>
+      <Filter>Actor\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCreate.cpp">
+      <Filter>Actor\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

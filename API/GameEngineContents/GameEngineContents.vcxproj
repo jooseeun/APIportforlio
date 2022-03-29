@@ -167,10 +167,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="CreatePlayerLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EnergyUI.h">
       <SubType>
       </SubType>
@@ -227,7 +223,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayerCreateLevel.h">
+    <ClInclude Include="PlayerCreate.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -278,10 +274,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CoopLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="CreatePlayerLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -337,7 +329,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayerCreateLevel.cpp">
+    <ClCompile Include="PlayerCreate.cpp">
       <SubType>
       </SubType>
     </ClCompile>
