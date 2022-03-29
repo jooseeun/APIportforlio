@@ -89,6 +89,11 @@ void StardewVallyGame::GameInit()
 	TitleButton->Cut({ 222, 174 });
 	GameEngineImage* CreateTile = GameEngineImageManager::GetInst()->Find("Menutile.bmp");
 	CreateTile->Cut({ 256, 256 });
+	GameEngineImage* BigLeaf = GameEngineImageManager::GetInst()->Find("BigLeaf.bmp");
+	BigLeaf->CutCount(3,1);
+	GameEngineImage* SmallLeaf = GameEngineImageManager::GetInst()->Find("SmallLeaf.bmp");
+	SmallLeaf->CutCount(3, 1);
+
 	
 	if (false == GameEngineInput::GetInst()->IsKey("FarmHouseLevel"))
 	{
