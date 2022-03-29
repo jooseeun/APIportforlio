@@ -167,6 +167,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CreatePlayerLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EnergyUI.h">
       <SubType>
       </SubType>
@@ -212,6 +216,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="narrationLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ContentsEnums.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -270,6 +278,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CoopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CreatePlayerLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

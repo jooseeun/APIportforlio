@@ -5,17 +5,11 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Title</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleBackGround.h">
-      <Filter>Title</Filter>
-    </ClInclude>
     <ClInclude Include="TopUI.h">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
@@ -63,19 +57,31 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ToolUI.h">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="EnergyUI.h">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Play</Filter>
+      <Filter>Actor\Play</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Play\Mine</Filter>
+      <Filter>Actor\Play\Mine</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnums.h">
+      <Filter>Level\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatePlayerLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,17 +89,11 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleBackGround.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
     <ClCompile Include="TopUI.cpp">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
@@ -141,36 +141,51 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ToolUI.cpp">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="EnergyUI.cpp">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Play</Filter>
+      <Filter>Actor\Play</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Play\Mine</Filter>
+      <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>Play\Playdefault</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatePlayerLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
       <UniqueIdentifier>{7485c8d2-d493-49c9-9d3c-cb4875e4528e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play">
+    <Filter Include="Level\Global">
+      <UniqueIdentifier>{4e66794d-661b-4a18-9265-47d3ebb39aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{124b1e5b-67b6-46ea-acf7-45ba685767e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play">
       <UniqueIdentifier>{ad9b271b-908c-46ba-96e7-ae3bb31c03dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Title">
-      <UniqueIdentifier>{5df20397-b445-49a8-ab9c-50ab93349bbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play\Mine">
+    <Filter Include="Actor\Play\Mine">
       <UniqueIdentifier>{c96028d3-02da-46dd-9daf-6ef5dcb71a35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play\Playdefault">
+    <Filter Include="Actor\Play\Playdefault">
       <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Title">
+      <UniqueIdentifier>{5df20397-b445-49a8-ab9c-50ab93349bbd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

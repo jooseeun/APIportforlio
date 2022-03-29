@@ -3,16 +3,8 @@
 #include "ToolUI.h"
 #include "TopUI.h"
 #include "EnergyUI.h"
+#include "ContentsEnums.h"
 
-enum class ORDER
-{
-	BACKGROUND,
-	PLAYER,
-	MONSTER,
-	UI,
-	NPC,
-	TOOL
-};
 FarmHouseLevel::FarmHouseLevel() 
 {
 }

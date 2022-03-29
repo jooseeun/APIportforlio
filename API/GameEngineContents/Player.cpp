@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "BackGround.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
