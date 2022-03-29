@@ -62,6 +62,6 @@ void TitleLogo::Update()
 			hide_==false;
 		}
 	}
-
+	
 	
 }

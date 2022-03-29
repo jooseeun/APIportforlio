@@ -4,6 +4,10 @@
 #include "TopUI.h"
 #include "EnergyUI.h"
 #include "ContentsEnums.h"
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
+#include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineDebug.h>
 
 FarmHouseLevel::FarmHouseLevel() 
 {
@@ -24,8 +28,13 @@ void FarmHouseLevel::Loading()
 
 void FarmHouseLevel::Update()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("TitleLevel"))
+	{
+		GameEngine::GlobalEngine().ChangeLevel("TitleLevel");
 
+	}
 }
+
 void FarmHouseLevel::LevelChangeStart()
 {
 }

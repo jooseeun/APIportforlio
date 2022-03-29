@@ -87,7 +87,9 @@ void StardewVallyGame::GameInit()
 	Shirts->Cut({ 32, 32 });
 	GameEngineImage* TitleButton = GameEngineImageManager::GetInst()->Find("TitleButton.bmp");
 	TitleButton->Cut({ 222, 174 });
-
+	GameEngineImage* CreateTile = GameEngineImageManager::GetInst()->Find("Menutile.bmp");
+	CreateTile->Cut({ 256, 256 });
+	
 	if (false == GameEngineInput::GetInst()->IsKey("FarmHouseLevel"))
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayerCreate", '1');
@@ -106,7 +108,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
 	ChangeLevel("TitleLevel");
-
+	//ChangeLevel("FarmHouseLevel");
 }
 
 void StardewVallyGame::GameLoop()

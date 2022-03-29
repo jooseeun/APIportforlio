@@ -12,7 +12,7 @@ PlayerCreate::~PlayerCreate()
 void PlayerCreate::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	SetScale({ 100, 100 });
+	CreateRenderer("PlayerCreateBackGround.bmp");
 }
 
 void PlayerCreate::Render()
