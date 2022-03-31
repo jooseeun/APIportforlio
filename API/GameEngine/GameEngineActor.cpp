@@ -1,7 +1,9 @@
 #include "GameEngineActor.h"
 #include "GameEngine/GameEngine.h"
 #include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngine/GameEngineRenderer.h>
+#include "GameEngineRenderer.h"
+#include "GameEngineCollision.h"
+#include "GameEngineLevel.h"
 
 GameEngineActor::GameEngineActor()
 	: Level_(nullptr)
@@ -41,18 +43,18 @@ void GameEngineActor::DebugRectRender()
 	);
 }
 
-
 GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType /*= RenderPivot::CENTER*/, const float4& _PivotPos /*= { 0,0 }*/)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
-	// NewRenderer->SetImageScale();
+	// NewRenderer->SetImage(_Image);
 	NewRenderer->SetPivot(_PivotPos);
-	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetPivotType(_PivotType);
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
+
 }
 
 
@@ -67,7 +69,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	NewRenderer->SetActor(this);
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetPivot(_PivotPos);
-	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetPivotType(_PivotType);
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
@@ -95,8 +97,15 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetScale(_Scale);
 	NewRenderer->SetPivot(_PivotPos);
-	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetPivotType(_PivotType);
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
+}
+
+GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot /*= { 0, 0 }*/)
+{
+	GameEngineCollision* NewCollision = new GameEngineCollision();
+	GetLevel()->AddCollision(_GroupName, NewCollision);
+	return NewCollision;
 }

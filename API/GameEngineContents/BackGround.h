@@ -1,8 +1,11 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
-// Ό³Έν :
-class BackGround
+class GameEngineRenderer;
+class BackGround : public GameEngineActor
 {
+	// static BackGround* CurBackGround;
+
 public:
 	// constrcuter destructer
 	BackGround();
@@ -14,9 +17,16 @@ public:
 	BackGround& operator=(const BackGround& _Other) = delete;
 	BackGround& operator=(BackGround&& _Other) noexcept = delete;
 
+	GameEngineRenderer* GetRenderer()
+	{
+		return Image_;
+	};
+
 protected:
+	void Start() override;
+
+	void Render() override;
 
 private:
-
+	GameEngineRenderer* Image_;
 };
-

@@ -14,45 +14,6 @@
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="narrationLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="FarmHouseLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="FarmLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="BusStopLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="TownLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="ShopLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Town2Level.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MineEntryLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Mine1Level.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Mine2Level.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="LobinHouseLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MarnieHouseLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="CoopLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ToolUI.h">
       <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
@@ -80,6 +41,45 @@
     <ClInclude Include="PlayerCreate.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
+    <ClInclude Include="BusStopLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="CoopLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmHouseLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="FarmLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="LobinHouseLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="MarnieHouseLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine1Level.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine2Level.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="MineEntryLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="narrationLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Town2Level.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="TownLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -93,45 +93,6 @@
       <Filter>Actor\Play\Playdefault</Filter>
     </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="narrationLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="FarmHouseLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="FarmLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="BusStopLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="TownLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Town2Level.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MineEntryLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Mine1Level.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Mine2Level.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="LobinHouseLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MarnieHouseLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="CoopLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ToolUI.cpp">
@@ -158,6 +119,45 @@
     <ClCompile Include="PlayerCreate.cpp">
       <Filter>Actor\Title</Filter>
     </ClCompile>
+    <ClCompile Include="BusStopLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="CoopLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmHouseLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="LobinHouseLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MarnieHouseLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine1Level.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine2Level.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MineEntryLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="narrationLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Town2Level.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="TownLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -180,6 +180,9 @@
     </Filter>
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{5df20397-b445-49a8-ab9c-50ab93349bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel">
+      <UniqueIdentifier>{c70a5de1-b1d0-4e9a-8bde-90ac2ad135ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

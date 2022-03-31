@@ -66,7 +66,7 @@ void TitleLogo::Update()
 		{
 			PlayerCreate* Ptr = GetLevel()->CreateActor<PlayerCreate>();
 			Ptr->SetPosition(GameEngineWindow::GetScale().Half());
-			hide_==false;
+			hide_=false;
 		}
 	}
 	

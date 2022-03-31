@@ -31,13 +31,13 @@ public:
 		RenderPivot_ = _Pos;
 	}
 
-	inline void SetType(const RenderPivot& _Type)
+	inline void SetPivotType(const RenderPivot& _Type)
 	{
 		PivotType_ = _Type;
 	}
 
 	inline void SetScaleMode(const RenderScaleMode& _Mode)
-	{
+	{ 
 		ScaleMode_ = _Mode;
 	}
 
@@ -58,8 +58,17 @@ public:
 	void SetImage(const std::string& _Name);
 
 	// 
-	void SetIndex(size_t _Index);
+	void SetIndex(size_t _Index, const float4& _Scale = { -1, -1 });
 
+	void CameraEffectOff()
+	{
+		IsCameraEffect_ = false;
+	}
+
+	void CameraEffectOn()
+	{
+		IsCameraEffect_ = true;
+	}
 
 
 protected:
@@ -68,6 +77,7 @@ protected:
 private:
 	friend class FrameAnimation;
 
+	bool IsCameraEffect_;
 	GameEngineImage* Image_;
 	RenderPivot PivotType_; // ºæ≈Õ / bot
 	RenderScaleMode ScaleMode_;
@@ -76,6 +86,8 @@ private:
 	float4 RenderImageScale_;
 	float4 RenderImagePivot_;
 	unsigned int TransColor_;
+
+
 
 
 

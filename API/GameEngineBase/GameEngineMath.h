@@ -27,6 +27,7 @@ public:
 	static float4 RIGHT;
 	static float4 UP;
 	static float4 DOWN;
+	static float4 ZERO;
 
 public:
 	float x;
@@ -105,12 +106,15 @@ public:
 
 		return *this;
 	}
-	///////////세은만든코드
-	/*bool operator==(const float _Value) const
-	{
-		return(x == _Value && y == _Value && z == _Value);
 
-	}*/
+	float4& operator-=(const float4& _Other)
+	{
+		x -= _Other.x;
+		y -= _Other.y;
+		z -= _Other.z;
+
+		return *this;
+	}
 
 
 public:
