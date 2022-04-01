@@ -115,6 +115,7 @@ void StardewVallyGame::GameInit()
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayerCreate", '1');
 		GameEngineInput::GetInst()->CreateKey("FarmHouseLevel", '2');
+		GameEngineInput::GetInst()->CreateKey("FarmLevel", '3');
 		GameEngineInput::GetInst()->CreateKey("TitleLevel", '0');
 	}
 

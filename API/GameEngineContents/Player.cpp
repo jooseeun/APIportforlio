@@ -11,7 +11,7 @@
 #include <GameEngine/GameEngineImage.h>
 
 Player::Player()
-	:Speed_(125.0f)
+	:Speed_(205.0f)
 {
 }
 
@@ -83,7 +83,7 @@ void Player::Update()
 	{
 		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
 	}
-
+	
 	float4 NextPos;
 	float4 CheckPos;
 	float4 Move = float4::ZERO;
@@ -125,8 +125,31 @@ void Player::Update()
 		{
 			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
 		}
-	}
+		if (RGB(0, 0, 255) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel("FarmLevel");
+		}
+		
+	} // 맵충돌
 	
+
+	// 카메라 이동
+
+	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+	
+	//if (0 > GetLevel()->GetCameraPos().x)
+	//{
+	//	float4 CameraPos = GetLevel()->GetCameraPos();
+	//	CameraPos.x = 0;
+	//	GetLevel()->SetCameraPos(CameraPos);
+	//}
+	//if (0 > GetLevel()->GetCameraPos().y)
+	//{
+	//	float4 CameraPos = GetLevel()->GetCameraPos();
+	//	CameraPos.y = 0;
+	//	GetLevel()->SetCameraPos(CameraPos);
+	//}
+
 
 }
 void Player::Render()

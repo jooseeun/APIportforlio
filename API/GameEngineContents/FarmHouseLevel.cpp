@@ -28,28 +28,31 @@ void FarmHouseLevel::Loading()
 		CreateActor<BlackBackground>((int)ORDER::BACKGROUND, "Black");
 		BackGround* Back = CreateActor<BackGround>(1);
 		Back->GetRenderer()->SetImage("FarmHouse.bmp");
-		float4 BackActor = {};
-		BackActor.x = (Back->GetRenderer()->GetImage()->GetScale().Half().x) - (GameEngineWindow::GetScale().Half().x);
-		BackActor.y = (Back->GetRenderer()->GetImage()->GetScale().Half().y) - (GameEngineWindow::GetScale().Half().y);
+		Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x/2, Back->GetRenderer()->GetImage()->GetScale().y/2 });
 
-		Back->GetRenderer()->SetPivot(BackActor);
 	}
 
 	CreateActor<ToolUI>( (int)ORDER::UI, "ToolUI" );
 	CreateActor<TopUI>( (int)ORDER::UI,"TopUI");
 	CreateActor<EnergyUI>( (int)ORDER::UI, "EnergyUI");
 
-	Player* PlayerPos=CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerPos->SetPosition({ 640.0f,360.f });
+	
+	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerPos->SetPosition({ 384.0f,450.f });
+	
+
 }
 
 void FarmHouseLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("TitleLevel"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("TitleLevel");
+		GameEngine::GetInst().ChangeLevel("TitleLevel");
 
 	}
+
+	
+	
 }
 
 void FarmHouseLevel::LevelChangeStart()

@@ -17,11 +17,11 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	GameEngineImage* MapColImage_;
 protected:
 
 private:
 	float Speed_;
-	GameEngineImage* MapColImage_;
 
 	void Update() override;
 	void Start() override;

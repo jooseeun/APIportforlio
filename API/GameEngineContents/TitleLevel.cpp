@@ -27,9 +27,12 @@ void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("FarmHouseLevel"))
 	{
-		GameEngine::GlobalEngine().ChangeLevel("FarmHouseLevel");
+		GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
 	}
-
+	if (true == GameEngineInput::GetInst()->IsDown("FarmLevel"))
+	{
+		GameEngine::GetInst().ChangeLevel("FarmLevel");
+	}
 }
 
 void TitleLevel::LevelChangeStart()

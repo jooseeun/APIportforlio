@@ -14,8 +14,8 @@ ToolUI::~ToolUI()
 void ToolUI::Start()
 {
 	SetPosition({ 640,664 });
-	CreateRenderer("ToolUI.bmp");
-
+	GameEngineRenderer* Renderer = CreateRenderer("ToolUI.bmp");
+	Renderer->CameraEffectOff();
 }
 
 void ToolUI::Render()

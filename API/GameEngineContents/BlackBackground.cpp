@@ -16,9 +16,8 @@ void BlackBackground::Start()
 	//
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale(GameEngineWindow::GetScale());
-
-
-	CreateRenderer("BlackBackground.bmp");
+	GameEngineRenderer* Renderer = CreateRenderer("BlackBackground.bmp");
+	Renderer->CameraEffectOff();
 }
 
 void BlackBackground::Render()

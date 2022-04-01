@@ -1,4 +1,5 @@
 #include "TopUI.h"
+#include <GameEngine/GameEngineRenderer.h>
 
 TopUI::TopUI() 
 {
@@ -13,7 +14,8 @@ void TopUI::Start()
 {
 	SetPosition({ 1124,131.5 });
 
-	CreateRenderer("TopUI.bmp");
+	GameEngineRenderer* Renderer = CreateRenderer("TopUI.bmp");
+	Renderer->CameraEffectOff();
 }
 
 

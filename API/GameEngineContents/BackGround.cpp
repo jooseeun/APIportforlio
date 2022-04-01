@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 BackGround::BackGround()
+
 {
 	// Level_ = nullptr;
 }
@@ -15,12 +16,12 @@ BackGround::~BackGround()
 
 void BackGround::Start()
 {
-	//
-	SetPosition(GameEngineWindow::GetScale().Half());
+	SetPosition({0.0f,0.0f});
 	SetScale(GameEngineWindow::GetScale());
-
 	Image_ = CreateRenderer();
+
 }
+
 
 void BackGround::Render()
 {
