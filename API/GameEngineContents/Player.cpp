@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "BackGround.h"
+
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -7,7 +8,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
-
+#include <GameEngine/GameEngineImage.h>
 
 Player::Player()
 	:Speed_(125.0f)
@@ -19,9 +20,7 @@ Player::~Player()
 }
 
 void Player::Start()
-{	
-
-	SetPosition(GameEngineWindow::GetScale().Half());
+{
 	//defalut 값
 	GameEngineRenderer* Body = CreateRendererToScale("Body.bmp", { 64, 128 });
 	Body->SetIndex(0);
@@ -79,43 +78,55 @@ void Player::Start()
 
 void Player::Update()
 {
+	MapColImage_ = GameEngineImageManager::GetInst()->Find("FarmHouseColMap.bmp");
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
+
+	float4 NextPos;
+	float4 CheckPos;
+	float4 Move = float4::ZERO;
+
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
 	{
-		// 1.0F * 0.001101F
-		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * Speed_);
+		Move = float4::RIGHT;
+		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
+		CheckPos = NextPos+float4{32.0f,0.0f};
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
-		SetMove(float4::LEFT * GameEngineTime::GetDeltaTime() * Speed_);
+		Move = float4::LEFT;
+		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
+		CheckPos = NextPos + float4{ -32.0f,0.0f };
 	}
 
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
-		SetMove(float4::UP * GameEngineTime::GetDeltaTime() * Speed_);
+		Move = float4::UP;
+		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
+		CheckPos = NextPos + float4{ 0.0f,-64.0f };
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		SetMove(float4::DOWN * GameEngineTime::GetDeltaTime() * Speed_);
+		Move = float4::DOWN;
+		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
+		CheckPos = NextPos + float4{ 0.0f,64.0f };
 
-		{ // 캐릭터 아래로 걷는 모션
-			GameEngineRenderer* BodyDown = CreateRenderer();
-			BodyDown->CreateAnimation("Body.bmp", "PlayerWalkDownLag", 1, 2, 0.3f, true);
-			BodyDown->ChangeAnimation("PlayerWalkDownLag");
-			GameEngineRenderer* ArmDown = CreateRenderer();
-			ArmDown->CreateAnimation("Body.bmp", "PlayerWalkDownArm", 7, 8, 0.3f, true);
-			ArmDown->ChangeAnimation("PlayerWalkDownArm");
-			GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, RenderPivot::CENTER, { 0,9 });
-			Hair->SetIndex(101);
-			GameEngineRenderer* Pants = CreateRendererToScale("Pants.bmp", { 64, 128 });
-			Pants->SetIndex(0);
-			GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, RenderPivot::CENTER, { 0,16 });
-			Shirts->SetIndex(387);
-		}
 	}
 
+	{
 
+		int Color = MapColImage_->GetImagePixel(CheckPos);
+
+		if (RGB(255, 0, 0) != Color)
+		{
+			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
+		}
+	}
+	
 
 }
 void Player::Render()

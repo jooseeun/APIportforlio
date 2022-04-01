@@ -2,6 +2,8 @@
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
+class GameEngineImage;
+class GameEngineCollision;
 class Player:public GameEngineActor
 {
 public:
@@ -19,6 +21,8 @@ protected:
 
 private:
 	float Speed_;
+	GameEngineImage* MapColImage_;
+
 	void Update() override;
 	void Start() override;
 	void Render() override;
