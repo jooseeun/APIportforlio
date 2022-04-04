@@ -10,15 +10,61 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
 
+
 Player::Player()
-	:Speed_(205.0f),
-	 MapSizeX(5120),
-	 MapSizeY(4160)
+	:Speed_(205.0f)
 {
 }
 
 Player::~Player() 
 {
+}
+
+void Player::SetMapScale(float _X, float _Y)
+{
+	MapScaleX_ = _X;
+	MapScaleY_ = _Y;
+}
+
+void Player::ChangeState(PlayerState _State)
+{
+	if (CurState_ != _State)
+	{
+		switch (_State)
+		{
+		case Idle:
+			IdleStart();
+			break;
+		case Attack:
+			AttackStart();
+			break;
+		case Move:
+			MoveStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	CurState_ = _State;
+}
+
+void Player::StateUpdate()
+{
+	switch (CurState_)
+	{
+	case Idle:
+		IdleUpdate();
+		break;
+	case Attack:
+		AttackUpdate();
+		break;
+	case Move:
+		MoveUpdate();
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::Start()
@@ -80,99 +126,63 @@ void Player::Start()
 
 void Player::Update()
 {
-	MapColImage_ = GameEngineImageManager::GetInst()->Find("FarmHouseColMap.bmp");
-	if (nullptr == MapColImage_)
-	{
-		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
-	}
-	
-	float4 NextPos;
-	float4 CheckPos;
-	float4 Move = float4::ZERO;
-
-	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
-	{
-		Move = float4::RIGHT;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos+float4{32.0f,0.0f};
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
-	{
-		Move = float4::LEFT;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ -32.0f,0.0f };
-	}
-
-
-	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
-	{
-		Move = float4::UP;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 0.0f,-64.0f };
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
-	{
-		Move = float4::DOWN;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 0.0f,64.0f };
-
-	}
-
-	{
-
-		int Color = MapColImage_->GetImagePixel(CheckPos);
-
-		if (RGB(255, 0, 0) != Color)
-		{
-			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
-		}
-		if (RGB(0, 0, 255) == Color)
-		{
-			GameEngine::GetInst().ChangeLevel("FarmLevel");
-		}
-		
-	} // 맵충돌
-	
-
+	StateUpdate();
+	CameraCheck();
 	// 카메라 이동
 
+}
+
+void Player::Render()
+{
+
+}
+
+void Player::CameraCheck()
+{
 	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
-	
+
 	float CameraRectX = 1280;
 	float CameraRectY = 720;
 
-	if (0 > GetLevel()->GetCameraPos().x)
+	if (0 >= GetLevel()->GetCameraPos().x)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.x = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	
-	if (0 > GetLevel()->GetCameraPos().y)
+
+	if (0 >= GetLevel()->GetCameraPos().y)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.y = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
+	if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
+		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
-	if (MapSizeY <= (GetLevel()->GetCameraPos().y + CameraRectY))
+	if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
+		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-
 
 }
-void Player::Render()
-{
 
+bool Player::IsMoveKey()
+{
+	if (false == GameEngineInput::GetInst()->IsDown("MoveLeft") &&
+		false == GameEngineInput::GetInst()->IsDown("MoveRight") &&
+		false == GameEngineInput::GetInst()->IsDown("MoveUp") &&
+		false == GameEngineInput::GetInst()->IsDown("MoveDown"))
+	{
+		return false;
+	}
+	ChangeState(Move);
+	return true;
 }

@@ -1,33 +1,68 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+enum PlayerState
+{
+	Idle,
+	Attack,
+	Move
+};
 
-// Ό³Έν :
+enum PlayerDir
+{
+	Left,
+	Right,
+	Up,
+	Down
+};
+
 class GameEngineImage;
 class GameEngineCollision;
 class Player:public GameEngineActor
 {
 public:
-	// constrcuter destructer
 	Player();
 	~Player();
 
-	// delete Function
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 	GameEngineImage* MapColImage_;
-	float MapSizeX;
-	float MapSizeY;
+	void SetMapScale(float _X,float _Y);
+	void CameraCheck();
+
 protected:
 
 private:
+	float MapScaleY_;
+	float MapScaleX_;
 	float Speed_;
 
 	void Update() override;
 	void Start() override;
 	void Render() override;
+
+
+private:
+	PlayerState CurState_;
+	GameEngineRenderer* Render1;
+
+	bool IsMoveKey();
+	void KeyMove();
+
+public:
+	void ChangeState(PlayerState _State);
+	void StateUpdate();
+
+private:
+	void IdleUpdate();
+	void AttackUpdate();
+	void MoveUpdate();
+
+	void IdleStart();
+	void AttackStart();
+	void MoveStart();
 
 };
 
