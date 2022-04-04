@@ -9,6 +9,7 @@ class GameEngineImage;
 class GameEngineRenderer : public GameEngineActorSubObject
 {
 	friend GameEngineActor;
+	friend GameEngineLevel;
 
 public:
 	// constrcuter destructer
@@ -37,7 +38,7 @@ public:
 	}
 
 	inline void SetScaleMode(const RenderScaleMode& _Mode)
-	{ 
+	{
 		ScaleMode_ = _Mode;
 	}
 
@@ -69,6 +70,8 @@ public:
 	{
 		IsCameraEffect_ = true;
 	}
+
+	void SetOrder(int _Order) override;
 
 
 protected:

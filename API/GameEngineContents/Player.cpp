@@ -28,11 +28,11 @@ void Player::Start()
 	Body->SetIndex(0);
 	GameEngineRenderer* Arm = CreateRendererToScale("Body.bmp", { 64, 128 });
 	Arm->SetIndex(6);
-	GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, RenderPivot::CENTER, { 0,4 });
+	GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 },3, RenderPivot::CENTER, { 0,4 });
 	Hair->SetIndex(101);
 	GameEngineRenderer* Pants = CreateRendererToScale("Pants.bmp", { 64, 128 });
 	Pants->SetIndex(0);
-	GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, RenderPivot::CENTER, { 0,16 });
+	GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 },5, RenderPivot::CENTER, { 0,16 });
 	Shirts->SetIndex(387);
 
 	//{ // 캐릭터 아래로 걷는 모션

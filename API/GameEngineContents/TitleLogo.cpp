@@ -27,24 +27,24 @@ void TitleLogo::Start()
 	CreateRenderer("TitleLogo.bmp");
 
 	//나뭇잎 애니메이션은 마우스 클릭했을때 흔들린다. 수정하기
-	GameEngineRenderer* BigLeaf = CreateRenderer(RenderPivot::CENTER,{283,46}); // 890 280
+	GameEngineRenderer* BigLeaf = CreateRenderer(2,RenderPivot::CENTER,{283,46}); // 890 280
 	BigLeaf->CreateAnimation("BigLeaf.bmp", "BigLeaf", 0, 2, 0.15f, true);
 	BigLeaf->ChangeAnimation("BigLeaf");
-	GameEngineRenderer* SmallLeaf = CreateRenderer(RenderPivot::CENTER, { -345,-138 }); // 890 280
+	GameEngineRenderer* SmallLeaf = CreateRenderer(2,RenderPivot::CENTER, { -345,-138 }); // 890 280
 	SmallLeaf->CreateAnimation("SmallLeaf.bmp", "SmallLeaf", 0, 2, 0.15f, true);
 	SmallLeaf->ChangeAnimation("SmallLeaf");
 
-	GameEngineRenderer* StartButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, RenderPivot::CENTER,
+	GameEngineRenderer* StartButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ -369,359 });//246
 	StartButton->SetIndex(0);
 
-	GameEngineRenderer* LoadButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, RenderPivot::CENTER,
+	GameEngineRenderer* LoadButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ -123,359 });
 	LoadButton->SetIndex(1);
-	GameEngineRenderer* MultyButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, RenderPivot::CENTER,
+	GameEngineRenderer* MultyButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 123,359 });
 	MultyButton->SetIndex(2);
-	GameEngineRenderer* ExitButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, RenderPivot::CENTER,
+	GameEngineRenderer* ExitButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 369,359 });
 	ExitButton->SetIndex(3);
 
