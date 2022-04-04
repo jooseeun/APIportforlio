@@ -11,7 +11,9 @@
 #include <GameEngine/GameEngineImage.h>
 
 Player::Player()
-	:Speed_(205.0f)
+	:Speed_(205.0f),
+	 MapSizeX(5120),
+	 MapSizeY(4160)
 {
 }
 
@@ -137,18 +139,36 @@ void Player::Update()
 
 	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 	
-	//if (0 > GetLevel()->GetCameraPos().x)
-	//{
-	//	float4 CameraPos = GetLevel()->GetCameraPos();
-	//	CameraPos.x = 0;
-	//	GetLevel()->SetCameraPos(CameraPos);
-	//}
-	//if (0 > GetLevel()->GetCameraPos().y)
-	//{
-	//	float4 CameraPos = GetLevel()->GetCameraPos();
-	//	CameraPos.y = 0;
-	//	GetLevel()->SetCameraPos(CameraPos);
-	//}
+	float CameraRectX = 1280;
+	float CameraRectY = 720;
+
+	if (0 > GetLevel()->GetCameraPos().x)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+	
+	if (0 > GetLevel()->GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+	if (MapSizeX <= GetLevel()->GetCameraPos().x + CameraRectX)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapSizeX);
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+	if (MapSizeY <= (GetLevel()->GetCameraPos().y + CameraRectY))
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapSizeY);
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
 
 
 }

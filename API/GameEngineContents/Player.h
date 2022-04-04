@@ -18,6 +18,8 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 	GameEngineImage* MapColImage_;
+	float MapSizeX;
+	float MapSizeY;
 protected:
 
 private:

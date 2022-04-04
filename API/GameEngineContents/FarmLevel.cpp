@@ -35,6 +35,8 @@ void FarmLevel::Loading()
 
 	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerPos->SetPosition({ 4120.0f,1020.f });
+	PlayerPos->MapSizeX = 5120.0f;
+	PlayerPos->MapSizeY = 4160.0f;
 }
 
 void FarmLevel::Update()
