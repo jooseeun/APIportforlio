@@ -12,7 +12,8 @@
 
 
 Player::Player()
-	:Speed_(205.0f)
+	:Speed_(205.0f),
+	 ColMap_(" ")
 {
 }
 
@@ -24,6 +25,10 @@ void Player::SetMapScale(float _X, float _Y)
 {
 	MapScaleX_ = _X;
 	MapScaleY_ = _Y;
+}
+void Player::SetColMapName(const std::string& _Name)
+{
+	ColMap_ = _Name;
 }
 
 void Player::ChangeState(PlayerState _State)

@@ -21,6 +21,9 @@ FarmLevel::~FarmLevel()
 
 }
 
+
+
+
 void FarmLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
@@ -31,9 +34,10 @@ void FarmLevel::Loading()
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
-	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerPos->SetPosition({ 4120.0f,1020.f });
-	PlayerPos->SetMapScale(5120.0f,4160.0f);
+	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet->SetPosition({ 4120.0f,1020.f });
+	PlayerSet->SetMapScale(5120.0f,4160.0f);
+	PlayerSet->SetColMapName("FarmColMap.bmp");
 }
 
 void FarmLevel::Update()

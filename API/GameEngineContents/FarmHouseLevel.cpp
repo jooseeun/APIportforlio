@@ -35,10 +35,10 @@ void FarmHouseLevel::Loading()
 	CreateActor<EnergyUI>( (int)ORDER::UI, "EnergyUI");
 
 	
-	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerPos->SetPosition({ 750.0f,520.f });
-	PlayerPos->SetMapScale(1280.0f, 5000.0f);
-	
+	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet->SetPosition({ 750.0f,520.f });
+	PlayerSet->SetMapScale(1280.0f, 5000.0f);
+	PlayerSet->SetColMapName("FarmHouseColMap.bmp");
 
 }
 

@@ -30,11 +30,13 @@ public:
 
 	GameEngineImage* MapColImage_;
 	void SetMapScale(float _X,float _Y);
+	void SetColMapName(const std::string& _Name);
 	void CameraCheck();
 
 protected:
 
 private:
+	std::string ColMap_;
 	float MapScaleY_;
 	float MapScaleX_;
 	float Speed_;

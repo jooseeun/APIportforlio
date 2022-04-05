@@ -23,7 +23,7 @@ void Player::AttackUpdate()
 void Player::MoveUpdate()
 {
 
-	MapColImage_ = GameEngineImageManager::GetInst()->Find("FarmHouse.bmp");
+	MapColImage_ = GameEngineImageManager::GetInst()->Find(ColMap_);
 	if (nullptr == MapColImage_)
 	{
 		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
@@ -70,7 +70,7 @@ void Player::MoveUpdate()
 		{
 			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
 		}
-		if (RGB(0, 0, 255) == Color)
+		if (RGB(0, 255, 255) == Color)
 		{
 			GameEngine::GetInst().ChangeLevel("FarmLevel");
 		}
