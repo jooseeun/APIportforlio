@@ -70,11 +70,11 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(
 	NewRenderer->SetActor(this);
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
-		NewRenderer->SetOrder(_Order);
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
 	}
 	else
 	{
-		NewRenderer->SetOrder(GetOrder());
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
 	}
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
@@ -169,6 +169,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = RenderList_.erase(StartIter);
 		}
 	}
@@ -186,6 +187,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = CollisionList_.erase(StartIter);
 		}
 	}
