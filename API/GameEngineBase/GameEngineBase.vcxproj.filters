@@ -19,7 +19,16 @@
     <Filter Include="IO">
       <UniqueIdentifier>{bf66ee59-d068-4bd2-ba89-367c50f2b4ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound">
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{32cb1fb0-bd07-420a-ba71-660b6449504b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Bin">
+      <UniqueIdentifier>{b3f64fff-0110-471c-9d4e-54744235f6b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\inc">
+      <UniqueIdentifier>{feb43d22-7b24-4c15-a4d2-fc94031145c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
       <UniqueIdentifier>{47cc73e1-1468-4206-85d4-741ea278f822}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -57,6 +66,12 @@
     <ClCompile Include="GameEngineTime.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineRandom.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSound.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineWindow.h">
@@ -92,5 +107,33 @@
     <ClInclude Include="GameEngineTime.h">
       <Filter>Platform</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineRandom.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSound.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\bin\fmod.dll">
+      <Filter>ThirdParty\Bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\bin\fmod_vc.lib">
+      <Filter>ThirdParty\Bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL.dll">
+      <Filter>ThirdParty\Bin</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
+      <Filter>ThirdParty\Bin</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\inc\fmod.h">
+      <Filter>ThirdParty\inc</Filter>
+    </None>
+    <None Include="ThirdParty\inc\fmod.hpp">
+      <Filter>ThirdParty\inc</Filter>
+    </None>
   </ItemGroup>
 </Project>

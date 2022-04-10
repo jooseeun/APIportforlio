@@ -42,6 +42,10 @@ void FarmHouseLevel::Loading()
 
 void FarmHouseLevel::Update()
 {
-	
+
+}
+
+void FarmHouseLevel::LevelChangeStart()
+{
 }
 

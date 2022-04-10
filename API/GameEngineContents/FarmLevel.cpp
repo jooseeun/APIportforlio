@@ -26,6 +26,11 @@ FarmLevel::~FarmLevel()
 }
 void FarmLevel::LevelChangeStart()
 {
+	//BgmPlayer = GameEngineSound::SoundPlayControl("Spring (The Valley Comes Alive).MP3");
+
+}
+void FarmLevel::Loading()
+{
 	BackGround* Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("Farm.bmp");
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
@@ -48,10 +53,6 @@ void FarmLevel::LevelChangeStart()
 	PlayerSet->SetTileMap(&Back->TileMap_);
 
 	PlayerSet->SetSideLevel("FarmHouseLevel","BusStopLevel"," ");
-
-}
-void FarmLevel::Loading()
-{
 }
 
 void FarmLevel::Update()

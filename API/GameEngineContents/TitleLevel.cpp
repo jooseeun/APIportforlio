@@ -8,7 +8,9 @@
 #include <GameEngineBase/GameEngineDebug.h>
 
 
+
 TitleLevel::TitleLevel()
+	:count(0)
 {
 }
 
@@ -25,16 +27,18 @@ void TitleLevel::Loading()
 
 void TitleLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("FarmHouseLevel"))
+	if (true == GameEngineInput::GetInst()->IsDown("GoPlay"))
 	{
-		GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+		if (count == 1)
+		{
+			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+		}
+		count++;
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("FarmLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("FarmLevel");
-	}
+	
 }
 
 void TitleLevel::LevelChangeStart()
 {
+	BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.MP3");
 }

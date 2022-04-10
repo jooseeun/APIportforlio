@@ -24,6 +24,8 @@ public:
 	{
 		TileMap_ = _TileMap;
 	}
+
+
 protected:
 private:
 	GameEngineRendererTileMap* TileMap_;

@@ -83,7 +83,7 @@ void Player::ChangeAni(std::string _Name)
 }
 void Player::Start()
 {
-	
+
 	int ShirtsNum = 0;
 	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, 10);
 	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, 11);

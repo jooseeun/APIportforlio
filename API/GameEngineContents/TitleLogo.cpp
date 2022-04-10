@@ -52,7 +52,7 @@ void TitleLogo::Start()
 }
 void TitleLogo::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("PlayerCreate"))
+	if (true == GameEngineInput::GetInst()->IsDown("GOPlay"))
 	{
 		hide_ = true;
 

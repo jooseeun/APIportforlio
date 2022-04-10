@@ -19,6 +19,8 @@
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineSound.h>
+
 StardewVallyGame::StardewVallyGame() 
 {
 }
@@ -111,7 +113,22 @@ void StardewVallyGame::GameInit()
 			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
 		}
 	}
+	{
 
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Sound");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile();
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineSound::LoadRes(AllImageFileList[i].GetFullPath());
+		}
+
+	}
 	GameEngineImage* Body = GameEngineImageManager::GetInst()->Find("Body.bmp");
 	Body->Cut({ 64, 128 });
 	GameEngineImage* Hair = GameEngineImageManager::GetInst()->Find("Hair.bmp");
@@ -135,6 +152,11 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* WeaPons = GameEngineImageManager::GetInst()->Find("WeaPons.bmp");
 	WeaPons->CutCount(8, 9);
 
+	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
+	{
+		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
+	}
+
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
 	CreateLevel<IntroLevel>("IntroLevel");
@@ -150,7 +172,8 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
-	ChangeLevel("FarmLevel");
+	ChangeLevel("TitleLevel");
+	//ChangeLevel("FarmLevel");
 }
 
 void StardewVallyGame::GameLoop()
