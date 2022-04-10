@@ -19,6 +19,7 @@ protected:
 
 private:
 	void Start() override;
-	void Render() override;
+	void Update() override;
+	GameEngineRenderer* Select;
 };
 

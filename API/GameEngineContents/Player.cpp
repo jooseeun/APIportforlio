@@ -52,8 +52,8 @@ void Player::StateUpdate()
 	case Idle:
 		IdleUpdate();
 		break;
-	case Attack:
-		AttackUpdate();
+	case Wield:
+		WieldUpdate();
 		break;
 	case Move:
 		MoveUpdate();
@@ -73,77 +73,71 @@ void Player::ChangeAni(std::string _Name)
 }
 void Player::Start()
 {
+	int ShirtsNum = 259;
 	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, 10);
-	Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, 11, RenderPivot::CENTER, { 0,4 });
-	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, 12);
-	Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, 14, RenderPivot::CENTER, { 0,16 });
+	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, 11);
+	Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, 12, RenderPivot::CENTER, { 0,16 });
 	Arm = CreateRendererToScale("Body.bmp", { 64, 128 }, 13, RenderPivot::CENTER, { 0,2 });
+	Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, 14, RenderPivot::CENTER, { 0,4 });
 
-	//PlayerCollision = CreateCollision("PlayerCol", {64, 128});
-	//defalut 값
-	{
+	{// 캐릭터 front idle 상태
 		Body->CreateAnimation("Body.bmp", "FrontIdle", 0, 0, 0.15f, false); // 24 한줄에
 		Arm->CreateAnimation("Body.bmp", "FrontIdle", 6, 6, 0.15f, false);
 		Pants->CreateAnimation("Body.bmp", "FrontIdle", 18, 18, 0.15f, false);
 		Hair->CreateAnimation("Hair.bmp", "FrontIdle", 101, 101, 0.15f, false);
-		Shirts->CreateAnimation("Shirts.bmp", "FrontIdle", 387, 387, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "FrontIdle", ShirtsNum, ShirtsNum, 0.15f, false);
 	}
-	{
-		Body->CreateAnimation("Body.bmp", "BackIdle", 48, 48, 0.15f, false); // 24 한줄에
-		Arm->CreateAnimation("Body.bmp", "BackIdle", 54, 54, 0.15f, false);
-		Pants->CreateAnimation("Body.bmp", "BackIdle", 66, 66, 0.15f, false);
-		Hair->CreateAnimation("Hair.bmp", "BackIdle", 117, 117, 0.15f, false);
-		Shirts->CreateAnimation("Shirts.bmp", "BackIdle", 483, 483, 0.15f, false);
-	}
-	
-	{
-		Body->CreateAnimation("Body.bmp", "LeftIdle", 0, 0, 0.15f, false);
-		Arm->CreateAnimation("Body.bmp", "LeftIdle", 6, 6, 0.15f, false);
-		Pants->CreateAnimation("Body.bmp", "LeftIdle", 14, 14, 0.15f, false);
-		Hair->CreateAnimation("Hair.bmp", "LeftIdle", 101, 101, 0.15f, false);
-		Shirts->CreateAnimation("Shirts.bmp", "LeftIdle", 387, 387, 0.15f, false);
-	}
-	{
+	{// 캐릭터 right idle 상태
 		Body->CreateAnimation("Body.bmp", "RightIdle", 24, 24, 0.15f, false);//+24
 		Arm->CreateAnimation("Body.bmp", "RightIdle", 30, 30, 0.15f, false);
 		Pants->CreateAnimation("Body.bmp", "RightIdle", 42, 42, 0.15f, false);
 		Hair->CreateAnimation("Hair.bmp", "RightIdle", 109, 109, 0.15f, false);
-		Shirts->CreateAnimation("Shirts.bmp", "RightIdle", 419, 419, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "RightIdle", ShirtsNum+16, ShirtsNum+16, 0.15f, false);
+	}	
+	{// 캐릭터 Left idle 상태
+		Body->CreateAnimation("Body2.bmp", "LeftIdle", 47, 47, 0.15f, false);
+		Arm->CreateAnimation("Body2.bmp", "LeftIdle", 41, 41, 0.15f, false);
+		Pants->CreateAnimation("Body2.bmp", "LeftIdle", 29, 29, 0.15f, false);
+		Hair->CreateAnimation("Hair2.bmp", "LeftIdle", 106, 106, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "LeftIdle", ShirtsNum+32, ShirtsNum+32, 0.15f, false);
+	}
+	{// 캐릭터 Back idle 상태
+		Body->CreateAnimation("Body.bmp", "BackIdle", 48, 48, 0.15f, false); // 24 한줄에
+		Arm->CreateAnimation("Body.bmp", "BackIdle", 54, 54, 0.15f, false);
+		Pants->CreateAnimation("Body.bmp", "BackIdle", 66, 66, 0.15f, false);
+		Hair->CreateAnimation("Hair.bmp", "BackIdle", 117, 117, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "BackIdle", ShirtsNum+48, ShirtsNum+48, 0.15f, false);
 	}
 	{ // 캐릭터 아래로 걷는 모션
-		Body->CreateAnimation("Body.bmp", "WalkDown", 1, 2, 0.15f, true);
-		Arm->CreateAnimation("Body.bmp", "WalkDown", 7, 8, 0.15f, true);
-		Pants->CreateAnimation("Body.bmp", "WalkDown", 19, 20, 0.15f, true);
-		Hair->CreateAnimation("Hair.bmp", "WalkDown", 101, 101, 0.15f, true);
-		Shirts->CreateAnimation("Shirts.bmp", "WalkDown", 387, 387, 0.15f, true);
-		//GameEngineRenderer* HairDown = CreateRendererToScale("Hair.bmp", { 64, 128 }, 3,RenderPivot::CENTER, { 0,9 });
-		//HairDown->SetIndex(101);
-		//Shirts->SetIndex(387);
-		
-	}
-	{ // 캐릭터 위로 걷는 모션
-		Body->CreateAnimation("Body.bmp", "WalkUp", 49, 50, 0.15f, true);
-		Arm->CreateAnimation("Body.bmp", "WalkUp", 55, 56, 0.15f, true);
-		Pants->CreateAnimation("Body.bmp", "WalkUp", 67, 68, 0.15f, true);
-		Hair->CreateAnimation("Hair.bmp", "WalkUp", 117, 117, 0.15f, true);
-		Shirts->CreateAnimation("Shirts.bmp", "WalkUp", 483, 483, 0.15f, true);
+		Body->CreateAnimation("Body.bmp", "WalkDown", 1, 2, 0.3f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkDown", 7, 8, 0.3f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkDown", 19, 20, 0.3f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkDown", 101, 101, 0.3f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkDown", ShirtsNum, ShirtsNum, 0.15f, true);
 	}
 	{ // 캐릭터 오른쪽으로 걷는 모션
-		Body->CreateAnimation("Body.bmp", "WalkRight", 25, 26, 0.6f, true);
-		Arm->CreateAnimation("Body.bmp", "WalkRight", 31, 32, 0.6f, true);
-		Pants->CreateAnimation("Body.bmp", "WalkRight", 43, 44, 0.6f, true);
-		Hair->CreateAnimation("Hair.bmp", "WalkRight", 109, 109, 0.6f, true);
-		Shirts->CreateAnimation("Shirts.bmp", "WalkRight", 419, 419, 0.6f, true);
+		Body->CreateAnimation("Body.bmp", "WalkRight", 25, 26, 0.4f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkRight", 31, 32, 0.4f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkRight", 43, 44, 0.4f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkRight", 109, 109, 0.4f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkRight", ShirtsNum + 16, ShirtsNum + 16, 0.6f, true);
 	}
 	{ // 캐릭터 왼쪽으로 걷는 모션
-		Body->CreateAnimation("Body2.bmp", "WalkLeft", 33, 34, 0.6f, true);
-		Pants->CreateAnimation("Body.bmp", "WalkLeft", 121, 122, 0.6f, true);
-		Arm->CreateAnimation("Body2.bmp", "WalkLeft", 27, 29, 0.6f, true);
-		Hair->CreateAnimation("Hair2.bmp", "WalkLeft", 109, 109, 0.6f, true);
-		Shirts->CreateAnimation("Shirts.bmp", "WalkLeft", 451, 451, 0.6f, true);
+		Body->CreateAnimation("Body2.bmp", "WalkLeft", 45, 46, 0.4f, true);
+		Arm->CreateAnimation("Body2.bmp", "WalkLeft", 40, 41, 0.4f, true);
+		Pants->CreateAnimation("Body2.bmp", "WalkLeft", 27, 28, 0.4f, true);
+		Hair->CreateAnimation("Hair2.bmp", "WalkLeft", 106, 106, 0.4f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkLeft", ShirtsNum + 32, ShirtsNum + 32, 0.6f, true);
+	}
+	{ // 캐릭터 위로 걷는 모션
+		Body->CreateAnimation("Body.bmp", "WalkUp", 49, 50, 0.3f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkUp", 55, 56, 0.3f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkUp", 67, 68, 0.3f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkUp", 117, 117, 0.3f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkUp", ShirtsNum + 48, ShirtsNum + 48, 0.15f, true);
 	}
 
-
+	
 	ChangeAni("FrontIdle");
 
 	if (false == GameEngineInput::GetInst()->IsKey("WalkLeft"))
@@ -152,7 +146,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("WalkRight", 'D');
 		GameEngineInput::GetInst()->CreateKey("WalkUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("WalkDown", 'S');
-
+		GameEngineInput::GetInst()->CreateKey("Wield", VK_LBUTTON);
 	}
 
 }

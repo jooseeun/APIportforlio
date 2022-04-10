@@ -35,7 +35,7 @@ void FarmLevel::Loading()
 	PlayerSet->SetPosition({ 4120.0f,1020.f });
 	PlayerSet->SetMapScale(5120.0f,4160.0f);
 	PlayerSet->SetColMapName("FarmColMap.bmp");
-	PlayerSet->SetSideLevel("FarmHouseLevel","BusStop"," ");
+	PlayerSet->SetSideLevel("FarmHouseLevel","BusStopLevel"," ");
 }
 
 void FarmLevel::Update()

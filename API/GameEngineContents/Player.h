@@ -3,7 +3,7 @@
 enum PlayerState
 {
 	Idle,
-	Attack,
+	Wield,
 	Move
 };
 
@@ -69,11 +69,11 @@ public:
 
 private:
 	void IdleUpdate();
-	void AttackUpdate();
+	void WieldUpdate();
 	void MoveUpdate();
 
 	void IdleStart();
-	void AttackStart();
+	void WieldStart();
 	void MoveStart();
 
 };

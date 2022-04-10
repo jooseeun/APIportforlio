@@ -13,10 +13,10 @@
 void Player::IdleUpdate()
 {
 	IsMoveKey();
-
+	Is
 }
 
-void Player::AttackUpdate()
+void Player::WieldUpdate()
 {
 
 }
@@ -124,7 +124,7 @@ void Player::IdleStart()
 	}
 }
 
-void Player::AttackStart()
+void Player::WieldStart()
 {
 
 }

@@ -1,7 +1,9 @@
 #pragma once
 
+#include <GameEngine/GameEngineLevel.h>
 // Ό³Έν :
-class ForestLevel
+
+class ForestLevel : public GameEngineLevel
 {
 public:
 	// constrcuter destructer
@@ -15,7 +17,8 @@ public:
 	ForestLevel& operator=(ForestLevel&& _Other) noexcept = delete;
 
 protected:
-
+	void Loading() override;
+	void Update() override;
 private:
 
 };

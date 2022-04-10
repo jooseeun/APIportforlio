@@ -31,7 +31,7 @@ void Town2Level::Loading()
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
 	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerSet->SetPosition({ 1020.0f,2500.f });
+	PlayerSet->SetPosition({ 1006.0f,2380.f });
 	PlayerSet->SetMapScale(5448.0f, 2620.0f);
 	PlayerSet->SetColMapName("Town2ColMap.bmp");
 	PlayerSet->SetSideLevel("TownLevel", "MineEntryLevel","LobinHouseLevel");
