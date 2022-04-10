@@ -4,6 +4,7 @@ enum PlayerState
 {
 	Idle,
 	Wield,
+	Hit,
 	Move
 };
 
@@ -13,6 +14,15 @@ enum PlayerDir
 	Back,
 	Left,
 	Right
+};
+
+enum PlayerHave
+{
+	HitItem,
+	WieldItem,
+	EatItem,
+	ElseItem,
+	NoItem
 };
 
 class GameEngineImage;
@@ -58,8 +68,8 @@ private:
 private:
 	PlayerState CurState_;
 	PlayerDir CurDir_;
-	GameEngineRenderer* Render1;
-
+	PlayerHave CurItem_;
+	
 	bool IsMoveKey();
 	void KeyMove();
 
@@ -70,8 +80,10 @@ public:
 private:
 	void IdleUpdate();
 	void WieldUpdate();
+	void HitUpdate();
 	void MoveUpdate();
 
+	void HitStart();
 	void IdleStart();
 	void WieldStart();
 	void MoveStart();

@@ -49,7 +49,7 @@ void Player::WieldUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
 	{
- 		ChangeAni("FrontWield");
+		ChangeAni("FrontWield");
 	}
 
 	if (true == Arm->IsEndAnimation())

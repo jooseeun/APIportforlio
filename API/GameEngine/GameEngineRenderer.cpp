@@ -187,7 +187,7 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 	}
 
 	CurrentAnimation_ = &FindIter->second;	//FrameAnimation은 값형이다.
-
+	//CurrentAnimation_->IsEnd = true;
 }
 
 void GameEngineRenderer::FrameAnimation::Update()
