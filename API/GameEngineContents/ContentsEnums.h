@@ -5,6 +5,7 @@ enum class ORDER
 	BACKGROUND,
 	PLAYER,
 	MONSTER,
-	UI
+	UI,
+	ITEM
 
 };

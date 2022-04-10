@@ -1,13 +1,10 @@
 #include "BackGround.h"
 #include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngine/GameEngineImage.h>
-#include <GameEngine/GameEngineImageManager.h>
-#include <GameEngine/GameEngineRenderer.h>
 
 BackGround::BackGround()
-
+	:TileMap_(this)
 {
-	// Level_ = nullptr;
+	
 }
 
 BackGround::~BackGround()
@@ -16,8 +13,6 @@ BackGround::~BackGround()
 
 void BackGround::Start()
 {
-	//SetPosition({0.0f,0.0f});
-	//SetScale(GameEngineWindow::GetScale());
 	Image_ = CreateRenderer();
 
 }
@@ -25,5 +20,5 @@ void BackGround::Start()
 
 void BackGround::Render()
 {
-	// DebugRectRender();
+	
 }

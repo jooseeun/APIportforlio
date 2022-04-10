@@ -81,6 +81,21 @@ void StardewVallyGame::GameInit()
 		}
 	}
 	{
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
+		ResourcesDir.Move("Item");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+	}
+	{
 		// 현재 디렉토리
 		GameEngineDirectory ResourcesDir;
 		ResourcesDir.MoveParent("API");
@@ -115,8 +130,10 @@ void StardewVallyGame::GameInit()
 	BigLeaf->CutCount(3,1);
 	GameEngineImage* SmallLeaf = GameEngineImageManager::GetInst()->Find("SmallLeaf.bmp");
 	SmallLeaf->CutCount(3, 1);
-	
-
+	GameEngineImage* Tools = GameEngineImageManager::GetInst()->Find("Tools.bmp");
+	Tools->CutCount(21, 12);
+	GameEngineImage* WeaPons = GameEngineImageManager::GetInst()->Find("WeaPons.bmp");
+	WeaPons->CutCount(8, 9);
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<FarmHouseLevel>("FarmHouseLevel");

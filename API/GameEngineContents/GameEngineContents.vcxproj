@@ -155,11 +155,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ax.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BabyChicken.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BackGround.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Bug.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BusStopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="cauliflower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Chicken.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -180,6 +200,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ForestLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hoe.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -211,11 +235,23 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Monster.h">
+    <ClInclude Include="ContentsEnums.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ContentsEnums.h">
+    <ClInclude Include="NPCAnimalShopOnner.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="NPCRobin.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="NPCShopOnner.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Pick.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -227,7 +263,20 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PlayerEnum.h" />
+    <ClInclude Include="Potato.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SeedShopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Sickle.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -265,11 +314,31 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ax.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BabyChicken.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Bug.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BusStopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="cauliflower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -290,6 +359,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ForestLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Hoe.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -321,7 +394,19 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
+    <ClCompile Include="NPCAnimalShopOnner.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="NPCRobin.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="NPCShopOnner.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Pick.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -334,7 +419,19 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="Potato.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SeedShopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Sickle.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
       <SubType>
       </SubType>
     </ClCompile>

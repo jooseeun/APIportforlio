@@ -23,9 +23,6 @@
     <ClInclude Include="Menu.h">
       <Filter>Actor\Play</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Play\Mine</Filter>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
@@ -80,6 +77,48 @@
     <ClInclude Include="ForestLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="cauliflower.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCRobin.h">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCShopOnner.h">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCAnimalShopOnner.h">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="BabyChicken.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Actor\Play\Mine\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bug.h">
+      <Filter>Actor\Play\Mine\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Hoe.h">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Pick.h">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Sickle.h">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Ax.h">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEnum.h">
+      <Filter>Actor\Play\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -103,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Actor\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Actor\Play\Playdefault</Filter>
@@ -161,6 +197,45 @@
     <ClCompile Include="ForestLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="cauliflower.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCRobin.cpp">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCShopOnner.cpp">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCAnimalShopOnner.cpp">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="BabyChicken.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Actor\Play\Mine\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bug.cpp">
+      <Filter>Actor\Play\Mine\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Hoe.cpp">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Pick.cpp">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Sickle.cpp">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Ax.cpp">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -186,6 +261,24 @@
     </Filter>
     <Filter Include="Level\PlayLevel">
       <UniqueIdentifier>{c70a5de1-b1d0-4e9a-8bde-90ac2ad135ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Animal">
+      <UniqueIdentifier>{66428bba-ed27-4a8f-bc5b-effe02311df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\NPC">
+      <UniqueIdentifier>{4a275f80-aef1-4a04-95fc-866be7586d49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Crops">
+      <UniqueIdentifier>{7c0a0298-12ca-4edb-8efc-9db4288682ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Mine\Monster">
+      <UniqueIdentifier>{bc9d8fd5-53d0-47f8-a28a-3f9e483e1b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Tool">
+      <UniqueIdentifier>{62c3f873-97c8-4ace-ba03-5b781cf68296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Global">
+      <UniqueIdentifier>{1f8793ba-2888-4108-be26-d54874451dbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

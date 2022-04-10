@@ -1,29 +1,7 @@
 #pragma once
+#include "PlayerEnum.h"
 #include <GameEngine/GameEngineActor.h>
-enum PlayerState
-{
-	Idle,
-	Wield,
-	Hit,
-	Move
-};
-
-enum PlayerDir
-{
-	Front,
-	Back,
-	Left,
-	Right
-};
-
-enum PlayerHave
-{
-	HitItem,
-	WieldItem,
-	EatItem,
-	ElseItem,
-	NoItem
-};
+#include <GameEngine/GameEngineRendererTileMap.h>
 
 class GameEngineImage;
 class GameEngineCollision;
@@ -38,15 +16,27 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	GameEngineImage* MapColImage_;
 	void SetMapScale(float _X,float _Y);
 	void SetColMapName(const std::string& _Name);
-	void CameraCheck();
-	void ChangeAni(std::string _Name);
 	void SetSideLevel(std::string _Pre, std::string _Next, std::string _Entry);
-protected:
 
+	inline void SetTileMap(GameEngineRendererTileMap* _TileMap)
+	{
+		TileMap_ = _TileMap;
+	}
+protected:
 private:
+	GameEngineRendererTileMap* TileMap_;
+	
+	
+	GameEngineRenderer* Body;
+	GameEngineRenderer* Hair;
+	GameEngineRenderer* Shirts;
+	GameEngineRenderer* Pants;
+	GameEngineRenderer* Arm;
+	GameEngineRenderer* Tool;
+	GameEngineImage* MapColImage_;
+
 	std::string ColMap_;
 	std::string NextLevel_;
 	std::string PreLevel_;
@@ -58,20 +48,19 @@ private:
 	void Update() override;
 	void Start() override;
 	void Render() override;
-
-	GameEngineRenderer* Body;
-	GameEngineRenderer* Hair;
-	GameEngineRenderer* Shirts;
-	GameEngineRenderer* Pants;
-	GameEngineRenderer* Arm;
+	void ChangeAni(std::string _Name);
+	void CameraCheck();
+	
 	
 private:
 	PlayerState CurState_;
 	PlayerDir CurDir_;
-	PlayerHave CurItem_;
+	PlayerHave CurItemKind_;
+	PlayerItem CurItem_;
 	
 	bool IsMoveKey();
 	void KeyMove();
+	std::string GetDirString();
 
 public:
 	void ChangeState(PlayerState _State);
@@ -82,11 +71,13 @@ private:
 	void WieldUpdate();
 	void HitUpdate();
 	void MoveUpdate();
+	void EatUpdate();
 
 	void HitStart();
 	void IdleStart();
 	void WieldStart();
 	void MoveStart();
+	void EatStart();
 
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRendererTileMap.h>
 
 class GameEngineRenderer;
 class BackGround : public GameEngineActor
@@ -21,6 +22,8 @@ public:
 	{
 		return Image_;
 	};
+
+	GameEngineRendererTileMap TileMap_;
 
 protected:
 	void Start() override;

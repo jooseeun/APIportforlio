@@ -21,25 +21,25 @@ void Player::IdleUpdate()
 
 	if (true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
 	{
-		if (CurItem_ == PlayerHave::WieldItem)
+		if (CurItemKind_ == PlayerHave::WieldItem)
 		{
 			ChangeState(Wield);
 		}
-		else if (CurItem_ == PlayerHave::HitItem)
+		else if (CurItemKind_ == PlayerHave::HitItem)
 		{
-			ChangeState(Wield);
+			ChangeState(Hit);
 		}
-		else if (CurItem_ == PlayerHave::EatItem)
+		else if (CurItemKind_ == PlayerHave::EatItem)
 		{
-			ChangeState(Wield);
+			ChangeState(Eat);
 		}
-		else if (CurItem_ == PlayerHave::ElseItem)
+		else if (CurItemKind_ == PlayerHave::ElseItem)
 		{
-			ChangeState(Wield);
+			ChangeState(Idle);
 		}
-		else if (CurItem_ == PlayerHave::NoItem)
+		else if (CurItemKind_ == PlayerHave::NoItem)
 		{
-			ChangeState(Wield);
+			ChangeState(Idle);
 		}
 	}
 
@@ -47,19 +47,21 @@ void Player::IdleUpdate()
 
 void Player::WieldUpdate()
 {
-	if (true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
-	{
- 		ChangeAni("FrontWield");
-	}
-
 	if (true == Arm->IsEndAnimation())
 	{
 		ChangeState(Idle);
 	}
 	
 }
-
 void Player::HitUpdate()
+{
+	if (true == Arm->IsEndAnimation())
+	{
+		ChangeState(Idle);
+	}
+}
+
+void Player::EatUpdate()
 {
 
 }
@@ -71,40 +73,40 @@ void Player::MoveUpdate()
 	float4 CheckPos;
 	float4 Move = float4::ZERO;
 
-	if (true == GameEngineInput::GetInst()->IsPress("WalkRight"))
+	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
 	{
 		Move = float4::RIGHT;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 		CheckPos = NextPos + float4{ 32.0f,62.0f };
 		CurDir_ = PlayerDir::Right;
-		ChangeAni("WalkRight");
+		ChangeAni("RightWalk");
 	}
-	if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
+	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
 	{
 		Move = float4::LEFT;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 		CheckPos = NextPos + float4{ -32.0f,62.0f };
 		CurDir_ = PlayerDir::Left;
-		ChangeAni("WalkLeft");
+		ChangeAni("LeftWalk");
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("WalkUp"))
+	else if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
 	{
 		Move = float4::UP;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 		CheckPos = NextPos + float4{ 0.0f,62.0f };
 		CurDir_ = PlayerDir::Back;
-		ChangeAni("WalkUp");
+		ChangeAni("BackWalk");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("WalkDown"))
+	else if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
 	{
 		Move = float4::DOWN;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 		CheckPos = NextPos + float4{ 0.0f,64.0f };
 		CurDir_ = PlayerDir::Front;
-		ChangeAni("WalkDown");
+		ChangeAni("FrontWalk");
 	}
 
 	{
@@ -146,28 +148,20 @@ void Player::MoveUpdate()
 
 void Player::IdleStart()
 {
-	if (CurDir_ == PlayerDir::Front)
-	{
-		ChangeAni("FrontIdle");
-	}
-	else if (CurDir_ == PlayerDir::Back)
-	{
-
-		ChangeAni("BackIdle");
-	}
-	else if (CurDir_ == PlayerDir::Left)
-	{
-
-		ChangeAni("LeftIdle");
-	}
-	else if (CurDir_ == PlayerDir::Right)
-	{
-
-		ChangeAni("RightIdle");
-	}
+	ChangeAni(GetDirString() + "Idle");
 }
 
 void Player::WieldStart()
+{
+	ChangeAni(GetDirString() + "Wield");
+}
+
+void Player::HitStart()
+{
+	ChangeAni(GetDirString() + "Hit");
+}
+
+void Player::EatStart()
 {
 
 }
@@ -177,7 +171,23 @@ void Player::MoveStart()
 	
 }
 
-void Player::HitStart()
+std::string Player::GetDirString()
 {
-
+	if (CurDir_ == PlayerDir::Front)
+	{
+		return "Front";
+	}
+	else if (CurDir_ == PlayerDir::Back)
+	{
+		return "Back";
+	}
+	else if (CurDir_ == PlayerDir::Left)
+	{
+		return "Left";
+	}
+	else if (CurDir_ == PlayerDir::Right)
+	{
+		return "Right";
+	}
+	return "";
 }
