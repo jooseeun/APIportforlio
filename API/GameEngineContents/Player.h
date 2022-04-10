@@ -9,10 +9,10 @@ enum PlayerState
 
 enum PlayerDir
 {
+	Front,
+	Back,
 	Left,
-	Right,
-	Up,
-	Down
+	Right
 };
 
 class GameEngineImage;
@@ -32,11 +32,15 @@ public:
 	void SetMapScale(float _X,float _Y);
 	void SetColMapName(const std::string& _Name);
 	void CameraCheck();
-
+	void ChangeAni(std::string _Name);
+	void SetSideLevel(std::string _Pre, std::string _Next, std::string _Entry);
 protected:
 
 private:
 	std::string ColMap_;
+	std::string NextLevel_;
+	std::string PreLevel_;
+	std::string EntryLevel_;
 	float MapScaleY_;
 	float MapScaleX_;
 	float Speed_;
@@ -45,9 +49,15 @@ private:
 	void Start() override;
 	void Render() override;
 
-
+	GameEngineRenderer* Body;
+	GameEngineRenderer* Hair;
+	GameEngineRenderer* Shirts;
+	GameEngineRenderer* Pants;
+	GameEngineRenderer* Arm;
+	
 private:
 	PlayerState CurState_;
+	PlayerDir CurDir_;
 	GameEngineRenderer* Render1;
 
 	bool IsMoveKey();

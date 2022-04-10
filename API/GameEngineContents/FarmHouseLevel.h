@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+
 // Ό³Έν :
 class FarmHouseLevel : public GameEngineLevel
 {
@@ -17,8 +18,6 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
 private:
-
 };
 

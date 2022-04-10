@@ -33,9 +33,11 @@ void BusStopLevel::Loading()
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
 
-	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerPos->SetPosition({ 50.0f,1516.f });
-	PlayerPos->SetMapScale(2240.0f, 1920.0f);
+	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet->SetPosition({ 50.0f,1516.f });
+	PlayerSet->SetMapScale(2240.0f, 1920.0f);
+	PlayerSet->SetColMapName("BusStopColMap.bmp");
+	PlayerSet->SetSideLevel("FarmLevel", "TownLevel"," ");
 
 }
 

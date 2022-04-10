@@ -30,9 +30,11 @@ void TownLevel::Loading()
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
-	Player* PlayerPos = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerPos->SetPosition({ 28.0f,3492.f });
-	PlayerPos->SetMapScale(5544.0f, 6200.0f);
+	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet->SetPosition({ 28.0f,3492.f });
+	PlayerSet->SetMapScale(5544.0f, 6200.0f);
+	PlayerSet->SetColMapName("TownColMap.bmp");
+	PlayerSet->SetSideLevel("BusStopLevel", "Town2Level","SeedShopLevel");
 }
 
 void TownLevel::Update()

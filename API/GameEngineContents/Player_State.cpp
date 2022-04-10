@@ -13,6 +13,7 @@
 void Player::IdleUpdate()
 {
 	IsMoveKey();
+
 }
 
 void Player::AttackUpdate()
@@ -23,43 +24,44 @@ void Player::AttackUpdate()
 void Player::MoveUpdate()
 {
 
-	MapColImage_ = GameEngineImageManager::GetInst()->Find(ColMap_);
-	if (nullptr == MapColImage_)
-	{
-		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
-	}
-
 	float4 NextPos;
 	float4 CheckPos;
 	float4 Move = float4::ZERO;
 
-	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+	if (true == GameEngineInput::GetInst()->IsPress("WalkRight"))
 	{
 		Move = float4::RIGHT;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 32.0f,0.0f };
+		CheckPos = NextPos + float4{ 32.0f,62.0f };
+		CurDir_ = Right;
+		ChangeAni("WalkRight");
 	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+	if (true == GameEngineInput::GetInst()->IsPress("WalkLeft"))
 	{
 		Move = float4::LEFT;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ -32.0f,0.0f };
+		CheckPos = NextPos + float4{ -32.0f,62.0f };
+		CurDir_ = Left;
+		ChangeAni("WalkLeft");
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
+	if (true == GameEngineInput::GetInst()->IsPress("WalkUp"))
 	{
 		Move = float4::UP;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 0.0f,-64.0f };
+		CheckPos = NextPos + float4{ 0.0f,62.0f };
+		CurDir_ = Back;
+		ChangeAni("WalkUp");
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+	if (true == GameEngineInput::GetInst()->IsPress("WalkDown"))
 	{
 		Move = float4::DOWN;
 		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 		CheckPos = NextPos + float4{ 0.0f,64.0f };
-
+		CurDir_ = Front;
+		ChangeAni("WalkDown");
 	}
 
 	{
@@ -70,14 +72,30 @@ void Player::MoveUpdate()
 		{
 			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
 		}
+		
 		if (RGB(0, 255, 255) == Color)
 		{
-			GameEngine::GetInst().ChangeLevel("FarmLevel");
+			GameEngine::GetInst().ChangeLevel(PreLevel_);
+		}
+		else if (RGB(0, 0, 255) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel(NextLevel_);
+		}
+		else if (RGB(255, 255, 0) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel(EntryLevel_);
+		}
+		else if (RGB(25, 25, 25) == Color)
+		{
+			GameEngine::GetInst().ChangeLevel("ForestLevel");
 		}
 
-	} // 맵충돌
+	} 
 
-
+	if (false == IsMoveKey())
+	{
+		ChangeState(Idle);
+	}
 }
 
 
@@ -85,9 +103,25 @@ void Player::MoveUpdate()
 
 void Player::IdleStart()
 {
-	// 애니메이션이 바뀐다.
+	if (CurDir_ == Front)
+	{
+		ChangeAni("FrontIdle");
+	}
+	else if (CurDir_ == Back)
+	{
 
-	// AnimationName = "Idle_"
+		ChangeAni("BackIdle");
+	}
+	else if (CurDir_ == Left)
+	{
+
+		ChangeAni("LeftIdle");
+	}
+	else if (CurDir_ == Right)
+	{
+
+		ChangeAni("RightIdle");
+	}
 }
 
 void Player::AttackStart()
@@ -97,6 +131,6 @@ void Player::AttackStart()
 
 void Player::MoveStart()
 {
-
+	
 }
 

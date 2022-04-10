@@ -12,7 +12,6 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-
 FarmHouseLevel::FarmHouseLevel() 
 {
 }
@@ -23,12 +22,10 @@ FarmHouseLevel::~FarmHouseLevel()
 
 void FarmHouseLevel::Loading()
 {
-	{
-		BackGround* Back = CreateActor<BackGround>(1);
-		Back->GetRenderer()->SetImage("FarmHouse.bmp");
-		Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x/2, Back->GetRenderer()->GetImage()->GetScale().y/2 });
+	BackGround* Back = CreateActor<BackGround>(1);
+	Back->GetRenderer()->SetImage("FarmHouse.bmp");
+	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
 
-	}
 
 	CreateActor<ToolUI>( (int)ORDER::UI, "ToolUI" );
 	CreateActor<TopUI>( (int)ORDER::UI,"TopUI");
@@ -37,23 +34,14 @@ void FarmHouseLevel::Loading()
 	
 	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });
-	PlayerSet->SetMapScale(1280.0f, 5000.0f);
+	PlayerSet->SetMapScale(1280.0f, 720.0f);
 	PlayerSet->SetColMapName("FarmHouseColMap.bmp");
+	PlayerSet->SetSideLevel("BusStopLevel", "FarmLevel", " ");
 
 }
 
 void FarmHouseLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("TitleLevel"))
-	{
-		GameEngine::GetInst().ChangeLevel("TitleLevel");
-
-	}
-
-	
 	
 }
 
-void FarmHouseLevel::LevelChangeStart()
-{
-}

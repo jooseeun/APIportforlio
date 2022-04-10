@@ -9,26 +9,17 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
-
+#include <GameEngine/GameEngineCollision.h>
 
 Player::Player()
 	:Speed_(205.0f),
 	 ColMap_(" ")
 {
+	
 }
 
 Player::~Player() 
 {
-}
-
-void Player::SetMapScale(float _X, float _Y)
-{
-	MapScaleX_ = _X;
-	MapScaleY_ = _Y;
-}
-void Player::SetColMapName(const std::string& _Name)
-{
-	ColMap_ = _Name;
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -71,59 +62,96 @@ void Player::StateUpdate()
 		break;
 	}
 }
+void Player::ChangeAni(std::string _Name)
+{
+	Body->ChangeAnimation(_Name);
+	Arm->ChangeAnimation(_Name);
+	Pants->ChangeAnimation(_Name);
+	Shirts->ChangeAnimation(_Name);
+	Hair->ChangeAnimation(_Name);
 
+}
 void Player::Start()
 {
-	//defalut 값
-	GameEngineRenderer* Body = CreateRendererToScale("Body.bmp", { 64, 128 });
-	Body->SetIndex(0);
-	GameEngineRenderer* Arm = CreateRendererToScale("Body.bmp", { 64, 128 });
-	Arm->SetIndex(6);
-	GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 },3, RenderPivot::CENTER, { 0,4 });
-	Hair->SetIndex(101);
-	GameEngineRenderer* Pants = CreateRendererToScale("Pants.bmp", { 64, 128 });
-	Pants->SetIndex(0);
-	GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 },5, RenderPivot::CENTER, { 0,16 });
-	Shirts->SetIndex(387);
+	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, 10);
+	Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, 11, RenderPivot::CENTER, { 0,4 });
+	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, 12);
+	Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, 14, RenderPivot::CENTER, { 0,16 });
+	Arm = CreateRendererToScale("Body.bmp", { 64, 128 }, 13, RenderPivot::CENTER, { 0,2 });
 
-	//{ // 캐릭터 아래로 걷는 모션
-	//	GameEngineRenderer* BodyDown = CreateRenderer();
-	//	BodyDown->CreateAnimation("Body.bmp", "PlayerWalkDownLag", 1, 2, 0.15f, true);
-	//	BodyDown->ChangeAnimation("PlayerWalkDownLag");
-	//	GameEngineRenderer* ArmDown = CreateRenderer();
-	//	ArmDown->CreateAnimation("Body.bmp", "PlayerWalkDownArm", 7, 8, 0.15f, true);
-	//	ArmDown->ChangeAnimation("PlayerWalkDownArm");
-	//	GameEngineRenderer* Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, RenderPivot::CENTER, { 0,9 });
-	//	Hair->SetIndex(101);
-	//	GameEngineRenderer* PantsDown = CreateRenderer();
-	//	PantsDown->CreateAnimation("Pants.bmp", "PlayerWalkDownPants", 1, 2, 0.15f, true);
-	//	PantsDown->ChangeAnimation("PlayerWalkDownPants");
-	//	GameEngineRenderer* Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, RenderPivot::CENTER, { 0,16 });
-	//	Shirts->SetIndex(387);
-	//}
-	// 
-	//{ // 캐릭터 오른쪽으로 걷는 모션
-	//	GameEngineRenderer* BodyRight = CreateRenderer();
-	//	BodyRight->CreateAnimation("Body.bmp", "PlayerWalkRightLag", 19, 20, 0.15f, true);
-	//	BodyRight->ChangeAnimation("PlayerWalkRightLag");
-	//	GameEngineRenderer* ShirtsRight = CreateRendererToScale("Shirts.bmp", { 32, 32 }, RenderPivot::CENTER, { 0,16 });
-	//	ShirtsRight->SetIndex(419);
-	//	GameEngineRenderer* ArmRight = CreateRenderer();
-	//	ArmRight->CreateAnimation("Body.bmp", "PlayerWalkRightArm", 25, 26, 0.15f, true);
-	//	ArmRight->ChangeAnimation("PlayerWalkRightArm");
-	//	GameEngineRenderer* HairRight = CreateRendererToScale("Hair.bmp", { 64, 128 }, RenderPivot::CENTER, { 0,9 });
-	//	HairRight->SetIndex(109);
-	//	GameEngineRenderer* PantsDown = CreateRenderer();
-	//	PantsDown->CreateAnimation("Pants.bmp", "PlayerWalkDownPants", 121, 122, 0.15f, true);
-	//	PantsDown->ChangeAnimation("PlayerWalkDownPants");
-	//}
-	
-	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
+	//PlayerCollision = CreateCollision("PlayerCol", {64, 128});
+	//defalut 값
 	{
-		GameEngineInput::GetInst()->CreateKey("MoveLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
-		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
+		Body->CreateAnimation("Body.bmp", "FrontIdle", 0, 0, 0.15f, false); // 24 한줄에
+		Arm->CreateAnimation("Body.bmp", "FrontIdle", 6, 6, 0.15f, false);
+		Pants->CreateAnimation("Body.bmp", "FrontIdle", 18, 18, 0.15f, false);
+		Hair->CreateAnimation("Hair.bmp", "FrontIdle", 101, 101, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "FrontIdle", 387, 387, 0.15f, false);
+	}
+	{
+		Body->CreateAnimation("Body.bmp", "BackIdle", 48, 48, 0.15f, false); // 24 한줄에
+		Arm->CreateAnimation("Body.bmp", "BackIdle", 54, 54, 0.15f, false);
+		Pants->CreateAnimation("Body.bmp", "BackIdle", 66, 66, 0.15f, false);
+		Hair->CreateAnimation("Hair.bmp", "BackIdle", 117, 117, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "BackIdle", 483, 483, 0.15f, false);
+	}
+	
+	{
+		Body->CreateAnimation("Body.bmp", "LeftIdle", 0, 0, 0.15f, false);
+		Arm->CreateAnimation("Body.bmp", "LeftIdle", 6, 6, 0.15f, false);
+		Pants->CreateAnimation("Body.bmp", "LeftIdle", 14, 14, 0.15f, false);
+		Hair->CreateAnimation("Hair.bmp", "LeftIdle", 101, 101, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "LeftIdle", 387, 387, 0.15f, false);
+	}
+	{
+		Body->CreateAnimation("Body.bmp", "RightIdle", 24, 24, 0.15f, false);//+24
+		Arm->CreateAnimation("Body.bmp", "RightIdle", 30, 30, 0.15f, false);
+		Pants->CreateAnimation("Body.bmp", "RightIdle", 42, 42, 0.15f, false);
+		Hair->CreateAnimation("Hair.bmp", "RightIdle", 109, 109, 0.15f, false);
+		Shirts->CreateAnimation("Shirts.bmp", "RightIdle", 419, 419, 0.15f, false);
+	}
+	{ // 캐릭터 아래로 걷는 모션
+		Body->CreateAnimation("Body.bmp", "WalkDown", 1, 2, 0.15f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkDown", 7, 8, 0.15f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkDown", 19, 20, 0.15f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkDown", 101, 101, 0.15f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkDown", 387, 387, 0.15f, true);
+		//GameEngineRenderer* HairDown = CreateRendererToScale("Hair.bmp", { 64, 128 }, 3,RenderPivot::CENTER, { 0,9 });
+		//HairDown->SetIndex(101);
+		//Shirts->SetIndex(387);
+		
+	}
+	{ // 캐릭터 위로 걷는 모션
+		Body->CreateAnimation("Body.bmp", "WalkUp", 49, 50, 0.15f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkUp", 55, 56, 0.15f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkUp", 67, 68, 0.15f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkUp", 117, 117, 0.15f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkUp", 483, 483, 0.15f, true);
+	}
+	{ // 캐릭터 오른쪽으로 걷는 모션
+		Body->CreateAnimation("Body.bmp", "WalkRight", 25, 26, 0.6f, true);
+		Arm->CreateAnimation("Body.bmp", "WalkRight", 31, 32, 0.6f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkRight", 43, 44, 0.6f, true);
+		Hair->CreateAnimation("Hair.bmp", "WalkRight", 109, 109, 0.6f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkRight", 419, 419, 0.6f, true);
+	}
+	{ // 캐릭터 왼쪽으로 걷는 모션
+		Body->CreateAnimation("Body2.bmp", "WalkLeft", 33, 34, 0.6f, true);
+		Pants->CreateAnimation("Body.bmp", "WalkLeft", 121, 122, 0.6f, true);
+		Arm->CreateAnimation("Body2.bmp", "WalkLeft", 27, 29, 0.6f, true);
+		Hair->CreateAnimation("Hair2.bmp", "WalkLeft", 109, 109, 0.6f, true);
+		Shirts->CreateAnimation("Shirts.bmp", "WalkLeft", 451, 451, 0.6f, true);
+	}
+
+
+	ChangeAni("FrontIdle");
+
+	if (false == GameEngineInput::GetInst()->IsKey("WalkLeft"))
+	{
+		GameEngineInput::GetInst()->CreateKey("WalkLeft", 'A');
+		GameEngineInput::GetInst()->CreateKey("WalkRight", 'D');
+		GameEngineInput::GetInst()->CreateKey("WalkUp", 'W');
+		GameEngineInput::GetInst()->CreateKey("WalkDown", 'S');
 
 	}
 
@@ -181,13 +209,48 @@ void Player::CameraCheck()
 
 bool Player::IsMoveKey()
 {
-	if (false == GameEngineInput::GetInst()->IsDown("MoveLeft") &&
-		false == GameEngineInput::GetInst()->IsDown("MoveRight") &&
-		false == GameEngineInput::GetInst()->IsDown("MoveUp") &&
-		false == GameEngineInput::GetInst()->IsDown("MoveDown"))
+	if (false == GameEngineInput::GetInst()->IsDown("WalkLeft") &&
+		false == GameEngineInput::GetInst()->IsDown("WalkRight") &&
+		false == GameEngineInput::GetInst()->IsDown("WalkUp") &&
+		false == GameEngineInput::GetInst()->IsDown("WalkDown"))
+	{
+		if (CurState_ == Idle)
+		{
+			return false;
+
+		}
+		
+	}
+	if (true == GameEngineInput::GetInst()->IsFree("WalkLeft") &&
+		true == GameEngineInput::GetInst()->IsFree("WalkRight") &&
+		true == GameEngineInput::GetInst()->IsFree("WalkUp") &&
+		true == GameEngineInput::GetInst()->IsFree("WalkDown"))
 	{
 		return false;
 	}
 	ChangeState(Move);
 	return true;
+}
+
+void Player::SetMapScale(float _X, float _Y)
+{
+	MapScaleX_ = _X;
+	MapScaleY_ = _Y;
+}
+
+void Player::SetColMapName(const std::string& _Name)
+{
+	ColMap_ = _Name;
+	MapColImage_ = GameEngineImageManager::GetInst()->Find(ColMap_);
+	if (nullptr == MapColImage_)
+	{
+		MsgBoxAssert("맵 충돌용 이미지를 찾지 못했습니다.");
+	}
+}
+void Player::SetSideLevel(std::string _Pre, std::string _Next, std::string _Entry)
+{
+	NextLevel_ = _Next;
+	PreLevel_ = _Pre;
+	EntryLevel_ = _Entry;
+
 }

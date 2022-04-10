@@ -5,11 +5,15 @@
 #include "FarmLevel.h"
 #include "BusStopLevel.h"
 #include "CoopLevel.h"
+#include "MineEntryLevel.h"
 #include "Mine1Level.h"
 #include "Mine2Level.h"
-#include "ShopLevel.h"
+#include "SeedShopLevel.h"
 #include "TownLevel.h"
 #include "Town2Level.h"
+#include "AnimalShopLevel.h"
+#include "ForestLevel.h"
+#include "LobinHouseLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
@@ -97,8 +101,10 @@ void StardewVallyGame::GameInit()
 	Body->Cut({ 64, 128 });
 	GameEngineImage* Hair = GameEngineImageManager::GetInst()->Find("Hair.bmp");
 	Hair->Cut({ 64, 128 });
-	GameEngineImage* Pants = GameEngineImageManager::GetInst()->Find("Pants.bmp");
-	Pants->Cut({ 64, 128 });
+	GameEngineImage* Body2 = GameEngineImageManager::GetInst()->Find("Body2.bmp");
+	Body2->Cut({ 64, 128 });
+	GameEngineImage* Hair2 = GameEngineImageManager::GetInst()->Find("Hair2.bmp");
+	Hair2->Cut({ 64, 128 });
 	GameEngineImage* Shirts = GameEngineImageManager::GetInst()->Find("Shirts.bmp");
 	Shirts->Cut({ 32, 32 });
 	GameEngineImage* TitleButton = GameEngineImageManager::GetInst()->Find("TitleButton.bmp");
@@ -125,12 +131,17 @@ void StardewVallyGame::GameInit()
 	CreateLevel<IntroLevel>("IntroLevel");
 	CreateLevel<FarmLevel>("FarmLevel");
 	CreateLevel<CoopLevel>("CoopLevel");
+	CreateLevel<AnimalShopLevel>("AnimalShopLevel");
+	CreateLevel<ForestLevel>("ForestLevel");
+	CreateLevel<TownLevel>("TownLevel");
+	CreateLevel<Town2Level>("Town2Level");
+	CreateLevel<LobinHouseLevel>("LobinHouseLevel");
 	CreateLevel<BusStopLevel>("BusStopLevel");
-	CreateLevel<ShopLevel>("ShopLevel");
+	CreateLevel<SeedShopLevel>("SeedShopLevel");
+	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
-	ChangeLevel("TitleLevel");
-	//ChangeLevel("FarmHouseLevel");
+	ChangeLevel("FarmLevel");
 }
 
 void StardewVallyGame::GameLoop()
