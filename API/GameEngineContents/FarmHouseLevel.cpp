@@ -35,7 +35,7 @@ void FarmHouseLevel::Loading()
 	
 	Player* PlayerSet = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });
-	PlayerSet->SetMapScale(1280.0f, 720.0f);
+	PlayerSet->SetMapScale(1280.0f, 840.0f);
 	PlayerSet->SetColMapName("FarmHouseColMap.bmp");
 	PlayerSet->SetSideLevel("BusStopLevel", "FarmLevel", " ");
 

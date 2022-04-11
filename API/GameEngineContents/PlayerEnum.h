@@ -20,7 +20,7 @@ enum class PlayerDir
 	Max
 };
 
-enum PlayerHave
+enum class PlayerHave
 {
 	HitItem,
 	WieldItem,
@@ -29,7 +29,7 @@ enum PlayerHave
 	NoItem
 };
 
-enum PlayerItem
+enum class PlayerItem
 {
 	Nothing,
 	AxItem,
