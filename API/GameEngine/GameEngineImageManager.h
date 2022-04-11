@@ -15,7 +15,7 @@ public:
 	{
 		return Inst_;
 	}
-
+	
 	static void Destroy()
 	{
 		if (nullptr == Inst_)
@@ -38,9 +38,9 @@ private:
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
 
 
-	/// <summary>
-	/// 일반이미지
-	/// </summary>
+/// <summary>
+/// 일반이미지
+/// </summary>
 public:
 	GameEngineImage* Find(const std::string& _Name);
 

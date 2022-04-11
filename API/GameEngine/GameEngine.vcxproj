@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{205647ee-ed0c-490d-8fb7-da3cf7b78256}</ProjectGuid>
+    <ProjectGuid>{205647EE-ED0C-490D-8FB7-DA3CF7B78256}</ProjectGuid>
     <RootNamespace>GameEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -159,6 +159,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameEngineActorSubObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollision.h" />
+    <ClInclude Include="GameEngineEnum.h" />
     <ClInclude Include="GameEngine.h">
       <SubType>
       </SubType>
@@ -167,22 +173,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineActorSubObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineCollision.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineEnum.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineFolderImage.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="GameEngineFolderImage.h" />
     <ClInclude Include="GameEngineImage.h">
       <SubType>
       </SubType>
@@ -199,10 +190,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineRendererTileMap.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="GameEngineRendererTileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -217,14 +205,8 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineCollision.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineFolderImage.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="GameEngineCollision.cpp" />
+    <ClCompile Include="GameEngineFolderImage.cpp" />
     <ClCompile Include="GameEngineImage.cpp">
       <SubType>
       </SubType>
@@ -241,14 +223,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineRendererTileMap.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
+    <ClCompile Include="GameEngineRendererTileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngineBase\GameEngineBase.vcxproj">
-      <Project>{3c3af446-4b7e-484e-b15d-8918871efa5d}</Project>
+      <Project>{5afae6f0-aebd-4bcc-b000-8c573be09f54}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

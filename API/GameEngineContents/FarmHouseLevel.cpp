@@ -27,12 +27,13 @@ void FarmHouseLevel::Loading()
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
 
 
-	CreateActor<ToolUI>( (int)ORDER::UI, "ToolUI" );
-	CreateActor<TopUI>( (int)ORDER::UI,"TopUI");
-	CreateActor<EnergyUI>( (int)ORDER::UI, "EnergyUI");
+	
+	CreateActor<TopUI>(static_cast<int>(ORDER::UI), "TopUI");
+	CreateActor<EnergyUI>(static_cast<int>(ORDER::UI), "EnergyUI");
+	CreateActor<ToolUI>(static_cast<int> (ORDER::UI), "ToolUI");
 
 	
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	Player* PlayerSet = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });
 	PlayerSet->SetMapScale(1280.0f, 720.0f);
 	PlayerSet->SetColMapName("FarmHouseColMap.bmp");

@@ -89,7 +89,7 @@ public:
 		return sqrtf((x * x) + (y * y));
 	}
 
-	void Normal2D()
+	void Normal2D() 
 	{
 		float Len = Len2D();
 		if (0 == Len)
@@ -114,7 +114,7 @@ public:
 	}
 
 
-
+	
 
 	float4 operator-(const float4& _Other) const
 	{
@@ -173,15 +173,15 @@ public:
 		return *this;
 	}
 
-	bool CompareInt2D(const float4& _Value)
+	bool CompareInt2D(const float4& _Value) 
 	{
 		return ix() == _Value.ix() && iy() == _Value.iy();
 	}
 
 	bool CompareInt3D(const float4& _Value)
 	{
-		return ix() == _Value.ix() &&
-			iy() == _Value.iy() &&
+		return ix() == _Value.ix() && 
+			iy() == _Value.iy() && 
 			iz() == _Value.iz();
 	}
 

@@ -80,7 +80,7 @@ protected:
 private:
 	friend class FrameAnimation;
 
-	GameEngineImage* Image_;
+	GameEngineImage* Image_;	
 	RenderPivot PivotType_;		// 센터 bot 등, 이미지 어느곳을 중심으로 출력할것인가
 	RenderScaleMode ScaleMode_;	// ENUM(Image, User), 엔진이 정의해준 기본값으로 쓸것인가, 프로그래머가 정의한 USER값으로 쓸것인가.
 
@@ -107,6 +107,7 @@ private:
 		GameEngineImage* Image_;
 		GameEngineFolderImage* FolderImage_;
 
+		int TimeKey;
 		int CurrentFrame_;
 		int StartFrame_;
 		int EndFrame_;
@@ -117,7 +118,7 @@ private:
 
 	public:
 		FrameAnimation()
-			: Image_(nullptr),
+			:	Image_(nullptr),
 			CurrentFrame_(-1),
 			StartFrame_(-1),
 			EndFrame_(-1),
@@ -146,6 +147,8 @@ public:
 	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+
+	void CreateFolderAnimationTimeKey(const std::string& _Image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	// 애니메이션을 재생한다.
 	void ChangeAnimation(const std::string& _Name);

@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "BackGround.h"
 
+#include "ContentsEnums.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -102,11 +103,11 @@ void Player::Start()
 {
 
 	int ShirtsNum = 0;
-	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, 10);
-	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, 11);
-	Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, 12, RenderPivot::CENTER, { 0,16 });
-	Arm = CreateRendererToScale("Body.bmp", { 64, 128 }, 13, RenderPivot::CENTER, { 0,2 });
-	Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, 14, RenderPivot::CENTER, { 0,4 });
+	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
+	Pants = CreateRendererToScale("Body.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
+	Shirts = CreateRendererToScale("Shirts.bmp", { 32, 32 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,16 });
+	Arm = CreateRendererToScale("Body.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
+	Hair = CreateRendererToScale("Hair.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
 	//Tool = CreateRendererToScale("Tools.bmp", { 56, 112 }, 15);
 
 	////////////idle
