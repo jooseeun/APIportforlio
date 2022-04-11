@@ -15,34 +15,51 @@ Player::Player()
 	:Speed_(205.0f),
 	 ColMap_(" "),
 	CurDir_(PlayerDir::Front),
+	PrevDir_(PlayerDir::Front),
 	CurItemKind_(PlayerHave::WieldItem),
 	CurState_(PlayerState::Idle),
 	CurItem_(PlayerItem::AxItem)
 {
-	
+	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
+	ArrAnimationName[static_cast<int>(PlayerState::Walk)] = "Walk";
+	ArrAnimationName[static_cast<int>(PlayerState::Wield)] = "Wield";
+
+	ArrCheckDir[static_cast<int>(PlayerDir::Left)] = float4{ -32.0f,62.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Back)] = float4{ 0.0f,62.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Front)] = float4{ 0.0f,64.0f };
 }
 
 Player::~Player() 
 {
 }
 
+void Player::DirAnimationChange() 
+{
+	ChangeAni(GetDirString() + ArrAnimationName[static_cast<int>(CurState_)]);
+}
+
 void Player::ChangeState(PlayerState _State)
 {
+	DirKeyCheck();
+
 	if (CurState_ != _State)
 	{
+		ChangeAni(GetDirString() + ArrAnimationName[static_cast<int>(_State)]);
+
 		switch (_State)
 		{
-		case Idle:
+		case PlayerState::Idle:
 			IdleStart();
 			break;
-		case Wield:
+		case PlayerState::Wield:
 			WieldStart();
 			break;
-		case Hit:
+		case PlayerState::Hit:
 			HitStart();
 			break;
-		case Move:
-			MoveStart();
+		case PlayerState::Walk:
+			WalkStart();
 			break;
 		default:
 			break;
@@ -56,17 +73,17 @@ void Player::StateUpdate()
 {
 	switch (CurState_)
 	{
-	case Idle:
+	case PlayerState::Idle:
 		IdleUpdate();
 		break;
-	case Wield:
+	case PlayerState::Wield:
 		WieldUpdate();
 		break;
-	case Hit:
+	case PlayerState::Hit:
 		HitUpdate();
 		break;
-	case Move:
-		MoveUpdate();
+	case PlayerState::Walk:
+		WalkUpdate();
 		break;
 	default:
 		break;
@@ -286,6 +303,38 @@ void Player::CameraCheck()
 
 }
 
+bool Player::DirKeyCheck() 
+{
+
+	if (true == GameEngineInput::GetInst()->IsPress("LeftWalk")) 
+	{
+		CurDir_ = PlayerDir::Left;
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
+	{
+		CurDir_ = PlayerDir::Right;
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
+	{
+		CurDir_ = PlayerDir::Front;
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
+	{
+		CurDir_ = PlayerDir::Back;
+	}
+
+	if (PrevDir_ != CurDir_)
+	{
+		PrevDir_ = CurDir_;
+		DirAnimationChange();
+		return true;
+	}
+
+	return false;
+}
+
+// 좋은 함수가 아닌거 같습니다.
 bool Player::IsMoveKey()
 {
 	if (false == GameEngineInput::GetInst()->IsDown("LeftWalk") &&
@@ -293,7 +342,7 @@ bool Player::IsMoveKey()
 		false == GameEngineInput::GetInst()->IsDown("BackWalk") &&
 		false == GameEngineInput::GetInst()->IsDown("FrontWalk"))
 	{
-		if (CurState_ == Idle)
+		if (CurState_ == PlayerState::Idle)
 		{
 			return false;
 
@@ -307,7 +356,6 @@ bool Player::IsMoveKey()
 	{
 		return false;
 	}
-	ChangeState(Move);
 	return true;
 }
 

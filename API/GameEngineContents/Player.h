@@ -55,11 +55,21 @@ private:
 	
 	
 private:
+	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
+
+	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
+
 	PlayerState CurState_;
 	PlayerDir CurDir_;
+	PlayerDir PrevDir_;
+
 	PlayerHave CurItemKind_;
 	PlayerItem CurItem_;
 	
+	void DirAnimationChange();
+
+	bool DirKeyCheck();
+
 	bool IsMoveKey();
 	void KeyMove();
 	std::string GetDirString();
@@ -72,13 +82,13 @@ private:
 	void IdleUpdate();
 	void WieldUpdate();
 	void HitUpdate();
-	void MoveUpdate();
+	void WalkUpdate();
 	void EatUpdate();
 
 	void HitStart();
 	void IdleStart();
 	void WieldStart();
-	void MoveStart();
+	void WalkStart();
 	void EatStart();
 
 };

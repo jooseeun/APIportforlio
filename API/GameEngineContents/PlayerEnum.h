@@ -1,21 +1,23 @@
 #pragma once
 
-enum PlayerState
+enum class PlayerState
 {
 	Idle,
 	Wield,
 	Hit,
 	Eat,
 	Hold,
-	Move
+	Walk,
+	Max,
 };
 
-enum PlayerDir
+enum class PlayerDir
 {
 	Front,
 	Back,
 	Left,
-	Right
+	Right,
+	Max
 };
 
 enum PlayerHave

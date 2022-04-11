@@ -14,7 +14,7 @@ void Player::IdleUpdate()
 {
 	if (true == IsMoveKey())
 	{
-		ChangeState(PlayerState::Move);
+		ChangeState(PlayerState::Walk);
 		return;
 	}
 
@@ -23,23 +23,23 @@ void Player::IdleUpdate()
 	{
 		if (CurItemKind_ == PlayerHave::WieldItem)
 		{
-			ChangeState(Wield);
+			ChangeState(PlayerState::Wield);
 		}
 		else if (CurItemKind_ == PlayerHave::HitItem)
 		{
-			ChangeState(Hit);
+			ChangeState(PlayerState::Hit);
 		}
 		else if (CurItemKind_ == PlayerHave::EatItem)
 		{
-			ChangeState(Eat);
+			ChangeState(PlayerState::Eat);
 		}
 		else if (CurItemKind_ == PlayerHave::ElseItem)
 		{
-			ChangeState(Idle);
+			ChangeState(PlayerState::Idle);
 		}
 		else if (CurItemKind_ == PlayerHave::NoItem)
 		{
-			ChangeState(Idle);
+			ChangeState(PlayerState::Idle);
 		}
 	}
 
@@ -49,7 +49,7 @@ void Player::WieldUpdate()
 {
 	if (true == Arm->IsEndAnimation())
 	{
-		ChangeState(Idle);
+		ChangeState(PlayerState::Idle);
 	}
 	
 }
@@ -57,7 +57,7 @@ void Player::HitUpdate()
 {
 	if (true == Arm->IsEndAnimation())
 	{
-		ChangeState(Idle);
+		ChangeState(PlayerState::Idle);
 	}
 }
 
@@ -66,48 +66,36 @@ void Player::EatUpdate()
 
 }
 
-void Player::MoveUpdate()
+void Player::WalkUpdate()
 {
+	DirKeyCheck();
 
 	float4 NextPos;
-	float4 CheckPos;
+	float4 CheckPos = ArrCheckDir[static_cast<int>(CurDir_)];
 	float4 Move = float4::ZERO;
 
 	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
 	{
-		Move = float4::RIGHT;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 32.0f,62.0f };
-		CurDir_ = PlayerDir::Right;
-		ChangeAni("RightWalk");
+		Move += float4::RIGHT;
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
 	{
-		Move = float4::LEFT;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ -32.0f,62.0f };
-		CurDir_ = PlayerDir::Left;
-		ChangeAni("LeftWalk");
+		Move += float4::LEFT;
 	}
 
-
-	else if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
+	if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
 	{
-		Move = float4::UP;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 0.0f,62.0f };
-		CurDir_ = PlayerDir::Back;
-		ChangeAni("BackWalk");
+		Move += float4::UP;
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
 	{
-		Move = float4::DOWN;
-		NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
-		CheckPos = NextPos + float4{ 0.0f,64.0f };
-		CurDir_ = PlayerDir::Front;
-		ChangeAni("FrontWalk");
+		Move += float4::DOWN;
 	}
+
+	Move.Normal2D();
+	NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
+	CheckPos += NextPos;
 
 	{
 
@@ -139,7 +127,7 @@ void Player::MoveUpdate()
 
 	if (false == IsMoveKey())
 	{
-		ChangeState(Idle);
+		ChangeState(PlayerState::Idle);
 	}
 }
 
@@ -148,17 +136,14 @@ void Player::MoveUpdate()
 
 void Player::IdleStart()
 {
-	ChangeAni(GetDirString() + "Idle");
 }
 
 void Player::WieldStart()
 {
-	ChangeAni(GetDirString() + "Wield");
 }
 
 void Player::HitStart()
 {
-	ChangeAni(GetDirString() + "Hit");
 }
 
 void Player::EatStart()
@@ -166,7 +151,7 @@ void Player::EatStart()
 
 }
 
-void Player::MoveStart()
+void Player::WalkStart()
 {
 	
 }
