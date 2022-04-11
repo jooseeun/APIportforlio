@@ -135,6 +135,8 @@ void StardewVallyGame::GameInit()
 	Hair->Cut({ 64, 128 });
 	GameEngineImage* Body2 = GameEngineImageManager::GetInst()->Find("Body2.bmp");
 	Body2->Cut({ 64, 128 });
+	GameEngineImage* Body3 = GameEngineImageManager::GetInst()->Find("Body3.bmp");
+	Body3->Cut({ 64, 128 });
 	GameEngineImage* Hair2 = GameEngineImageManager::GetInst()->Find("Hair2.bmp");
 	Hair2->Cut({ 64, 128 });
 	GameEngineImage* Shirts = GameEngineImageManager::GetInst()->Find("Shirts.bmp");

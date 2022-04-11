@@ -191,10 +191,10 @@ void Player::Start()
 			Shirts->CreateAnimation("Shirts.bmp", "RightWield", ShirtsNum + 16, ShirtsNum + 16, 0.15f, true);
 		}
 		{ // 내려치는 방향 : 왼쪽
-			Body->CreateAnimation("Body.bmp", "LeftWield", 144, 149, 0.1f, true);
-			Arm->CreateAnimation("Body.bmp", "LeftWield", 150, 155, 0.1f, true);
-			Pants->CreateAnimation("Body.bmp", "LeftWield", 162, 167, 0.1f, true);
-			Hair->CreateAnimation("Hair.bmp", "LeftWield", 117, 117, 0.1f, true);
+			Body->CreateAnimation("Body3.bmp", "LeftWield", 192, 196, 0.1f, true);
+			Arm->CreateAnimation("Body3.bmp", "LeftWield", 198, 202, 0.1f, true);
+			Pants->CreateAnimation("Body3.bmp", "LeftWield", 210, 214, 0.1f, true);
+			Hair->CreateAnimation("Hair2.bmp", "LeftWield", 106, 106, 0.1f, true);
 			Shirts->CreateAnimation("Shirts.bmp", "LeftWield", ShirtsNum + 32, ShirtsNum + 32, 0.15f, true);
 		}
 		{ // 내려치는 방향 : 뒤
@@ -208,28 +208,28 @@ void Player::Start()
 	////////////////////Hit
 	// Left 수정, 옷 수정
 	{
-		{ // 내려치는 방향 : 앞
+		{ // 때리는 방향 : 앞
 			Body->CreateAnimation("Body.bmp", "FrontHit", 96, 101, 0.05f, true); // 24 한줄에
 			Arm->CreateAnimation("Body.bmp", "FrontHit", 108, 113, 0.05f, true);
 			Pants->CreateAnimation("Body.bmp", "FrontHit", 114, 119, 0.05f, true);
 			Hair->CreateAnimation("Hair.bmp", "FrontHit", 101, 101, 0.15f, true);
 			Shirts->CreateAnimation("Shirts.bmp", "FrontHit", ShirtsNum, ShirtsNum, 0.15f, true);
 		}
-		{ // 내려치는 방향 : 오른쪽
+		{ // 때리는 방향  : 오른쪽
 			Body->CreateAnimation("Body.bmp", "RightHit", 120, 125, 0.05f, true);
 			Arm->CreateAnimation("Body.bmp", "RightHit", 132, 137, 0.05f, true);
 			Pants->CreateAnimation("Body.bmp", "RightHit", 138, 143, 0.05f, true);
 			Hair->CreateAnimation("Hair.bmp", "RightHit", 109, 109, 0.15f, true);
 			Shirts->CreateAnimation("Shirts.bmp", "RightHit", ShirtsNum + 16, ShirtsNum + 16, 0.15f, true);
 		}
-		{ // 내려치는 방향 : 왼쪽
-			Body->CreateAnimation("Body.bmp", "LeftHit", 144, 149, 0.05f, true);
-			Arm->CreateAnimation("Body.bmp", "LeftHit", 150, 155, 0.05f, true);
-			Pants->CreateAnimation("Body.bmp", "LeftHit", 162, 167, 0.05f, true);
-			Hair->CreateAnimation("Hair.bmp", "LeftHit", 117, 117, 0.15f, true);
+		{ // 때리는 방향  : 왼쪽
+			Body->CreateAnimation("Body3.bmp", "LeftHit", 120, 125, 0.05f, true);
+			Arm->CreateAnimation("Body3.bmp", "LeftHit", 132, 137, 0.05f, true);
+			Pants->CreateAnimation("Body3.bmp", "LeftHit", 138, 143, 0.05f, true);
+			Hair->CreateAnimation("Hair2.bmp", "LeftHit", 106, 106, 0.15f, true);
 			Shirts->CreateAnimation("Shirts.bmp", "LeftHit", ShirtsNum + 32, ShirtsNum + 32, 0.15f, true);
 		}
-		{ // 내려치는 방향 : 뒤
+		{ // 때리는 방향  : 뒤
 			Body->CreateAnimation("Body.bmp", "BackHit", 144, 149, 0.05f, true);
 			Arm->CreateAnimation("Body.bmp", "BackHit", 156, 161, 0.05f, true);
 			Pants->CreateAnimation("Body.bmp", "BackHit", 162, 167, 0.05f, true);

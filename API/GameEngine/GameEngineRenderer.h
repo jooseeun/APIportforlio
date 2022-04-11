@@ -124,7 +124,8 @@ private:
 			EndFrame_(-1),
 			CurrentInterTime_(0.1f),
 			InterTime_(0.1f),
-			Loop_(true)
+			Loop_(true),
+			TimeKey(0)
 		{
 		}
 
@@ -148,7 +149,7 @@ public:
 
 	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
-	//void CreateFolderAnimationTimeKey(const std::string& _Image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+	void CreateFolderAnimationTimeKey(const std::string& _Image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 
 	// 애니메이션을 재생한다.
 	void ChangeAnimation(const std::string& _Name);
