@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 WateringCan::WateringCan()
-	:ItemKind_(PlayerHave::HitItem),
+	:ItemKind_(PlayerHave::WaterItem),
 	InvenPos_(5),
 	ItemName_(PlayerItem::WateringItem)
 {
@@ -17,8 +17,8 @@ WateringCan::~WateringCan()
 void WateringCan::Start()
 {
 
-	GameEngineRenderer* WateringCanRender = CreateRenderer("Weapons.bmp");
-	WateringCanRender->SetIndex(47);
+	GameEngineRenderer* WateringCanRender = CreateRenderer("Tools.bmp");
+	WateringCanRender->SetIndex(149);
 	WateringCanRender->CameraEffectOff();
 
 }
