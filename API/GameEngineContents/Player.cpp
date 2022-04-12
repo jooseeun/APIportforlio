@@ -19,7 +19,7 @@ Player::Player()
 	PrevDir_(PlayerDir::Front),
 	CurItemKind_(PlayerHave::WieldItem),
 	CurState_(PlayerState::Idle),
-	CurItem_(PlayerItem::AxItem),
+	CurItem_(PlayerItem::HoeItem),
 	CurHairStyle_(PlayerHairStyle::First),
 	CurHairColor_(PlayerHairColor::Red),
 	CurShirts_(PlayerShirts::First)
@@ -28,10 +28,19 @@ Player::Player()
 	ArrAnimationName[static_cast<int>(PlayerState::Walk)] = "Walk";
 	ArrAnimationName[static_cast<int>(PlayerState::Wield)] = "Wield";
 
-	ArrCheckDir[static_cast<int>(PlayerDir::Left)] = float4{ -32.0f,62.0f };
-	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
-	ArrCheckDir[static_cast<int>(PlayerDir::Back)] = float4{ 0.0f,62.0f };
 	ArrCheckDir[static_cast<int>(PlayerDir::Front)] = float4{ 0.0f,64.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Left)] = float4{ -32.0f,62.0f };
+	ArrCheckDir[static_cast<int>(PlayerDir::Back)] = float4{ 0.0f,62.0f };
+
+	TileCheckDirX[static_cast<int>(PlayerDir::Front)] =static_cast<int>(GetPosition().x / 64);
+	TileCheckDirY[static_cast<int>(PlayerDir::Front)] =static_cast<int>(GetPosition().x / 64) + 1;
+	TileCheckDirX[static_cast<int>(PlayerDir::Right)] = static_cast<int>(GetPosition().x / 64) + 1;
+	TileCheckDirY[static_cast<int>(PlayerDir::Right)] = static_cast<int>(GetPosition().x / 64);
+	TileCheckDirX[static_cast<int>(PlayerDir::Left)] = static_cast<int>(GetPosition().x / 64) - 1;
+	TileCheckDirY[static_cast<int>(PlayerDir::Left)] = static_cast<int>(GetPosition().x / 64);
+	TileCheckDirX[static_cast<int>(PlayerDir::Back)] = static_cast<int>(GetPosition().x / 64);
+	TileCheckDirY[static_cast<int>(PlayerDir::Back)] = static_cast<int>(GetPosition().x / 64) - 1;
 }
 
 Player::~Player() 
@@ -245,9 +254,36 @@ void Player::Start()
 		}
 	}
 
-	///////////////////Craft
+	///////////////////Water
 	{
-		
+		{ // 때리는 방향 : 앞
+			Body->CreateAnimation("Body.bmp", "FrontWater", 216, 217, 0.1f, true); // 24 한줄에
+			Arm->CreateAnimation("Body.bmp", "FrontWater", 222, 223, 0.1f, true);
+			Pants->CreateAnimation("Body.bmp", "FrontWater", 234, 235, 0.1f, true);
+			Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWater", 216, 217, 0.1f, true);
+			Shirts->CreateAnimation("Shirts.bmp", "FrontWater", ShirtsNum, ShirtsNum, 0.1f, true);
+		}
+		{ // 때리는 방향  : 오른쪽
+			Body->CreateAnimation("Body.bmp", "RightWater", 120, 125, 0.1f, true);
+			Arm->CreateAnimation("Body.bmp", "RightWater", 132, 137, 0.1f, true);
+			Pants->CreateAnimation("Body.bmp", "RightWater", 138, 143, 0.1f, true);
+			Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWater", 120, 125, 0.1f, true);
+			Shirts->CreateAnimation("Shirts.bmp", "RightWater", ShirtsNum + 16, ShirtsNum + 16, 0.1f, true);
+		}
+		{ // 때리는 방향  : 왼쪽
+			Body->CreateAnimation("Body3.bmp", "LeftWater", 120, 125, 0.1f, true);
+			Arm->CreateAnimation("Body3.bmp", "LeftWater", 132, 137, 0.1f, true);
+			Pants->CreateAnimation("Body3.bmp", "LeftWater", 138, 143, 0.1f, true);
+			Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWater", 120, 125, 0.1f, true);
+			Shirts->CreateAnimation("Shirts.bmp", "LeftWater", ShirtsNum + 32, ShirtsNum + 32, 0.1f, true);
+		}
+		{ // 때리는 방향  : 뒤
+			Body->CreateAnimation("Body.bmp", "BackWater", 144, 149, 0.1f, true);
+			Arm->CreateAnimation("Body.bmp", "BackWater", 156, 161, 0.1f, true);
+			Pants->CreateAnimation("Body.bmp", "BackWater", 162, 167, 0.1f, true);
+			Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackWater", 144, 149, 0.1f, true);
+			Shirts->CreateAnimation("Shirts.bmp", "BackWater", ShirtsNum + 48, ShirtsNum + 48, 0.1f, true);
+		}
 	}
 	ChangeAni("FrontIdle");
 	if (false == GameEngineInput::GetInst()->IsKey("LeftWalk"))
@@ -340,6 +376,28 @@ bool Player::DirKeyCheck()
 	}
 
 	return false;
+}
+
+void Player::DirCreateTile() {
+	int _TileX = TileCheckDirX[static_cast<int>(CurDir_)];
+	int _TileY = TileCheckDirY[static_cast<int>(CurDir_)];
+
+	if (CurDir_ == PlayerDir::Front) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(_TileX, _TileY, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Type = TileType::noting;
+	}
+	else if (CurDir_ == PlayerDir::Right) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(_TileX, _TileY, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Type = TileType::noting;
+	}
+	else if (CurDir_ == PlayerDir::Left) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(_TileX, _TileY, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Type = TileType::noting;
+	}
+	else if (CurDir_ == PlayerDir::Back) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(_TileX, _TileY, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Type = TileType::noting;
+	}
 }
 
 // 좋은 함수가 아닌거 같습니다.

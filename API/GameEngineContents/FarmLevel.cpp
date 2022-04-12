@@ -33,8 +33,9 @@ void FarmLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("Farm.bmp");
-	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
-	Back->TileMap_.TileRangeSetting(80, 65, { 48,48 });
+	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
+	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+	Back->TileMap_.TileRangeSetting(80, 65, { 64,64 });
 
 
 	CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");

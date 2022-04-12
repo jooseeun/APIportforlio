@@ -208,7 +208,10 @@ void StardewVallyGame::GameInit()
 	Tools->CutCount(21, 12);
 	GameEngineImage* WeaPons = GameEngineImageManager::GetInst()->Find("WeaPons.bmp");
 	WeaPons->CutCount(8, 9);
-
+	GameEngineImage* hoeDirt = GameEngineImageManager::GetInst()->Find("hoeDirt.bmp");
+	hoeDirt->CutCount(12, 4);
+	GameEngineImage* hoeDirtDark = GameEngineImageManager::GetInst()->Find("hoeDirtDark.bmp");
+	hoeDirtDark->CutCount(12, 4);
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
@@ -230,8 +233,8 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
-	ChangeLevel("TitleLevel");
-	//ChangeLevel("FarmLevel");
+	//ChangeLevel("TitleLevel");
+	ChangeLevel("FarmLevel");
 }
 
 void StardewVallyGame::GameLoop()

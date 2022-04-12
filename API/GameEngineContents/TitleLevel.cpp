@@ -31,6 +31,7 @@ void TitleLevel::Update()
 	{
 		if (count == 1)
 		{
+			BgmPlayer.Stop();
 			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
 		}
 		count++;
@@ -41,4 +42,5 @@ void TitleLevel::Update()
 void TitleLevel::LevelChangeStart()
 {
 	BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.MP3");
+
 }

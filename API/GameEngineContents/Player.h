@@ -3,6 +3,13 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 
+class PlayerTile : public Tile
+{
+public:
+	
+	TileType Type;
+};
+
 class GameEngineImage;
 class GameEngineCollision;
 class Player:public GameEngineActor
@@ -68,11 +75,15 @@ private:
 	void ChangeAni(std::string _Name);
 	void CameraCheck();
 	
+	void UpdateTileMap();
+	void DirCreateTile();
 	
 private:
 	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
+	int TileCheckDirX[static_cast<int>(PlayerDir::Max)];
+	int TileCheckDirY[static_cast<int>(PlayerDir::Max)];
 
 	PlayerState CurState_;
 	PlayerDir CurDir_;
@@ -84,7 +95,6 @@ private:
 	void DirAnimationChange();
 
 	bool DirKeyCheck();
-
 	bool IsMoveKey();
 	void KeyMove();
 	std::string GetDirString();
@@ -98,13 +108,13 @@ private:
 	void WieldUpdate();
 	void HitUpdate();
 	void WalkUpdate();
-	void EatUpdate();
+	void WaterUpdate();
 
 	void HitStart();
 	void IdleStart();
 	void WieldStart();
 	void WalkStart();
-	void EatStart();
+	void WaterStart();
 
 };
 

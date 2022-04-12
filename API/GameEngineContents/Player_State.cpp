@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "BackGround.h"
-
+#include "ContentsEnums.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -9,6 +9,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngine/GameEngineRendererTileMap.h>
+
 
 void Player::IdleUpdate()
 {
@@ -29,9 +31,9 @@ void Player::IdleUpdate()
 		{
 			ChangeState(PlayerState::Hit);
 		}
-		else if (CurItemKind_ == PlayerHave::EatItem)
+		else if (CurItemKind_ == PlayerHave::WaterItem)
 		{
-			ChangeState(PlayerState::Eat);
+			ChangeState(PlayerState::Water);
 		}
 		else if (CurItemKind_ == PlayerHave::ElseItem)
 		{
@@ -61,9 +63,12 @@ void Player::HitUpdate()
 	}
 }
 
-void Player::EatUpdate()
+void Player::WaterUpdate()
 {
-
+	if (true == Arm->IsEndAnimation())
+	{
+		ChangeState(PlayerState::Idle);
+	}
 }
 
 void Player::WalkUpdate()
@@ -74,15 +79,6 @@ void Player::WalkUpdate()
 	float4 CheckPos = ArrCheckDir[static_cast<int>(CurDir_)];
 	float4 Move = float4::ZERO;
 
-	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
-	{
-		Move += float4::RIGHT;
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
-	{
-		Move += float4::LEFT;
-	}
-
 	if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
 	{
 		Move += float4::UP;
@@ -92,6 +88,17 @@ void Player::WalkUpdate()
 	{
 		Move += float4::DOWN;
 	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
+	{
+		Move += float4::RIGHT;
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
+	{
+		Move += float4::LEFT;
+	}
+
+	
 
 	Move.Normal2D();
 	NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
@@ -140,13 +147,14 @@ void Player::IdleStart()
 
 void Player::WieldStart()
 {
+	DirCreateTile();
 }
 
 void Player::HitStart()
 {
 }
 
-void Player::EatStart()
+void Player::WaterStart()
 {
 
 }

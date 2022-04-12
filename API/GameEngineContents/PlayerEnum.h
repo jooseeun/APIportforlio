@@ -1,11 +1,15 @@
 #pragma once
-
-enum class PlayerState
+enum class TileType
+{
+	noting,
+	Max,
+};
+enum class PlayerState 
 {
 	Idle,
 	Wield,
 	Hit,
-	Eat,
+	Water,
 	Hold,
 	Walk,
 	Max,
@@ -24,7 +28,7 @@ enum class PlayerHave
 {
 	HitItem,
 	WieldItem,
-	EatItem,
+	WaterItem,
 	ElseItem,
 	NoItem
 };
