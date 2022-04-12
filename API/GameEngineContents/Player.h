@@ -24,13 +24,28 @@ public:
 	{
 		TileMap_ = _TileMap;
 	}
-
-
+	inline void SetHairNum(PlayerHairStyle _Num)
+	{
+		CurHairStyle_ = _Num;
+	}
+	inline void SetHairColor(PlayerHairColor _Color)
+	{
+		CurHairColor_ = _Color;
+	}
+	inline void SetShirts(PlayerShirts _Shirts)
+	{
+		CurShirts_ = _Shirts;
+	}
+	
 protected:
 private:
 	GameEngineRendererTileMap* TileMap_;
 	
-	
+	PlayerHairColor CurHairColor_;
+	PlayerHairStyle CurHairStyle_;
+	PlayerShirts CurShirts_;
+	std::string GetHairColorString();
+	std::string GetHairStyleString();
 	GameEngineRenderer* Body;
 	GameEngineRenderer* Hair;
 	GameEngineRenderer* Shirts;

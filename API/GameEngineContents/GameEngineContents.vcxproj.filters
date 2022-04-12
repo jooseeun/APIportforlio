@@ -117,7 +117,7 @@
       <Filter>Actor\Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayerEnum.h">
-      <Filter>Actor\Play\Global</Filter>
+      <Filter>Actor\Play\Playdefault</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,9 +276,6 @@
     </Filter>
     <Filter Include="Actor\Play\Tool">
       <UniqueIdentifier>{62c3f873-97c8-4ace-ba03-5b781cf68296}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Global">
-      <UniqueIdentifier>{1f8793ba-2888-4108-be26-d54874451dbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
