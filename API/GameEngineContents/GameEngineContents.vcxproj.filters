@@ -6,25 +6,19 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="TopUI.h">
-      <Filter>Actor\Play\Playdefault</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ToolUI.h">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="EnergyUI.h">
-      <Filter>Actor\Play\Playdefault</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnums.h">
       <Filter>Level\Global</Filter>
@@ -117,7 +111,16 @@
       <Filter>Actor\Play\Tool</Filter>
     </ClInclude>
     <ClInclude Include="PlayerEnum.h">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="WateringCan.h">
+      <Filter>Actor\Play\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,25 +129,19 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="TopUI.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ToolUI.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="EnergyUI.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>Actor\Title</Filter>
@@ -191,9 +188,6 @@
     <ClCompile Include="TownLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="Player_State.cpp">
-      <Filter>Actor\Play\Playdefault</Filter>
-    </ClCompile>
     <ClCompile Include="ForestLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
@@ -236,6 +230,18 @@
     <ClCompile Include="Ax.cpp">
       <Filter>Actor\Play\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Actor\Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="WateringCan.cpp">
+      <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -252,9 +258,6 @@
     </Filter>
     <Filter Include="Actor\Play\Mine">
       <UniqueIdentifier>{c96028d3-02da-46dd-9daf-6ef5dcb71a35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Playdefault">
-      <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{5df20397-b445-49a8-ab9c-50ab93349bbd}</UniqueIdentifier>
@@ -276,6 +279,12 @@
     </Filter>
     <Filter Include="Actor\Play\Tool">
       <UniqueIdentifier>{62c3f873-97c8-4ace-ba03-5b781cf68296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Player">
+      <UniqueIdentifier>{9e4f5438-4aea-4c02-a194-e582b13c115d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\PlayUI">
+      <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -19,9 +19,13 @@ public:
 	{
 		InvenPos_ = _InvenPos;
 	}
-	inline int getInvenPos()
+	inline int GetInvenPos()
 	{
 		return InvenPos_;
+	}
+	inline PlayerItem GetItemName()
+	{
+		return ItemName_;
 	}
 protected:
 
@@ -30,5 +34,6 @@ private:
 	void Start() override;
 	void Update() override;
 	PlayerHave ItemKind_;
+	PlayerItem ItemName_;
 };
 

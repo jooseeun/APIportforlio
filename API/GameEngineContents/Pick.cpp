@@ -5,7 +5,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 Pick::Pick()
 	:ItemKind_(PlayerHave::WieldItem),
-	InvenPos_(3)
+	InvenPos_(3),
+	ItemName_(PlayerItem::PickItem)
 {
 }
 

@@ -6,7 +6,8 @@
 
 Ax::Ax()
 	:ItemKind_(PlayerHave::WieldItem),
-	InvenPos_(1)
+	InvenPos_(2),
+	ItemName_(PlayerItem::AxItem)
 {
 }
 

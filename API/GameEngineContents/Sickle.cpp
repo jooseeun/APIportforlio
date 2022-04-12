@@ -5,7 +5,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 Sickle::Sickle() 
 	:ItemKind_(PlayerHave::HitItem),
-	InvenPos_(4)
+	InvenPos_(4),
+	ItemName_(PlayerItem::SickleItem)
 {
 }
 

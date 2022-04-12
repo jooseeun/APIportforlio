@@ -5,6 +5,10 @@
 #include "EnergyUI.h"
 #include "ContentsEnums.h"
 #include "BackGround.h"
+#include "Ax.h"
+#include "Hoe.h"
+#include "Pick.h"
+#include "Sickle.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -32,6 +36,10 @@ void FarmHouseLevel::Loading()
 	CreateActor<EnergyUI>(static_cast<int>(ORDER::UI), "EnergyUI");
 	CreateActor<ToolUI>(static_cast<int> (ORDER::UI), "ToolUI");
 
+	CreateActor<Ax>((int)ORDER::ITEM, "Ax");
+	CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
+	CreateActor<Pick>((int)ORDER::ITEM, "Pick");
+	CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	
 	Player* PlayerSet = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });

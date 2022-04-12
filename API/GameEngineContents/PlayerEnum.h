@@ -1,7 +1,17 @@
 #pragma once
+
 enum class TileType
 {
-	noting,
+	HoeDirt,
+	SeedTile,
+	WaterDirt,
+	Max,
+};
+enum class SeedType
+{
+	Phoato,
+	Cauliflower,
+	Kale,
 	Max,
 };
 enum class PlayerState 
@@ -29,6 +39,7 @@ enum class PlayerHave
 	HitItem,
 	WieldItem,
 	WaterItem,
+	SeedItem,
 	ElseItem,
 	NoItem
 };
@@ -39,6 +50,7 @@ enum class PlayerItem
 	AxItem,
 	HoeItem,
 	PickItem,
+	WateringItem,
 	SickleItem
 };
 

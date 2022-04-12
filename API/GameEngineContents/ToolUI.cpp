@@ -4,8 +4,9 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
-#define VK_SUB 0x07
-ToolUI::ToolUI() 
+
+ToolUI::ToolUI()
+	:SelectPivot(1)
 {
 }
 
@@ -22,6 +23,7 @@ void ToolUI::Start()
 	Select->SetIndex(56);
 	Select->CameraEffectOff();
 	Select->SetPivot({ -352,0 });
+
 
 	if (false == GameEngineInput::GetInst()->IsKey("Num1"))
 	{
@@ -49,50 +51,63 @@ void ToolUI::Update()
 		if (true == GameEngineInput::GetInst()->IsDown("Num1"))
 		{
 			Select->SetPivot({ NumOne, 0 });
+			SelectPivot = 1;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num2"))
 		{
 			Select->SetPivot({ NumOne + Num * 1, 0 });
+			SelectPivot = 2;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num3"))
 		{
 			Select->SetPivot({ NumOne + Num * 2, 0 });
+			SelectPivot = 3;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num4"))
 		{
 			Select->SetPivot({ NumOne + Num * 3, 0 });
+			SelectPivot = 4;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num5"))
 		{
 			Select->SetPivot({ NumOne + Num * 4, 0 });
+			SelectPivot = 5;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num6"))
 		{
 			Select->SetPivot({ NumOne + Num * 5, 0 });
+			SelectPivot = 6;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num7"))
 		{
 			Select->SetPivot({ NumOne + Num * 6, 0 });
+			SelectPivot = 7;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num8"))
 		{
 			Select->SetPivot({ NumOne + Num * 7, 0 });
+			SelectPivot = 8;
+
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num9"))
 		{
 			Select->SetPivot({ NumOne + Num * 8, 0 });
+			SelectPivot = 9;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num0"))
 		{
 			Select->SetPivot({ NumOne + Num * 9, 0 });
+			SelectPivot = 10;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num-"))
 		{
 			Select->SetPivot({ NumOne + Num * 10 , 0 });
+			SelectPivot = 11;
 		}
 		else if (true == GameEngineInput::GetInst()->IsDown("Num="))
 		{
 			Select->SetPivot({ NumOne + Num * 11, 0 });
+			SelectPivot = 12;
 		}
 	}
 

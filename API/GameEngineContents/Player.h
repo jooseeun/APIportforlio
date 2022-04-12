@@ -6,8 +6,19 @@
 class PlayerTile : public Tile
 {
 public:
+	PlayerTile():
+	Dirt_(TileType::Max),
+	Seed_(SeedType::Max),
+	IsSeed_(false)
+	{
+
+	}
+
+	TileType Dirt_;
+	SeedType Seed_;
+	bool IsSeed_;
 	
-	TileType Type;
+
 };
 
 class GameEngineImage;
@@ -43,14 +54,20 @@ public:
 	{
 		CurShirts_ = _Shirts;
 	}
+	inline void GetSelectItem(PlayerItem _Item)
+	{
+		//item kind 자동 설정해주는 함수 만들어야됨!
+		CurItem_ = _Item;
+
+	}
 	
 protected:
 private:
-	GameEngineRendererTileMap* TileMap_;
 	
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;
 	PlayerShirts CurShirts_;
+
 	std::string GetHairColorString();
 	std::string GetHairStyleString();
 	GameEngineRenderer* Body;
@@ -74,13 +91,12 @@ private:
 	void Render() override;
 	void ChangeAni(std::string _Name);
 	void CameraCheck();
-	
-	void UpdateTileMap();
-	void DirCreateTile();
+
 	
 private:
-	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 
+
+	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
 	int TileCheckDirX[static_cast<int>(PlayerDir::Max)];
 	int TileCheckDirY[static_cast<int>(PlayerDir::Max)];
@@ -91,13 +107,22 @@ private:
 
 	PlayerHave CurItemKind_;
 	PlayerItem CurItem_;
-	
+
 	void DirAnimationChange();
 
 	bool DirKeyCheck();
 	bool IsMoveKey();
 	void KeyMove();
 	std::string GetDirString();
+
+private:
+	GameEngineRendererTileMap* TileMap_;
+
+	void CurTileIndexCheck();
+	bool IsHeoTileCreate();
+	bool IsWaterTileCreate();
+	void DirGroundCreateTile();
+	bool IsSeedTileCreate();
 
 public:
 	void ChangeState(PlayerState _State);

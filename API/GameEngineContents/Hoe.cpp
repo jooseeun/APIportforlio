@@ -5,7 +5,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 Hoe::Hoe() 
 	:ItemKind_(PlayerHave::WieldItem),
-	InvenPos_(2)
+	InvenPos_(1),
+	ItemName_(PlayerItem::HoeItem)
 {
 }
 

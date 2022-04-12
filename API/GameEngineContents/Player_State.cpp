@@ -147,7 +147,7 @@ void Player::IdleStart()
 
 void Player::WieldStart()
 {
-	DirCreateTile();
+	DirGroundCreateTile();
 }
 
 void Player::HitStart()
@@ -156,7 +156,7 @@ void Player::HitStart()
 
 void Player::WaterStart()
 {
-
+	DirGroundCreateTile();
 }
 
 void Player::WalkStart()
@@ -185,3 +185,14 @@ std::string Player::GetDirString()
 	return "";
 }
 
+void Player::CurTileIndexCheck()
+{
+	TileCheckDirX[static_cast<int>(PlayerDir::Front)] = static_cast<int>(GetPosition().x / 64);
+	TileCheckDirY[static_cast<int>(PlayerDir::Front)] = static_cast<int>((GetPosition().y / 64) + 1);
+	TileCheckDirX[static_cast<int>(PlayerDir::Right)] = static_cast<int>((GetPosition().x / 64) + 1);
+	TileCheckDirY[static_cast<int>(PlayerDir::Right)] = static_cast<int>(GetPosition().y / 64);
+	TileCheckDirX[static_cast<int>(PlayerDir::Left)] = static_cast<int>((GetPosition().x / 64) - 1);
+	TileCheckDirY[static_cast<int>(PlayerDir::Left)] = static_cast<int>(GetPosition().y / 64);
+	TileCheckDirX[static_cast<int>(PlayerDir::Back)] = static_cast<int>(GetPosition().x / 64);
+	TileCheckDirY[static_cast<int>(PlayerDir::Back)] = static_cast<int>((GetPosition().y / 64) - 1);
+}
