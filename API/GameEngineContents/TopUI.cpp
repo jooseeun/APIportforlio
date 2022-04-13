@@ -22,7 +22,7 @@ void TopUI::Start()
 
 
 
-void TopUI::Render()
+void TopUI::Update()
 {
 	//DebugRectRender();
 }
