@@ -5,10 +5,10 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 Ax::Ax()
-	:ItemKind_(PlayerHave::WieldItem),
-	InvenPos_(2),
+	:ItemKind_(PlayerItemKind::WieldItem),
 	ItemName_(PlayerItem::AxItem)
 {
+	InvenPos_ = 2;
 }
 
 Ax::~Ax() 
@@ -21,6 +21,7 @@ void Ax::Start()
 	GameEngineRenderer* AxRender = CreateRenderer("Tools.bmp");
 	AxRender->SetIndex(110);
 	AxRender->CameraEffectOff();
+	
 
 }
 void Ax::Update()

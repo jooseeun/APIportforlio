@@ -33,7 +33,7 @@ private:
 	int InvenPos_;
 	void Start() override;
 	void Update() override;
-	PlayerHave ItemKind_;
+	PlayerItemKind ItemKind_;
 	PlayerItem ItemName_;
 };
 

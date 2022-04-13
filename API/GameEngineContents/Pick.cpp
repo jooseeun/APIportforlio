@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 Pick::Pick()
-	:ItemKind_(PlayerHave::WieldItem),
+	:ItemKind_(PlayerItemKind::WieldItem),
 	InvenPos_(3),
 	ItemName_(PlayerItem::PickItem)
 {

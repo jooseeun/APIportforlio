@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 WateringCan::WateringCan()
-	:ItemKind_(PlayerHave::WaterItem),
+	:ItemKind_(PlayerItemKind::WaterItem),
 	InvenPos_(5),
 	ItemName_(PlayerItem::WateringItem)
 {
@@ -26,7 +26,7 @@ void WateringCan::Update()
 {
 	float NumOne = 288.0;
 	float Num = 64.0;
-	float WeaponHight = 665;
+	float WeaponHight = 680;
 	{
 		if (1 == InvenPos_)
 		{

@@ -211,10 +211,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="IntroLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="LobinHouseLevel.h">
       <SubType>
       </SubType>
@@ -371,10 +367,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Hoe.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="IntroLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

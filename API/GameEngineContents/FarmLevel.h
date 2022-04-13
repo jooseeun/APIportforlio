@@ -31,6 +31,12 @@ public:
 
 	}
 
+	inline void SetSelectPivot(int _SelectPivot)
+	{
+		CurSelectPivot_ = _SelectPivot;
+
+	}
+	
 protected:
 	void Loading() override;
 	void Update() override;

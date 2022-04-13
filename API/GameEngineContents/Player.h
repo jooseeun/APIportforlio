@@ -54,10 +54,31 @@ public:
 	{
 		CurShirts_ = _Shirts;
 	}
-	inline void GetSelectItem(PlayerItem _Item)
+	inline void SetSelectItem(PlayerItem _Item)
 	{
 		//item kind 자동 설정해주는 함수 만들어야됨!
 		CurItem_ = _Item;
+		SetItemKind(_Item);
+
+	}
+	inline void SetItemKind(PlayerItem _Item)
+	{
+		if (10 < static_cast<int>(_Item) && static_cast<int>(_Item) < 20)
+		{
+			CurItemKind_ = PlayerItemKind::WieldItem;
+		}
+		else if (10 < static_cast<int>(_Item) && static_cast<int>(_Item) < 20)
+		{
+			CurItemKind_ = PlayerItemKind::WaterItem;
+		}
+		else if (10 < static_cast<int>(_Item) && static_cast<int>(_Item) < 20)
+		{
+			CurItemKind_ = PlayerItemKind::HitItem;
+		}
+		else
+		{
+			CurItemKind_ = PlayerItemKind::NoItem;
+		}
 
 	}
 	
@@ -105,13 +126,14 @@ private:
 	PlayerDir CurDir_;
 	PlayerDir PrevDir_;
 
-	PlayerHave CurItemKind_;
-	PlayerItem CurItem_;
+	static PlayerItemKind CurItemKind_;
+	static PlayerItem CurItem_;
 
 	void DirAnimationChange();
 
 	bool DirKeyCheck();
-	bool IsMoveKey();
+	bool IsWalkKey();
+	bool IsIdleKey();
 	void KeyMove();
 	std::string GetDirString();
 
@@ -119,9 +141,11 @@ private:
 	GameEngineRendererTileMap* TileMap_;
 
 	void CurTileIndexCheck();
-	bool IsHeoTileCreate();
+	bool IsHoeTileCreate();
 	bool IsWaterTileCreate();
-	void DirGroundCreateTile();
+	void DirHoeDirtCreateTile();
+	void DirWaterDirtCreateTile();
+	void DirSeedCreateTile();
 	bool IsSeedTileCreate();
 
 public:
@@ -134,12 +158,14 @@ private:
 	void HitUpdate();
 	void WalkUpdate();
 	void WaterUpdate();
+	void SeedUpdate();
 
 	void HitStart();
 	void IdleStart();
 	void WieldStart();
 	void WalkStart();
 	void WaterStart();
+	void SeedStart();
 
 };
 

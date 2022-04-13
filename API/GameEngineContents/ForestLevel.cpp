@@ -12,7 +12,9 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-ForestLevel::ForestLevel() 
+ForestLevel::ForestLevel() :
+	CurSelectPivot_(1),
+	NextSelectPivot_(1)
 {
 }
 
@@ -26,9 +28,16 @@ void ForestLevel::Loading()
 	Back->GetRenderer()->SetImage("Forest.bmp");
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
 	Back->TileMap_.TileRangeSetting(90, 34, { 48,48 });
-	CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+
+	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+	HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
+	AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
+	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
+	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
+	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
 	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 4324.0f,1664.f });
@@ -39,5 +48,17 @@ void ForestLevel::Loading()
 
 void ForestLevel::Update()
 {
+	GetItemPos<Ax>(AxSet);
+	GetItemPos<Pick>(PickSet);
+	GetItemPos<Hoe>(HoeSet);
+	GetItemPos<Sickle>(SickleSet);
+	GetItemPos<WateringCan>(WateringCanSet);
 
+	NextSelectPivot_ = ToolUISet->getSelectPivot();
+	if (CurSelectPivot_ != NextSelectPivot_)
+	{
+		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
+	}
+
+	CurSelectPivot_ = NextSelectPivot_;
 }

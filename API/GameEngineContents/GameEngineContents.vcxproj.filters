@@ -8,9 +8,6 @@
     <ClInclude Include="TopUI.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="IntroLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ToolUI.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
@@ -130,9 +127,6 @@
     </ClCompile>
     <ClCompile Include="TopUI.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroLevel.cpp">
-      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ToolUI.cpp">
       <Filter>Actor\Play\PlayUI</Filter>

@@ -1,6 +1,9 @@
 #include "Mine1Level.h"
 
-Mine1Level::Mine1Level() 
+
+Mine1Level::Mine1Level() :
+	CurSelectPivot_(1),
+	NextSelectPivot_(1)
 {
 }
 

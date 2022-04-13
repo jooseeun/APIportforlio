@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 Sickle::Sickle() 
-	:ItemKind_(PlayerHave::HitItem),
+	:ItemKind_(PlayerItemKind::HitItem),
 	InvenPos_(4),
 	ItemName_(PlayerItem::SickleItem)
 {

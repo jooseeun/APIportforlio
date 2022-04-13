@@ -16,7 +16,9 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-FarmHouseLevel::FarmHouseLevel() 
+FarmHouseLevel::FarmHouseLevel() :
+	CurSelectPivot_(1),
+	NextSelectPivot_(1)
 {
 }
 
@@ -32,14 +34,15 @@ void FarmHouseLevel::Loading()
 	Back->TileMap_.TileRangeSetting(26, 15, { 48,48 });
 
 	
-	CreateActor<TopUI>(static_cast<int>(ORDER::UI), "TopUI");
-	CreateActor<EnergyUI>(static_cast<int>(ORDER::UI), "EnergyUI");
-	CreateActor<ToolUI>(static_cast<int> (ORDER::UI), "ToolUI");
+	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
+	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
-	CreateActor<Ax>((int)ORDER::ITEM, "Ax");
-	CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
-	CreateActor<Pick>((int)ORDER::ITEM, "Pick");
-	CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
+	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+	HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
+	AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
+	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
+	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
+	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 	
 	Player* PlayerSet = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });
@@ -53,7 +56,19 @@ void FarmHouseLevel::Loading()
 
 void FarmHouseLevel::Update()
 {
+	GetItemPos<Ax>(AxSet);
+	GetItemPos<Pick>(PickSet);
+	GetItemPos<Hoe>(HoeSet);
+	GetItemPos<Sickle>(SickleSet);
+	GetItemPos<WateringCan>(WateringCanSet);
 
+	NextSelectPivot_ = ToolUISet->getSelectPivot();
+	if (CurSelectPivot_ != NextSelectPivot_)
+	{
+		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
+	}
+
+	CurSelectPivot_ = NextSelectPivot_;
 }
 
 void FarmHouseLevel::LevelChangeStart()

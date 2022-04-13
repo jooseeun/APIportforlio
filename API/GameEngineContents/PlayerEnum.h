@@ -22,6 +22,7 @@ enum class PlayerState
 	Water,
 	Hold,
 	Walk,
+	Seed,
 	Max,
 };
 
@@ -34,24 +35,32 @@ enum class PlayerDir
 	Max
 };
 
-enum class PlayerHave
+enum class PlayerItemKind
 {
 	HitItem,
 	WieldItem,
 	WaterItem,
 	SeedItem,
-	ElseItem,
 	NoItem
 };
 
 enum class PlayerItem
 {
 	Nothing,
+	WieldItem=10,
 	AxItem,
 	HoeItem,
 	PickItem,
+	WaterItem=20,
 	WateringItem,
-	SickleItem
+	HitItem=30,
+	SickleItem,
+	LongswordItem,
+	SeedItem=40,
+	PhatatoSeedItem,
+	CauliFlowerSeedItem,
+
+	
 };
 
 enum class PlayerHairColor

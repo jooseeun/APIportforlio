@@ -14,7 +14,7 @@
 
 void Player::IdleUpdate()
 {
-	if (true == IsMoveKey())
+	if (true == IsWalkKey())
 	{
 		ChangeState(PlayerState::Walk);
 		return;
@@ -23,23 +23,23 @@ void Player::IdleUpdate()
 
 	if (true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
 	{
-		if (CurItemKind_ == PlayerHave::WieldItem)
+		if (CurItemKind_ == PlayerItemKind::WieldItem)
 		{
 			ChangeState(PlayerState::Wield);
 		}
-		else if (CurItemKind_ == PlayerHave::HitItem)
+		else if (CurItemKind_ == PlayerItemKind::HitItem)
 		{
 			ChangeState(PlayerState::Hit);
 		}
-		else if (CurItemKind_ == PlayerHave::WaterItem)
+		else if (CurItemKind_ == PlayerItemKind::WaterItem)
 		{
 			ChangeState(PlayerState::Water);
 		}
-		else if (CurItemKind_ == PlayerHave::ElseItem)
+		else if (CurItemKind_ == PlayerItemKind::SeedItem)
 		{
-			ChangeState(PlayerState::Idle);
+			ChangeState(PlayerState::Seed);
 		}
-		else if (CurItemKind_ == PlayerHave::NoItem)
+		else if (CurItemKind_ == PlayerItemKind::NoItem)
 		{
 			ChangeState(PlayerState::Idle);
 		}
@@ -64,6 +64,14 @@ void Player::HitUpdate()
 }
 
 void Player::WaterUpdate()
+{
+	if (true == Arm->IsEndAnimation())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::SeedUpdate()
 {
 	if (true == Arm->IsEndAnimation())
 	{
@@ -132,7 +140,7 @@ void Player::WalkUpdate()
 
 	} 
 
-	if (false == IsMoveKey())
+	if (true == IsIdleKey())
 	{
 		ChangeState(PlayerState::Idle);
 	}
@@ -145,23 +153,38 @@ void Player::IdleStart()
 {
 }
 
-void Player::WieldStart()
-{
-	DirGroundCreateTile();
-}
 
 void Player::HitStart()
 {
 }
 
-void Player::WaterStart()
-{
-	DirGroundCreateTile();
-}
-
 void Player::WalkStart()
 {
 	
+}
+
+void Player::WieldStart()
+{
+	if (true == IsHoeTileCreate())
+	{
+		DirHoeDirtCreateTile();
+	}
+}
+
+void Player::WaterStart()
+{
+	if (true == IsWaterTileCreate())
+	{
+		DirWaterDirtCreateTile();
+	}
+}
+
+void Player::SeedStart()
+{
+	if (true == IsSeedTileCreate())
+	{
+		DirSeedCreateTile();
+	}
 }
 
 std::string Player::GetDirString()

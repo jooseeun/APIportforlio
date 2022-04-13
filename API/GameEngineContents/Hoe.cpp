@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 Hoe::Hoe() 
-	:ItemKind_(PlayerHave::WieldItem),
+	:ItemKind_(PlayerItemKind::WieldItem),
 	InvenPos_(1),
 	ItemName_(PlayerItem::HoeItem)
 {

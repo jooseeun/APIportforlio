@@ -12,7 +12,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 FarmLevel::FarmLevel():
-	CurSelectPivot_(1),
+	CurSelectPivot_(0),
 	NextSelectPivot_(1)
 
 {
@@ -50,7 +50,6 @@ void FarmLevel::Loading()
 	PlayerSet->SetMapScale(5120.0f,4160.0f);
 	PlayerSet->SetColMapName("FarmColMap.bmp");
 	PlayerSet->SetTileMap(&Back->TileMap_);
-	PlayerSet->GetSelectItem(PlayerItem::HoeItem);
 	PlayerSet->SetSideLevel("FarmHouseLevel","BusStopLevel"," ");
 }
 
@@ -63,11 +62,13 @@ void FarmLevel::Update()
 	GetItemPos<WateringCan>(WateringCanSet);
 
 	NextSelectPivot_=ToolUISet->getSelectPivot();
+	
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
-		PlayerSet->GetSelectItem(ItemPos_[NextSelectPivot_]);
+		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
 	}
 
 	CurSelectPivot_ = NextSelectPivot_;
 }
+
 

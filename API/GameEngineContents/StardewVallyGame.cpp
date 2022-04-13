@@ -1,7 +1,6 @@
 #include "StardewVallyGame.h"
 #include "FarmHouseLevel.h"
 #include "TitleLevel.h"
-#include "IntroLevel.h"
 #include "FarmLevel.h"
 #include "BusStopLevel.h"
 #include "CoopLevel.h"
@@ -226,7 +225,6 @@ void StardewVallyGame::GameInit()
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
-	CreateLevel<IntroLevel>("IntroLevel");
 	CreateLevel<FarmLevel>("FarmLevel");
 	CreateLevel<CoopLevel>("CoopLevel");
 	CreateLevel<AnimalShopLevel>("AnimalShopLevel");
