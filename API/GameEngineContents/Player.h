@@ -126,8 +126,8 @@ private:
 	PlayerDir CurDir_;
 	PlayerDir PrevDir_;
 
-	static PlayerItemKind CurItemKind_;
-	static PlayerItem CurItem_;
+	 PlayerItemKind CurItemKind_;
+	 PlayerItem CurItem_;
 
 	void DirAnimationChange();
 
