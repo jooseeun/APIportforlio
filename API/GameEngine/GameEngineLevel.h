@@ -130,7 +130,7 @@ private:
 
 	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
 
-
+	
 private:
 	// 삭제는 액터가 하지만 실제 사용은 Level
 	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
