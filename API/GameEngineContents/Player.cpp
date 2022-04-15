@@ -27,9 +27,6 @@ Player::Player()
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
 	ArrAnimationName[static_cast<int>(PlayerState::Walk)] = "Walk";
 	ArrAnimationName[static_cast<int>(PlayerState::Wield)] = "Wield";
-	ArrAnimationName[static_cast<int>(PlayerState::Hit)] = "Hit";
-	ArrAnimationName[static_cast<int>(PlayerState::Water)] = "Water";
-	ArrAnimationName[static_cast<int>(PlayerState::Seed)] = "Idle";
 
 	ArrCheckDir[static_cast<int>(PlayerDir::Front)] = float4{ 0.0f,64.0f };
 	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
@@ -387,55 +384,78 @@ bool Player::DirKeyCheck()
 
 void Player::DirHoeDirtCreateTile() 
 {
-	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
-	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
+		if (CurDir_ == PlayerDir::Front) {
+			PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64) , static_cast<int>((GetPosition().y + 32.0f) / 64) + 1, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			Tile->Dirt_ = TileType::HoeDirt;
+			Tile->Seed_ = SeedType::Max;
+		}
+		else if (CurDir_ == PlayerDir::Right) {
+			PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64) + 1, static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			Tile->Dirt_ = TileType::HoeDirt;
+			Tile->Seed_ = SeedType::Max;
+		}
+		else if (CurDir_ == PlayerDir::Left) {
+			PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64) - 1, static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			Tile->Dirt_ = TileType::HoeDirt;
+			Tile->Seed_ = SeedType::Max;
+		}
+		else if (CurDir_ == PlayerDir::Back) {
+			PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			Tile->Dirt_ = TileType::HoeDirt;
+			Tile->Seed_ = SeedType::Max;
+		}
+
 }
 
 void Player::DirWaterDirtCreateTile() 
 {
 
-	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
-	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
+	if (CurDir_ == PlayerDir::Front) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
+	}
+	else if (CurDir_ == PlayerDir::Right) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
+	}
+	else if (CurDir_ == PlayerDir::Left) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
+	}
+	else if (CurDir_ == PlayerDir::Back) {
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
+	}
 
 }
 void Player::DirSeedCreateTile()
 {
 	
-	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND),50);
-	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
-
-}
-void Player::TileCheckDir() 
-{
 	if (CurDir_ == PlayerDir::Front) {
-		TileIndexX_ = static_cast<int>(GetPosition().x / 64);
-		TileIndexY_ = static_cast<int>((GetPosition().y + 32.0f) / 64) + 1;
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
 	}
 	else if (CurDir_ == PlayerDir::Right) {
-		TileIndexX_ = static_cast<int>(GetPosition().x / 64) + 1;
-		TileIndexY_ = static_cast<int>((GetPosition().y + 32.0f) / 64);
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
 	}
 	else if (CurDir_ == PlayerDir::Left) {
-		TileIndexX_ = static_cast<int>(GetPosition().x / 64) - 1;
-		TileIndexY_ = static_cast<int>((GetPosition().y + 32.0f) / 64);
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
 	}
 	else if (CurDir_ == PlayerDir::Back) {
-		TileIndexX_ = static_cast<int>(GetPosition().x / 64);
-		TileIndexY_ = static_cast<int>((GetPosition().y + 32.0f) / 64) - 1;
+		PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(static_cast<int>(GetPosition().x / 64), static_cast<int>((GetPosition().y + 32.0f) / 64), "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		Tile->Dirt_ = TileType::WaterDirt;
 	}
-	
+
 }
+
 bool Player::IsHoeTileCreate()
 {
-	TileCheckDir();
+	int _TileX = TileCheckDirX[static_cast<int>(CurDir_)];
+	int _TileY = TileCheckDirY[static_cast<int>(CurDir_)];
 	
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(_TileX, _TileY);
 
 	if (nullptr == Tile && PlayerItem::HoeItem == CurItem_) // 맨땅이라면
 	{
@@ -447,38 +467,37 @@ bool Player::IsHoeTileCreate()
 
 bool Player::IsWaterTileCreate()
 {
-	TileCheckDir();
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == Tile)
+	int _TileX = TileCheckDirX[static_cast<int>(CurDir_)];
+	int _TileY = TileCheckDirY[static_cast<int>(CurDir_)];
+	if (false == TileMap_->IsTile(_TileX, _TileY))
 	{
 		return false;
-	}
-	else 
+	};
+	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(_TileX, _TileY);
+	if (CurItem_ == PlayerItem::WateringItem && TileType::HoeDirt == Tile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
 	{
-		if (CurItem_ == PlayerItem::WateringItem && TileType::HoeDirt == Tile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
-		{
-			return true;
-		}
-		return false;
+		return true;
 	}
+	return false;
 
 }
 bool Player::IsSeedTileCreate()
 {
-	TileCheckDir();
-
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == Tile)
+	int _TileX = TileCheckDirX[static_cast<int>(CurDir_)];
+	int _TileY = TileCheckDirY[static_cast<int>(CurDir_)];
+	if (false == TileMap_->IsTile(_TileX, _TileY))
 	{
 		return false;
-	}
+	};
+
+	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(_TileX, _TileY);
 	if (CurItemKind_ == PlayerItemKind::SeedItem && SeedType::Max == Tile->Seed_) // Nothing 만아니면 씨앗심을 수 있음
 	{
 		return true;
 	}
 	return false;
 }
-
+// 좋은 함수가 아닌거 같습니다.
 bool Player::IsIdleKey()
 {	
 	if (true == GameEngineInput::GetInst()->IsFree("LeftWalk") &&

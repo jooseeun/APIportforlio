@@ -67,17 +67,13 @@ public:
 		{
 			CurItemKind_ = PlayerItemKind::WieldItem;
 		}
-		else if (20 < static_cast<int>(_Item) && static_cast<int>(_Item) < 30)
+		else if (10 < static_cast<int>(_Item) && static_cast<int>(_Item) < 20)
 		{
 			CurItemKind_ = PlayerItemKind::WaterItem;
 		}
-		else if (30 < static_cast<int>(_Item) && static_cast<int>(_Item) < 40)
+		else if (10 < static_cast<int>(_Item) && static_cast<int>(_Item) < 20)
 		{
 			CurItemKind_ = PlayerItemKind::HitItem;
-		}
-		else if (40 < static_cast<int>(_Item) && static_cast<int>(_Item) < 50)
-		{
-			CurItemKind_ = PlayerItemKind::SeedItem;
 		}
 		else
 		{
@@ -151,10 +147,6 @@ private:
 	void DirWaterDirtCreateTile();
 	void DirSeedCreateTile();
 	bool IsSeedTileCreate();
-	void TileCheckDir();
-
-	int TileIndexX_;
-	int TileIndexY_;
 
 public:
 	void ChangeState(PlayerState _State);

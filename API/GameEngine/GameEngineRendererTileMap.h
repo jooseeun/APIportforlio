@@ -106,6 +106,13 @@ public:
 		return CreateTile<TileType>(Index.X, Index.Y, _Image);
 	}
 
+	template<typename TileType>
+	TileType* CreateTile(const float4& _Pos, const std::string& _Image,int _Index, int _Order)
+	{
+		TileIndex Index = GetTileIndex(_Pos);
+		return CreateTile<TileType>(Index.X, Index.Y, _Image ,_Index, _Order);
+	}
+
 	// 타일이미지가 1장1장 있을때
 	template<typename TileType>
 	TileType* CreateTile(int _X, int _Y, const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX))
@@ -127,23 +134,12 @@ public:
 	}
 
 	// 타일이미지가 여러장 모여있는데 컷했을때
-
 	template<typename TileType>
 	TileType* CreateTile(int _X, int _Y, const std::string& _Image, int Index, int _Order)
 	{
 		TileType* Tile = CreateTile<TileType>(_X, _Y, _Image);
 		Tile->Renderer->SetIndex(Index);
 		Tile->Renderer->SetPivot(GetWorldPostion(_X, _Y));
-		return reinterpret_cast<TileType*>(Tile);
-	}
-
-	template<typename TileType>
-	TileType* CreateTile(int _X, int _Y, const std::string& _Image, int Index, int _Order , unsigned int _Alpha)
-	{
-		TileType* Tile = CreateTile<TileType>(_X, _Y, _Image);
-		Tile->Renderer->SetIndex(Index);
-		Tile->Renderer->SetPivot(GetWorldPostion(_X, _Y));
-		Tile->Renderer->SetAlpha(_Alpha);
 		return reinterpret_cast<TileType*>(Tile);
 	}
 
