@@ -68,7 +68,7 @@ public:
 		return NewActor;
 	}
 
-	inline float4 GetCameraPos() 
+	inline float4 GetCameraPos()
 	{
 		return CameraPos_;
 	}
@@ -78,9 +78,9 @@ public:
 		CameraPos_ += _Value;
 	}
 
-	inline void SetCameraPos(const float4& _Value )
+	inline void SetCameraPos(const float4& _Value)
 	{
-		CameraPos_  = _Value;
+		CameraPos_ = _Value;
 	}
 
 
