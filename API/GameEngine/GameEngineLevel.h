@@ -68,7 +68,7 @@ public:
 		return NewActor;
 	}
 
-	inline float4 GetCameraPos()
+	inline float4 GetCameraPos() 
 	{
 		return CameraPos_;
 	}
@@ -78,20 +78,11 @@ public:
 		CameraPos_ += _Value;
 	}
 
-	inline void SetCameraPos(const float4& _Value)
+	inline void SetCameraPos(const float4& _Value )
 	{
-		CameraPos_ = _Value;
+		CameraPos_  = _Value;
 	}
 
-	template<typename ConvertType>
-	ConvertType* FindActor(const std::string& _Name)
-	{
-		return dynamic_cast<ConvertType*>(FindActor(_Name));
-	}
-
-	GameEngineActor* FindActor(const std::string& _Name);
-
-	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
 
 protected:
 	// 시점함수
@@ -100,17 +91,13 @@ protected:
 	// 이 레벨이 현재 레벨일때 해야할일을 실행한다.
 	virtual void Update() = 0;
 	// Current레벨 => Next레벨로 이전할때 현재레벨이 실행하는 함수.
-	void ActorLevelChangeStart();
 	virtual void LevelChangeStart() {}
 	// Current레벨 => Next레벨로 이전할때 이전레벨이 실행하는 함수.
-	void ActorLevelChangeEnd();
 	virtual void LevelChangeEnd() {}
 
 private:
 	// std::vector로 관리하는게 더 좋다고 생각..
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
-
-	std::map<std::string, GameEngineActor*> RegistActor_;
 
 	std::vector<ChangeOrderItem> ChangeOrderList;
 
@@ -130,7 +117,7 @@ private:
 
 	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
 
-	
+
 private:
 	// 삭제는 액터가 하지만 실제 사용은 Level
 	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
