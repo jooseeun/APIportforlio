@@ -5,7 +5,6 @@
 #include "Sickle.h"
 #include "Player.h"
 #include "ToolUI.h"
-#include "PhotatoSeed.h"
 #include "WateringCan.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
@@ -50,7 +49,6 @@ private:
 	Sickle* SickleSet;
 	WateringCan* WateringCanSet;
 	ToolUI* ToolUISet;
-	PhotatoSeed* PhotatoSeedSet;
 
 	PlayerItem ItemPos_[13];
 

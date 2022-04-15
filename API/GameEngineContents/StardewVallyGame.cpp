@@ -216,9 +216,7 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* hoeDirtDark = GameEngineImageManager::GetInst()->Find("hoeDirtDark.bmp");
 	hoeDirtDark->CutCount(12, 4);
 	GameEngineImage* Crops = GameEngineImageManager::GetInst()->Find("Crops.bmp");
-	Crops->Cut({ 64, 128 });
-	GameEngineImage* Objects = GameEngineImageManager::GetInst()->Find("Objects.bmp");
-	Objects->CutCount(24, 39);
+	Crops->CutCount(64, 128);
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{

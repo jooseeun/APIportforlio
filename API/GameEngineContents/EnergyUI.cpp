@@ -19,7 +19,7 @@ void EnergyUI::Start()
 	Renderer->CameraEffectOff();
 }
 
-void EnergyUI::Update()
+void EnergyUI::Render()
 {
 	//DebugRectRender();
 }

@@ -68,6 +68,12 @@
     <ClInclude Include="ForestLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
+    <ClInclude Include="Potato.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="cauliflower.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
     <ClInclude Include="NPCRobin.h">
       <Filter>Actor\Play\NPC</Filter>
     </ClInclude>
@@ -112,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="WateringCan.h">
       <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="PhotatoSeed.h">
-      <Filter>Actor\Play\Crops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +185,12 @@
     <ClCompile Include="ForestLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
+    <ClCompile Include="Potato.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="cauliflower.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
     <ClCompile Include="NPCRobin.cpp">
       <Filter>Actor\Play\NPC</Filter>
     </ClCompile>
@@ -226,9 +235,6 @@
     </ClCompile>
     <ClCompile Include="WateringCan.cpp">
       <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="PhotatoSeed.cpp">
-      <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
