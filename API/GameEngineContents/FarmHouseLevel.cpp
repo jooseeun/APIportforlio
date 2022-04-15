@@ -43,7 +43,8 @@ void FarmHouseLevel::Loading()
 	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
-	
+	PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
+
 	Player* PlayerSet = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
 	PlayerSet->SetPosition({ 750.0f,520.f });
 	PlayerSet->SetMapScale(1280.0f, 840.0f);
@@ -61,6 +62,7 @@ void FarmHouseLevel::Update()
 	GetItemPos<Hoe>(HoeSet);
 	GetItemPos<Sickle>(SickleSet);
 	GetItemPos<WateringCan>(WateringCanSet);
+	GetItemPos<PhotatoSeed>(PhotatoSeedSet);
 
 	NextSelectPivot_ = ToolUISet->getSelectPivot();
 	if (CurSelectPivot_ != NextSelectPivot_)

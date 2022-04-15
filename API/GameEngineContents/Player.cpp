@@ -406,7 +406,7 @@ void Player::DirSeedCreateTile()
 {
 	
 	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND),50);
+	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
 	Tile->Dirt_ = TileType::HoeDirt;
 	Tile->Seed_ = SeedType::Max;
 

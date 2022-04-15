@@ -44,6 +44,7 @@ void FarmLevel::Loading()
 	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
+	PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
 
 	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 4120.0f,1020.f });
@@ -60,6 +61,7 @@ void FarmLevel::Update()
 	GetItemPos<Hoe>(HoeSet);
 	GetItemPos<Sickle>(SickleSet);
 	GetItemPos<WateringCan>(WateringCanSet);
+	GetItemPos<PhotatoSeed>(PhotatoSeedSet);
 
 	NextSelectPivot_=ToolUISet->getSelectPivot();
 	
