@@ -23,7 +23,8 @@ public:
 		return Image_;
 	};
 
-	GameEngineRendererTileMap TileMap_;
+	GameEngineRendererTileMap GroundTileMap_;
+	GameEngineRendererTileMap CropsTileMap_;
 
 protected:
 	void Start() override;

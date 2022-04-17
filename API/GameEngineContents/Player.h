@@ -38,9 +38,13 @@ public:
 	void SetColMapName(const std::string& _Name);
 	void SetSideLevel(std::string _Pre, std::string _Next, std::string _Entry);
 
-	inline void SetTileMap(GameEngineRendererTileMap* _TileMap)
+	inline void SetGroundTileMap(GameEngineRendererTileMap* _TileMap)
 	{
-		TileMap_ = _TileMap;
+		GroundTileMap_ = _TileMap;
+	}
+	inline void SetCropsTileMap(GameEngineRendererTileMap* _TileMap)
+	{
+		CropsTileMap_ = _TileMap;
 	}
 	inline void SetHairNum(PlayerHairStyle _Num)
 	{
@@ -142,7 +146,8 @@ private:
 	std::string GetDirString();
 
 private:
-	GameEngineRendererTileMap* TileMap_;
+	GameEngineRendererTileMap* GroundTileMap_;
+	GameEngineRendererTileMap* CropsTileMap_;
 
 	void CurTileIndexCheck();
 	bool IsHoeTileCreate();

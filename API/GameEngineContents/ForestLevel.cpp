@@ -27,7 +27,8 @@ void ForestLevel::Loading()
 	BackGround* Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("Forest.bmp");
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
-	Back->TileMap_.TileRangeSetting(90, 34, { 48,48 });
+	Back->GroundTileMap_.TileRangeSetting(90, 34, { 48,48 });
+	Back->CropsTileMap_.TileRangeSetting(90, 34, { 48,48 });
 
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");

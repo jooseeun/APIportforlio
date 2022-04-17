@@ -2,7 +2,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 BackGround::BackGround()
-	:TileMap_(this)
+	:GroundTileMap_(this),
+	 CropsTileMap_(this)
 {
 	
 }

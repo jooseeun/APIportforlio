@@ -33,7 +33,8 @@ void FarmLevel::Loading()
 	Back->GetRenderer()->SetImage("Farm.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
-	Back->TileMap_.TileRangeSetting(80, 65, { 64,64 });
+	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
+	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
 
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
@@ -50,7 +51,8 @@ void FarmLevel::Loading()
 	PlayerSet->SetPosition({ 4120.0f,1020.f });
 	PlayerSet->SetMapScale(5120.0f,4160.0f);
 	PlayerSet->SetColMapName("FarmColMap.bmp");
-	PlayerSet->SetTileMap(&Back->TileMap_);
+	PlayerSet->SetGroundTileMap(&Back->GroundTileMap_);
+	PlayerSet->SetCropsTileMap(&Back->CropsTileMap_);
 	PlayerSet->SetSideLevel("FarmHouseLevel","BusStopLevel"," ");
 }
 

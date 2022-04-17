@@ -31,8 +31,8 @@ void FarmHouseLevel::Loading()
 	BackGround* Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("FarmHouse.bmp");
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
-	Back->TileMap_.TileRangeSetting(26, 15, { 48,48 });
-
+	Back->GroundTileMap_.TileRangeSetting(26, 15, { 48,48 });
+	Back->CropsTileMap_.TileRangeSetting(26, 15, { 48,48 });
 	
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
@@ -51,8 +51,8 @@ void FarmHouseLevel::Loading()
 	PlayerSet->SetColMapName("FarmHouseColMap.bmp");
 	PlayerSet->SetSideLevel("BusStopLevel", "FarmLevel", " ");
 
-	PlayerSet->SetTileMap(&Back->TileMap_);
-
+	PlayerSet->SetGroundTileMap(&Back->GroundTileMap_);
+	PlayerSet->SetCropsTileMap(&Back->CropsTileMap_);
 }
 
 void FarmHouseLevel::Update()

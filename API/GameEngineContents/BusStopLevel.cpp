@@ -27,7 +27,8 @@ void BusStopLevel::Loading()
 		BackGround* Back = CreateActor<BackGround>(1);
 		Back->GetRenderer()->SetImage("BusStop.bmp");
 		Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
-		Back->TileMap_.TileRangeSetting(35, 30, { 48,48 });
+		Back->GroundTileMap_.TileRangeSetting(35, 30, { 48,48 });
+		Back->CropsTileMap_.TileRangeSetting(35, 30, { 48,48 });
 	}
 
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");

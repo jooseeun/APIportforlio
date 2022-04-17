@@ -388,7 +388,7 @@ bool Player::DirKeyCheck()
 void Player::DirHoeDirtCreateTile() 
 {
 	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
 	Tile->Dirt_ = TileType::HoeDirt;
 	Tile->Seed_ = SeedType::Max;
 }
@@ -397,7 +397,7 @@ void Player::DirWaterDirtCreateTile()
 {
 
 	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
 	Tile->Dirt_ = TileType::HoeDirt;
 	Tile->Seed_ = SeedType::Max;
 
@@ -406,9 +406,13 @@ void Player::DirSeedCreateTile()
 {
 	
 	TileCheckDir();
-	PlayerTile* Tile = TileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
-	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
+	PlayerTile* CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+	CropsTile->Dirt_ = TileType::HoeDirt;
+	CropsTile->Seed_ = SeedType::Phoato;
+
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	GroundTile->Dirt_ = TileType::SeedTile;
+	GroundTile->Seed_ = SeedType::Phoato;
 
 }
 void Player::TileCheckDir() 
@@ -435,7 +439,7 @@ bool Player::IsHoeTileCreate()
 {
 	TileCheckDir();
 	
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
 	if (nullptr == Tile && PlayerItem::HoeItem == CurItem_) // 맨땅이라면
 	{
@@ -448,7 +452,7 @@ bool Player::IsHoeTileCreate()
 bool Player::IsWaterTileCreate()
 {
 	TileCheckDir();
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 	if (nullptr == Tile)
 	{
 		return false;
@@ -467,12 +471,12 @@ bool Player::IsSeedTileCreate()
 {
 	TileCheckDir();
 
-	PlayerTile* Tile = TileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == Tile)
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	if (nullptr == GroundTile)
 	{
 		return false;
 	}
-	if (CurItemKind_ == PlayerItemKind::SeedItem && SeedType::Max == Tile->Seed_) // Nothing 만아니면 씨앗심을 수 있음
+	if (CurItemKind_ == PlayerItemKind::SeedItem && SeedType::Max == GroundTile->Seed_) // Nothing 만아니면 씨앗심을 수 있음
 	{
 		return true;
 	}

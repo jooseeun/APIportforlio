@@ -125,28 +125,8 @@ public:
 
 		return reinterpret_cast<TileType*>(FindTile);
 	}
-
-	template<typename TileType>
-	TileType* AddTile(int _X, int _Y, const std::string& _Image, int _Index, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX))
-	{
-		Tile* AddTile = GetTile<Tile>(_X, _Y);
-		
-		if (nullptr != AddTile)
-		{
-			TileType * FindTile = new TileType();
-			FindTile->Renderer = Master_->CreateRenderer(_Image, _Order);
-			FindTile->Renderer->SetPivot(_Index);
-			FindTile->Renderer->SetPivot(GetWorldPostion(_X, _Y));
-			Tiles_[_Y][_X] = FindTile;
-
-			return reinterpret_cast<TileType*>(FindTile);
-
-
-		}
 	
 
-		
-	}
 	// 타일이미지가 여러장 모여있는데 컷했을때
 
 	template<typename TileType>
