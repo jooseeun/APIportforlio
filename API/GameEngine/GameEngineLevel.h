@@ -36,6 +36,20 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
+	bool IsDebugModeOn() 
+	{
+		IsDebug = true;
+	}
+
+	bool IsDebugModeOff()
+	{
+		IsDebug = false;
+	}
+
+	bool IsDebugModeSwitch()
+	{
+		IsDebug = !IsDebug;
+	}
 
 	template<typename ActorType>
 	ActorType* CreateActor(int _Order = 0, const std::string& _Name = "")
@@ -68,7 +82,7 @@ public:
 		return NewActor;
 	}
 
-	inline float4 GetCameraPos()
+	inline float4 GetCameraPos() 
 	{
 		return CameraPos_;
 	}
@@ -78,11 +92,20 @@ public:
 		CameraPos_ += _Value;
 	}
 
-	inline void SetCameraPos(const float4& _Value)
+	inline void SetCameraPos(const float4& _Value )
 	{
-		CameraPos_ = _Value;
+		CameraPos_  = _Value;
 	}
 
+	template<typename ConvertType>
+	ConvertType* FindActor(const std::string& _Name)
+	{
+		return dynamic_cast<ConvertType*>(FindActor(_Name));
+	}
+
+	GameEngineActor* FindActor(const std::string& _Name);
+
+	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
 
 protected:
 	// 시점함수
@@ -91,13 +114,19 @@ protected:
 	// 이 레벨이 현재 레벨일때 해야할일을 실행한다.
 	virtual void Update() = 0;
 	// Current레벨 => Next레벨로 이전할때 현재레벨이 실행하는 함수.
+	void ActorLevelChangeStart();
 	virtual void LevelChangeStart() {}
 	// Current레벨 => Next레벨로 이전할때 이전레벨이 실행하는 함수.
+	void ActorLevelChangeEnd();
 	virtual void LevelChangeEnd() {}
 
 private:
+	static bool IsDebug;
+
 	// std::vector로 관리하는게 더 좋다고 생각..
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+
+	std::map<std::string, GameEngineActor*> RegistActor_;
 
 	std::vector<ChangeOrderItem> ChangeOrderList;
 
