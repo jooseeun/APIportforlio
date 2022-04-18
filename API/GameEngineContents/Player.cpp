@@ -54,9 +54,10 @@ void Player::ChangeState(PlayerState _State)
 
 	if (CurState_ != _State)
 	{
-		ChangeAni(GetDirString() + ArrAnimationName[static_cast<int>(_State)]);
+		CurState_ = _State;	
+		ChangeAni(GetDirString() + ArrAnimationName[static_cast<int>(CurState_)]);
 
-		switch (_State)
+		switch (CurState_)
 		{
 		case PlayerState::Idle:
 			IdleStart();
@@ -81,7 +82,6 @@ void Player::ChangeState(PlayerState _State)
 		}
 	}
 
-	CurState_ = _State;
 }
 
 void Player::StateUpdate()
