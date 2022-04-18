@@ -144,12 +144,14 @@ void Player::Start()
 	std::string HairStyle_ = GetHairStyleString();
 	Body = CreateRendererToScale("Body.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
 	Pants = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
-	Shirts = CreateRendererToScale("BodyShirts.bmp", { 32, 32 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
+	Shirts = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
 	Hair = CreateRendererToScale("Hair" + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
-	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-17});
+	WieldItem = CreateRendererToScale("Tools.bmp", { 192, 160 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-17});
 	Arm = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
-	HitItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,-12 });
+	HitItem = CreateRendererToScale("Tools.bmp", { 192, 160 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,-12 });
 	HitItem->Off();
+
+	// BackWield 리소스 다시 수정하기
 	////////////idle
 	{ 
 		{// 캐릭터 front idle 상태
