@@ -209,6 +209,8 @@ void StardewVallyGame::GameInit()
 	SmallLeaf->CutCount(3, 1);
 	GameEngineImage* Tools = GameEngineImageManager::GetInst()->Find("Tools.bmp");
 	Tools->CutCount(21, 12);
+	GameEngineImage* LeftTools = GameEngineImageManager::GetInst()->Find("LeftTools.bmp");
+	LeftTools->CutCount(21, 12);
 	GameEngineImage* WeaPons = GameEngineImageManager::GetInst()->Find("WeaPons.bmp");
 	WeaPons->CutCount(8, 9);
 	GameEngineImage* hoeDirt = GameEngineImageManager::GetInst()->Find("hoeDirt.bmp");
@@ -219,25 +221,41 @@ void StardewVallyGame::GameInit()
 	Crops->Cut({ 64, 128 });
 	GameEngineImage* Objects = GameEngineImageManager::GetInst()->Find("Objects.bmp");
 	Objects->CutCount(24, 39);
+
 	GameEngineImage* RightHoe = GameEngineImageManager::GetInst()->Find("RightHoe.bmp");
 	RightHoe->CutCount(1, 5);
 	GameEngineImage* LeftHoe = GameEngineImageManager::GetInst()->Find("LeftHoe.bmp");
 	LeftHoe->CutCount(1, 5);
 	GameEngineImage* FrontHoe = GameEngineImageManager::GetInst()->Find("FrontHoe.bmp");
 	FrontHoe->CutCount(1, 5);
+
 	GameEngineImage* RightAx = GameEngineImageManager::GetInst()->Find("RightAx.bmp");
 	RightAx->CutCount(1, 5);
 	GameEngineImage* LeftAx = GameEngineImageManager::GetInst()->Find("LeftAx.bmp");
 	LeftAx->CutCount(1, 5);
 	GameEngineImage* FrontAx = GameEngineImageManager::GetInst()->Find("FrontAx.bmp");
 	FrontAx->CutCount(1, 5);
-	GameEngineImage* RightSickle = GameEngineImageManager::GetInst()->Find("RightSickle.bmp");
-	RightSickle->CutCount(1, 5);
-	GameEngineImage* LeftSickle = GameEngineImageManager::GetInst()->Find("LeftSickle.bmp");
-	LeftSickle->CutCount(1, 5);
-	GameEngineImage* FrontSickle = GameEngineImageManager::GetInst()->Find("FrontSickle.bmp");
-	FrontSickle->CutCount(1, 5);
 
+	GameEngineImage* RightPick = GameEngineImageManager::GetInst()->Find("RightPick.bmp");
+	RightPick->CutCount(1, 5);
+	GameEngineImage* LeftPick = GameEngineImageManager::GetInst()->Find("LeftPick.bmp");
+	LeftPick->CutCount(1, 5);
+	GameEngineImage* FrontPick = GameEngineImageManager::GetInst()->Find("FrontPick.bmp");
+	FrontPick->CutCount(1, 5);
+
+	GameEngineImage* RightSickle = GameEngineImageManager::GetInst()->Find("RightSickle.bmp");
+	RightSickle->CutCount(1, 6);
+	GameEngineImage* LeftSickle = GameEngineImageManager::GetInst()->Find("LeftSickle.bmp");
+	LeftSickle->CutCount(1, 6);
+	GameEngineImage* FrontSickle = GameEngineImageManager::GetInst()->Find("FrontSickle.bmp");
+	FrontSickle->CutCount(1, 6);
+
+	GameEngineImage* RightSword = GameEngineImageManager::GetInst()->Find("RightSword.bmp");
+	RightSword->CutCount(1, 6);
+	GameEngineImage* LeftSword = GameEngineImageManager::GetInst()->Find("LeftSword.bmp");
+	LeftSword->CutCount(1, 6);
+	GameEngineImage* FrontSword = GameEngineImageManager::GetInst()->Find("FrontSword.bmp");
+	FrontSword->CutCount(1, 6);
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
@@ -258,8 +276,8 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
-	ChangeLevel("TitleLevel");
-	//ChangeLevel("FarmLevel");
+	//ChangeLevel("TitleLevel");
+	ChangeLevel("FarmLevel");
 }
 
 void StardewVallyGame::GameLoop()

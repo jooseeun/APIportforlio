@@ -106,6 +106,7 @@ private:
 	GameEngineRenderer* Pants;
 	GameEngineRenderer* Arm;
 	GameEngineRenderer* WieldItem;
+	GameEngineRenderer* HitItem;
 	GameEngineImage* MapColImage_;
 
 	std::string ColMap_;

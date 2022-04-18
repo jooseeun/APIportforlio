@@ -13,7 +13,7 @@
 #include <GameEngine/GameEngineCollision.h>
 
 Player::Player()
-	:Speed_(205.0f),
+	:Speed_(705.0f),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
 	PrevDir_(PlayerDir::Front),
@@ -21,7 +21,7 @@ Player::Player()
 	CurState_(PlayerState::Idle),
 	CurItem_(PlayerItem::Nothing),
 	CurHairStyle_(PlayerHairStyle::First),
-	CurHairColor_(PlayerHairColor::Red),
+	CurHairColor_(PlayerHairColor::Black),
 	CurShirts_(PlayerShirts::First)
 {
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -145,6 +145,8 @@ void Player::Start()
 	Hair = CreateRendererToScale("Hair" + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
 	Arm = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
 	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-12});
+	HitItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,-12 });
+	HitItem->Off();
 	////////////idle
 	{ 
 		{// 캐릭터 front idle 상태
@@ -222,6 +224,8 @@ void Player::Start()
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.1f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "FrontWield", 264, 268, 0.1f, true);
 				WieldItem->CreateAnimation("FrontHoe.bmp", "FrontHoe", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("FrontAx.bmp", "FrontAx", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("FrontPick.bmp", "FrontPick", 0, 4, 0.1f, true);
 			}
 			{ // 내려치는 방향 : 오른쪽
 				Body->CreateAnimation("Body.bmp", "RightWield", 192, 196, 0.1f, true);
@@ -230,6 +234,8 @@ void Player::Start()
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.1f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "RightWield", 192, 196, 0.1f, true);
 				WieldItem->CreateAnimation("RightHoe.bmp", "RightHoe", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("RightAx.bmp", "RightAx", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("RightPick.bmp", "RightPick", 0, 4, 0.1f, true);
 			}
 			{ // 내려치는 방향 : 왼쪽
 				Body->CreateAnimation("Body3.bmp", "LeftWield", 192, 196, 0.1f, true);
@@ -238,6 +244,9 @@ void Player::Start()
 				Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWield", 192, 196, 0.1f, true);
 				Shirts->CreateAnimation("Body3Shirts.bmp", "LeftWield", 192, 196, 0.1f, true);
 				WieldItem->CreateAnimation("LeftHoe.bmp", "LeftHoe", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("LeftAx.bmp", "LeftAx", 0, 4, 0.1f, true);
+				WieldItem->CreateAnimation("LeftPick.bmp", "LeftPick", 0, 4, 0.1f, true);
+
 			}
 			{ // 내려치는 방향 : 뒤
 				Body->CreateAnimation("Body.bmp", "BackWield", 242, 243, 0.3f, true);
@@ -245,10 +254,13 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "BackWield", 260, 261, 0.3f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.3f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "BackWield", 242, 243, 0.3f, true);
-				WieldItem->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.1f, true);
+				WieldItem->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.3f, true);
+				WieldItem->CreateAnimation("Tools.bmp", "BackAx", 66+42, 67+42, 0.3f, true);
+				WieldItem->CreateAnimation("Tools.bmp", "BackPick", 66, 67, 0.3f, true);
 			}
 		}
 		////////////////////Hit
+		HitItem->CreateAnimation("Tools.bmp", "ItemIdle", 20, 20, 0.15f, false);
 		// Left 수정, 옷 수정
 		{
 			{ // 때리는 방향 : 앞
@@ -257,6 +269,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "FrontHit", 114, 119, 0.05f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontHit", 96, 101, 0.05f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "FrontHit", 96, 101, 0.05f, true);
+				HitItem->CreateAnimation("FrontSickle.bmp", "FrontSickle", 0, 5, 0.05f, true);
 			}
 			{ // 때리는 방향  : 오른쪽
 				Body->CreateAnimation("Body.bmp", "RightHit", 120, 125, 0.05f, true);
@@ -264,6 +277,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "RightHit", 138, 143, 0.05f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightHit", 120, 125, 0.05f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "RightHit", 120, 125, 0.05f, true);
+				HitItem->CreateAnimation("RightSickle.bmp", "RightSickle", 0, 5, 0.05f, true);
 			}
 			{ // 때리는 방향  : 왼쪽
 				Body->CreateAnimation("Body3.bmp", "LeftHit", 120, 125, 0.05f, true);
@@ -271,6 +285,7 @@ void Player::Start()
 				Pants->CreateAnimation("Body3Shirts.bmp", "LeftHit", 138, 143, 0.05f, true);
 				Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftHit", 120, 125, 0.05f, true);
 				Shirts->CreateAnimation("Body3Shirts.bmp", "LeftHit", 120, 125, 0.05f, true);
+				HitItem->CreateAnimation("LeftSickle.bmp", "LeftSickle", 0, 5, 0.05f, true);
 			}
 			{ // 때리는 방향  : 뒤
 				Body->CreateAnimation("Body.bmp", "BackHit", 144, 149, 0.05f, true);
@@ -278,6 +293,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "BackHit", 162, 167, 0.05f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackHit", 144, 149, 0.05f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "BackHit", 144, 149, 0.05f, true);
+				HitItem->CreateAnimation("Tools.bmp", "BackSickle", 0, 5, 0.05f, true);
 			}
 		}
 
@@ -596,6 +612,14 @@ std::string Player::GetItemString()
 	if (CurItem_ == PlayerItem::HoeItem)
 	{
 		return "Hoe";
+	}
+	else if (CurItem_ == PlayerItem::AxItem)
+	{
+		return "Ax";
+	}
+	else if (CurItem_ == PlayerItem::PickItem)
+	{
+		return "Pick";
 	}
 	else
 	{
