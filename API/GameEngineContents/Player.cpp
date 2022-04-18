@@ -112,14 +112,28 @@ void Player::StateUpdate()
 }
 void Player::ChangeAni(std::string _Name)
 {
-	
-	Body->ChangeAnimation(_Name);
-	Arm->ChangeAnimation(_Name);
-	Pants->ChangeAnimation(_Name);
-	Shirts->ChangeAnimation(_Name);
-	Hair->ChangeAnimation(_Name);
+		std::string Item_ = GetItemString();
 
-}
+		if (PlayerState::Wield == CurState_)
+		{
+			WieldItem->ChangeAnimation(GetDirString() + Item_);
+			Body->ChangeAnimation(_Name);
+			Arm->ChangeAnimation(_Name);
+			Pants->ChangeAnimation(_Name);
+			Shirts->ChangeAnimation(_Name);
+			Hair->ChangeAnimation(_Name);
+		}
+		else
+		{	
+			WieldItem->ChangeAnimation("ItemIdle");
+			Body->ChangeAnimation(_Name);
+			Arm->ChangeAnimation(_Name);
+			Pants->ChangeAnimation(_Name);
+			Shirts->ChangeAnimation(_Name);
+			Hair->ChangeAnimation(_Name);
+		}
+}	
+
 void Player::Start()
 {
 	int HairNum_ = static_cast<int>(CurHairStyle_);
@@ -130,8 +144,8 @@ void Player::Start()
 	Shirts = CreateRendererToScale("BodyShirts.bmp", { 32, 32 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
 	Hair = CreateRendererToScale("Hair" + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
 	Arm = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
-	//Tool = CreateRendererToScale("Tools.bmp", { 56, 112 }, 15);
-
+	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-12});
+	WieldItem->CreateAnimation("Tools.bmp", "ItemIdle", 20, 20, 0.15f, false);
 	////////////idle
 	{ 
 		{// 캐릭터 front idle 상태
@@ -194,7 +208,11 @@ void Player::Start()
 			Hair->CreateAnimation("HairDown" + HairColor_ + ".bmp", "BackWalk", HairNum_ + 16, HairNum_ + 16, 0.3f, true);
 			Shirts->CreateAnimation("BodyShirts.bmp", "BackWalk", 49, 50, 0.3f, true);
 		}
+
 		//////////////////Wield
+
+	
+
 		//Left 수정 , 옷 수정
 		{
 			{ // 내려치는 방향 : 앞
@@ -204,6 +222,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "FrontWield", 282, 287, 0.1f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.1f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "FrontWield", 264, 268, 0.1f, true);
+				WieldItem->CreateAnimation("FrontHoe.bmp", "FrontHoe", 0, 4, 0.1f, true);
 			}
 			{ // 내려치는 방향 : 오른쪽
 				Body->CreateAnimation("Body.bmp", "RightWield", 192, 196, 0.1f, true);
@@ -211,6 +230,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "RightWield", 210, 214, 0.1f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.1f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "RightWield", 192, 196, 0.1f, true);
+				WieldItem->CreateAnimation("RightHoe.bmp", "RightHoe", 0, 4, 0.1f, true);
 			}
 			{ // 내려치는 방향 : 왼쪽
 				Body->CreateAnimation("Body3.bmp", "LeftWield", 192, 196, 0.1f, true);
@@ -218,6 +238,7 @@ void Player::Start()
 				Pants->CreateAnimation("Body3Shirts.bmp", "LeftWield", 210, 214, 0.1f, true);
 				Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWield", 192, 196, 0.1f, true);
 				Shirts->CreateAnimation("Body3Shirts.bmp", "LeftWield", 192, 196, 0.1f, true);
+				WieldItem->CreateAnimation("LeftHoe.bmp", "LeftHoe", 0, 4, 0.1f, true);
 			}
 			{ // 내려치는 방향 : 뒤
 				Body->CreateAnimation("Body.bmp", "BackWield", 242, 243, 0.3f, true);
@@ -225,6 +246,7 @@ void Player::Start()
 				Pants->CreateAnimation("BodyShirts.bmp", "BackWield", 260, 261, 0.3f, true);
 				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.3f, true);
 				Shirts->CreateAnimation("BodyShirts.bmp", "BackWield", 242, 243, 0.3f, true);
+				WieldItem->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.1f, true);
 			}
 		}
 		////////////////////Hit
@@ -566,6 +588,19 @@ std::string Player::GetHairStyleString()
 	else if (CurHairStyle_ == PlayerHairStyle::Second)
 	{
 		return "Second";
+	}
+	return "";
+}
+std::string Player::GetItemString()
+{
+
+	if (CurItem_ == PlayerItem::HoeItem)
+	{
+		return "Hoe";
+	}
+	else
+	{
+		return "Nothing";
 	}
 	return "";
 }

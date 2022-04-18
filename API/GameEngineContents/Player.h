@@ -99,12 +99,13 @@ private:
 
 	std::string GetHairColorString();
 	std::string GetHairStyleString();
+	std::string GetItemString();
 	GameEngineRenderer* Body;
 	GameEngineRenderer* Hair;
 	GameEngineRenderer* Shirts;
 	GameEngineRenderer* Pants;
 	GameEngineRenderer* Arm;
-	GameEngineRenderer* Tool;
+	GameEngineRenderer* WieldItem;
 	GameEngineImage* MapColImage_;
 
 	std::string ColMap_;
