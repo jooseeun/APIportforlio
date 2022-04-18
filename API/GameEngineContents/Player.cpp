@@ -145,7 +145,6 @@ void Player::Start()
 	Hair = CreateRendererToScale("Hair" + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
 	Arm = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
 	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-12});
-	WieldItem->CreateAnimation("Tools.bmp", "ItemIdle", 20, 20, 0.15f, false);
 	////////////idle
 	{ 
 		{// 캐릭터 front idle 상태
@@ -211,7 +210,7 @@ void Player::Start()
 
 		//////////////////Wield
 
-	
+		WieldItem->CreateAnimation("Tools.bmp", "ItemIdle", 20, 20, 0.15f, false);
 
 		//Left 수정 , 옷 수정
 		{
