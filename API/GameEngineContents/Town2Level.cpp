@@ -38,7 +38,7 @@ void Town2Level::Loading()
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 1006.0f,2380.f });
 	PlayerSet->SetMapScale(5448.0f, 2620.0f);
 	PlayerSet->SetColMapName("Town2ColMap.bmp");

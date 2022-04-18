@@ -19,10 +19,7 @@ void TopUI::Start()
 }
 
 
-
-
-
 void TopUI::Update()
 {
-	//DebugRectRender();
+
 }

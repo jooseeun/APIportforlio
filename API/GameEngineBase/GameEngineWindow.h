@@ -25,6 +25,7 @@ public:
 		}
 	}
 
+
 public:
 	void RegClass(HINSTANCE _hInst);
 	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title);
@@ -45,6 +46,10 @@ public:
 		return Inst_->Scale_;
 	}
 
+	static inline HWND GethWnd()
+	{
+		return Inst_->hWnd_;
+	}
 
 protected:
 

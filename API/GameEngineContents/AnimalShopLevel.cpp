@@ -38,7 +38,7 @@ void AnimalShopLevel::Loading()
 	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet =CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 862.0f,1202.f });
 	PlayerSet->SetMapScale(2240.0f, 1280.0f);
 	PlayerSet->SetColMapName("AnimalShopColMap.bmp");

@@ -38,8 +38,8 @@ void TownLevel::Loading()
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerSet->SetPosition({ 144.0f,3492.f });
+	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet->SetPosition({ 144.0f,3442.f });
 	PlayerSet->SetMapScale(5544.0f, 6200.0f);
 	PlayerSet->SetColMapName("TownColMap.bmp");
 	PlayerSet->SetSideLevel("BusStopLevel", "Town2Level","SeedShopLevel");

@@ -40,7 +40,7 @@ void ForestLevel::Loading()
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 4324.0f,1664.f });
 	PlayerSet->SetMapScale(4536.0f, 3084.0f);
 	PlayerSet->SetColMapName("ForestColMap.bmp");

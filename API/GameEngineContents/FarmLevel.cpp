@@ -3,7 +3,7 @@
 #include "EnergyUI.h"
 #include "ContentsEnums.h"
 #include "BackGround.h"
-
+#include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -14,19 +14,15 @@
 FarmLevel::FarmLevel():
 	CurSelectPivot_(0),
 	NextSelectPivot_(1)
-
 {
+
 }
 
 FarmLevel::~FarmLevel() 
 {
 
 }
-void FarmLevel::LevelChangeStart()
-{
-	//BgmPlayer = GameEngineSound::SoundPlayControl("Spring (The Valley Comes Alive).MP3");
 
-}
 void FarmLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
@@ -35,6 +31,8 @@ void FarmLevel::Loading()
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
+
+	Mouse* Cursor = CreateActor<Mouse>(200 );
 
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");

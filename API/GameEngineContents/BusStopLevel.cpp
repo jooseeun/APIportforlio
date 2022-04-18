@@ -42,7 +42,7 @@ void BusStopLevel::Loading()
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
 
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 50.0f,1516.f });
 	PlayerSet->SetMapScale(2240.0f, 1920.0f);
 	PlayerSet->SetColMapName("BusStopColMap.bmp");

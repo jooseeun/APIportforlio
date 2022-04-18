@@ -100,7 +100,7 @@ private:
 	std::string GetHairColorString();
 	std::string GetHairStyleString();
 	std::string GetItemString();
-	GameEngineRenderer* Body;
+	 GameEngineRenderer* Body;
 	GameEngineRenderer* Hair;
 	GameEngineRenderer* Shirts;
 	GameEngineRenderer* Pants;

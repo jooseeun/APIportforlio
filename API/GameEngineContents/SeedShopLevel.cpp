@@ -38,7 +38,7 @@ void SeedShopLevel::Loading()
 		SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
-		Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+		PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 		PlayerSet->SetPosition({ 414.0f,1770.f });
 		PlayerSet->SetMapScale(3072.0f, 2048.0f);
 		PlayerSet->SetColMapName("SeedShopColMap.bmp");

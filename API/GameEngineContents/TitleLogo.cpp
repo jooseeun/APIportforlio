@@ -8,6 +8,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngine/GameEngineCollision.h>
 
 TitleLogo::TitleLogo()
 	:hide_(false),
@@ -27,26 +28,33 @@ void TitleLogo::Start()
 	CreateRenderer("TitleLogo.bmp");
 
 	//나뭇잎 애니메이션은 마우스 클릭했을때 흔들린다. 수정하기
-	GameEngineRenderer* BigLeaf = CreateRenderer(2,RenderPivot::CENTER,{283,46}); // 890 280
+	GameEngineRenderer* BigLeaf = CreateRenderer(2, RenderPivot::CENTER, { 283,46 }); // 890 280
 	BigLeaf->CreateAnimation("BigLeaf.bmp", "BigLeaf", 0, 2, 0.15f, true);
 	BigLeaf->ChangeAnimation("BigLeaf");
-	GameEngineRenderer* SmallLeaf = CreateRenderer(2,RenderPivot::CENTER, { -345,-138 }); // 890 280
+	GameEngineRenderer* SmallLeaf = CreateRenderer(2, RenderPivot::CENTER, { -345,-138 }); // 890 280
 	SmallLeaf->CreateAnimation("SmallLeaf.bmp", "SmallLeaf", 0, 2, 0.15f, true);
 	SmallLeaf->ChangeAnimation("SmallLeaf");
 
-	GameEngineRenderer* StartButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
+	GameEngineRenderer* StartButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, 2, RenderPivot::CENTER,
 		{ -369,359 });//246
 	StartButton->SetIndex(0);
+	GameEngineCollision* StartCol = CreateCollision("StartButton", { 222, 174 }, { -369,359 });
 
 	GameEngineRenderer* LoadButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ -123,359 });
 	LoadButton->SetIndex(1);
+	GameEngineCollision* LoadCol = CreateCollision("LoadButton", { 222, 174 }, { -123,359 });
+
+
 	GameEngineRenderer* MultyButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 123,359 });
 	MultyButton->SetIndex(2);
+	GameEngineCollision* MultyCol = CreateCollision("MultyCol", { 222, 174 }, { 123,359 });
+
 	GameEngineRenderer* ExitButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 369,359 });
 	ExitButton->SetIndex(3);
+	GameEngineCollision* Exitcol = CreateCollision("Exitcol", { 222, 174 }, { 369,359 });
 
 
 }

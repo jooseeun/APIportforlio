@@ -12,6 +12,8 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
 
+Player* PlayerSet = nullptr;
+
 Player::Player()
 	:Speed_(705.0f),
 	ColMap_(" "),
@@ -24,6 +26,7 @@ Player::Player()
 	CurHairColor_(PlayerHairColor::Black),
 	CurShirts_(PlayerShirts::First)
 {
+
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
 	ArrAnimationName[static_cast<int>(PlayerState::Walk)] = "Walk";
 	ArrAnimationName[static_cast<int>(PlayerState::Wield)] = "Wield";
@@ -41,6 +44,7 @@ Player::Player()
 
 Player::~Player() 
 {
+
 }
 
 void Player::DirAnimationChange() 
@@ -54,7 +58,7 @@ void Player::ChangeState(PlayerState _State)
 
 	if (CurState_ != _State)
 	{
-		CurState_ = _State;	
+		CurState_ = _State;
 		ChangeAni(GetDirString() + ArrAnimationName[static_cast<int>(CurState_)]);
 
 		switch (CurState_)
@@ -113,7 +117,6 @@ void Player::StateUpdate()
 void Player::ChangeAni(std::string _Name)
 {
 		std::string Item_ = GetItemString();
-
 		if (PlayerState::Wield == CurState_)
 		{
 			WieldItem->ChangeAnimation(GetDirString() + Item_);
@@ -143,8 +146,8 @@ void Player::Start()
 	Pants = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
 	Shirts = CreateRendererToScale("BodyShirts.bmp", { 32, 32 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
 	Hair = CreateRendererToScale("Hair" + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,4 });
+	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-17});
 	Arm = CreateRendererToScale("BodyShirts.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,2 });
-	WieldItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER),RenderPivot::CENTER,{0,-12});
 	HitItem = CreateRendererToScale("Tools.bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,-12 });
 	HitItem->Off();
 	////////////idle
@@ -300,25 +303,25 @@ void Player::Start()
 		///////////////////Water
 		{
 			{ // 때리는 방향 : 앞
-				Body->CreateAnimation("Body.bmp", "FrontWater", 216, 217, 0.1f, true); // 24 한줄에
-				Arm->CreateAnimation("BodyShirts.bmp", "FrontWater", 222, 223, 0.1f, true);
-				Pants->CreateAnimation("BodyShirts.bmp", "FrontWater", 234, 235, 0.1f, true);
-				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWater", 216, 217, 0.1f, true);
-				Shirts->CreateAnimation("BodyShirts.bmp", "FrontWater", 216, 217, 0.1f, true);
+				Body->CreateAnimation("Body.bmp", "FrontWater", 216, 217, 0.2f, true); // 24 한줄에
+				Arm->CreateAnimation("BodyShirts.bmp", "FrontWater", 222, 223, 0.2f, true);
+				Pants->CreateAnimation("BodyShirts.bmp", "FrontWater", 234, 235, 0.2f, true);
+				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWater", 216, 217, 0.2f, true);
+				Shirts->CreateAnimation("BodyShirts.bmp", "FrontWater", 216, 217, 0.2f, true);
 			}
 			{ // 때리는 방향  : 오른쪽
-				Body->CreateAnimation("Body.bmp", "RightWater", 120, 125, 0.1f, true);
-				Arm->CreateAnimation("BodyShirts.bmp", "RightWater", 132, 137, 0.1f, true);
-				Pants->CreateAnimation("BodyShirts.bmp", "RightWater", 138, 143, 0.1f, true);
-				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWater", 120, 125, 0.1f, true);
-				Shirts->CreateAnimation("BodyShirts.bmp", "RightWater", 120, 125, 0.1f, true);
+				Body->CreateAnimation("Body.bmp", "RightWater", 171, 171, 0.2f, true);
+				Arm->CreateAnimation("BodyShirts.bmp", "RightWater", 183, 183, 0.2f, true);
+				Pants->CreateAnimation("BodyShirts.bmp", "RightWater", 189, 189, 0.2f, true);
+				Hair->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWater", 171+24, 171+24, 0.2f, true);
+				Shirts->CreateAnimation("BodyShirts.bmp", "RightWater", 171, 171, 0.2f, true);
 			}
 			{ // 때리는 방향  : 왼쪽
-				Body->CreateAnimation("Body3.bmp", "LeftWater", 120, 125, 0.1f, true);
-				Arm->CreateAnimation("Body3Shirts.bmp", "LeftWater", 132, 137, 0.1f, true);
-				Pants->CreateAnimation("Body3Shirts.bmp", "LeftWater", 138, 143, 0.1f, true);
-				Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWater", 120, 125, 0.1f, true);
-				Shirts->CreateAnimation("Body3Shirts.bmp", "LeftWater", 120, 125, 0.1f, true);
+				Body->CreateAnimation("Body2.bmp", "LeftWater", 188, 188, 0.1f, true);
+				Arm->CreateAnimation("Body2Shirts.bmp", "LeftWater", 176, 176, 0.1f, true);
+				Pants->CreateAnimation("Body2Shirts.bmp", "LeftWater", 170, 170, 0.1f, true);
+				Hair->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWater", 171 +24, 171 +24, 0.1f, true);
+				Shirts->CreateAnimation("Body2Shirts.bmp", "LeftWater", 188, 188, 0.1f, true);
 			}
 			{ // 때리는 방향  : 뒤
 				Body->CreateAnimation("Body.bmp", "BackWater", 144, 149, 0.1f, true);
@@ -489,14 +492,14 @@ bool Player::IsHoeTileCreate()
 bool Player::IsWaterTileCreate()
 {
 	TileCheckDir();
-	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == Tile)
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	if (nullptr == GroundTile)
 	{
 		return false;
 	}
 	else 
 	{
-		if (CurItem_ == PlayerItem::WateringItem && TileType::HoeDirt == Tile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
+		if (CurItem_ == PlayerItem::WateringItem && TileType::Max != GroundTile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
 		{
 			return true;
 		}

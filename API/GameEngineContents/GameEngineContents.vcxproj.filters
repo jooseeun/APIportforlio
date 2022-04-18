@@ -104,9 +104,6 @@
     <ClInclude Include="PlayerEnum.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Actor\Play\PlayUI</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Play\Player</Filter>
     </ClInclude>
@@ -115,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="PhotatoSeed.h">
       <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +215,6 @@
     <ClCompile Include="Ax.cpp">
       <Filter>Actor\Play\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Actor\Play\PlayUI</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Play\Player</Filter>
     </ClCompile>
@@ -229,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="PhotatoSeed.cpp">
       <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

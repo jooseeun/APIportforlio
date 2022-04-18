@@ -39,7 +39,7 @@ void MineEntryLevel::Loading()
 	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
-	Player* PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 1176.0f,816.f });
 	PlayerSet->SetMapScale(3200.0f, 1280.0f);
 	PlayerSet->SetColMapName("MineEntryColMap.bmp");
