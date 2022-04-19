@@ -19,6 +19,8 @@ public:
 protected:
 
 private:
+	GameEngineRenderer* DateRender_;
+	int Date_;
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;

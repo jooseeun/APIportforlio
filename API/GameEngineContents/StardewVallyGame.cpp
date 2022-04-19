@@ -268,6 +268,11 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* RightWateringCan = GameEngineImageManager::GetInst()->Find("RightWateringCan.bmp");
 	RightWateringCan->CutCount(1, 1);
 
+	GameEngineImage* Font = GameEngineImageManager::GetInst()->Find("Font.bmp");
+	Font->CutCount(16, 29);
+	GameEngineImage* Date = GameEngineImageManager::GetInst()->Find("Date.bmp");
+	Date->CutCount(1, 14);
+
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
