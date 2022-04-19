@@ -272,6 +272,8 @@ void StardewVallyGame::GameInit()
 	Font->CutCount(16, 29);
 	GameEngineImage* Date = GameEngineImageManager::GetInst()->Find("Date.bmp");
 	Date->CutCount(1, 14);
+	GameEngineImage* Time = GameEngineImageManager::GetInst()->Find("Time.bmp");
+	Time->CutCount(2, 13);
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{

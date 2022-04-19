@@ -20,6 +20,9 @@ protected:
 
 private:
 	GameEngineRenderer* DateRender_;
+	GameEngineRenderer* HourRender_;
+	GameEngineRenderer* MinuteRender_;
+	GameEngineRenderer* AMPMRender_;
 	int Date_;
 	void Start() override;
 	void Update() override;
