@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
+class GameEngineCollision;
 class TitleLogo : public GameEngineActor
 {
 public:
@@ -17,6 +18,9 @@ public:
 
 
 protected:
+	GameEngineCollision* StartCol_;
+	GameEngineCollision* ExitCol_;
+
 	void Start();
 	void Update() override;
 

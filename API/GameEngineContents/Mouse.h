@@ -1,10 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineCollision.h>
 // Ό³Έν :
+class GameEngineCollision;
 class Mouse :public GameEngineActor
 {
 public:
+	static Mouse* MouseSet;
 	// constrcuter destructer
 	Mouse();
 	~Mouse();
@@ -22,11 +25,16 @@ public:
 		CurPos_.x = static_cast<float>(Pos_.x);
 		CurPos_.y = static_cast<float>(Pos_.y);
 	}
+	inline GameEngineCollision* GetMouseCol()
+	{
+		return MouseCol_;
+	}
 protected:
-
 private:
+	GameEngineCollision* MouseCol_;
 	float4 CurPos_;
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 

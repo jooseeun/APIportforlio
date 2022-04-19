@@ -38,28 +38,28 @@ void TitleLogo::Start()
 	GameEngineRenderer* StartButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 }, 2, RenderPivot::CENTER,
 		{ -369,359 });//246
 	StartButton->SetIndex(0);
-	GameEngineCollision* StartCol = CreateCollision("StartButton", { 222, 174 }, { -369,359 });
-
 	GameEngineRenderer* LoadButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ -123,359 });
 	LoadButton->SetIndex(1);
-	GameEngineCollision* LoadCol = CreateCollision("LoadButton", { 222, 174 }, { -123,359 });
 
 
 	GameEngineRenderer* MultyButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 123,359 });
 	MultyButton->SetIndex(2);
-	GameEngineCollision* MultyCol = CreateCollision("MultyCol", { 222, 174 }, { 123,359 });
 
 	GameEngineRenderer* ExitButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 369,359 });
 	ExitButton->SetIndex(3);
-	GameEngineCollision* Exitcol = CreateCollision("Exitcol", { 222, 174 }, { 369,359 });
+	StartCol_ = CreateCollision("StartCol", { 222, 174 }, { -369,359 });
+	ExitCol_ = CreateCollision("ExitCol", { 222, 174 }, { 369,359 });
 
 
 }
 void TitleLogo::Update()
 {
+
+
+
 	if (true == GameEngineInput::GetInst()->IsDown("GOPlay"))
 	{
 		hide_ = true;

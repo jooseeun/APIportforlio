@@ -12,6 +12,7 @@
 #include "PhotatoSeed.h"
 #include "ContentsEnums.h"
 #include "WateringCan.h"
+#include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -49,6 +50,7 @@ void Town2Level::Loading()
 		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
+		Mouse::MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 	}
 }
 
@@ -92,5 +94,6 @@ void Town2Level::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Sickle::SickleSet->NextLevelOn();
 		WateringCan::WateringCanSet->NextLevelOn();
 		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
+		Mouse::MouseSet->NextLevelOn();
 	}
 }

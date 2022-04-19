@@ -183,7 +183,7 @@ void Player::Start()
 	WaterItem_ = CreateRendererToScale("Tools.bmp", { 192,128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0,20 });
 	
 
-	// BackWield 리소스 다시 수정하기
+	// BackHit 리소스 다시 수정하기
 	////////////idle
 	{ 
 		{// 캐릭터 front idle 상태
