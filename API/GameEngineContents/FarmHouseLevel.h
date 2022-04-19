@@ -5,11 +5,14 @@
 #include "Sickle.h"
 #include "Player.h"
 #include "ToolUI.h"
-#include "PhotatoSeed.h"
 #include "WateringCan.h"
+#include "ContentsEnums.h"
+#include "PhotatoSeed.h"
+#include "BackGround.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
+
 class FarmHouseLevel : public GameEngineLevel
 {
 public:
@@ -34,9 +37,10 @@ public:
 protected:
 	void Loading() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 private:
-	Player* PlayerSet;
+
 	Ax* AxSet;
 	Hoe* HoeSet;
 	Pick* PickSet;
@@ -45,7 +49,7 @@ private:
 	ToolUI* ToolUISet;
 	PhotatoSeed* PhotatoSeedSet;
 	PlayerItem ItemPos_[13];
-
+	BackGround* Back;
 
 	int CurSelectPivot_;
 	int NextSelectPivot_;

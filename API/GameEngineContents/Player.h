@@ -26,6 +26,8 @@ class GameEngineCollision;
 class Player:public GameEngineActor
 {
 public:
+	static Player* MainPlayer;
+
 	Player();
 	~Player();
 
@@ -120,6 +122,9 @@ private:
 	void Update() override;
 	void Start() override;
 	void Render() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+
+
 	void ChangeAni(std::string _Name);
 	void CameraCheck();
 
@@ -144,14 +149,13 @@ private:
 	bool DirKeyCheck();
 	bool IsWalkKey();
 	bool IsIdleKey();
-	void KeyMove();
+
 	std::string GetDirString();
 
 private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
 
-	void CurTileIndexCheck();
 	bool IsHoeTileCreate();
 	bool IsWaterTileCreate();
 	void DirHoeDirtCreateTile();

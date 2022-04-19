@@ -39,8 +39,3 @@ void TitleLevel::Update()
 	
 }
 
-void TitleLevel::LevelChangeStart()
-{
-	BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.MP3");
-
-}

@@ -263,8 +263,8 @@ void StardewVallyGame::GameInit()
 	}
 
 	CreateLevel<TitleLevel>("TitleLevel");
-	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
 	CreateLevel<FarmLevel>("FarmLevel");
+	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
 	CreateLevel<CoopLevel>("CoopLevel");
 	CreateLevel<AnimalShopLevel>("AnimalShopLevel");
 	CreateLevel<ForestLevel>("ForestLevel");

@@ -12,7 +12,7 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
 
-Player* PlayerSet = nullptr;
+Player* Player::MainPlayer = nullptr;
 
 Player::Player()
 	:Speed_(705.0f),
@@ -631,4 +631,9 @@ std::string Player::GetItemString()
 		return "Nothing";
 	}
 	return "";
+}
+
+void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	MainPlayer = this;
 }

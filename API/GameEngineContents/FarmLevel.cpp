@@ -1,9 +1,16 @@
 #include "FarmLevel.h"
 #include "TopUI.h"
 #include "EnergyUI.h"
-#include "ContentsEnums.h"
 #include "BackGround.h"
 #include "Mouse.h"
+#include "Ax.h"
+#include "Hoe.h"
+#include "Pick.h"
+#include "Sickle.h"
+#include "Player.h"
+#include "ToolUI.h"
+#include "PhotatoSeed.h"
+#include "WateringCan.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -25,7 +32,7 @@ FarmLevel::~FarmLevel()
 
 void FarmLevel::Loading()
 {
-	BackGround* Back = CreateActor<BackGround>(1);
+	Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("Farm.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
@@ -45,13 +52,18 @@ void FarmLevel::Loading()
 	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 	PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
 
-	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerSet->SetPosition({ 4120.0f,1020.f });
-	PlayerSet->SetMapScale(5120.0f,4160.0f);
-	PlayerSet->SetColMapName("FarmColMap.bmp");
-	PlayerSet->SetGroundTileMap(&Back->GroundTileMap_);
-	PlayerSet->SetCropsTileMap(&Back->CropsTileMap_);
-	PlayerSet->SetSideLevel("FarmHouseLevel","BusStopLevel"," ");
+
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
+	}
+
+	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
+	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
+	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
+	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
+	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
+	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
 }
 
 void FarmLevel::Update()
@@ -67,10 +79,26 @@ void FarmLevel::Update()
 	
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
-		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
+		Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 	}
 
 	CurSelectPivot_ = NextSelectPivot_;
 }
 
+void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
+	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
+	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
+	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
+	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
+	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
+}
 
+void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	if (_NextLevel->GetNameCopy() != "TitleLevel")
+	{
+		Player::MainPlayer->NextLevelOn();
+	}
+}
