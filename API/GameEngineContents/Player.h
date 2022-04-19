@@ -91,7 +91,14 @@ public:
 		}
 
 	}
-	
+	inline void SetIsLeftMouseON() 
+	{
+		IsLeftMouse = true;
+	}
+	inline void SetIsLeftMouseOFF()
+	{
+		IsLeftMouse = false;
+	}
 protected:
 private:
 	
@@ -151,7 +158,7 @@ private:
 	bool DirKeyCheck();
 	bool IsWalkKey();
 	bool IsIdleKey();
-
+	bool IsLeftMouse;
 	std::string GetDirString();
 
 private:

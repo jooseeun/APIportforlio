@@ -16,6 +16,7 @@ Player* Player::MainPlayer = nullptr;
 
 Player::Player()
 	:Speed_(705.0f),
+	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
 	PrevDir_(PlayerDir::Front),
@@ -381,7 +382,6 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("RightWalk", 'D');
 		GameEngineInput::GetInst()->CreateKey("BackWalk", 'W');
 		GameEngineInput::GetInst()->CreateKey("FrontWalk", 'S');
-		GameEngineInput::GetInst()->CreateKey("LeftMouse", VK_LBUTTON);
 	}
 
 }
@@ -668,7 +668,7 @@ std::string Player::GetItemString()
 	}
 	else if (CurItem_ == PlayerItem::WateringCanItem)
 	{
-		return "Wateringcan";
+		return "WateringCan";
 	}
 	else if (CurItem_ == PlayerItem::SickleItem)
 	{

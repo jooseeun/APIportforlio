@@ -34,14 +34,14 @@ FarmLevel::~FarmLevel()
 
 void FarmLevel::Loading()
 {
-	Back = CreateActor<BackGround>(1);
+	Back = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	Back->GetRenderer()->SetImage("Farm.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
 
-	Mouse* Cursor = CreateActor<Mouse>(200 );
+	Mouse* MouseSet= CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)
 	{
@@ -55,8 +55,8 @@ void FarmLevel::Loading()
 		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
-		Mouse::MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 	}
+
 }
 
 void FarmLevel::Update()
@@ -82,10 +82,10 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
-	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
-	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
 	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
+	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
+	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
 }
 
 void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -102,6 +102,5 @@ void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Sickle::SickleSet->NextLevelOn();
 		WateringCan::WateringCanSet->NextLevelOn();
 		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
-		Mouse::MouseSet->NextLevelOn();
 	}
 }

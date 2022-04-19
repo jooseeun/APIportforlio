@@ -37,6 +37,8 @@ void TownLevel::Loading()
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -49,7 +51,6 @@ void TownLevel::Loading()
 		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
-		Mouse::MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 	}
 
 	Player::MainPlayer->SetPosition({ 144.0f,3442.f });
@@ -98,6 +99,5 @@ void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Sickle::SickleSet->NextLevelOn();
 		WateringCan::WateringCanSet->NextLevelOn();
 		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
-		Mouse::MouseSet->NextLevelOn();
 	}
 }

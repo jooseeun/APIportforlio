@@ -38,6 +38,8 @@ void MineEntryLevel::Loading()
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -50,7 +52,6 @@ void MineEntryLevel::Loading()
 		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
-		Mouse::MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 	}
 
 
@@ -98,6 +99,5 @@ void MineEntryLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Sickle::SickleSet->NextLevelOn();
 		WateringCan::WateringCanSet->NextLevelOn();
 		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
-		Mouse::MouseSet->NextLevelOn();
 	}
 }

@@ -21,7 +21,7 @@ void Player::IdleUpdate()
 	}
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
+	if (true == IsLeftMouse)
 	{
 		if (CurItemKind_ == PlayerItemKind::WieldItem)
 		{
@@ -151,6 +151,7 @@ void Player::WalkUpdate()
 
 void Player::IdleStart()
 {
+	SetIsLeftMouseOFF();
 }
 
 
@@ -165,7 +166,7 @@ void Player::WalkStart()
 
 void Player::WieldStart()
 {
-	if (true == IsHoeTileCreate())
+	if (true == IsHoeTileCreate()&&"FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
 		DirHoeDirtCreateTile();
 	}
@@ -173,7 +174,7 @@ void Player::WieldStart()
 
 void Player::WaterStart()
 {
-	if (true == IsWaterTileCreate())
+	if (true == IsWaterTileCreate() && "FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
 		DirWaterDirtCreateTile();
 	}
@@ -181,7 +182,7 @@ void Player::WaterStart()
 
 void Player::SeedStart()
 {
-	if (true == IsSeedTileCreate())
+	if (true == IsSeedTileCreate() && "FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
 		DirSeedCreateTile();
 	}
