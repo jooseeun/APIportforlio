@@ -20,7 +20,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-MineEntryLevel::MineEntryLevel() :
+MineEntryLevel::MineEntryLevel():
 	CurSelectPivot_(1),
 	NextSelectPivot_(1)
 {

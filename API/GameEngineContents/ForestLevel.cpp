@@ -5,6 +5,7 @@
 #include "EnergyUI.h"
 #include "ContentsEnums.h"
 #include "BackGround.h"
+#include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -29,6 +30,8 @@ void ForestLevel::Loading()
 	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
 	Back->GroundTileMap_.TileRangeSetting(90, 34, { 48,48 });
 	Back->CropsTileMap_.TileRangeSetting(90, 34, { 48,48 });
+
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE));
 
 	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");

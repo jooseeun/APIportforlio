@@ -12,12 +12,14 @@
 #include "PhotatoSeed.h"
 #include "ContentsEnums.h"
 #include "WateringCan.h"
+#include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
+
 BusStopLevel::BusStopLevel() :
 	CurSelectPivot_(1),
 	NextSelectPivot_(1)
@@ -38,6 +40,9 @@ void BusStopLevel::Loading()
 		Back->GroundTileMap_.TileRangeSetting(35, 30, { 48,48 });
 		Back->CropsTileMap_.TileRangeSetting(35, 30, { 48,48 });
 	}
+
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE));
+
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");

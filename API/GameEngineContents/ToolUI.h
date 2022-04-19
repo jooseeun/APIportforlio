@@ -19,17 +19,28 @@ public:
 	
 	inline int getSelectPivot()
 	{
-		return SelectPivot;
+		return SelectPivot_;
+	}
+	inline void SetSelectPivot(int _SelectPivot)
+	{
+		SelectPivot_ = _SelectPivot;
 	}
 
 	
 protected:
 
 private:
+	void SelectSetPivot();
+	void CheckToolUIKey();
+
+	float NumOne = -352.0;
+	float Num = 64.0;
+
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-	int SelectPivot;
+
+	int SelectPivot_;
 	GameEngineRenderer* Select;
 };
 

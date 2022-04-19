@@ -12,6 +12,7 @@
 #include "PhotatoSeed.h"
 #include "WateringCan.h"
 #include "ContentsEnums.h"
+#include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -35,6 +36,8 @@ void SeedShopLevel::Loading()
 		Back->GetRenderer()->SetImage("SeedShop.bmp");
 		float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 		Back->GetRenderer()->SetPivot(BackImageScale.Half());
+
+		Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE));
 
 		if (nullptr == Player::MainPlayer)
 		{
