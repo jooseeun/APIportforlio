@@ -54,12 +54,6 @@ void FarmHouseLevel::Loading()
 	}
 
 
-	Player::MainPlayer->SetPosition({ 750.0f,520.f });
-	Player::MainPlayer->SetMapScale(1280.0f, 840.0f);
-	Player::MainPlayer->SetColMapName("FarmHouseColMap.bmp");
-	Player::MainPlayer->SetSideLevel("BusStopLevel", "FarmLevel", " ");
-	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
-	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
 }
 
 void FarmHouseLevel::Update()

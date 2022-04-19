@@ -55,13 +55,6 @@ void FarmLevel::Loading()
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
 	}
-
-	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
-	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
-	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
-	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
-	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
-	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
 }
 
 void FarmLevel::Update()
