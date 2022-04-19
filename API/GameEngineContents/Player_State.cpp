@@ -49,7 +49,7 @@ void Player::IdleUpdate()
 
 void Player::WieldUpdate()
 {
-	if (true == Arm->IsEndAnimation())
+	if (true == Arm_->IsEndAnimation())
 	{
 		ChangeState(PlayerState::Idle);
 	}
@@ -57,7 +57,7 @@ void Player::WieldUpdate()
 }
 void Player::HitUpdate()
 {
-	if (true == Arm->IsEndAnimation())
+	if (true == Arm_->IsEndAnimation())
 	{
 		ChangeState(PlayerState::Idle);
 	}
@@ -65,7 +65,7 @@ void Player::HitUpdate()
 
 void Player::WaterUpdate()
 {
-	if (true == Arm->IsEndAnimation())
+	if (true == Arm_->IsEndAnimation())
 	{
 		ChangeState(PlayerState::Idle);
 	}
@@ -73,7 +73,7 @@ void Player::WaterUpdate()
 
 void Player::SeedUpdate()
 {
-	if (true == Arm->IsEndAnimation())
+	if (true == Arm_->IsEndAnimation())
 	{
 		ChangeState(PlayerState::Idle);
 	}

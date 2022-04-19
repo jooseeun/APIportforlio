@@ -9,7 +9,7 @@ WateringCan* WateringCan::WateringCanSet = nullptr;
 WateringCan::WateringCan()
 	:ItemKind_(PlayerItemKind::WaterItem),
 	InvenPos_(5),
-	ItemName_(PlayerItem::WateringItem)
+	ItemName_(PlayerItem::WateringCanItem)
 {
 }
 

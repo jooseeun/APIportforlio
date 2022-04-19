@@ -249,6 +249,8 @@ void StardewVallyGame::GameInit()
 	LeftSickle->CutCount(1, 6);
 	GameEngineImage* FrontSickle = GameEngineImageManager::GetInst()->Find("FrontSickle.bmp");
 	FrontSickle->CutCount(1, 6);
+	GameEngineImage* BackSickle = GameEngineImageManager::GetInst()->Find("BackSickle.bmp");
+	BackSickle->CutCount(1, 6);
 
 	GameEngineImage* RightSword = GameEngineImageManager::GetInst()->Find("RightSword.bmp");
 	RightSword->CutCount(1, 6);
@@ -256,6 +258,15 @@ void StardewVallyGame::GameInit()
 	LeftSword->CutCount(1, 6);
 	GameEngineImage* FrontSword = GameEngineImageManager::GetInst()->Find("FrontSword.bmp");
 	FrontSword->CutCount(1, 6);
+	GameEngineImage* BackSword = GameEngineImageManager::GetInst()->Find("BackSword.bmp");
+	BackSword->CutCount(1, 6);
+
+	GameEngineImage* FrontWateringCan = GameEngineImageManager::GetInst()->Find("FrontWateringCan.bmp");
+	FrontWateringCan->CutCount(1, 1);
+	GameEngineImage* LeftWateringCan = GameEngineImageManager::GetInst()->Find("LeftWateringCan.bmp");
+	LeftWateringCan->CutCount(1, 1);
+	GameEngineImage* RightWateringCan = GameEngineImageManager::GetInst()->Find("RightWateringCan.bmp");
+	RightWateringCan->CutCount(1, 1);
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
