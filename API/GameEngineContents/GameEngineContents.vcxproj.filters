@@ -116,6 +116,9 @@
     <ClInclude Include="Mouse.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -228,6 +231,9 @@
       <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,6 +13,7 @@
 #include "ContentsEnums.h"
 #include "WateringCan.h"
 #include "Mouse.h"
+#include "Inventory.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -54,6 +55,7 @@ void FarmHouseLevel::Loading()
 		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
 		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
+		Inventory::InventorySet = CreateActor<Inventory>((int)ORDER::INVENUI, "Inventory");
 	}
 
 
@@ -61,6 +63,7 @@ void FarmHouseLevel::Loading()
 
 void FarmHouseLevel::Update()
 {
+	InvenONOFF();
 
 	GetItemPos<Ax>(Ax::AxSet);
 	GetItemPos<Pick>(Pick::PickSet);
@@ -76,7 +79,26 @@ void FarmHouseLevel::Update()
 		Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 	}
 
-	CurSelectPivot_ = NextSelectPivot_;;
+	CurSelectPivot_ = NextSelectPivot_;
+}
+void FarmHouseLevel::InvenONOFF()
+{
+	if (true == GameEngineInput::GetInst()->IsDown("InvenSwitch"))
+	{
+		Inventory::InventorySet->InventorySwitch();
+	}
+
+	if (false == Inventory::InventorySet->GetIsInventory())
+	{
+		Inventory::InventorySet->Off();
+		ToolUI::ToolUISet->On();
+	}
+
+	else if (true == Inventory::InventorySet->GetIsInventory())
+	{
+		Inventory::InventorySet->On();
+		ToolUI::ToolUISet->Off();
+	}
 }
 void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -95,7 +117,6 @@ void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	{
 		Player::MainPlayer->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
-		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
 		Hoe::HoeSet->NextLevelOn();
 		Ax::AxSet->NextLevelOn();
@@ -103,5 +124,6 @@ void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Sickle::SickleSet->NextLevelOn();
 		WateringCan::WateringCanSet->NextLevelOn();
 		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
+		Inventory::InventorySet->NextLevelOn();
 	}
 }

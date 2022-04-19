@@ -8,6 +8,7 @@ enum class ORDER
 	PLAYER,
 	MONSTER,
 	UI,
+	INVENUI,
 	ITEM,
 	MOUSE
 
