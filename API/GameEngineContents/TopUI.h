@@ -5,6 +5,7 @@
 class TopUI : public GameEngineActor
 {
 public:
+	static TopUI* TopUISet;
 	// constrcuter destructer
 	TopUI();
 	~TopUI();
@@ -20,5 +21,6 @@ protected:
 private:
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 

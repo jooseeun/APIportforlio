@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+Ax* Ax::AxSet = nullptr;
+
 Ax::Ax()
 	:ItemKind_(PlayerItemKind::WieldItem),
 	ItemName_(PlayerItem::AxItem)
@@ -14,7 +16,10 @@ Ax::Ax()
 Ax::~Ax() 
 {
 }
-
+void Ax::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	AxSet = this;
+}
 void Ax::Start()
 {
 

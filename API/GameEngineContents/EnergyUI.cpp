@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+EnergyUI* EnergyUI::EnergyUISet = nullptr;
+
 EnergyUI::EnergyUI() 
 {
 }
@@ -22,4 +24,8 @@ void EnergyUI::Start()
 void EnergyUI::Update()
 {
 	//DebugRectRender();
+}
+void EnergyUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	EnergyUISet = this;
 }

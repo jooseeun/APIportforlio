@@ -5,6 +5,7 @@
 class ToolUI : public GameEngineActor
 {
 public:
+	static ToolUI* ToolUISet;
 	// constrcuter destructer
 	ToolUI();
 	~ToolUI();
@@ -27,6 +28,7 @@ protected:
 private:
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	int SelectPivot;
 	GameEngineRenderer* Select;
 };

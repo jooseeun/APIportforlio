@@ -3,6 +3,9 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
+
+Hoe* Hoe::HoeSet = nullptr;
+
 Hoe::Hoe() 
 	:ItemKind_(PlayerItemKind::WieldItem),
 	InvenPos_(1),
@@ -13,7 +16,10 @@ Hoe::Hoe()
 Hoe::~Hoe() 
 {
 }
-
+void Hoe::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	HoeSet = this;
+}
 
 void Hoe::Start()
 {

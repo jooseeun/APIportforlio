@@ -5,6 +5,7 @@
 class Hoe : public GameEngineActor
 {
 public:
+	static Hoe* HoeSet;
 	// constrcuter destructer
 	Hoe();
 	~Hoe();
@@ -32,6 +33,7 @@ private:
 	int InvenPos_;
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	PlayerItemKind ItemKind_;
 	PlayerItem ItemName_;
 };

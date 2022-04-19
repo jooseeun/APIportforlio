@@ -1,6 +1,7 @@
 #include "TopUI.h"
 #include <GameEngine/GameEngineRenderer.h>
 
+TopUI* TopUI::TopUISet = nullptr;
 TopUI::TopUI() 
 {
 }
@@ -22,4 +23,9 @@ void TopUI::Start()
 void TopUI::Update()
 {
 
+}
+
+void TopUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	TopUISet = this;
 }

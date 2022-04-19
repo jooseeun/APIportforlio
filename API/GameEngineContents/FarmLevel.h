@@ -1,14 +1,7 @@
 #pragma once
-#include "Ax.h"
-#include "Hoe.h"
-#include "Pick.h"
-#include "Sickle.h"
-#include "Player.h"
-#include "ToolUI.h"
-#include "WateringCan.h"
-#include "ContentsEnums.h"
-#include "PhotatoSeed.h"
+
 #include "BackGround.h"
+#include "PlayerEnum.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
@@ -49,16 +42,7 @@ protected:
 private:
 
 	BackGround* Back;
-	Ax* AxSet;
-	Hoe* HoeSet;
-	Pick* PickSet;
-	Sickle* SickleSet;
-	WateringCan* WateringCanSet;
-	ToolUI* ToolUISet;
-	PhotatoSeed* PhotatoSeedSet;
-
 	PlayerItem ItemPos_[13];
-
 
 	int CurSelectPivot_;
 	int NextSelectPivot_;

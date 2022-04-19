@@ -6,6 +6,7 @@ class WateringCan : public GameEngineActor
 
 {
 public:
+	static WateringCan* WateringCanSet;
 	// constrcuter destructer
 	WateringCan();
 	~WateringCan();
@@ -34,6 +35,7 @@ private:
 	int InvenPos_;
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	PlayerItemKind ItemKind_;
 	PlayerItem ItemName_;
 };

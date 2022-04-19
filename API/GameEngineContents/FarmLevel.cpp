@@ -11,6 +11,7 @@
 #include "ToolUI.h"
 #include "PhotatoSeed.h"
 #include "WateringCan.h"
+#include "ContentsEnums.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -41,21 +42,18 @@ void FarmLevel::Loading()
 
 	Mouse* Cursor = CreateActor<Mouse>(200 );
 
-	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
-	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
-
-	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
-	HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
-	AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
-	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
-	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
-	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
-	PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
-
-
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+		TopUI::TopUISet=CreateActor<TopUI>((int)ORDER::UI, "TopUI");
+		EnergyUI::EnergyUISet=CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		Hoe::HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
+		Ax::AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
+		Pick::PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
+		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
+		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
+		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
 	}
 
 	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
@@ -68,14 +66,14 @@ void FarmLevel::Loading()
 
 void FarmLevel::Update()
 {
-	GetItemPos<Ax>(AxSet);
-	GetItemPos<Pick>(PickSet);
-	GetItemPos<Hoe>(HoeSet);
-	GetItemPos<Sickle>(SickleSet);
-	GetItemPos<WateringCan>(WateringCanSet);
-	GetItemPos<PhotatoSeed>(PhotatoSeedSet);
+	GetItemPos<Ax>(Ax::AxSet);
+	GetItemPos<Pick>(Pick::PickSet);
+	GetItemPos<Hoe>(Hoe::HoeSet);
+	GetItemPos<Sickle>(Sickle::SickleSet);
+	GetItemPos<WateringCan>(WateringCan::WateringCanSet);
+	GetItemPos<PhotatoSeed>(PhotatoSeed::PhotatoSeedSet);
 
-	NextSelectPivot_=ToolUISet->getSelectPivot();
+	NextSelectPivot_= ToolUI::ToolUISet->getSelectPivot();
 	
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
@@ -100,5 +98,14 @@ void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	if (_NextLevel->GetNameCopy() != "TitleLevel")
 	{
 		Player::MainPlayer->NextLevelOn();
+		ToolUI::ToolUISet->NextLevelOn();
+		ToolUI::ToolUISet->NextLevelOn();
+		TopUI::TopUISet->NextLevelOn();
+		Hoe::HoeSet->NextLevelOn();
+		Ax::AxSet->NextLevelOn();
+		Pick::PickSet->NextLevelOn();
+		Sickle::SickleSet->NextLevelOn();
+		WateringCan::WateringCanSet->NextLevelOn();
+		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
 	}
 }

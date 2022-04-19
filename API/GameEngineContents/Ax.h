@@ -5,6 +5,7 @@
 class Ax : public GameEngineActor
 {
 public:
+	static Ax* AxSet;
 	// constrcuter destructer
 	Ax();
 	~Ax();
@@ -33,6 +34,7 @@ private:
 	int InvenPos_;
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	PlayerItemKind ItemKind_;
 	PlayerItem ItemName_;
 };

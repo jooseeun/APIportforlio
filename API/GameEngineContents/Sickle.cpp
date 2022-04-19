@@ -3,6 +3,9 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
+
+Sickle* Sickle::SickleSet = nullptr;
+
 Sickle::Sickle() 
 	:ItemKind_(PlayerItemKind::HitItem),
 	InvenPos_(4),
@@ -13,7 +16,10 @@ Sickle::Sickle()
 Sickle::~Sickle() 
 {
 }
-
+void Sickle::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	SickleSet = this;
+}
 void Sickle::Start()
 {
 

@@ -5,6 +5,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 
+ToolUI* ToolUI::ToolUISet = nullptr;
+
 ToolUI::ToolUI()
 	:SelectPivot(1)
 {
@@ -111,4 +113,10 @@ void ToolUI::Update()
 		}
 	}
 
+}
+
+
+void ToolUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	ToolUISet = this;
 }

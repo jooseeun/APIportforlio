@@ -4,6 +4,8 @@
 class EnergyUI :public GameEngineActor
 {
 public:
+	static EnergyUI* EnergyUISet;
+
 	// constrcuter destructer
 	EnergyUI();
 	~EnergyUI();
@@ -19,5 +21,6 @@ protected:
 private:
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 

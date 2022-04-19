@@ -19,8 +19,8 @@ public:
 		POINT Pos_;
 		GetCursorPos(&Pos_);
 		ScreenToClient(GameEngineWindow::GethWnd(), &Pos_);
-		CurPos_.x = static_cast<int>(Pos_.x);
-		CurPos_.y = static_cast<int>(Pos_.y);
+		CurPos_.x = static_cast<float>(Pos_.x);
+		CurPos_.y = static_cast<float>(Pos_.y);
 	}
 protected:
 

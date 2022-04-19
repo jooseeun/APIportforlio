@@ -3,6 +3,9 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
+
+Pick* Pick::PickSet = nullptr;
+
 Pick::Pick()
 	:ItemKind_(PlayerItemKind::WieldItem),
 	InvenPos_(3),
@@ -13,7 +16,10 @@ Pick::Pick()
 Pick::~Pick() 
 {
 }
-
+void Pick::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	PickSet = this;
+}
 
 
 void Pick::Start()

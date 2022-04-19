@@ -3,6 +3,9 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
+
+WateringCan* WateringCan::WateringCanSet = nullptr;
+
 WateringCan::WateringCan()
 	:ItemKind_(PlayerItemKind::WaterItem),
 	InvenPos_(5),
@@ -12,6 +15,11 @@ WateringCan::WateringCan()
 
 WateringCan::~WateringCan()
 {
+}
+
+void WateringCan::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	WateringCanSet = this;
 }
 
 void WateringCan::Start()

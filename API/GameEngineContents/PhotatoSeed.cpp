@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+PhotatoSeed* PhotatoSeed::PhotatoSeedSet = nullptr;
+
 PhotatoSeed::PhotatoSeed() :
 	ItemKind_(PlayerItemKind::SeedItem),
 	ItemName_(PlayerItem::PhatatoSeedItem),
@@ -12,9 +14,13 @@ PhotatoSeed::PhotatoSeed() :
 
 }
 
-
 PhotatoSeed::~PhotatoSeed() 
 {
+}
+
+void PhotatoSeed::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	PhotatoSeedSet = this;
 }
 
 void PhotatoSeed::Start() //20¹øÂ° ÁÙ ¾¾¾Ñ 475 , ÄÃ¸®ÇÃ¶ó¿ö 474, Äá 473
