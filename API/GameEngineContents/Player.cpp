@@ -1,6 +1,5 @@
 #include "Player.h"
 #include "BackGround.h"
-
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -25,7 +24,8 @@ Player::Player()
 	CurItem_(PlayerItem::HoeItem),
 	CurHairStyle_(PlayerHairStyle::First),
 	CurHairColor_(PlayerHairColor::Black),
-	CurShirts_(PlayerShirts::First)
+	CurShirts_(PlayerShirts::First),
+	CurDay_(1)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -392,7 +392,7 @@ void Player::Update()
 	StateUpdate();
 	CameraCheck();
 	IsDebugModeONOFF();
-	// 카메라 이동
+	CropsGrowUpdate();
 }
 
 
@@ -475,30 +475,156 @@ void Player::DirHoeDirtCreateTile()
 	TileCheckDir();
 	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
 	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
 }
 
 void Player::DirWaterDirtCreateTile() 
 {
 
 	TileCheckDir();
-	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
-	Tile->Dirt_ = TileType::HoeDirt;
-	Tile->Seed_ = SeedType::Max;
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	if (true == GroundTile->IsSeed_)
+	{
+		PlayerTile* CropsTile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+		CropsTile->Dirt_ = TileType::WaterDirt;
+		GroundTile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		GroundTile->Dirt_ = TileType::WaterDirt;
+	}
+	else
+	{
+		GroundTile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirtDark.bmp", 0, static_cast<int>(ORDER::GROUND));
+		GroundTile->Dirt_ = TileType::WaterDirt;
+	}
+	
 
 }
 void Player::DirSeedCreateTile()
 {
-	
+
 	TileCheckDir();
-	PlayerTile* CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
-	CropsTile->Dirt_ = TileType::HoeDirt;
-	CropsTile->Seed_ = SeedType::Phoato;
-
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	GroundTile->Dirt_ = TileType::SeedTile;
-	GroundTile->Seed_ = SeedType::Phoato;
+	PlayerTile* CropsTile;
+	if (PlayerItem::CauliFlowerSeedItem == CurItem_)
+	{
+		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16, static_cast<int>(ORDER::GROUND));
+		CropsTile->Seed_ = SeedType::Cauliflower;
+	}
+	else if (PlayerItem::PhatatoSeedItem == CurItem_)
+	{
+		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24, static_cast<int>(ORDER::GROUND));
+		CropsTile->Seed_ = SeedType::Phoato;
+	}
+	else if (PlayerItem::KaleSeedItem == CurItem_)
+	{
+		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 40, static_cast<int>(ORDER::GROUND));
+		CropsTile->Seed_ = SeedType::Kale;
+	}
+	else //임시
+	{
+		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+	}
+	CropsTile->Dirt_ = GroundTile->Dirt_;
+	CropsTile->SeedDay_ = Time::TimeSet->GetGameDay_(); // 심은 날짜 저장.
+	CropsTile->DirtTilePosX_ = TileIndexX_;
+	CropsTile->DirtTilePosY_ = TileIndexY_;
+	IsCropsTile_.push_back(CropsTile);
 
+	GroundTile->Dirt_ = TileType::SeedTile;
+	GroundTile->Seed_ = CropsTile->Seed_;
+	GroundTile->IsSeed_ = true;
+
+	
+
+}
+//감자 24~
+//콜리플라워 16~
+//케일 40 ~
+void Player::CropsGrowUpdate()
+{
+	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
+	std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (false == (*StartIter)->Isharvest_)
+		{
+			if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
+			{
+				CropsGrowDay(*StartIter);
+			}
+			else //물을 안줬을때
+			{
+				if (CurDay_ != Time::TimeSet->GetGameDay_())
+				{
+					(*StartIter)->SeedDay_ += 1;
+				}
+			}
+		}
+	}
+
+	DayChangeSetCrops();
+}
+void Player::DayChangeSetCrops()
+{
+	if (CurDay_ != Time::TimeSet->GetGameDay_())
+	{
+		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
+		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
+		PlayerTile* GroundTile;
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
+			GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			(*StartIter)->Dirt_= TileType::HoeDirt;
+			GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
+			
+		}
+
+		CurDay_ = Time::TimeSet->GetGameDay_();
+	}
+}
+
+void Player::CropsGrowDay(PlayerTile* _Tile)
+{
+	if (_Tile->Seed_ == SeedType::Phoato && CurDay_ != Time::TimeSet->GetGameDay_()) //날짜가 변했을때
+	{
+		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+
+		if (6 <= _GrowDay)
+		{
+			_Tile->Isharvest_ = true;
+		}
+
+
+	}
+
+	else if (_Tile->Seed_ == SeedType::Cauliflower && CurDay_ != Time::TimeSet->GetGameDay_())
+	{
+		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+
+		if (6 <= _GrowDay)
+		{
+			_Tile->Isharvest_ = true;
+		}
+
+
+	}
+	else if (_Tile->Seed_ == SeedType::Kale && CurDay_ != Time::TimeSet->GetGameDay_())
+	{
+		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 40 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+
+		if (5 <= _GrowDay)
+		{
+			_Tile->Isharvest_ = true;
+		}
+
+	}
 }
 void Player::TileCheckDir() 
 {

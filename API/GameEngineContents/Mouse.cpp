@@ -116,7 +116,15 @@ void Mouse::CheckPlayerIsLeftMouse()
 			{
 				ToolUI::ToolUISet->SetSelectPivot(11);
 			}
+			else
+			{
+				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy())
+				{
+					Player::MainPlayer->SetIsLeftMouseON();
+				}
+			}
 		}
+
 		if (true == ToolUI::ToolUISet->GetIsInventory())
 		{
 			if (true == GetMouseCol()->CollisionCheck("Inven1Col", CollisionType::Rect, CollisionType::Rect))
@@ -227,15 +235,15 @@ void Mouse::CheckPlayerIsLeftMouse()
 			{
 				Tool::ToolSet->SetClickItem(23);
 			}
-		}
-
-		else
-		{
-			if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy())
+			else
 			{
-				Player::MainPlayer->SetIsLeftMouseON();
+				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy())
+				{
+					Player::MainPlayer->SetIsLeftMouseON();
+				}
 			}
 		}
+		
 	}
 	
 }

@@ -1,15 +1,20 @@
 #pragma once
 #include "PlayerEnum.h"
+#include "Time.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 
 class PlayerTile : public Tile
 {
 public:
-	PlayerTile():
-	Dirt_(TileType::Max),
-	Seed_(SeedType::Max),
-	IsSeed_(false)
+	PlayerTile()
+		:Dirt_(TileType::Max),
+		Seed_(SeedType::Max),
+		IsSeed_(false),
+		SeedDay_(0),
+		Isharvest_(false),
+		DirtTilePosX_(-1),
+		DirtTilePosY_(-1)
 	{
 
 	}
@@ -17,7 +22,10 @@ public:
 	TileType Dirt_;
 	SeedType Seed_;
 	bool IsSeed_;
-	
+	bool Isharvest_;
+	int DirtTilePosX_;
+	int DirtTilePosY_;
+	int SeedDay_;
 
 };
 
@@ -139,8 +147,6 @@ private:
 	void IsDebugModeONOFF();
 	
 private:
-
-
 	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
 	int TileCheckDirX[static_cast<int>(PlayerDir::Max)];
@@ -149,6 +155,8 @@ private:
 	PlayerState CurState_;
 	PlayerDir CurDir_;
 	PlayerDir PrevDir_;
+
+	int CurDay_;
 
 	 PlayerItemKind CurItemKind_;
 	 PlayerItem CurItem_;
@@ -164,6 +172,11 @@ private:
 private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
+	std::list< PlayerTile*> IsCropsTile_;
+	void CropsGrowUpdate();
+	void CropsGrowDay(PlayerTile* _Tile);
+	void DayChangeSetCrops();
+
 
 	bool IsHoeTileCreate();
 	bool IsWaterTileCreate();

@@ -32,7 +32,7 @@ void Time::Update()
 
 	if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 	{
-		CurTime_ += 1.0f;
+		CurTime_ += 2.0f;
 	}
 }
 void Time::UpdateGameTime()
