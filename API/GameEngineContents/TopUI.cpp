@@ -1,4 +1,5 @@
 #include "TopUI.h"
+#include "Time.h"
 #include <GameEngine/GameEngineRenderer.h>
 
 TopUI* TopUI::TopUISet = nullptr;
@@ -36,9 +37,67 @@ void TopUI::Start()
 
 void TopUI::Update()
 {
-	DateRender_->SetIndex(Date_ - 1);
+	MinuteUpdate();
+	HourUpdate();
+	AMPMUpdate();
+	DateRender_->SetIndex(Time::TimeSet->GetGameDay_() - 1);
+	
 }
+void TopUI::MinuteUpdate() 
+{
+	if (0 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(21);
+	}
+	else if (10 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(15);
+	}
+	else if (20 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(16);
+	}
+	else if (30 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(17);
+	}
+	else if (40 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(18);
+	}
+	else if (50 == Time::TimeSet->GetGameMinute_())
+	{
+		MinuteRender_->SetIndex(19);
+	}
 
+}
+void TopUI::HourUpdate()
+{
+	if (-1 < Time::TimeSet->GetGameHour_() && Time::TimeSet->GetGameHour_() < 13)
+	{
+		HourRender_->SetIndex(Time::TimeSet->GetGameHour_() + 2);
+		
+	}
+	else
+	{
+		HourRender_->SetIndex(Time::TimeSet->GetGameHour_() -10);
+		
+	}
+	
+}
+void TopUI::AMPMUpdate()
+{
+	if (-1 < Time::TimeSet->GetGameHour_() && Time::TimeSet->GetGameHour_() < 12)
+	{
+		AMPMRender_->SetIndex(0);
+
+	}
+	else
+	{
+		AMPMRender_->SetIndex(1);
+	}
+
+}
 void TopUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	TopUISet = this;

@@ -136,7 +136,7 @@ private:
 
 	void ChangeAni(std::string _Name);
 	void CameraCheck();
-
+	void IsDebugModeONOFF();
 	
 private:
 

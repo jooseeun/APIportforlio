@@ -101,6 +101,9 @@
     <ClInclude Include="Tool.h">
       <Filter>Actor\Play\Tool</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Tool.cpp">
       <Filter>Actor\Play\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

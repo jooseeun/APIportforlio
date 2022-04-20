@@ -30,7 +30,7 @@ void Mouse::Start()
 	if (false == GameEngineInput::GetInst()->IsKey("LeftMouse"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LeftMouse", VK_LBUTTON);
-		GameEngineInput::GetInst()->CreateKey("DebugONOFF", 'Q');
+		
 	}
 }
 
@@ -39,10 +39,7 @@ void Mouse::Update()
 	GetCurPos();
 	SetPosition({ CurPos_.x,CurPos_.y });
 	CheckPlayerIsLeftMouse();
-	if (true == GameEngineInput::GetInst()->IsDown("DebugONOFF"))
-	{
-		this->GetLevel()->IsDebugModeSwitch();
-	}
+
 
 	if ("TitleLevel" == GetLevel()->GetNameCopy()&& true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
 	{

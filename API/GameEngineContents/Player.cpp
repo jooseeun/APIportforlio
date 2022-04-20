@@ -20,9 +20,9 @@ Player::Player()
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
 	PrevDir_(PlayerDir::Front),
-	CurItemKind_(PlayerItemKind::NoItem),
+	CurItemKind_(PlayerItemKind::WieldItem),
 	CurState_(PlayerState::Idle),
-	CurItem_(PlayerItem::Nothing),
+	CurItem_(PlayerItem::HoeItem),
 	CurHairStyle_(PlayerHairStyle::First),
 	CurHairColor_(PlayerHairColor::Black),
 	CurShirts_(PlayerShirts::First)
@@ -382,6 +382,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("RightWalk", 'D');
 		GameEngineInput::GetInst()->CreateKey("BackWalk", 'W');
 		GameEngineInput::GetInst()->CreateKey("FrontWalk", 'S');
+		GameEngineInput::GetInst()->CreateKey("DebugONOFF", 'Q');
 	}
 
 }
@@ -390,9 +391,11 @@ void Player::Update()
 {
 	StateUpdate();
 	CameraCheck();
+	IsDebugModeONOFF();
 	// 카메라 이동
-
 }
+
+
 
 void Player::Render()
 {
@@ -688,4 +691,12 @@ std::string Player::GetItemString()
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
+}
+
+void Player::IsDebugModeONOFF()
+{
+	if (true == GameEngineInput::GetInst()->IsDown("DebugONOFF"))
+	{
+		GetLevel()->IsDebugModeSwitch();
+	}
 }

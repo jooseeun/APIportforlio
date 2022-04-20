@@ -24,6 +24,9 @@ private:
 	GameEngineRenderer* MinuteRender_;
 	GameEngineRenderer* AMPMRender_;
 	int Date_;
+	void MinuteUpdate();
+	void HourUpdate();
+	void AMPMUpdate();
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;

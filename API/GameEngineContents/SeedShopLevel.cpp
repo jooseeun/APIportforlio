@@ -7,6 +7,7 @@
 #include "ToolUI.h"
 #include "ContentsEnums.h"
 #include "Mouse.h"
+#include "Time.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -41,6 +42,7 @@ void SeedShopLevel::Loading()
 			TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 			EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 			Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
+			Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 
 		}
 
@@ -54,10 +56,8 @@ void SeedShopLevel::Update()
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
-	if (CurSelectPivot_ != NextSelectPivot_)
-	{
-		Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
-	}
+
+	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 
 	CurSelectPivot_ = NextSelectPivot_;
 }
@@ -80,6 +80,7 @@ void SeedShopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		TopUI::TopUISet->NextLevelOn();
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
+		Time::TimeSet->NextLevelOn();
 
 
 	}
