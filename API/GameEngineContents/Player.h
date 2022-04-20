@@ -128,6 +128,8 @@ private:
 	GameEngineRenderer* BackItem_;
 	GameEngineImage* MapColImage_;
 
+	GameEngineCollision* PlayerCol_;
+
 	std::string ColMap_;
 	std::string NextLevel_;
 	std::string PreLevel_;
@@ -170,13 +172,21 @@ private:
 	bool IsLeftMouse;
 	std::string GetDirString();
 
+public:
+
+	bool IsCreateCropTile_;
+	SeedType CreateSeedType_;
+	float4 CreateCropPos_;
+
 private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
 	std::list< PlayerTile*> IsCropsTile_;
+
 	void CropsGrowUpdate();
 	void CropsGrowDay(PlayerTile* _Tile);
 	void DayChangeSetCrops();
+	void CropsHarvestSet(PlayerTile* _Tile);
 
 
 	bool IsHoeTileCreate();

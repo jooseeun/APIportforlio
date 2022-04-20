@@ -1,22 +1,23 @@
 #pragma once
-
+#include <GameEngine/GameEngineActor.h>
 // Ό³Έν :
-class cauliflower
+class Cauliflower : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	cauliflower();
-	~cauliflower();
+	Cauliflower();
+	~Cauliflower();
 
 	// delete Function
-	cauliflower(const cauliflower& _Other) = delete;
-	cauliflower(cauliflower&& _Other) noexcept = delete;
-	cauliflower& operator=(const cauliflower& _Other) = delete;
-	cauliflower& operator=(cauliflower&& _Other) noexcept = delete;
+	Cauliflower(const Cauliflower& _Other) = delete;
+	Cauliflower(Cauliflower&& _Other) noexcept = delete;
+	Cauliflower& operator=(const Cauliflower& _Other) = delete;
+	Cauliflower& operator=(Cauliflower&& _Other) noexcept = delete;
 
 protected:
 
 private:
-
+	void Start() override;
+	void Update() override;
 };
 

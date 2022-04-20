@@ -11,7 +11,7 @@ enum class TileType
 };
 enum class SeedType
 {
-	Phoato,
+	Photato,
 	Cauliflower,
 	Kale,
 	Max,

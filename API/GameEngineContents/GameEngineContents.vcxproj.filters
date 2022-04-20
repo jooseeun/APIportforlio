@@ -104,6 +104,15 @@
     <ClInclude Include="Time.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
+    <ClInclude Include="Photato.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="Kale.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
+    <ClInclude Include="Cauliflower.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -206,6 +215,15 @@
     <ClCompile Include="Time.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
+    <ClCompile Include="Photato.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="Kale.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="Cauliflower.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -246,6 +264,9 @@
     </Filter>
     <Filter Include="Actor\Play\PlayUI">
       <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Crops">
+      <UniqueIdentifier>{e9e3a408-1419-4c10-b6d0-adf2e20f78be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

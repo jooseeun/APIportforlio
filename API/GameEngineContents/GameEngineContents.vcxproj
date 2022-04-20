@@ -179,6 +179,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Cauliflower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Chicken.h">
       <SubType>
       </SubType>
@@ -200,6 +204,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ForestLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Kale.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -240,6 +248,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="NPCShopOnner.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Photato.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -318,6 +330,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Cauliflower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Chicken.cpp">
       <SubType>
       </SubType>
@@ -339,6 +355,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ForestLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Kale.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -375,6 +395,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="NPCShopOnner.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Photato.cpp">
       <SubType>
       </SubType>
     </ClCompile>

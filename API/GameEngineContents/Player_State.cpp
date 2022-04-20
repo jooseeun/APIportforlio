@@ -112,6 +112,8 @@ void Player::WalkUpdate()
 	NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 	CheckPos += NextPos;
 
+
+
 	{
 
 		int Color = MapColImage_->GetImagePixel(CheckPos);

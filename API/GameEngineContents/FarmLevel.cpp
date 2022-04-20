@@ -9,6 +9,9 @@
 #include "Mouse.h"
 #include "Tool.h"
 #include "Time.h"
+#include "Photato.h"
+#include "Kale.h"
+#include "Cauliflower.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -57,13 +60,36 @@ void FarmLevel::Update()
 	GetItemPos();
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
-
-
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 
 	CurSelectPivot_ = NextSelectPivot_;
-}
 
+	CreateCropActorUpdate();
+
+}
+void FarmLevel::CreateCropActorUpdate()
+{
+	if (true == Player::MainPlayer->IsCreateCropTile_)
+	{
+		if (SeedType::Photato == Player::MainPlayer->CreateSeedType_)
+		{
+			Photato* Crop = CreateActor<Photato>(static_cast<int>(ORDER::CROP), "Photato");
+			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
+		}
+		else if (SeedType::Kale == Player::MainPlayer->CreateSeedType_)
+		{
+			Kale* Crop = CreateActor<Kale>(static_cast<int>(ORDER::CROP), "Kale");
+			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
+		}
+		else if (SeedType::Cauliflower == Player::MainPlayer->CreateSeedType_)
+		{
+			Cauliflower* Crop = CreateActor<Cauliflower>(static_cast<int>(ORDER::CROP), "Cauliflower");
+			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
+		}
+
+		Player::MainPlayer->IsCreateCropTile_ = false;
+	}
+}
 void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });

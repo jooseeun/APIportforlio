@@ -59,8 +59,6 @@ void FarmHouseLevel::Update()
 	GetItemPos();
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
-
-
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 
 	CurSelectPivot_ = NextSelectPivot_;
