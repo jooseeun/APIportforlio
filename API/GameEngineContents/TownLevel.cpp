@@ -3,15 +3,9 @@
 #include "EnergyUI.h"
 #include "BackGround.h"
 #include "Mouse.h"
-#include "Ax.h"
-#include "Hoe.h"
-#include "Pick.h"
-#include "Sickle.h"
 #include "Player.h"
 #include "ToolUI.h"
-#include "PhotatoSeed.h"
 #include "ContentsEnums.h"
-#include "WateringCan.h"
 #include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -45,12 +39,6 @@ void TownLevel::Loading()
 		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
 		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
-		Hoe::HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
-		Ax::AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
-		Pick::PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
-		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
-		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
-		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
 	}
 
 	Player::MainPlayer->SetPosition({ 144.0f,3442.f });
@@ -61,12 +49,6 @@ void TownLevel::Loading()
 
 void TownLevel::Update()
 {
-	GetItemPos<Ax>(Ax::AxSet);
-	GetItemPos<Pick>(Pick::PickSet);
-	GetItemPos<Hoe>(Hoe::HoeSet);
-	GetItemPos<Sickle>(Sickle::SickleSet);
-	GetItemPos<WateringCan>(WateringCan::WateringCanSet);
-	GetItemPos<PhotatoSeed>(PhotatoSeed::PhotatoSeedSet);
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
@@ -93,11 +75,6 @@ void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		ToolUI::ToolUISet->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
-		Hoe::HoeSet->NextLevelOn();
-		Ax::AxSet->NextLevelOn();
-		Pick::PickSet->NextLevelOn();
-		Sickle::SickleSet->NextLevelOn();
-		WateringCan::WateringCanSet->NextLevelOn();
-		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
+
 	}
 }

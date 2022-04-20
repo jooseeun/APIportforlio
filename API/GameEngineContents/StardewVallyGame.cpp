@@ -294,8 +294,8 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
-	//ChangeLevel("FarmHouseLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("FarmHouseLevel");
+	//ChangeLevel("TitleLevel");
 	//ChangeLevel("FarmLevel");
 }
 

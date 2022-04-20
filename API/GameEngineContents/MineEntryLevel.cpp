@@ -3,14 +3,8 @@
 #include "EnergyUI.h"
 #include "BackGround.h"
 #include "Mouse.h"
-#include "Ax.h"
-#include "Hoe.h"
-#include "Pick.h"
-#include "Sickle.h"
 #include "Player.h"
 #include "ToolUI.h"
-#include "PhotatoSeed.h"
-#include "WateringCan.h"
 #include "ContentsEnums.h"
 #include "Mouse.h"
 #include <GameEngineBase/GameEngineInput.h>
@@ -46,12 +40,7 @@ void MineEntryLevel::Loading()
 		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
 		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
-		Hoe::HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
-		Ax::AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
-		Pick::PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
-		Sickle::SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
-		WateringCan::WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
-		PhotatoSeed::PhotatoSeedSet = CreateActor<PhotatoSeed>((int)ORDER::ITEM, "PhotatoSeed");
+
 	}
 
 
@@ -59,12 +48,6 @@ void MineEntryLevel::Loading()
 
 void MineEntryLevel::Update()
 {
-	GetItemPos<Ax>(Ax::AxSet);
-	GetItemPos<Pick>(Pick::PickSet);
-	GetItemPos<Hoe>(Hoe::HoeSet);
-	GetItemPos<Sickle>(Sickle::SickleSet);
-	GetItemPos<WateringCan>(WateringCan::WateringCanSet);
-	GetItemPos<PhotatoSeed>(PhotatoSeed::PhotatoSeedSet);
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
@@ -93,11 +76,5 @@ void MineEntryLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		ToolUI::ToolUISet->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
-		Hoe::HoeSet->NextLevelOn();
-		Ax::AxSet->NextLevelOn();
-		Pick::PickSet->NextLevelOn();
-		Sickle::SickleSet->NextLevelOn();
-		WateringCan::WateringCanSet->NextLevelOn();
-		PhotatoSeed::PhotatoSeedSet->NextLevelOn();
 	}
 }

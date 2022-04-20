@@ -37,11 +37,6 @@ void ForestLevel::Loading()
 	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 
 	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
-	HoeSet = CreateActor<Hoe>((int)ORDER::ITEM, "Hoe");
-	AxSet = CreateActor<Ax>((int)ORDER::ITEM, "Ax");
-	PickSet = CreateActor<Pick>((int)ORDER::ITEM, "Pick");
-	SickleSet = CreateActor<Sickle>((int)ORDER::ITEM, "Sickle");
-	WateringCanSet = CreateActor<WateringCan>((int)ORDER::ITEM, "WateringCan");
 
 	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	PlayerSet->SetPosition({ 4324.0f,1664.f });
@@ -52,11 +47,7 @@ void ForestLevel::Loading()
 
 void ForestLevel::Update()
 {
-	GetItemPos<Ax>(AxSet);
-	GetItemPos<Pick>(PickSet);
-	GetItemPos<Hoe>(HoeSet);
-	GetItemPos<Sickle>(SickleSet);
-	GetItemPos<WateringCan>(WateringCanSet);
+
 
 	NextSelectPivot_ = ToolUISet->getSelectPivot();
 	if (CurSelectPivot_ != NextSelectPivot_)

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
@@ -34,16 +35,26 @@ public:
 	{
 		return IsInventory_;
 	}
-	
+
 protected:
 
 private:
+
+	int ClickPivot_;
+	bool IsClickItem_;
+
 	void SelectSetPivot();
 	void CheckToolUIKey();
 	void InvenONOFF();
 
-	float NumOne = -352.0;
-	float Num = 64.0;
+	float FirstPivot_;
+	float NumPivot_;
+	float Ypivot_;
+
+	float InvenFirstXPivot_;
+	float InvenFirstYPivot_;
+	float InvenNumPivot_;
+	float InvenFloorPivot_;
 
 	void Start() override;
 	void Update() override;
@@ -54,5 +65,9 @@ private:
 	GameEngineRenderer* Select_;
 	GameEngineRenderer* Inventory_;
 	GameEngineRenderer* ToolUI_;
+
+	std::list<GameEngineCollision*> ToolUIPivotColl_;
+	std::list<GameEngineCollision*> InventoryPivotColl_;
+
 };
 

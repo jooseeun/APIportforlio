@@ -89,32 +89,17 @@
     <ClInclude Include="Bug.h">
       <Filter>Actor\Play\Mine\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Hoe.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Pick.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Sickle.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="Ax.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerEnum.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Play\Player</Filter>
     </ClInclude>
-    <ClInclude Include="WateringCan.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="PhotatoSeed.h">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>Actor\Play\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,32 +188,17 @@
     <ClCompile Include="Bug.cpp">
       <Filter>Actor\Play\Mine\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Hoe.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Pick.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Sickle.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="Ax.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Play\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
       <Filter>Actor\Play\Player</Filter>
     </ClCompile>
-    <ClCompile Include="WateringCan.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="PhotatoSeed.cpp">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>Actor\Play\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,9 +228,6 @@
     </Filter>
     <Filter Include="Actor\Play\NPC">
       <UniqueIdentifier>{4a275f80-aef1-4a04-95fc-866be7586d49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Crops">
-      <UniqueIdentifier>{7c0a0298-12ca-4edb-8efc-9db4288682ff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Play\Mine\Monster">
       <UniqueIdentifier>{bc9d8fd5-53d0-47f8-a28a-3f9e483e1b38}</UniqueIdentifier>

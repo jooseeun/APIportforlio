@@ -62,7 +62,7 @@ void TitleLogo::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("GOPlay"))
 	{
-		hide_ = true;
+		//hide_ = true;
 
 	}
 

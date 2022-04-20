@@ -1,11 +1,7 @@
 #pragma once
-#include "Ax.h"
-#include "Hoe.h"
-#include "Pick.h"
-#include "Sickle.h"
+
 #include "Player.h"
 #include "ToolUI.h"
-#include "WateringCan.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 
@@ -36,11 +32,6 @@ protected:
 	void Update() override;
 private:
 	Player* PlayerSet;
-	Ax* AxSet;
-	Hoe* HoeSet;
-	Pick* PickSet;
-	Sickle* SickleSet;
-	WateringCan* WateringCanSet;
 	ToolUI* ToolUISet;
 
 	PlayerItem ItemPos_[13];

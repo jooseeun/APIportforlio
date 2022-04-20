@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 enum class TileType
 {
 	HoeDirt,
@@ -58,6 +60,7 @@ enum class PlayerItem
 	LongSwordItem,
 	SeedItem=40,
 	PhatatoSeedItem,
+	KaleSeedItem,
 	CauliFlowerSeedItem,
 
 	
@@ -89,4 +92,10 @@ enum class PlayerShirts
 	Ninth,
 	Tenth
 
+};
+
+enum class InvenFloor
+{
+	First,
+	Second
 };
