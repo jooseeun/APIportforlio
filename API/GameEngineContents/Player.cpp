@@ -25,7 +25,8 @@ Player::Player()
 	CurHairStyle_(PlayerHairStyle::First),
 	CurHairColor_(PlayerHairColor::Black),
 	CurShirts_(PlayerShirts::First),
-	CurDay_(1)
+	CurDay_(1),
+	CurHour_(0)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -45,6 +46,20 @@ Player::Player()
 
 Player::~Player() 
 {
+	{
+		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
+		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			if (nullptr == (*StartIter))
+			{
+				continue;
+			}
+			delete (*StartIter);
+			(*StartIter) = nullptr;
+		}
+	}
 
 }
 
@@ -515,7 +530,7 @@ void Player::DirSeedCreateTile()
 	}
 	else if (PlayerItem::KaleSeedItem == CurItem_)
 	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 40, static_cast<int>(ORDER::GROUND));
+		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41, static_cast<int>(ORDER::GROUND));
 		CropsTile->Seed_ = SeedType::Kale;
 	}
 	else //임시
@@ -590,9 +605,9 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
-		if (6 <= _GrowDay)
+		if (3 <= _GrowDay) // 6일로하면 너무 길어서 시연하기힘들듯? 절반으로 일단 세팅
 		{
 			_Tile->Isharvest_ = true;
 		}
@@ -604,9 +619,9 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
-		if (6 <= _GrowDay)
+		if (3 <= _GrowDay)
 		{
 			_Tile->Isharvest_ = true;
 		}
@@ -617,9 +632,9 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 40 + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
-		if (5 <= _GrowDay)
+		if (2 <= _GrowDay)
 		{
 			_Tile->Isharvest_ = true;
 		}

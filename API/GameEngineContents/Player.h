@@ -157,6 +157,7 @@ private:
 	PlayerDir PrevDir_;
 
 	int CurDay_;
+	int CurHour_;
 
 	 PlayerItemKind CurItemKind_;
 	 PlayerItem CurItem_;
