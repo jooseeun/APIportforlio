@@ -1,12 +1,12 @@
 #include "GameEngineWindow.h"
-
+#include "GameEngineInput.h"
 
 // HWND hWnd 어떤 윈도우에 무슨일이 생겼는지 그 윈도우의 핸들
 // UINT message 그 메세지의 중료가 뭔지.
 // WPARAM wParam
 // LPARAM lParam
 
-LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK GameEngineWindow::MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -23,9 +23,9 @@ LRESULT CALLBACK MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM l
         EndPaint(hWnd, &ps);
         break;
     }
-    case WM_CLOSE:
+    case WM_MOUSEWHEEL:
     {
-        GameEngineWindow::GetInst().Off();
+        GameEngineInput::GetInst()->WheelValue = (SHORT)HIWORD(wParam);
         break;
     }
     default:

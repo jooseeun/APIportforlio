@@ -30,7 +30,7 @@ public:
 
 	inline bool IsDeath() override
 	{
-		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();
+		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();//이거 ||로하면 터져..
 	}
 
 

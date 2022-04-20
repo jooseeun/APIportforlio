@@ -14,7 +14,7 @@ GameEngineImage::~GameEngineImage()
 	// Window에서 할당해 온 애들은 릭으로 체크가 안되지만 지워주는게 깔끔하다.
 	// 윈도우에세 할당해왔으므로 윈도우의 함수를 이용해서 지워야한다.
 
-	if ( nullptr != BitMap_)
+	if (nullptr != BitMap_)
 	{
 		DeleteObject(BitMap_);
 		BitMap_ = nullptr;
@@ -182,7 +182,7 @@ void GameEngineImage::TransCopy(GameEngineImage* _Other, const float4& _CopyPos,
 
 void GameEngineImage::AlphaCopy(GameEngineImage* _Other, const float4& _CopyPos,
 	const float4& _CopyScale,
-	const float4& _OtherPivot, const float4& _OtherScale, unsigned int _Alpha) 
+	const float4& _OtherPivot, const float4& _OtherScale, unsigned int _Alpha)
 {
 	BLENDFUNCTION Func;
 	Func.BlendOp = AC_SRC_OVER;
@@ -207,15 +207,49 @@ void GameEngineImage::AlphaCopy(GameEngineImage* _Other, const float4& _CopyPos,
 
 }
 
+void GameEngineImage::PlgCopy(GameEngineImage* _Other, const float4& _CopyPos,
+	const float4& _CopyScale,
+	const float4& _OtherPivot, const float4& _OtherScale, float _Angle, GameEngineImage* _Filter)
+{
+	// 3개의 포인트를 넣어줘야 합니다.
 
-void GameEngineImage::CutCount(int _x, int _y) 
+	POINT RotPoint[3];
+
+	GameEngineRect Rect = GameEngineRect(float4::ZERO, _CopyScale);
+
+	float4 LeftTop = Rect.CenterLeftTopPoint();
+	float4 RightTop = Rect.CenterRightTopPoint();
+	float4 LeftBot = Rect.CenterLeftBotPoint();
+	float4 Center = _CopyPos + _CopyScale.Half();
+
+
+	RotPoint[0] = (Rect.CenterLeftTopPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+	RotPoint[1] = (Rect.CenterRightTopPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+	RotPoint[2] = (Rect.CenterLeftBotPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+
+	PlgBlt(
+		ImageDC_, // 여기에 복사(우리 윈도우이미지)
+		RotPoint,
+		_Other->ImageDC_,
+		_OtherPivot.ix(), // 윈도우 이미지의 위치 x에서부터 y
+		_OtherPivot.iy(), // 윈도우 이미지의 위치 x에서부터 y
+		_OtherScale.ix(), // 내 이미지의 이 크기만큼 x
+		_OtherScale.iy(), // 내 이미지의 이 크기만큼 y
+		_Filter->BitMap_, // 복사하려는 대상은(거기에 그려지는 이미지가 뭔데?커비)
+		_OtherPivot.ix(), // 복사하려는 대상의 시작점X 위치
+		_OtherPivot.iy()// 복사하려는 대상의 시작점Y
+	);
+}
+
+
+void GameEngineImage::CutCount(int _x, int _y)
 {
 	float4 Scale = { GetScale().x / _x, GetScale().y / _y };
 	Cut(Scale);
 }
 
 void GameEngineImage::Cut(const float4& _CutSize)
-{	
+{
 	// 딱맞아 떨어지게 만들어줄것.
 	if (0 != (GetScale().ix() % _CutSize.ix()))
 	{
