@@ -18,6 +18,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineCollision.h>
 FarmLevel::FarmLevel():
 	CurSelectPivot_(0),
 	NextSelectPivot_(1)
@@ -51,7 +52,9 @@ void FarmLevel::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 
 	}
-
+	
+	Cauliflower* Crop = CreateActor<Cauliflower>(static_cast<int>(ORDER::CROP), "EX");
+	Crop->SetPosition({ 4120.0f,1320.f });
 }
 
 void FarmLevel::Update()

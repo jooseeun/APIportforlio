@@ -113,13 +113,23 @@ void Player::WalkUpdate()
 	NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 	CheckPos += NextPos;
 
+	///플레이어와 다 자란 작물의 충돌 처리 -> 플레이어가 다자란 작물이 앞에 있으면 지나가지 못한다.
+	//실험용 코드
+
+
+	/*if (true == PlayerCol_->CollisionCheck("EX", CollisionType::Rect, CollisionType::Rect))
+	{
+		Move = float4::ZERO;
+	}*/
 
 
 	{
 
 		int Color = MapColImage_->GetImagePixel(CheckPos);
 
-		if (true == PlayerCol_->CollisionCheck("Photao", CollisionType::Rect, CollisionType::Rect))
+	
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
+		/*if (true == PlayerCol_->CollisionCheck("Photao", CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
@@ -130,7 +140,8 @@ void Player::WalkUpdate()
 		else if (true == PlayerCol_->CollisionCheck("Cauliflower", CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
-		}
+		}*/
+
 
 		if (RGB(255, 0, 0) != Color)
 		{

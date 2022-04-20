@@ -13,8 +13,8 @@ void Cauliflower::Start()
 {
 	GameEngineRenderer* Cauliflower_ = CreateRenderer("Crops.bmp");
 	Cauliflower_->SetIndex(22);
-
-	GameEngineCollision* CauliflowerCol_ = CreateCollision("Cauliflower", { 64,64 });
+	GameEngineCollision* CauliflowerCol_ = CreateCollision("EX", { 64,64 });
+	//GameEngineCollision* CauliflowerCol_ = CreateCollision("Cauliflower", { 64,64 });
 }
 void Cauliflower::Update()
 {
