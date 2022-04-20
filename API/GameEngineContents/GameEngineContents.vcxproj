@@ -211,10 +211,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="LobinHouseLevel.h">
       <SubType>
       </SubType>
@@ -367,10 +363,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Hoe.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -26,12 +26,21 @@ public:
 		SelectPivot_ = _SelectPivot;
 	}
 
+	inline void InventorySwitch()
+	{
+		IsInventory_ = !IsInventory_;
+	}
+	inline bool GetIsInventory()
+	{
+		return IsInventory_;
+	}
 	
 protected:
 
 private:
 	void SelectSetPivot();
 	void CheckToolUIKey();
+	void InvenONOFF();
 
 	float NumOne = -352.0;
 	float Num = 64.0;
@@ -41,6 +50,9 @@ private:
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 	int SelectPivot_;
-	GameEngineRenderer* Select;
+	bool IsInventory_;
+	GameEngineRenderer* Select_;
+	GameEngineRenderer* Inventory_;
+	GameEngineRenderer* ToolUI_;
 };
 
