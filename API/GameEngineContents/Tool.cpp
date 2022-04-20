@@ -243,13 +243,15 @@ void Tool::GetToolUINum()
 	std::list<ToolData*>::iterator StartIter = ItemList_.begin();
 	std::list<ToolData*>::iterator EndIter = ItemList_.end();
 	
-	
+	for (int i = 0; i < 24; i++)
+	{
+		_ItemPos[i]=PlayerItem::Nothing;
+	}
+
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (0 <= (*StartIter)->InvenPivot_ && (*StartIter)->InvenPivot_ < 13)
-		{
-			_ItemPos[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
-		}
+		_ItemPos[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
+
 	}
 }
 

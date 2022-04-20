@@ -7,13 +7,13 @@
 #include "ToolUI.h"
 #include "ContentsEnums.h"
 #include "Mouse.h"
+#include "Tool.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngine/GameEngineRendererTileMap.h>
 FarmLevel::FarmLevel():
 	CurSelectPivot_(0),
 	NextSelectPivot_(1)
@@ -35,14 +35,16 @@ void FarmLevel::Loading()
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
 
-	Mouse* MouseSet= CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
-		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
-		TopUI::TopUISet=CreateActor<TopUI>((int)ORDER::UI, "TopUI");
-		EnergyUI::EnergyUISet=CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::TOOLUI, "ToolUI");
+		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
+		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
+
 	}
 
 }
@@ -50,8 +52,10 @@ void FarmLevel::Loading()
 void FarmLevel::Update()
 {
 
-	NextSelectPivot_= ToolUI::ToolUISet->getSelectPivot();
-	
+	GetItemPos();
+
+	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
+
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
 		Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
@@ -76,7 +80,9 @@ void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	{
 		Player::MainPlayer->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
-		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
+
 	}
 }

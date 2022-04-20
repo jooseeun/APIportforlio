@@ -9,7 +9,6 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineCollision.h>
 
-Mouse* Mouse::MouseSet = nullptr;
 
 Mouse::Mouse() 
 {
@@ -242,9 +241,4 @@ void Mouse::CheckPlayerIsLeftMouse()
 		}
 	}
 	
-}
-
-void Mouse::LevelChangeStart(GameEngineLevel* _PrevLevel)
-{
-	MouseSet = this;
 }

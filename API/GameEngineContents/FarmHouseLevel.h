@@ -29,21 +29,12 @@ public:
 		}
 	}
 
-	/*template<typename ItemActor>
-	inline void ChangeItemPos(ItemActor* _Actor1, ItemActor* _Actor2)
-	{
-		int Num = _Actor1->GetInvenPos();
-		_Actor1->SetInvenPos(_Actor2->GetInvenPos());
-		_Actor2->SetInvenPos(Num);
-		ItemPos_[Num] = _Actor->GetItemName();
-
-	}*/
-
 	inline void SetSelectPivot(int _SelectPivot)
 	{
 		CurSelectPivot_ = _SelectPivot;
 
 	}
+
 protected:
 	void Loading() override;
 	void Update() override;

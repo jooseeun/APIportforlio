@@ -19,7 +19,7 @@ ForestLevel::ForestLevel() :
 {
 }
 
-ForestLevel::~ForestLevel() 
+ForestLevel::~ForestLevel()
 {
 }
 
@@ -31,29 +31,50 @@ void ForestLevel::Loading()
 	Back->GroundTileMap_.TileRangeSetting(90, 34, { 48,48 });
 	Back->CropsTileMap_.TileRangeSetting(90, 34, { 48,48 });
 
-	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE));
 
-	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
-	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
-	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::TOOLUI, "ToolUI");
+		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
+		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 
-	PlayerSet = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerSet->SetPosition({ 4324.0f,1664.f });
-	PlayerSet->SetMapScale(4536.0f, 3084.0f);
-	PlayerSet->SetColMapName("ForestColMap.bmp");
-	PlayerSet->SetSideLevel("TownLevel", "FarmLevel", "AnimalShopLevel");
+	}
 }
 
 void ForestLevel::Update()
 {
+	GetItemPos();
 
+	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
-	NextSelectPivot_ = ToolUISet->getSelectPivot();
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
-		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
+		Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 	}
 
 	CurSelectPivot_ = NextSelectPivot_;
+}
+void ForestLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	Player::MainPlayer->SetPosition({ 4324.0f,1664.f });
+	Player::MainPlayer->SetMapScale(4536.0f, 3084.0f);
+	Player::MainPlayer->SetColMapName("ForestColMap.bmp");
+	Player::MainPlayer->SetSideLevel("TownLevel", "FarmLevel", "AnimalShopLevel");
+}
+void ForestLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	if (_NextLevel->GetNameCopy() != "TitleLevel")
+	{
+		Player::MainPlayer->NextLevelOn();
+		ToolUI::ToolUISet->NextLevelOn();
+		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
+
+	}
 }

@@ -35,14 +35,16 @@ void BusStopLevel::Loading()
 		Back->CropsTileMap_.TileRangeSetting(35, 30, { 48,48 });
 	}
 
-	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE));
+	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
-		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::TOOLUI, "ToolUI");
 		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
+
 	}
 
 
@@ -51,6 +53,8 @@ void BusStopLevel::Loading()
 }
 void BusStopLevel::Update()
 {
+
+	GetItemPos();
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
@@ -76,8 +80,9 @@ void BusStopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	{
 		Player::MainPlayer->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
-		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
 
 	}
 }

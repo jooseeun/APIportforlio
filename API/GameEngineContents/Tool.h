@@ -61,7 +61,7 @@ protected:
 private:
 
 	std::list<ToolData*> ItemList_;
-	PlayerItem _ItemPos[13];
+	PlayerItem _ItemPos[24];
 
 	bool IsClickON_;
 	float FirstPivot_;

@@ -1,6 +1,7 @@
 #pragma once
 #include "BackGround.h"
 #include "PlayerEnum.h"
+#include "Tool.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
@@ -17,11 +18,18 @@ public:
 	TownLevel& operator=(const TownLevel& _Other) = delete;
 	TownLevel& operator=(TownLevel&& _Other) noexcept = delete;
 
-	template<typename ItemActor>
-	inline void GetItemPos(ItemActor* _Actor)
+
+	inline void GetItemPos()
 	{
-		int Num = _Actor->GetInvenPos();
-		ItemPos_[Num] = _Actor->GetItemName();
+		for (int _Num = 0; _Num < 13; _Num++)
+		{
+			ItemPos_[_Num] = Tool::ToolSet->GetToolUIPivotItem(_Num);
+		}
+	}
+
+	inline void SetSelectPivot(int _SelectPivot)
+	{
+		CurSelectPivot_ = _SelectPivot;
 
 	}
 
@@ -30,6 +38,7 @@ protected:
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
+
 private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;

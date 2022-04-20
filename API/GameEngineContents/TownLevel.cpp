@@ -31,24 +31,23 @@ void TownLevel::Loading()
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 
+
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
-		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::TOOLUI, "ToolUI");
 		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
-	}
+		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 
-	Player::MainPlayer->SetPosition({ 144.0f,3442.f });
-	Player::MainPlayer->SetMapScale(5544.0f, 6200.0f);
-	Player::MainPlayer->SetColMapName("TownColMap.bmp");
-	Player::MainPlayer->SetSideLevel("BusStopLevel", "Town2Level","SeedShopLevel");
+	}
 }
 
 void TownLevel::Update()
 {
+	GetItemPos();
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
@@ -73,8 +72,9 @@ void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 	{
 		Player::MainPlayer->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
-		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
 
 	}
 }

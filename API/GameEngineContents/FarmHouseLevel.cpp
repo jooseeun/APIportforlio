@@ -45,7 +45,6 @@ void FarmHouseLevel::Loading()
 		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
-		//Mouse::MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 		
 	}
 
@@ -57,7 +56,7 @@ void FarmHouseLevel::Update()
 {
 	GetItemPos();
 	
-	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot()-1;
+	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 
 	if (CurSelectPivot_ != NextSelectPivot_)
 	{
@@ -86,6 +85,9 @@ void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Player::MainPlayer->NextLevelOn();
 		ToolUI::ToolUISet->NextLevelOn();
 		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
+
 
 	}
 }

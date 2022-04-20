@@ -7,7 +7,7 @@ class GameEngineCollision;
 class Mouse :public GameEngineActor
 {
 public:
-	static Mouse* MouseSet;
+
 	// constrcuter destructer
 	Mouse();
 	~Mouse();
@@ -36,7 +36,6 @@ private:
 	float4 CurPos_;
 	void Start() override;
 	void Update() override;
-	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 	void CheckPlayerIsLeftMouse();
 };
 
