@@ -569,6 +569,7 @@ void Player::CropsHarvestSet(PlayerTile* _Tile)
 	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND));
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_ , _Tile->DirtTilePosY_);
 	GroundTile->IsSeed_ = false;
+	_Tile->Isharvest_ = false;
 }
 
 void Player::CropsGrowUpdate()
