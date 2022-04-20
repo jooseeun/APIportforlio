@@ -10,6 +10,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include <GameEngine/GameEngineCollision.h>
 
 
 void Player::IdleUpdate()
@@ -118,6 +119,19 @@ void Player::WalkUpdate()
 
 		int Color = MapColImage_->GetImagePixel(CheckPos);
 
+		if (true == PlayerCol_->CollisionCheck("Photao", CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+		else if (true == PlayerCol_->CollisionCheck("Kale", CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+		else if (true == PlayerCol_->CollisionCheck("Cauliflower", CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+
 		if (RGB(255, 0, 0) != Color)
 		{
 			SetMove(Move * GameEngineTime::GetDeltaTime() * Speed_);
@@ -140,6 +154,7 @@ void Player::WalkUpdate()
 			GameEngine::GetInst().ChangeLevel("ForestLevel");
 		}
 
+	
 	} 
 
 	if (true == IsIdleKey())
