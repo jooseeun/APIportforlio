@@ -15,6 +15,7 @@ ToolUI::ToolUI()
 
 ToolUI::~ToolUI() 
 {
+	
 }
 
 void ToolUI::Start()
@@ -100,10 +101,42 @@ void ToolUI::Start()
 		InventoryPivotColl_.push_back(CreateCollision("Inven22Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ + InvenFloorPivot_}));
 		InventoryPivotColl_.push_back(CreateCollision("Inven23Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ + InvenFloorPivot_}));
 		InventoryPivotColl_.push_back(CreateCollision("Inven24Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ + InvenFloorPivot_}));
+		
 
 	}
 
+	ColListCameraEffectOff();
+}
 
+void ToolUI::ColListCameraEffectOff()
+{
+	{
+		std::list<GameEngineCollision*>::iterator StartIter = ToolUIPivotColl_.begin();
+		std::list<GameEngineCollision*>::iterator EndIter = ToolUIPivotColl_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			if (nullptr == (*StartIter))
+			{
+				continue;
+			}
+			(*StartIter)->CameraEffectOff();
+		}
+	}
+
+	{
+		std::list<GameEngineCollision*>::iterator StartIter = InventoryPivotColl_.begin();
+		std::list<GameEngineCollision*>::iterator EndIter = InventoryPivotColl_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			if (nullptr == (*StartIter))
+			{
+				continue;
+			}
+			(*StartIter)->CameraEffectOff();
+		}
+	}
 }
 void ToolUI::Update()
 {

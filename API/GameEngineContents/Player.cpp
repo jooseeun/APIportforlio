@@ -189,7 +189,7 @@ void Player::ChangeAni(std::string _Name)
 
 void Player::Start()
 {
-	PlayerCol_ = CreateCollision("Player", { 64,16 },{0,48});
+	PlayerCol_ = CreateCollision("Player", { 64,16 },{0,56});
 
 	int HairNum_ = static_cast<int>(CurHairStyle_);
 	std::string HairColor_ = GetHairColorString();

@@ -69,5 +69,7 @@ private:
 	std::list<GameEngineCollision*> ToolUIPivotColl_;
 	std::list<GameEngineCollision*> InventoryPivotColl_;
 
+	void ColListCameraEffectOff();
+
 };
 

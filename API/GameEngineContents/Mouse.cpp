@@ -26,7 +26,7 @@ void Mouse::Start()
 	GameEngineRenderer* Renderer = CreateRenderer("Mouse.bmp");
 	Renderer->CameraEffectOff();
 	MouseCol_ = CreateCollision("MouseCol", { 16,20 }, { -8,-10 });
-
+	MouseCol_->CameraEffectOff();
 	if (false == GameEngineInput::GetInst()->IsKey("LeftMouse"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LeftMouse", VK_LBUTTON);
