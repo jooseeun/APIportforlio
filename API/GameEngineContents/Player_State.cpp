@@ -117,10 +117,10 @@ void Player::WalkUpdate()
 	//실험용 코드
 
 
-	/*if (true == PlayerCol_->CollisionCheck("EX", CollisionType::Rect, CollisionType::Rect))
+	if (true == PlayerCol_->NextPostCollisionCheck("EX", (Move * GameEngineTime::GetDeltaTime() * Speed_), CollisionType::Rect, CollisionType::Rect))
 	{
 		Move = float4::ZERO;
-	}*/
+	}
 
 
 	{

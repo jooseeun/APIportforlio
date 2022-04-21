@@ -4,8 +4,8 @@ enum class ORDER
 {
 	BACKGROUND,
 	GROUND,
-	PLAYER,
 	CROP,
+	PLAYER,
 	MONSTER,
 	UI,
 	TOOLUI,
