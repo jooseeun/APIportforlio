@@ -111,10 +111,10 @@ void GameEngineRenderer::Render()
 		float4 Scale = RenderScale_.Half();
 		Scale.y *= 2;
 		/////////////엔진 BOT 부분 수정-세은
-		if (Alpha_ == 255)
+		if (Alpha_ != 255)
 		{
-			//GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
-			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+			
 		}
 		else if (RotZ_ != 0.0f)
 		{
@@ -122,7 +122,7 @@ void GameEngineRenderer::Render()
 		}
 		else
 		{	//
-			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		}
 
 
