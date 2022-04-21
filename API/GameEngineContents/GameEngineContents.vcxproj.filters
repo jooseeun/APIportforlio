@@ -104,13 +104,7 @@
     <ClInclude Include="Time.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="Photato.h">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClInclude>
-    <ClInclude Include="Kale.h">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClInclude>
-    <ClInclude Include="Cauliflower.h">
+    <ClInclude Include="Crops.h">
       <Filter>Actor\Play\Crops</Filter>
     </ClInclude>
   </ItemGroup>
@@ -215,13 +209,7 @@
     <ClCompile Include="Time.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
-    <ClCompile Include="Photato.cpp">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClCompile>
-    <ClCompile Include="Kale.cpp">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClCompile>
-    <ClCompile Include="Cauliflower.cpp">
+    <ClCompile Include="Crops.cpp">
       <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
   </ItemGroup>

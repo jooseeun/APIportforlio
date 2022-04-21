@@ -1,9 +1,6 @@
 #include "Player.h"
 #include "BackGround.h"
 #include "ContentsEnums.h"
-#include "Photato.h"
-#include "Cauliflower.h"
-#include "Kale.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -30,7 +27,7 @@ Player::Player()
 	CurShirts_(PlayerShirts::First),
 	CurDay_(1),
 	CurHour_(0),
-	IsCreateCropTile_(false)
+	CropNum_(0)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -562,16 +559,60 @@ void Player::DirSeedCreateTile()
 //케일 40 ~
 void Player::CropsHarvestSet(PlayerTile* _Tile)
 {
-	IsCreateCropTile_ = true;
-	CreateSeedType_ = _Tile->Seed_;
 	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_)+0.5f) * (MapScaleX_/ 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_/ 65) };
 
+	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::GROUND),CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
+	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
+	_Tile->CropsActor_->SetCropsType(_Tile->Seed_); // 수확할 작물 종류 넣어주기
+
 	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND));
+	_Tile->Isharvest_ = true;
+
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_ , _Tile->DirtTilePosY_);
 	GroundTile->IsSeed_ = false;
-	_Tile->Isharvest_ = false;
+}
+std::string Player::CheckSeedSting(SeedType _Type)
+{
+	if (SeedType::Photato == _Type)
+	{
+		return "Photato" + CropNum_;
+	}
+	else if (SeedType::Kale == _Type)
+	{
+		return "Kale" + CropNum_;
+	}
+	else if (SeedType::Cauliflower == _Type)
+	{
+		return "Cauliflower" + CropNum_;
+	}
+}
+bool Player::IsCheckHarvestTile()
+{
+	TileCheckDir();
+
+	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+
+	if (nullptr == _Tile)
+	{
+		return false;
+	}
+
+	if (true == _Tile->Isharvest_)
+	{
+		CropsHarvest(_Tile);
+		_Tile->Isharvest_ = false;
+		return true;
+	}
+
+	return false;
+
 }
 
+void Player::CropsHarvest(PlayerTile* _Tile)
+{
+	_Tile->CropsActor_->Harvest();
+	_Tile->Isharvest_ = false();
+}
 void Player::CropsGrowUpdate()
 {
 	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();

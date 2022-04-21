@@ -21,9 +21,17 @@ void Player::IdleUpdate()
 		return;
 	}
 
+	if (true == IsLeftMouse)
+	{
+		if (GetLevel()->GetNameCopy()=="FarmLevel" && true == IsCheckHarvestTile())
+		{
+			return;
+		}
+	}
 
 	if (true == IsLeftMouse)
 	{
+
 		if (CurItemKind_ == PlayerItemKind::WieldItem)
 		{
 			ChangeState(PlayerState::Wield);
@@ -108,39 +116,28 @@ void Player::WalkUpdate()
 	}
 
 	
-
 	Move.Normal2D();
 	NextPos = GetPosition() + (Move * GameEngineTime::GetDeltaTime() * Speed_);
 	CheckPos += NextPos;
-
-	///플레이어와 다 자란 작물의 충돌 처리 -> 플레이어가 다자란 작물이 앞에 있으면 지나가지 못한다.
-	//실험용 코드
-
-
-	if (true == PlayerCol_->NextPostCollisionCheck("EX", (Move * GameEngineTime::GetDeltaTime() * Speed_), CollisionType::Rect, CollisionType::Rect))
-	{
-		Move = float4::ZERO;
-	}
 
 
 	{
 
 		int Color = MapColImage_->GetImagePixel(CheckPos);
 
-	
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		/*if (true == PlayerCol_->CollisionCheck("Photao", CollisionType::Rect, CollisionType::Rect))
+
+		if (true == PlayerCol_->NextPostCollisionCheck("Photao", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->CollisionCheck("Kale", CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_->NextPostCollisionCheck("Kale", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->CollisionCheck("Cauliflower", CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_->NextPostCollisionCheck("Cauliflower", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
-		}*/
+		}
 
 
 		if (RGB(255, 0, 0) != Color)

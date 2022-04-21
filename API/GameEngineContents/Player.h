@@ -1,8 +1,10 @@
 #pragma once
 #include "PlayerEnum.h"
 #include "Time.h"
+#include "Crops.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
+
 
 class PlayerTile : public Tile
 {
@@ -26,6 +28,7 @@ public:
 	int DirtTilePosX_;
 	int DirtTilePosY_;
 	int SeedDay_;
+	Crops* CropsActor_;
 
 };
 
@@ -172,16 +175,19 @@ private:
 	bool IsLeftMouse;
 	std::string GetDirString();
 
-public:
-
-	bool IsCreateCropTile_;
-	SeedType CreateSeedType_;
-	float4 CreateCropPos_;
 
 private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
 	std::list< PlayerTile*> IsCropsTile_;
+
+	float4 CreateCropPos_;
+	int CropNum_;
+
+
+	bool IsCheckHarvestTile();
+	void CropsHarvest(PlayerTile* _Tile);
+	std::string CheckSeedSting(SeedType _Type);
 
 	void CropsGrowUpdate();
 	void CropsGrowDay(PlayerTile* _Tile);
