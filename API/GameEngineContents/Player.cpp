@@ -58,7 +58,7 @@ Player::~Player()
 				continue;
 			}
 			delete (*StartIter);
-			(*StartIter) = nullptr;
+			//(*StartIter) = nullptr;
 		}
 	}
 
