@@ -5,7 +5,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 // Ό³Έν :
-struct ToolData
+struct ItemData
 {
 	GameEngineRenderer* Render;
 	PlayerItem ItemName_;
@@ -44,7 +44,7 @@ public:
 		return _ItemPos[_InvenPivot];
 	}
 	
-	inline void IsInvenOnOff(ToolData _Tool)
+	inline void IsInvenOnOff(ItemData _Tool)
 	{
 		if (false == _Tool.IsInven)
 		{
@@ -55,12 +55,19 @@ public:
 			//_Tool.Render->CreateRenderer();
 		}
 	}
+
+	inline void CreateItem(ItemData* _Tool)
+	{
+		ItemList_.push_back(_Tool);
+	}
+
 	void SetClickItem(int _Pivot);
+
 protected:
 
 private:
 
-	std::list<ToolData*> ItemList_;
+	std::list<ItemData*> ItemList_;
 	PlayerItem _ItemPos[24];
 
 	bool IsClickON_;

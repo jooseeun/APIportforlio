@@ -22,6 +22,9 @@ protected:
 
 private:
 	SeedType SeedType_;
+	PlayerItemKind ItemKind_;
+	PlayerItem Item_;
+
 
 	GameEngineRenderer* Crops_;
 	GameEngineCollision* CropsCol_;

@@ -1,6 +1,8 @@
 #include "DropCrops.h"
 #include "Player.h"
 #include "ContentsEnums.h"
+#include "Tool.h"
+
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 DropCrops::DropCrops() 
@@ -28,7 +30,7 @@ void DropCrops::Start()// 감자 192
 		Crops_->SetIndex(22);
 	}
 
-	CropsCol_ = CreateCollision("Crops", { 64,64 });
+	CropsCol_ = CreateCollision("DropCrops", { 16,16 });
 }
 
 void DropCrops::Update()
@@ -46,6 +48,16 @@ void DropCrops::MoveToPlayer()
 	}
 	if (CheckDir_ <= 16)
 	{
+		//ItemData* _Item = new ItemData();
+		////_Item->InvenPivot_ = 6;
+		////_Item->InvenFloor_ = InvenFloor::First; -> 빈자리 채워주는 함수 만들어줌
+		//_Item->ItemKind_ = PlayerItemKind::SeedItem;
+		//_Item->ItemName_ = PlayerItem::KaleSeedItem;
+		//_Item->Render = CreateRenderer("Objects.bmp");
+		//_Item->Render->SetIndex(477);
+		//_Item->Render->CameraEffectOff();
+		//_Item->Click_ = false;
+		//Tool::ToolSet->CreateItem(_Item);
 		Death();
 		return;
 	}

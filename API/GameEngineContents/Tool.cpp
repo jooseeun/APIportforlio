@@ -20,8 +20,8 @@ Tool::Tool()
 Tool::~Tool()
 {
 	{
-		std::list<ToolData*>::iterator StartIter = ItemList_.begin();
-		std::list<ToolData*>::iterator EndIter = ItemList_.end();
+		std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+		std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
 		for (; StartIter != EndIter; ++StartIter)
 		{
@@ -42,7 +42,7 @@ void Tool::Start()
 {
 	{
 		SetPosition({ FirstPivot_, 664 });
-		ToolData* Hoe_ = new ToolData();
+		ItemData* Hoe_ = new ItemData();
 		Hoe_->InvenPivot_ = 0;
 		Hoe_->ItemKind_ = PlayerItemKind::WieldItem;
 		Hoe_->ItemName_ = PlayerItem::HoeItem;
@@ -53,7 +53,7 @@ void Tool::Start()
 		Hoe_->Click_ = false;
 		ItemList_.push_back(Hoe_);
 
-		ToolData* Ax_ = new ToolData();
+		ItemData* Ax_ = new ItemData();
 		Ax_->InvenPivot_ = 1;
 		Ax_->ItemKind_ = PlayerItemKind::WieldItem;
 		Ax_->ItemName_ = PlayerItem::AxItem;
@@ -64,7 +64,7 @@ void Tool::Start()
 		Ax_->Click_ = false;
 		ItemList_.push_back(Ax_);
 
-		ToolData* Pick_ = new ToolData();
+		ItemData* Pick_ = new ItemData();
 		Pick_->InvenPivot_ = 2;
 		Pick_->ItemKind_ = PlayerItemKind::WieldItem;
 		Pick_->ItemName_ = PlayerItem::PickItem;
@@ -75,7 +75,7 @@ void Tool::Start()
 		Pick_->Click_ = false;
 		ItemList_.push_back(Pick_);
 
-		ToolData* Sickle_ = new ToolData();
+		ItemData* Sickle_ = new ItemData();
 		Sickle_->InvenPivot_ = 3;
 		Sickle_->ItemKind_ = PlayerItemKind::HitItem;
 		Sickle_->ItemName_ = PlayerItem::SickleItem;
@@ -86,7 +86,7 @@ void Tool::Start()
 		Sickle_->Click_ = false;
 		ItemList_.push_back(Sickle_);
 
-		ToolData* WateringCan_ = new ToolData();
+		ItemData* WateringCan_ = new ItemData();
 		WateringCan_->InvenPivot_ = 4;
 		WateringCan_->ItemKind_ = PlayerItemKind::WaterItem;
 		WateringCan_->ItemName_ = PlayerItem::WateringCanItem;
@@ -97,7 +97,7 @@ void Tool::Start()
 		WateringCan_->Click_ = false;
 		ItemList_.push_back(WateringCan_);
 
-		ToolData* PhotatoSeed_ = new ToolData();
+		ItemData* PhotatoSeed_ = new ItemData();
 		PhotatoSeed_->InvenPivot_ = 5;
 		PhotatoSeed_->ItemKind_ = PlayerItemKind::SeedItem;
 		PhotatoSeed_->ItemName_ = PlayerItem::PhatatoSeedItem;
@@ -108,7 +108,7 @@ void Tool::Start()
 		PhotatoSeed_->Click_ = false;
 		ItemList_.push_back(PhotatoSeed_);
 
-		ToolData* KaleSeed_ = new ToolData();
+		ItemData* KaleSeed_ = new ItemData();
 		KaleSeed_->InvenPivot_ = 6;
 		KaleSeed_->ItemKind_ = PlayerItemKind::SeedItem;
 		KaleSeed_->ItemName_ = PlayerItem::KaleSeedItem;
@@ -119,7 +119,7 @@ void Tool::Start()
 		KaleSeed_->Click_ = false;
 		ItemList_.push_back(KaleSeed_);
 
-		ToolData* LongSword_ = new ToolData();
+		ItemData* LongSword_ = new ItemData();
 		LongSword_->InvenPivot_ = 7;
 		LongSword_->ItemKind_ = PlayerItemKind::HitItem;
 		LongSword_->ItemName_ = PlayerItem::LongSwordItem;
@@ -140,8 +140,8 @@ void Tool::CheckInventoryMode()
 
 void Tool::SetInventoryModePivot()
 {
-	std::list<ToolData*>::iterator StartIter = ItemList_.begin();
-	std::list<ToolData*>::iterator EndIter = ItemList_.end();
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
 	if (true == IsInvenToryMode)
 	{
@@ -178,8 +178,8 @@ void Tool::SetInventoryModePivot()
 void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 {
 	SetInventoryModePivot();
-	std::list<ToolData*>::iterator StartIter = ItemList_.begin();
-	std::list<ToolData*>::iterator EndIter = ItemList_.end();
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
@@ -212,8 +212,8 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 void Tool::SetClickItem(int _Pivot)
 {
 	// 클릭된 아이템 피봇을 받아 그 피폿을 true로 바꿈 -> 그러면 마우스 옆에 붙음
-	std::list<ToolData*>::iterator StartIter = ItemList_.begin();
-	std::list<ToolData*>::iterator EndIter = ItemList_.end();
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
 		if (true == (*StartIter)->Click_)
@@ -240,8 +240,8 @@ void Tool::SetClickItem(int _Pivot)
 }
 void Tool::GetToolUINum()
 {
-	std::list<ToolData*>::iterator StartIter = ItemList_.begin();
-	std::list<ToolData*>::iterator EndIter = ItemList_.end();
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	
 	for (int i = 0; i < 24; i++)
 	{
