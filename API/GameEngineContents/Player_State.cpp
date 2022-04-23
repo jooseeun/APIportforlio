@@ -23,8 +23,9 @@ void Player::IdleUpdate()
 
 	if (true == IsLeftMouse)
 	{
-		if (GetLevel()->GetNameCopy()=="FarmLevel" && true == IsCheckHarvestTile())
+		if (CurItem_ == PlayerItem::SickleItem && GetLevel()->GetNameCopy() == "FarmLevel" && true == IsCheckHarvestTile())
 		{
+			ChangeState(PlayerState::Harvest);
 			return;
 		}
 	}
@@ -71,7 +72,13 @@ void Player::HitUpdate()
 		ChangeState(PlayerState::Idle);
 	}
 }
-
+void Player::HarvestUpdate()
+{
+	if (true == Arm_->IsEndAnimation())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
 void Player::WaterUpdate()
 {
 	if (true == Arm_->IsEndAnimation())
@@ -179,7 +186,10 @@ void Player::IdleStart()
 	SetIsLeftMouseOFF();
 }
 
-
+void Player::HarvestStart()
+{
+	CropsHarvest();
+}
 void Player::HitStart()
 {
 }

@@ -25,6 +25,7 @@ enum class PlayerState
 	Hold,
 	Walk,
 	Seed,
+	Harvest,
 	Max,
 };
 

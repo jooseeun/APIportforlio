@@ -19,14 +19,21 @@ public:
 	{
 		SeedType_ = _SeedType;
 	}
-
-	void Harvest();
+	inline void IsHarvestOn_()
+	{
+		IsHarvest_ = true;
+	}
 	
 protected:
 
 private:
+	bool IsHarvest_;
+	void Harvest();
 	SeedType SeedType_;
-	
+	//GameEngineRenderer* Crops_;
+	//GameEngineCollision* CropsCol_;
+
+	GameEngineRenderer* CropsHavestAni_;
 	void Start() override;
 	void Update() override;
 	

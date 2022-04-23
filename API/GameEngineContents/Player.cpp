@@ -36,6 +36,7 @@ Player::Player()
 	ArrAnimationName[static_cast<int>(PlayerState::Hit)] = "Hit";
 	ArrAnimationName[static_cast<int>(PlayerState::Water)] = "Water";
 	ArrAnimationName[static_cast<int>(PlayerState::Seed)] = "Idle";
+	ArrAnimationName[static_cast<int>(PlayerState::Harvest)] = "Hit"; // 낫으로 수확하게 하도록 했기 때문에
 
 	ArrCheckDir[static_cast<int>(PlayerDir::Front)] = float4{ 0.0f,64.0f };
 	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
@@ -47,20 +48,7 @@ Player::Player()
 
 Player::~Player() 
 {
-	{
-		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
-		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
 
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			if (nullptr == (*StartIter))
-			{
-				continue;
-			}
-			delete (*StartIter);
-			//(*StartIter) = nullptr;
-		}
-	}
 
 }
 
@@ -98,6 +86,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Seed:
 			SeedStart();
 			break;
+		case PlayerState::Harvest:
+			HarvestStart();
+			break;
 		default:
 			break;
 		}
@@ -126,6 +117,9 @@ void Player::StateUpdate()
 		break;
 	case PlayerState::Seed:
 		SeedUpdate();
+		break;
+	case PlayerState::Harvest:
+		HarvestUpdate();
 		break;
 	default:
 		break;
@@ -599,8 +593,6 @@ bool Player::IsCheckHarvestTile()
 
 	if (true == _Tile->Isharvest_)
 	{
-		CropsHarvest(_Tile);
-		_Tile->Isharvest_ = false;
 		return true;
 	}
 
@@ -608,9 +600,11 @@ bool Player::IsCheckHarvestTile()
 
 }
 
-void Player::CropsHarvest(PlayerTile* _Tile)
+void Player::CropsHarvest()
 {
-	_Tile->CropsActor_->Harvest();
+	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+
+	_Tile->CropsActor_->IsHarvestOn_(); // 수확
 	_Tile->Isharvest_ = false();
 }
 void Player::CropsGrowUpdate()

@@ -107,6 +107,9 @@
     <ClInclude Include="Crops.h">
       <Filter>Actor\Play\Crops</Filter>
     </ClInclude>
+    <ClInclude Include="DropCrops.h">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -210,6 +213,9 @@
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="Crops.cpp">
+      <Filter>Actor\Play\Crops</Filter>
+    </ClCompile>
+    <ClCompile Include="DropCrops.cpp">
       <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,10 @@
 #include "Crops.h"
+#include "DropCrops.h"
+#include "ContentsEnums.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 Crops::Crops()
+	:IsHarvest_(false)
 {
 }
 
@@ -11,7 +14,7 @@ Crops::~Crops()
 
 void Crops::Start()
 {
-	GameEngineRenderer* Crops_ = CreateRenderer("Crops.bmp");
+	GameEngineRenderer* Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
 
 	if (SeedType::Photato == SeedType_)
 	{
@@ -28,11 +31,22 @@ void Crops::Start()
 
 	GameEngineCollision* CropsCol_ = CreateCollision("Crops", { 64,64 });
 }
+
 void Crops::Update()
 {
-
+	if (IsHarvest_ == true)
+	{
+		Harvest();
+		Death(0.0f);
+		IsHarvest_ = false;
+	}
 }
-void Crops::Harvest()
-{
 
+void Crops::Harvest() 
+{
+	
+	DropCrops* DropCrops_ = GetLevel()->CreateActor<DropCrops>(static_cast<int>(ORDER::CROP));
+	DropCrops_->SetPosition(GetPosition());
+	DropCrops_->SetCropsType(SeedType_);
+	
 }

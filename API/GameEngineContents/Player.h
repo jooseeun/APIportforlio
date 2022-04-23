@@ -186,7 +186,7 @@ private:
 
 
 	bool IsCheckHarvestTile();
-	void CropsHarvest(PlayerTile* _Tile);
+	void CropsHarvest();
 	std::string CheckSeedSting(SeedType _Type);
 
 	void CropsGrowUpdate();
@@ -217,6 +217,7 @@ private:
 	void WalkUpdate();
 	void WaterUpdate();
 	void SeedUpdate();
+	void HarvestUpdate();
 
 	void HitStart();
 	void IdleStart();
@@ -224,6 +225,7 @@ private:
 	void WalkStart();
 	void WaterStart();
 	void SeedStart();
+	void HarvestStart();
 
 };
 
