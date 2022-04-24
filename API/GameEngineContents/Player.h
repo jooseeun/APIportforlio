@@ -96,6 +96,10 @@ public:
 		{
 			CurItemKind_ = PlayerItemKind::SeedItem;
 		}
+		else if (50 < static_cast<int>(_Item) && static_cast<int>(_Item) < 60)
+		{
+			CurItemKind_ = PlayerItemKind::CropsItem;
+		}
 		else
 		{
 			CurItemKind_ = PlayerItemKind::NoItem;

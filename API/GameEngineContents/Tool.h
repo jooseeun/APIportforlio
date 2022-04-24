@@ -56,11 +56,7 @@ public:
 		}
 	}
 
-	inline void CreateItem(ItemData* _Tool)
-	{
-		ItemList_.push_back(_Tool);
-	}
-
+	void CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex);
 	void SetClickItem(int _Pivot);
 
 protected:

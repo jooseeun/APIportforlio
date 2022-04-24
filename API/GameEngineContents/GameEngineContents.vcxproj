@@ -191,7 +191,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="DropCrops.h">
+    <ClInclude Include="DropItem.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -338,7 +338,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="DropCrops.cpp">
+    <ClCompile Include="DropItem.cpp">
       <SubType>
       </SubType>
     </ClCompile>

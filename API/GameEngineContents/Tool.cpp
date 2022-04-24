@@ -208,6 +208,31 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 		}
 	}
 }
+void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName,int _RenderIndex)
+{
+	
+	for (int i = 0; i < 24; i++) // 인벤토리 빈자리 찾아서 넣어주는 함수
+	{
+		if (PlayerItem::Nothing == _ItemPos[i])
+		{
+			_Item->InvenPivot_ = i;
+			if (i < 12)
+			{
+				_Item->InvenFloor_ = InvenFloor::First;
+			}
+			else if (i > 12 || i == 12)
+			{
+				_Item->InvenFloor_ = InvenFloor::Second;
+			}
+				i = 24;
+		}
+
+	}
+	_Item->Render = CreateRenderer(_RenderFileName);
+	_Item->Render->SetIndex(_RenderIndex);
+	_Item->Render->CameraEffectOff();
+	ToolSet->ItemList_.push_back(_Item);
+}
 
 void Tool::SetClickItem(int _Pivot)
 {
@@ -253,6 +278,7 @@ void Tool::GetToolUINum()
 		_ItemPos[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
 
 	}
+
 }
 
 void Tool::Update()

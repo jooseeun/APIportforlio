@@ -30,8 +30,8 @@ private:
 	bool IsHarvest_;
 	void Harvest();
 	SeedType SeedType_;
-	//GameEngineRenderer* Crops_;
-	//GameEngineCollision* CropsCol_;
+	PlayerItemKind ItemKind_;
+	PlayerItem Item_;
 
 	GameEngineRenderer* CropsHavestAni_;
 	void Start() override;
