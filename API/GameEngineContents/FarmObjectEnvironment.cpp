@@ -1,7 +1,7 @@
 #include "FarmObjectEnvironment.h"
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineRenderer.h>
-
+#include <GameEngine/GameEngineCollision.h>
 
 FarmObjectEnvironment* FarmObjectEnvironment::MainFarmObject = nullptr;
 
@@ -47,7 +47,9 @@ void FarmObjectEnvironment::Update()
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 {
 	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "TreeBot.bmp", _index, static_cast<int>(ORDER::GROUND));
-	
+	GameEngineCollision* TreeBotCol_ = CreateCollision("Tree", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
+
+
 	GameEngineRenderer* TreeTop = CreateRenderer("TreeTop.bmp");
 	TreeTop->SetIndex(_index);
 	TreeTop->SetOrder(static_cast<int>(ORDER::TREETOP));
@@ -57,16 +59,19 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ºóÅ¸ÀÏ 31
 {
 	EnvironmentTile* Grass = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	GameEngineCollision* TreeBotCol_ = CreateCollision("Grass", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
 void FarmObjectEnvironment::MakeStone(int _Posx, int _Posy, int _index)// 693~
 {
 	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	GameEngineCollision* TreeBotCol_ = CreateCollision("Stone", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
 void FarmObjectEnvironment::Makebranch(int _Posx, int _Posy, int _index)// 693~
 {
 	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	GameEngineCollision* TreeBotCol_ = CreateCollision("Branch", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
 

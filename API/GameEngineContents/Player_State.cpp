@@ -133,15 +133,23 @@ void Player::WalkUpdate()
 		int Color = MapColImage_->GetImagePixel(CheckPos);
 
 
-		if (true == PlayerCol_->NextPostCollisionCheck("Photao", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		if (true == PlayerCol_->NextPostCollisionCheck("Crops", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->NextPostCollisionCheck("Kale", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_->NextPostCollisionCheck("Tree", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->NextPostCollisionCheck("Cauliflower", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_->NextPostCollisionCheck("Stone", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+		else if (true == PlayerCol_->NextPostCollisionCheck("Branch", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+		else if (true == PlayerCol_->NextPostCollisionCheck("Grass", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
