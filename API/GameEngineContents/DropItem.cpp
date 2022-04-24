@@ -53,7 +53,7 @@ void DropItem::MoveToPlayer()
 		_Item->ItemKind_ = DropItemKind_;
 		_Item->ItemName_ = DropItem_;
 		_Item->Click_ = false;
-		Tool::ToolSet->CreateItem(_Item, "Objects.bmp", IndexNum_);
+		Tool::ToolSet->CreateItem(_Item, "Objects.bmp", IndexNum_); // 일단 작물은 Object로 설정
 
 		Death();
 		return;

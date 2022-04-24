@@ -12,6 +12,7 @@ struct ItemData
 	PlayerItemKind ItemKind_;
 	InvenFloor InvenFloor_;
 	int InvenPivot_;
+	int ItemCount_ = 1;
 	bool Click_;
 	bool IsInven;
 };
@@ -41,7 +42,7 @@ public:
 
 	inline PlayerItem GetToolUIPivotItem(int _InvenPivot)
 	{
-		return _ItemPos[_InvenPivot];
+		return ItemPos_[_InvenPivot];
 	}
 	
 	inline void IsInvenOnOff(ItemData _Tool)
@@ -56,6 +57,7 @@ public:
 		}
 	}
 
+	void ItemUse(PlayerItem _Item);
 	void CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex);
 	void SetClickItem(int _Pivot);
 
@@ -64,7 +66,10 @@ protected:
 private:
 
 	std::list<ItemData*> ItemList_;
-	PlayerItem _ItemPos[24];
+	PlayerItem ItemPos_[24];
+	int ItemCount_[24];
+
+
 
 	bool IsClickON_;
 	float FirstPivot_;

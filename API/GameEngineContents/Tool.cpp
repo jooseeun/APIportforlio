@@ -1,5 +1,6 @@
 #include "Tool.h"
 #include "ToolUI.h"
+#include <GameEngine/GameEngineFont.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -40,7 +41,8 @@ void Tool::LevelChangeStart(GameEngineLevel* _PrevLevel)
 }
 void Tool::Start()
 {
-	{
+	{ // 기본아이템 렌더링
+
 		SetPosition({ FirstPivot_, 664 });
 		ItemData* Hoe_ = new ItemData();
 		Hoe_->InvenPivot_ = 0;
@@ -183,8 +185,9 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (100 == (*StartIter)->InvenPivot_)
+		if (0 == (*StartIter)->ItemCount_)
 		{
+			(*StartIter)->InvenPivot_ = 100;
 			(*StartIter)->Render->Off(); // 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
 			//일단 삭제는 x
 		}
@@ -201,6 +204,7 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
 					0+ InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
 			}
+
 			if (true == (*StartIter)->Click_)
 			{
 				(*StartIter)->Render->SetPivot({MouseX_ - FirstPivot_+32 , MouseY_ - 664+32});
@@ -208,12 +212,25 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 		}
 	}
 }
-void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName,int _RenderIndex)
+void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex)
 {
-	
-	for (int i = 0; i < 24; i++) // 인벤토리 빈자리 찾아서 넣어주는 함수
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
+
+	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (PlayerItem::Nothing == _ItemPos[i])
+		if (_Item->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
+		{
+			(*StartIter)->ItemCount_ += 1;
+			return;
+		}
+	}
+
+
+	for (int i = 0; i < 24; i++) // 인벤토리에 없는 아이템이면 인벤토리 빈자리 찾아서 넣어주는 함수
+	{
+
+		if (PlayerItem::Nothing == ItemPos_[i])
 		{
 			_Item->InvenPivot_ = i;
 			if (i < 12)
@@ -270,17 +287,33 @@ void Tool::GetToolUINum()
 	
 	for (int i = 0; i < 24; i++)
 	{
-		_ItemPos[i]=PlayerItem::Nothing;
+		ItemPos_[i]=PlayerItem::Nothing;
+		ItemCount_[i] = 0;
 	}
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		_ItemPos[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
-
+		ItemPos_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
+		ItemCount_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemCount_;
 	}
 
 }
+void Tool::ItemUse(PlayerItem _Item)
+{
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
+	
 
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (_Item == (*StartIter)->ItemName_)
+		{
+			(*StartIter)->ItemCount_ -= 1;
+			return; 
+		}
+	}
+
+}
 void Tool::Update()
 {
 	GetCurMousePos();

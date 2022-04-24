@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "BackGround.h"
 #include "ContentsEnums.h"
+#include "Tool.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -545,7 +546,7 @@ void Player::DirSeedCreateTile()
 	GroundTile->Seed_ = CropsTile->Seed_;
 	GroundTile->IsSeed_ = true;
 
-	
+	Tool::ToolSet->ItemUse(CurItem_); // 아이템 사용하면 하나 없애기
 
 }
 //감자 24~
