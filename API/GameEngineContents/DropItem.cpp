@@ -23,11 +23,11 @@ void DropItem::Start()// °¨ÀÚ 192
 	}
 	else if (SeedType::Kale == DropSeedType_)
 	{
-		IndexNum_ = 45;
+		IndexNum_ = 250;
 	}
 	else if (SeedType::Cauliflower == DropSeedType_)
 	{
-		IndexNum_ = 22;
+		IndexNum_ = 190;
 	}
 
 	Crops_->SetIndex(IndexNum_);
