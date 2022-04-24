@@ -108,6 +108,7 @@ void Tool::Start()
 		PhotatoSeed_->Render->CameraEffectOff();
 		PhotatoSeed_->InvenFloor_ = InvenFloor::First;
 		PhotatoSeed_->Click_ = false;
+		PhotatoSeed_->ItemCount_ = 4;
 		ItemList_.push_back(PhotatoSeed_);
 
 		ItemData* KaleSeed_ = new ItemData();
@@ -203,6 +204,7 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 			{
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
 					0+ InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
+				ItemCountRenderUpdate();
 			}
 
 			if (true == (*StartIter)->Click_)
@@ -211,6 +213,38 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 			}
 		}
 	}
+}
+void Tool::ItemCountRenderUpdate()
+{
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (1 < (*StartIter)->ItemCount_) // 아이템이 한개이상일때부터 숫자 렌더링 한다.
+		{
+			if ((*StartIter)->NumRender != nullptr)
+			{
+				(*StartIter)->NumRender->On();
+			}
+			else
+			{
+				(*StartIter)->NumRender = CreateRenderer("ItemCountNum.bmp");
+			}
+			(*StartIter)->NumRender->SetIndex((*StartIter)->ItemCount_);
+			(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_)+24,
+					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))+24 });
+			(*StartIter)->NumRender->CameraEffectOff();
+			
+		}
+		else if(1 == (*StartIter)->ItemCount_)
+		{
+			if ((*StartIter)->NumRender != nullptr)
+			{
+				(*StartIter)->NumRender->Death();
+			}
+		}
+	}
+	
 }
 void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex)
 {

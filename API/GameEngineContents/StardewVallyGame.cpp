@@ -274,7 +274,8 @@ void StardewVallyGame::GameInit()
 	Date->CutCount(1, 14);
 	GameEngineImage* Time = GameEngineImageManager::GetInst()->Find("Time.bmp");
 	Time->CutCount(2, 13);
-
+	GameEngineImage* ItemNum = GameEngineImageManager::GetInst()->Find("ItemCountNum.bmp");
+	ItemNum->CutCount(10, 1);
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);

@@ -8,6 +8,7 @@
 struct ItemData
 {
 	GameEngineRenderer* Render;
+	GameEngineRenderer* NumRender;
 	PlayerItem ItemName_;
 	PlayerItemKind ItemKind_;
 	InvenFloor InvenFloor_;
@@ -80,7 +81,7 @@ private:
 	float MouseX_;
 	float MouseY_;
 
-
+	void ItemCountRenderUpdate();
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
