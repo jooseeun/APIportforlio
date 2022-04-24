@@ -664,7 +664,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 24 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
 		if (3 <= _GrowDay)
 		{
@@ -678,7 +678,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 16 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
 		if (3 <= _GrowDay)
 		{
@@ -691,7 +691,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 41 + (_GrowDay)*2, static_cast<int>(ORDER::GROUND)); // 타일 변경
 
 		if (2 <= _GrowDay)
 		{
