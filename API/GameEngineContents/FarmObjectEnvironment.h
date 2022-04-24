@@ -30,6 +30,7 @@ public:
 protected:
 
 private:
+	bool CheckMake_;
 	GameEngineRendererTileMap* FarmTileMap_;
 
 	std::list< EnvironmentTile* > Tree;
