@@ -51,7 +51,7 @@ void FarmHouseLevel::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		
 	}
-
+	
 
 
 }

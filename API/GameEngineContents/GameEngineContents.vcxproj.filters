@@ -110,6 +110,12 @@
     <ClInclude Include="DropItem.h">
       <Filter>Actor\Play\Crops</Filter>
     </ClInclude>
+    <ClInclude Include="FarmObjectEnvironment.h">
+      <Filter>Actor\Play\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Actor\Play\Environment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -218,6 +224,12 @@
     <ClCompile Include="DropItem.cpp">
       <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
+    <ClCompile Include="FarmObjectEnvironment.cpp">
+      <Filter>Actor\Play\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Actor\Play\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -261,6 +273,9 @@
     </Filter>
     <Filter Include="Actor\Play\Crops">
       <UniqueIdentifier>{e9e3a408-1419-4c10-b6d0-adf2e20f78be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Environment">
+      <UniqueIdentifier>{13f37d19-b047-43e1-904f-b3ce95abf745}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

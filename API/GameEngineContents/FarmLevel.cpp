@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Tool.h"
 #include "Time.h"
+#include "FarmObjectEnvironment.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -47,8 +48,10 @@ void FarmLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
-
 	}
+
+	FarmObjectEnvironment::MainFarmObject = CreateActor< FarmObjectEnvironment>();
+	FarmObjectEnvironment::MainFarmObject->SetTileMap(&Back->GroundTileMap_);
 	
 }
 
