@@ -300,8 +300,9 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* TreeBot = GameEngineImageManager::GetInst()->Find("TreeBot.bmp");
 	TreeBot->CutCount(2, 1);
 	GameEngineImage* CutTree = GameEngineImageManager::GetInst()->Find("CutTree.bmp");
-	CutTree->CutCount(2, 1);
-
+	CutTree->CutCount(2, 1); 
+	GameEngineImage* FarmObject = GameEngineImageManager::GetInst()->Find("FarmObject.bmp");
+	FarmObject->CutCount(8, 1);
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);

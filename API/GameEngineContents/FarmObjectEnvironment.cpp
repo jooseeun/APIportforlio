@@ -31,6 +31,14 @@ void FarmObjectEnvironment::Update()
 		MakeTree(48, 22, 0);
 		MakeTree(73, 23, 1);
 		MakeTree(59, 29, 1);
+
+		MakeStone(65, 19, 4);
+		MakeStone(66, 19, 3);
+		MakeGrass(63, 18, 0);
+
+		Makebranch(63, 22, 5);
+		Makebranch(70, 18, 6);
+
 		CheckMake_ = true;
 	}
 
@@ -42,17 +50,26 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 	
 	GameEngineRenderer* TreeTop = CreateRenderer("TreeTop.bmp");
 	TreeTop->SetIndex(_index);
+	TreeTop->SetOrder(static_cast<int>(ORDER::TREETOP));
 	TreeTop->SetPivotType(RenderPivot::BOT);
 	TreeTop->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 20});
 }
-void FarmObjectEnvironment::MakeGrass(float4 _Pos)
+void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ºóÅ¸ÀÏ 31
 {
+	EnvironmentTile* Grass = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
 
 }
-void FarmObjectEnvironment::MakeStone(float4 _Pos)
+void FarmObjectEnvironment::MakeStone(int _Posx, int _Posy, int _index)// 693~
 {
+	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
 
 }
+void FarmObjectEnvironment::Makebranch(int _Posx, int _Posy, int _index)// 693~
+{
+	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+
+}
+
 void FarmObjectEnvironment::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainFarmObject = this;

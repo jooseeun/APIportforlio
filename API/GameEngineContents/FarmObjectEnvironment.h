@@ -36,9 +36,13 @@ private:
 	std::list< EnvironmentTile* > Tree;
 	std::list< EnvironmentTile* > Stone;
 	std::list< EnvironmentTile* > Grass;
+
 	void MakeTree(int _Posx, int _Posy, int _index);
-	void MakeGrass(float4 _Pos);
-	void MakeStone(float4 _Pos);
+	void MakeGrass(int _Posx, int _Posy, int _index);
+	void MakeStone(int _Posx, int _Posy, int _index);
+	void Makebranch(int _Posx, int _Posy, int _index);
+
+
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
