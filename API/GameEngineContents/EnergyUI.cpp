@@ -19,6 +19,8 @@ void EnergyUI::Start()
 	SetPosition({1247,593});
 	GameEngineRenderer* Renderer = CreateRenderer("EnergyUI.bmp");
 	Renderer->CameraEffectOff();
+	GameEngineRenderer* EnergyUIBar = CreateRenderer("EnergyUIBar.bmp");
+	EnergyUIBar->CameraEffectOff();
 }
 
 void EnergyUI::Update()

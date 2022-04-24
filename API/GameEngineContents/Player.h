@@ -2,6 +2,7 @@
 #include "PlayerEnum.h"
 #include "Time.h"
 #include "Crops.h"
+#include "FarmObjectEnvironment.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 
@@ -20,7 +21,7 @@ public:
 	{
 
 	}
-
+	
 	TileType Dirt_;
 	SeedType Seed_;
 	bool IsSeed_;

@@ -7,7 +7,7 @@ class EnvironmentTile : public Tile
 {
 public:
 	
-
+	bool IsDestroy;
 };
 // Ό³Έν :
 class FarmObjectEnvironment : public GameEngineActor

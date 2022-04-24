@@ -43,7 +43,8 @@ void Crops::Update()
 	if (IsHarvest_ == true)
 	{
 		Harvest();
-		Death(0.0f); // 이거 렌더링한거 지워줘야하는 것도 다시 해야됨 ㅠ
+
+		Death();// 이거 렌더링한거 지워줘야하는 것도 다시 해야됨 ㅠ
 		IsHarvest_ = false;
 	}
 }
