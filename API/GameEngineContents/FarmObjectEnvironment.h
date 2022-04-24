@@ -1,6 +1,14 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
+
+
+class EnvironmentTile : public Tile
+{
+public:
+	
+
+};
 // Ό³Έν :
 class FarmObjectEnvironment : public GameEngineActor
 {
@@ -24,10 +32,12 @@ protected:
 private:
 	GameEngineRendererTileMap* FarmTileMap_;
 
-	std::list< GameEngineRendererTileMap* > Tree;
-	std::list< GameEngineRendererTileMap* > Stone;
-	std::list< GameEngineRendererTileMap* > Grass;
-
+	std::list< EnvironmentTile* > Tree;
+	std::list< EnvironmentTile* > Stone;
+	std::list< EnvironmentTile* > Grass;
+	void MakeTree(int _Posx, int _Posy, int _index);
+	void MakeGrass(float4 _Pos);
+	void MakeStone(float4 _Pos);
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;

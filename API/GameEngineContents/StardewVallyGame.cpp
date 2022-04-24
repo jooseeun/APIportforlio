@@ -129,6 +129,23 @@ void StardewVallyGame::GameInit()
 
 	}
 	{
+
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
+		ResourcesDir.Move("Environment");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+
+	}
+	{
 		GameEngineImage* HairB = GameEngineImageManager::GetInst()->Find("HairBlack.bmp");
 		HairB->Cut({ 64, 128 });
 		GameEngineImage* HairBL = GameEngineImageManager::GetInst()->Find("HairLBlack.bmp");
@@ -276,6 +293,15 @@ void StardewVallyGame::GameInit()
 	Time->CutCount(2, 13);
 	GameEngineImage* ItemNum = GameEngineImageManager::GetInst()->Find("ItemCountNum.bmp");
 	ItemNum->CutCount(10, 1);
+
+
+	GameEngineImage* TreeTop = GameEngineImageManager::GetInst()->Find("TreeTop.bmp");
+	TreeTop->CutCount(2, 1);
+	GameEngineImage* TreeBot = GameEngineImageManager::GetInst()->Find("TreeBot.bmp");
+	TreeBot->CutCount(2, 1);
+	GameEngineImage* CutTree = GameEngineImageManager::GetInst()->Find("CutTree.bmp");
+	CutTree->CutCount(2, 1);
+
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
@@ -284,7 +310,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<FarmHouseLevel>("FarmHouseLevel");
 	CreateLevel<FarmLevel>("FarmLevel");
-	CreateLevel<CoopLevel>("CoopLevel");
+	CreateLevel<CoopLevel>("CoopLevel"); 
 	CreateLevel<AnimalShopLevel>("AnimalShopLevel");
 	CreateLevel<ForestLevel>("ForestLevel");
 	CreateLevel<TownLevel>("TownLevel");
