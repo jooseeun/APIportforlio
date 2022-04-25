@@ -23,7 +23,7 @@ void Player::IdleUpdate()
 
 	if (true == IsLeftMouse)
 	{
-		if (CurItem_ == PlayerItem::SickleItem && GetLevel()->GetNameCopy() == "FarmLevel" && true == IsCheckHarvestTile())
+		if (CurItem_ == PlayerItem::SickleItem && GetLevel()->GetNameCopy() == "FarmLevel" && true == IsCheckHarvestTile()) //낫을 들었을때 수확할수 있는 타일이면
 		{
 			ChangeState(PlayerState::Harvest);
 			return;

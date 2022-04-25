@@ -155,7 +155,7 @@ void Player::ChangeAni(std::string _Name)
 				WaterItem_->ChangeAnimation(GetDirString() + Item_);
 			}
 		}
-		else if (PlayerState::Hit == CurState_)
+		else if (PlayerState::Hit == CurState_ || PlayerState::Harvest == CurState_)
 		{
 			if (PlayerDir::Back == CurDir_)
 			{
@@ -704,7 +704,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile) ////////////작물 자랐을때 타일 바꾸
 
 	}
 }
-void Player::TileCheckDir() 
+void Player::TileCheckDir() ///////////플레이어 앞 방향에 타일 생성하게하는 함수
 {
 	if (CurDir_ == PlayerDir::Front) {
 		TileIndexX_ = static_cast<int>(GetPosition().x / 64);
@@ -724,7 +724,8 @@ void Player::TileCheckDir()
 	}
 	
 }
-bool Player::IsHoeTileCreate()
+
+bool Player::IsHoeTileCreate() ////////////호미 타일 만들수 있는지 체크하는 함수
 {
 	TileCheckDir();
 	
@@ -738,7 +739,7 @@ bool Player::IsHoeTileCreate()
 	return false;
 }
 
-bool Player::IsWaterTileCreate()
+bool Player::IsWaterTileCreate() ////////////워터 타일 만들수 있는지 체크하는 함수
 {
 	TileCheckDir();
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
@@ -756,7 +757,7 @@ bool Player::IsWaterTileCreate()
 	}
 
 }
-bool Player::IsSeedTileCreate()
+bool Player::IsSeedTileCreate()////////////시드 타일 만들수 있는지 체크하는 함수
 {
 	TileCheckDir();
 
@@ -771,6 +772,8 @@ bool Player::IsSeedTileCreate()
 	}
 	return false;
 }
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 bool Player::IsIdleKey()
 {	
