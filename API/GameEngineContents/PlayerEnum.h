@@ -51,6 +51,7 @@ enum class PlayerItemKind
 	WaterItem,
 	SeedItem,
 	CropsItem,
+	ObjectItem,
 	NoItem
 };
 
@@ -71,9 +72,13 @@ enum class PlayerItem
 	KaleSeedItem,
 	CauliFlowerSeedItem,
 	CropsItem=50,
-	PhatatoItem,
+	PhotatoItem,
 	KaleItem,
-	CauliFlowerItem
+	CauliFlowerItem,
+	ObjectItem=60,
+	StoneItem,
+	BranchItem,
+	TreeItem
 
 	
 };

@@ -8,6 +8,7 @@ class EnvironmentTile : public Tile
 {
 public:
 	EnvironmentTileType TileType_;
+	GameEngineCollision* TileCol_;
 	bool IsDestroy_;
 };
 // Ό³Έν :

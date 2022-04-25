@@ -14,11 +14,6 @@ public:
 	DropItem(DropItem&& _Other) noexcept = delete;
 	DropItem& operator=(const DropItem& _Other) = delete;
 	DropItem& operator=(DropItem&& _Other) noexcept = delete;
-	inline void SetCropsType(SeedType _SeedType)
-	{
-		DropSeedType_ = _SeedType;
-	}
-
 	inline void SetItemKind(PlayerItemKind _DropItemKind)
 	{
 		DropItemKind_ = _DropItemKind;
@@ -34,14 +29,14 @@ private:
 	SeedType DropSeedType_;
 	PlayerItemKind DropItemKind_;
 	PlayerItem DropItem_;
+	PlayerItem CurDropItem_;
 	int IndexNum_;
-
-
-	GameEngineRenderer* Crops_;
-	GameEngineCollision* CropsCol_;
+	GameEngineRenderer* Object_;
+	GameEngineCollision* ObjectCol_;
 
 	void Start() override;
 	void Update() override;
 	void MoveToPlayer();
+	std::string ItemToString(PlayerItem _Item);
 };
 

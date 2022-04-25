@@ -29,10 +29,7 @@ void Player::IdleUpdate()
 			return;
 		}
 
-		if ( true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 타일
-		{
-			return;
-		}
+		
 	}
 
 	if (true == IsLeftMouse)
@@ -205,6 +202,10 @@ void Player::HarvestStart()
 }
 void Player::HitStart()
 {
+	if (true == IsCheckObjectTile()) //오브젝트가 앞에 있다면 
+	{
+		
+	}
 }
 
 void Player::WalkStart()
@@ -214,6 +215,11 @@ void Player::WalkStart()
 
 void Player::WieldStart()
 {
+	if (true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 함수
+	{
+		WieldObject();
+	}
+
 	if (true == IsHoeTileCreate()&&"FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
 		DirHoeDirtCreateTile();

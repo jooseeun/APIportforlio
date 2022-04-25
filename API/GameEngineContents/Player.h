@@ -101,6 +101,10 @@ public:
 		{
 			CurItemKind_ = PlayerItemKind::CropsItem;
 		}
+		else if (60 < static_cast<int>(_Item) && static_cast<int>(_Item) < 70)
+		{
+			CurItemKind_ = PlayerItemKind::ObjectItem;
+		}
 		else
 		{
 			CurItemKind_ = PlayerItemKind::NoItem;
@@ -213,6 +217,8 @@ private:
 
 private:
 	bool IsCheckObjectTile();
+	void WieldObject();
+
 
 public:
 	void ChangeState(PlayerState _State);

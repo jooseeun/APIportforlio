@@ -2,6 +2,7 @@
 #include "BackGround.h"
 #include "ContentsEnums.h"
 #include "Tool.h"
+#include "DropItem.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -793,6 +794,28 @@ bool Player::IsCheckObjectTile()
 		return true;
 	}
 
+}
+
+void Player::WieldObject()
+{
+	TileCheckDir();
+	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "FarmLevel")
+	{
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+		if (_Tile->TileType_ == EnvironmentTileType::Stone)
+		{
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile->TileCol_->Off();
+			//_Tile->IsDestroy_ = true;
+
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+			DropItem_->SetItem(PlayerItem::StoneItem);
+			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			return;
+		}
+
+	}
 }
 
 bool Player::IsIdleKey()

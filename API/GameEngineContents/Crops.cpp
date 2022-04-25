@@ -19,7 +19,7 @@ void Crops::Start()
 	if (SeedType::Photato == SeedType_)
 	{
 		Crops_->SetIndex(30);
-		Item_ = PlayerItem::PhatatoItem;
+		Item_ = PlayerItem::PhotatoItem;
 		ItemKind_ = PlayerItemKind::CropsItem;
 	}
 	else if (SeedType::Kale == SeedType_)
@@ -53,7 +53,7 @@ void Crops::Harvest()
 {
 	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
 	DropItem_->SetPosition(GetPosition());
-	DropItem_->SetCropsType(SeedType_);
+	//DropItem_->SetCropsType(SeedType_);
 	DropItem_->SetItem(Item_);
 	DropItem_->SetItemKind(ItemKind_);
 
