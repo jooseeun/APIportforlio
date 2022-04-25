@@ -78,7 +78,8 @@ enum class PlayerItem
 	ObjectItem=60,
 	StoneItem,
 	BranchItem,
-	TreeItem
+	TreeItem,
+	GrassItem
 
 	
 };

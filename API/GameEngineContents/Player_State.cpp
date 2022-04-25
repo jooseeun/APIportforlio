@@ -29,7 +29,6 @@ void Player::IdleUpdate()
 			return;
 		}
 
-		
 	}
 
 	if (true == IsLeftMouse)
@@ -204,7 +203,7 @@ void Player::HitStart()
 {
 	if (true == IsCheckObjectTile()) //오브젝트가 앞에 있다면 
 	{
-		
+		HitObject();
 	}
 }
 

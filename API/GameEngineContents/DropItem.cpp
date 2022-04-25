@@ -22,6 +22,7 @@ void DropItem::Start()// °¨ÀÚ 192
 	Object_->CreateAnimation("Objects.bmp", "CauliFlowerItem", 190, 190, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "StoneItem", 390, 390, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "BranchItem", 388, 388, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "GrassItem", 771, 771, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "Max", 23, 23, 0.8f, true);
 
 	Object_->ChangeAnimation("Max");
@@ -51,6 +52,12 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		IndexNum_ = 390;
 		return "StoneItem";
 		
+	}
+	else if (PlayerItem::GrassItem == _Item)
+	{
+		IndexNum_ = 771;
+		return "GrassItem";
+
 	}
 	else if (PlayerItem::BranchItem == _Item || PlayerItem::TreeItem == _Item)
 	{

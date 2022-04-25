@@ -218,7 +218,7 @@ private:
 private:
 	bool IsCheckObjectTile();
 	void WieldObject();
-
+	void HitObject();
 
 public:
 	void ChangeState(PlayerState _State);
