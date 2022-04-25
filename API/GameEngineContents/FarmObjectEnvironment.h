@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerEnum.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
 
@@ -6,8 +7,8 @@
 class EnvironmentTile : public Tile
 {
 public:
-	
-	bool IsDestroy;
+	EnvironmentTileType TileType_;
+	bool IsDestroy_;
 };
 // Ό³Έν :
 class FarmObjectEnvironment : public GameEngineActor
@@ -27,6 +28,12 @@ public:
 	{
 		FarmTileMap_ = _TileMap;
 	}
+
+	inline GameEngineRendererTileMap* ReturnFarTileObejctMap_()
+	{
+		return FarmTileMap_;
+	}
+
 protected:
 
 private:
@@ -40,7 +47,7 @@ private:
 	void MakeTree(int _Posx, int _Posy, int _index);
 	void MakeGrass(int _Posx, int _Posy, int _index);
 	void MakeStone(int _Posx, int _Posy, int _index);
-	void Makebranch(int _Posx, int _Posy, int _index);
+	void MakeBranch(int _Posx, int _Posy, int _index);
 
 
 	void Start() override;

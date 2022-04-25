@@ -36,8 +36,8 @@ void FarmObjectEnvironment::Update()
 		MakeStone(66, 19, 3);
 		MakeGrass(63, 18, 0);
 
-		Makebranch(63, 22, 5);
-		Makebranch(70, 18, 6);
+		MakeBranch(63, 22, 5);
+		MakeBranch(70, 18, 6);
 
 		CheckMake_ = true;
 	}
@@ -47,6 +47,7 @@ void FarmObjectEnvironment::Update()
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 {
 	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "TreeBot.bmp", _index, static_cast<int>(ORDER::GROUND));
+	TreeBot_->TileType_ = EnvironmentTileType::Tree;
 	GameEngineCollision* TreeBotCol_ = CreateCollision("Tree", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 
@@ -60,6 +61,7 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ºóÅ¸ÀÏ 31
 {
 	EnvironmentTile* Grass = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	Grass->TileType_ = EnvironmentTileType::Grass;
 	GameEngineCollision* TreeBotCol_ = CreateCollision("Grass", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
@@ -67,13 +69,15 @@ void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ 
 void FarmObjectEnvironment::MakeStone(int _Posx, int _Posy, int _index)// 693~
 {
 	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	Stone->TileType_ = EnvironmentTileType::Stone;
 	GameEngineCollision* TreeBotCol_ = CreateCollision("Stone", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
 
-void FarmObjectEnvironment::Makebranch(int _Posx, int _Posy, int _index)// 693~
+void FarmObjectEnvironment::MakeBranch(int _Posx, int _Posy, int _index)// 693~
 {
-	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	EnvironmentTile* Branch = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
+	Branch->TileType_ = EnvironmentTileType::Branch;
 	GameEngineCollision* TreeBotCol_ = CreateCollision("Branch", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }

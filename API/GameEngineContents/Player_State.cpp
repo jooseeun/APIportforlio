@@ -28,6 +28,11 @@ void Player::IdleUpdate()
 			ChangeState(PlayerState::Harvest);
 			return;
 		}
+
+		if ( true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 타일
+		{
+			return;
+		}
 	}
 
 	if (true == IsLeftMouse)

@@ -211,6 +211,9 @@ private:
 	int TileIndexX_;
 	int TileIndexY_;
 
+private:
+	bool IsCheckObjectTile();
+
 public:
 	void ChangeState(PlayerState _State);
 	void StateUpdate();

@@ -1,6 +1,12 @@
 #pragma once
 
-
+enum class EnvironmentTileType
+{
+	Stone,
+	Tree,
+	Grass,
+	Branch
+};
 
 enum class TileType
 {

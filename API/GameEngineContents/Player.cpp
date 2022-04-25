@@ -482,6 +482,9 @@ bool Player::DirKeyCheck()
 
 	return false;
 }
+///////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////농사 타일맵 관련 함수//////////////////////////////////////////////
 
 void Player::DirHoeDirtCreateTile()
 {
@@ -766,6 +769,30 @@ bool Player::IsSeedTileCreate()
 		return true;
 	}
 	return false;
+}
+
+
+
+///////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////오브젝트 상호작용 관련 함수/////////////////////////////////////////////
+
+bool Player::IsCheckObjectTile()
+{
+	TileCheckDir();
+
+	EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+
+	if (nullptr == _Tile)
+	{
+		return false;
+	}
+
+	else
+	{
+		return true;
+	}
+
 }
 
 bool Player::IsIdleKey()
