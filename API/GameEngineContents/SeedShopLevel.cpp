@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Time.h"
 #include "FrontMap.h"
+#include "NPCShopOnner.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -37,6 +38,9 @@ void SeedShopLevel::Loading()
 		Front_->GetRenderer()->SetImage("SeedShopFront.bmp");
 		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
 		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
+
+		NPCShopOnner* NPC_= CreateActor<NPCShopOnner>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
+
 
 		Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
