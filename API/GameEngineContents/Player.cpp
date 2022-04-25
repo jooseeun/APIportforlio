@@ -2,6 +2,7 @@
 #include "BackGround.h"
 #include "ContentsEnums.h"
 #include "Tool.h"
+#include "DropItem.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -521,20 +522,23 @@ void Player::DirSeedCreateTile()
 	{
 		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16, static_cast<int>(ORDER::GROUND));
 		CropsTile->Seed_ = SeedType::Cauliflower;
+		CropsTile->Item_ = PlayerItem::CauliFlowerItem;
 	}
 	else if (PlayerItem::PhatatoSeedItem == CurItem_)
 	{
 		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24, static_cast<int>(ORDER::GROUND));
 		CropsTile->Seed_ = SeedType::Photato;
+		CropsTile->Item_ = PlayerItem::PhatatoItem;
 	}
 	else if (PlayerItem::KaleSeedItem == CurItem_)
 	{
 		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41, static_cast<int>(ORDER::GROUND));
 		CropsTile->Seed_ = SeedType::Kale;
+		CropsTile->Item_ = PlayerItem::KaleItem;
 	}
 	else //임시
 	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		return;
 	}
 	CropsTile->Dirt_ = GroundTile->Dirt_;
 	CropsTile->SeedDay_ = Time::TimeSet->GetGameDay_(); // 심은 날짜 저장.
@@ -557,10 +561,10 @@ void Player::CropsHarvestSet(PlayerTile* _Tile)
 	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_)+0.5f) * (MapScaleX_/ 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_/ 65) };
 
 	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::GROUND),CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
-	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
 	_Tile->CropsActor_->SetCropsType(_Tile->Seed_); // 수확할 작물 종류 넣어주기
+	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
 
-	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND));
+	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND)); //  빈타일
 	_Tile->Isharvest_ = true;
 
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_ , _Tile->DirtTilePosY_);
@@ -605,7 +609,14 @@ void Player::CropsHarvest()
 {
 	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
-	_Tile->CropsActor_->IsHarvestOn_(); // 수확
+	_Tile->CropsActor_->Death(); // 엑터삭제
+
+	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
+	DropItem_->SetPosition(GetPosition());
+	DropItem_->SetCropsType(_Tile->Seed_);
+	DropItem_->SetItem(_Tile->Item_);
+	DropItem_->SetItemKind(PlayerItemKind::CropsItem);
+
 	_Tile->Isharvest_ = false();
 }
 void Player::CropsGrowUpdate()

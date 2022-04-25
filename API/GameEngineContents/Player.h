@@ -24,6 +24,7 @@ public:
 	
 	TileType Dirt_;
 	SeedType Seed_;
+	PlayerItem Item_;
 	bool IsSeed_;
 	bool Isharvest_;
 	int DirtTilePosX_;

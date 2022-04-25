@@ -27,6 +27,9 @@ public:
 protected:
 
 private:
+	GameEngineCollision* CropsCol_;
+	GameEngineRenderer* Crops_;
+
 	bool IsHarvest_;
 	void Harvest();
 	SeedType SeedType_;
