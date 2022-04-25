@@ -2,10 +2,11 @@
 
 enum class EnvironmentTileType
 {
-	Stone,
+	Stone=100,
 	Tree,
 	Grass,
-	Branch
+	Branch,
+	Max
 };
 
 enum class TileType
@@ -79,7 +80,8 @@ enum class PlayerItem
 	StoneItem,
 	BranchItem,
 	TreeItem,
-	GrassItem
+	GrassItem,
+	Max
 
 	
 };
@@ -115,5 +117,6 @@ enum class PlayerShirts
 enum class InvenFloor
 {
 	First,
-	Second
+	Second,
+	Max
 };

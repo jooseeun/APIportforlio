@@ -19,20 +19,20 @@ public:
 	{
 		SeedType_ = _SeedType;
 	}
-	inline void IsHarvestOn_()
-	{
-		IsHarvest_ = true;
-	}
 
+
+	PlayerItemKind ItemKind_;
+	PlayerItem Item_;
 protected:
 
 private:
-	bool IsHarvest_;
-	void Harvest();
-	SeedType SeedType_;
-	PlayerItemKind ItemKind_;
-	PlayerItem Item_;
 
+	GameEngineRenderer* Crops_;
+
+	int IndexNum_;
+	SeedType SeedType_;
+	SeedType CurSeedType_;
+	std::string CropToString(SeedType _SeedType);
 	GameEngineRenderer* CropsHavestAni_;
 	void Start() override;
 	void Update() override;

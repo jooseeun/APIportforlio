@@ -47,7 +47,7 @@ void FarmObjectEnvironment::Update()
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 {
 	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "TreeBot.bmp", _index, static_cast<int>(ORDER::GROUND));
-	TreeBot_->TileType_ = EnvironmentTileType::Tree;
+	TreeBot_->EnvironmentType_ = EnvironmentTileType::Tree;
 	TreeBot_->DeathCount_ = 3;
 	TreeBot_->TileCol_ = CreateCollision("Tree", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
@@ -62,7 +62,7 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ºóÅ¸ÀÏ 31
 {
 	EnvironmentTile* Grass = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
-	Grass->TileType_ = EnvironmentTileType::Grass;
+	Grass->EnvironmentType_ = EnvironmentTileType::Grass;
 	Grass->TileCol_ = CreateCollision("Grass", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
@@ -70,7 +70,7 @@ void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ 
 void FarmObjectEnvironment::MakeStone(int _Posx, int _Posy, int _index)// 693~
 {
 	EnvironmentTile* Stone = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
-	Stone->TileType_ = EnvironmentTileType::Stone;
+	Stone->EnvironmentType_ = EnvironmentTileType::Stone;
 	Stone->TileCol_ = CreateCollision("Stone", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
@@ -78,7 +78,7 @@ void FarmObjectEnvironment::MakeStone(int _Posx, int _Posy, int _index)// 693~
 void FarmObjectEnvironment::MakeBranch(int _Posx, int _Posy, int _index)// 693~
 {
 	EnvironmentTile* Branch = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "FarmObject.bmp", _index, static_cast<int>(ORDER::GROUND));
-	Branch->TileType_ = EnvironmentTileType::Branch;
+	Branch->EnvironmentType_ = EnvironmentTileType::Branch;
 	Branch->TileCol_ = CreateCollision("Branch", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }

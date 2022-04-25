@@ -607,64 +607,74 @@ bool Player::IsCheckHarvestTile()
 
 void Player::CropsHarvest()
 {
+	TileCheckDir();
 	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
-	_Tile->CropsActor_->IsHarvestOn_(); // 수확
-	_Tile->Isharvest_ = false();
+	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
+	DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+	DropItem_->SetItem(_Tile->CropsActor_->Item_);
+	DropItem_->SetItemKind(_Tile->CropsActor_->ItemKind_);
+	CropsTileMap_->DeleteTile(TileIndexX_, TileIndexY_);
 }
 void Player::CropsGrowUpdate()
-{
-	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
-	std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
-
-	for (; StartIter != EndIter; ++StartIter)
-	{
-		if (false == (*StartIter)->Isharvest_)
-		{
-			if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
-			{
-				CropsGrowDay(*StartIter);
-			}
-			else //물을 안줬을때
-			{
-				if (CurDay_ != Time::TimeSet->GetGameDay_())
-				{
-					(*StartIter)->SeedDay_ += 1;
-				}
-			}
-		}
-		else
-		{
-			CropsHarvestSet(*StartIter);
-		}
-	}
-
-	DayChangeSetCrops();
-}
-void Player::DayChangeSetCrops()
 {
 	if (CurDay_ != Time::TimeSet->GetGameDay_())
 	{
 		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
 		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
 
-		PlayerTile* GroundTile;
 		for (; StartIter != EndIter; ++StartIter)
 		{
-			GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
-			GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
-			(*StartIter)->Dirt_ = TileType::HoeDirt;
-			GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
+			if (nullptr == *StartIter)
+			{
+				IsCropsTile_.erase(StartIter);
+			}
 
+			else if (false == (*StartIter)->Isharvest_)
+			{
+				if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
+				{
+					CropsGrowDay(*StartIter);
+				}
+				else //물을 안줬을때
+				{
+					if (CurDay_ != Time::TimeSet->GetGameDay_())
+					{
+						(*StartIter)->SeedDay_ += 1;
+					}
+				}
+			}
+			else
+			{
+				
+			}
 		}
 
-		CurDay_ = Time::TimeSet->GetGameDay_();
+		DayChangeSetCrops();
 	}
+
+}
+void Player::DayChangeSetCrops()
+{
+	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
+	std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
+	PlayerTile* GroundTile;
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
+		GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+		(*StartIter)->Dirt_ = TileType::HoeDirt;
+		GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
+	}
+
+	CurDay_ = Time::TimeSet->GetGameDay_();
+
 }
 
 void Player::CropsGrowDay(PlayerTile* _Tile)
 {
-	if (_Tile->Seed_ == SeedType::Photato && CurDay_ != Time::TimeSet->GetGameDay_()) //날짜가 변했을때
+	if (_Tile->Seed_ == SeedType::Photato)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -673,12 +683,13 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 		if (3 <= _GrowDay)
 		{
 			_Tile->Isharvest_ = true;
+			CropsHarvestSet(_Tile);
 		}
 
 
 	}
 
-	else if (_Tile->Seed_ == SeedType::Cauliflower && CurDay_ != Time::TimeSet->GetGameDay_())
+	else if (_Tile->Seed_ == SeedType::Cauliflower)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -687,11 +698,12 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 		if (3 <= _GrowDay)
 		{
 			_Tile->Isharvest_ = true;
+			CropsHarvestSet(_Tile);
 		}
 
 
 	}
-	else if (_Tile->Seed_ == SeedType::Kale && CurDay_ != Time::TimeSet->GetGameDay_())
+	else if (_Tile->Seed_ == SeedType::Kale)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -700,6 +712,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 		if (2 <= _GrowDay)
 		{
 			_Tile->Isharvest_ = true;
+			CropsHarvestSet(_Tile);
 		}
 
 	}
@@ -801,7 +814,7 @@ void Player::HitObject()
 	if (CurItem_ == PlayerItem::SickleItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
-		if (_Tile->TileType_ == EnvironmentTileType::Grass)
+		if (_Tile->EnvironmentType_ == EnvironmentTileType::Grass)
 		{
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
@@ -822,7 +835,11 @@ void Player::WieldObject()
 	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
-		if (_Tile->TileType_ == EnvironmentTileType::Stone)
+		if (_Tile == nullptr)
+		{
+			return;
+		}
+		if (_Tile->EnvironmentType_ == EnvironmentTileType::Stone)
 		{
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
@@ -840,8 +857,11 @@ void Player::WieldObject()
 	else if (CurItem_ == PlayerItem::AxItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
-
-		if (_Tile->TileType_ == EnvironmentTileType::Branch)
+		if (_Tile == nullptr)
+		{
+			return;
+		}
+		if (_Tile->EnvironmentType_ == EnvironmentTileType::Branch)
 		{
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
@@ -854,7 +874,7 @@ void Player::WieldObject()
 			return;
 		}
 
-		else if (_Tile->TileType_ == EnvironmentTileType::Tree)
+		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
 			if (_Tile->DeathCount_ != 0)
 			{

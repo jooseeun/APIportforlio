@@ -21,6 +21,13 @@ public:
 	{
 
 	}
+	~PlayerTile()
+	{
+		if (CropsActor_ != nullptr)
+		{
+			CropsActor_->Death();
+		}
+	}
 
 	TileType Dirt_;
 	SeedType Seed_;

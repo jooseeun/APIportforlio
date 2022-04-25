@@ -7,8 +7,13 @@
 class EnvironmentTile : public Tile
 {
 public:
+	EnvironmentTile()
+		:EnvironmentType_(EnvironmentTileType::Max)
+	{
+
+	}
 	int DeathCount_;
-	EnvironmentTileType TileType_;
+	EnvironmentTileType EnvironmentType_;
 	GameEngineCollision* TileCol_;
 	bool IsDestroy_;
 };

@@ -4,8 +4,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 Crops::Crops()
-	:IsHarvest_(false)
 {
+	CurSeedType_ = SeedType::Max;
 }
 
 Crops::~Crops()
@@ -14,47 +14,46 @@ Crops::~Crops()
 
 void Crops::Start()
 {
-	GameEngineRenderer* Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
+	Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
+	Crops_->CreateAnimation("Crops.bmp", "Photato", 30, 30, 0.8f, true);
+	Crops_->CreateAnimation("Crops.bmp", "Kale", 45, 45, 0.8f, true);
+	Crops_->CreateAnimation("Crops.bmp", "CauliFlower", 20, 20, 0.8f, true);
+	Crops_->CreateAnimation("Crops.bmp", "Max", 6, 6, 0.8f, true);
 
-	if (SeedType::Photato == SeedType_)
-	{
-		Crops_->SetIndex(30);
-		Item_ = PlayerItem::PhotatoItem;
-		ItemKind_ = PlayerItemKind::CropsItem;
-	}
-	else if (SeedType::Kale == SeedType_)
-	{
-		Crops_->SetIndex(45);
-		Item_ = PlayerItem::KaleItem;
-		ItemKind_ = PlayerItemKind::CropsItem;
-	}
-	else if (SeedType::Cauliflower == SeedType_)
-	{
-		Crops_->SetIndex(22);
-		Item_ = PlayerItem::CauliFlowerItem;
-		ItemKind_ = PlayerItemKind::CropsItem;
-	}
-
+	Crops_->ChangeAnimation("Max");
 	GameEngineCollision* CropsCol_ = CreateCollision("Crops", { 64,64 });
 }
 
 void Crops::Update()
 {
-	if (IsHarvest_ == true)
+	if (CurSeedType_ != SeedType_)
 	{
-		Harvest();
-
-		Death();// 이거 렌더링한거 지워줘야하는 것도 다시 해야됨 ㅠ
-		IsHarvest_ = false;
+		Crops_->ChangeAnimation(CropToString(SeedType_));
+		CurSeedType_ = SeedType_;
 	}
 }
 
-void Crops::Harvest()
+std::string Crops::CropToString(SeedType _SeedType)
 {
-	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
-	DropItem_->SetPosition(GetPosition());
-	//DropItem_->SetCropsType(SeedType_);
-	DropItem_->SetItem(Item_);
-	DropItem_->SetItemKind(ItemKind_);
-
+	if (SeedType::Photato == _SeedType)
+	{
+		IndexNum_ = 30;
+		Item_ = PlayerItem::PhotatoItem;
+		ItemKind_ = PlayerItemKind::CropsItem;
+		return "Photato";
+	}
+	else if (SeedType::Cauliflower == _SeedType)
+	{
+		IndexNum_ = 45;
+		Item_ = PlayerItem::KaleItem;
+		ItemKind_ = PlayerItemKind::CropsItem;
+		return "Kale";
+	}
+	else if (SeedType::Kale == _SeedType)
+	{
+		IndexNum_ = 20;
+		Item_ = PlayerItem::CauliFlowerItem;
+		ItemKind_ = PlayerItemKind::CropsItem;
+		return "CauliFlower";
+	}
 }
