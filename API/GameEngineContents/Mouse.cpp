@@ -59,6 +59,15 @@ void Mouse::CheckPlayerIsLeftMouse()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
+		if (true == GetMouseCol()->CollisionCheck("ShopNPC", CollisionType::Rect, CollisionType::Rect))
+		{
+			ToolUI::ToolUISet->SetSelectPivot(0);
+			return;
+		}
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
+	{
 		if (false == ToolUI::ToolUISet->GetIsInventory())
 		{
 			if (true == GetMouseCol()->CollisionCheck("Num1Col", CollisionType::Rect, CollisionType::Rect))

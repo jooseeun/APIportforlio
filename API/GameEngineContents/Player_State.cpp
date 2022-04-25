@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "BackGround.h"
 #include "ContentsEnums.h"
+#include "EnergyUI.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -33,18 +34,21 @@ void Player::IdleUpdate()
 
 	if (true == IsLeftMouse)
 	{
-
+		
 		if (CurItemKind_ == PlayerItemKind::WieldItem)
 		{
 			ChangeState(PlayerState::Wield);
+			EnergyUI::EnergyUISet->UseEnergy();
 		}
 		else if (CurItemKind_ == PlayerItemKind::HitItem)
 		{
 			ChangeState(PlayerState::Hit);
+			EnergyUI::EnergyUISet->UseEnergy();
 		}
 		else if (CurItemKind_ == PlayerItemKind::WaterItem)
 		{
 			ChangeState(PlayerState::Water);
+			EnergyUI::EnergyUISet->UseEnergy();
 		}
 		else if (CurItemKind_ == PlayerItemKind::SeedItem)
 		{

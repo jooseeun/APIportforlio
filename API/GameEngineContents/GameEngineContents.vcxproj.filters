@@ -119,6 +119,9 @@
     <ClInclude Include="FrontMap.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
+    <ClInclude Include="SeedShopUI.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -234,6 +237,9 @@
       <Filter>Actor\Play\Environment</Filter>
     </ClCompile>
     <ClCompile Include="FrontMap.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SeedShopUI.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>

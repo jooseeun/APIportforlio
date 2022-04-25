@@ -1,4 +1,5 @@
 #include "EnergyUI.h"
+#include "ContentsEnums.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -6,7 +7,8 @@
 
 EnergyUI* EnergyUI::EnergyUISet = nullptr;
 
-EnergyUI::EnergyUI() 
+EnergyUI::EnergyUI()
+	:EnergyValue_(224.0f)
 {
 }
 
@@ -16,16 +18,22 @@ EnergyUI::~EnergyUI()
 
 void EnergyUI::Start()
 {
-	SetPosition({1247,593});
-	GameEngineRenderer* Renderer = CreateRenderer("EnergyUI.bmp");
+	SetPosition({1247,593+112});
+	GameEngineRenderer* Renderer = CreateRendererToScale("EnergyUI.bmp", { 52,224 }, static_cast<int>(ORDER::UI), RenderPivot::BOT);
 	Renderer->CameraEffectOff();
-	GameEngineRenderer* EnergyUIBar = CreateRenderer("EnergyUIBar.bmp");
+	EnergyUIBar = CreateRendererToScale("EnergyUIBar.bmp",{52,224}, static_cast<int>(ORDER::UI),RenderPivot::BOT);
 	EnergyUIBar->CameraEffectOff();
 }
 
 void EnergyUI::Update()
 {
-	//DebugRectRender();
+	UpdateEnergyValue();
+}
+void EnergyUI::UpdateEnergyValue()
+{
+	EnergyUIBar->SetScale({ 52, EnergyValue_ });
+	EnergyUIBar->CameraEffectOff();
+	// 만약 0이 되면 탈진
 }
 void EnergyUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
