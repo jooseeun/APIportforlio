@@ -116,6 +116,9 @@
     <ClInclude Include="Tree.h">
       <Filter>Actor\Play\Environment</Filter>
     </ClInclude>
+    <ClInclude Include="FrontMap.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -229,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="Tree.cpp">
       <Filter>Actor\Play\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="FrontMap.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

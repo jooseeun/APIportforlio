@@ -6,6 +6,7 @@ enum class ORDER
 	GROUND,
 	CROP,
 	PLAYER,
+	FRONTMAP,
 	TREETOP,
 	MONSTER,
 	UI,
