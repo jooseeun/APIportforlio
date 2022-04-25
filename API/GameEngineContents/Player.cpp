@@ -483,8 +483,8 @@ bool Player::DirKeyCheck()
 
 	return false;
 }
-
-void Player::DirHoeDirtCreateTile() 
+/////////////////////////////농사 타일맵 관련
+void Player::DirHoeDirtCreateTile() ////////// 호미질타일 생성
 {
 	TileCheckDir();
 	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
@@ -492,7 +492,7 @@ void Player::DirHoeDirtCreateTile()
 
 }
 
-void Player::DirWaterDirtCreateTile() 
+void Player::DirWaterDirtCreateTile() ///////// 젖은타일 생성
 {
 
 	TileCheckDir();
@@ -512,7 +512,7 @@ void Player::DirWaterDirtCreateTile()
 	
 
 }
-void Player::DirSeedCreateTile()
+void Player::DirSeedCreateTile() ///////// 씨앗심는 타일 생성
 {
 
 	TileCheckDir();
@@ -536,7 +536,7 @@ void Player::DirSeedCreateTile()
 		CropsTile->Seed_ = SeedType::Kale;
 		CropsTile->Item_ = PlayerItem::KaleItem;
 	}
-	else //임시
+	else 
 	{
 		return;
 	}
@@ -556,36 +556,8 @@ void Player::DirSeedCreateTile()
 //감자 24~
 //콜리플라워 16~
 //케일 40 ~
-void Player::CropsHarvestSet(PlayerTile* _Tile)
-{
-	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_)+0.5f) * (MapScaleX_/ 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_/ 65) };
 
-	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::GROUND),CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
-	_Tile->CropsActor_->SetCropsType(_Tile->Seed_); // 수확할 작물 종류 넣어주기
-	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
-
-	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND)); //  빈타일
-	_Tile->Isharvest_ = true;
-
-	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_ , _Tile->DirtTilePosY_);
-	GroundTile->IsSeed_ = false;
-}
-std::string Player::CheckSeedSting(SeedType _Type)
-{
-	if (SeedType::Photato == _Type)
-	{
-		return "Photato" + CropNum_;
-	}
-	else if (SeedType::Kale == _Type)
-	{
-		return "Kale" + CropNum_;
-	}
-	else if (SeedType::Cauliflower == _Type)
-	{
-		return "Cauliflower" + CropNum_;
-	}
-}
-bool Player::IsCheckHarvestTile()
+bool Player::IsCheckHarvestTile() /////////////// 수확할 수 있는 타일인지 체크 true  면 수확
 {
 	TileCheckDir();
 
@@ -605,13 +577,13 @@ bool Player::IsCheckHarvestTile()
 
 }
 
-void Player::CropsHarvest()
+void Player::CropsHarvest() ///////////// 수확 -> 드롭아이템 만들어주면서 다자란 수확물엑터 삭제(Crops 엑터)
 {
 	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
 	_Tile->CropsActor_->Death(); // 엑터삭제
 
-	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
+	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP)); 
 	DropItem_->SetPosition(GetPosition());
 	DropItem_->SetCropsType(_Tile->Seed_);
 	DropItem_->SetItem(_Tile->Item_);
@@ -619,38 +591,59 @@ void Player::CropsHarvest()
 
 	_Tile->Isharvest_ = false();
 }
-void Player::CropsGrowUpdate()
+
+void Player::CropsHarvestSet(PlayerTile* _Tile) //////////////다 자란 타일맵을 엑터로 변환
 {
-	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
-	std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_ / 65) };
 
-	for (; StartIter != EndIter; ++StartIter)
-	{
-		if (false == (*StartIter)->Isharvest_)
-		{
-			if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
-			{
-				CropsGrowDay(*StartIter);
-			}
-			else //물을 안줬을때
-			{
-				if (CurDay_ != Time::TimeSet->GetGameDay_())
-				{
-					(*StartIter)->SeedDay_ += 1;
-				}
-			}
-		}
-		else
-		{
-			CropsHarvestSet(*StartIter);
-		}
-	}
+	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::GROUND), CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
+	_Tile->CropsActor_->SetCropsType(_Tile->Seed_); // 수확할 작물 종류 넣어주기
+	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
 
-	DayChangeSetCrops();
+	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND)); //  빈타일
+	_Tile->Isharvest_ = true;
+
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_);
+	GroundTile->IsSeed_ = false;
 }
-void Player::DayChangeSetCrops()
+
+
+void Player::CropsGrowUpdate() //////////////////// 하루가 지났을때 작물이 자라는지 안자라는지 확인하는 함수 
 {
 	if (CurDay_ != Time::TimeSet->GetGameDay_())
+	{
+		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
+		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			if (false == (*StartIter)->Isharvest_)
+			{
+				if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
+				{
+					CropsGrowDay(*StartIter); // 작물 자라게 타일맵 다시로드
+				}
+				else //물을 안줬을때
+				{
+					if (CurDay_ != Time::TimeSet->GetGameDay_())
+					{
+						(*StartIter)->SeedDay_ += 1;//안자랐을때 계산을 위해 심은 날짜 하루 밀기
+					}
+				}
+			}
+			else
+			{
+				CropsHarvestSet(*StartIter);
+			}
+		}
+
+		DayChangeSetCrops();
+	}
+}
+
+void Player::DayChangeSetCrops()///////////////////////하루가 지나고 물준땅 다른땅으로 바꿔주는 함수
+{
+	
 	{
 		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
 		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
@@ -669,9 +662,9 @@ void Player::DayChangeSetCrops()
 	}
 }
 
-void Player::CropsGrowDay(PlayerTile* _Tile)
+void Player::CropsGrowDay(PlayerTile* _Tile) ////////////작물 자랐을때 타일 바꾸는 함수  ,  다자라면 Isharvest를 true로 바꿔준다.
 {
-	if (_Tile->Seed_ == SeedType::Photato && CurDay_ != Time::TimeSet->GetGameDay_()) //날짜가 변했을때
+	if (_Tile->Seed_ == SeedType::Photato ) //날짜가 변했을때
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -685,7 +678,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 
 	}
 
-	else if (_Tile->Seed_ == SeedType::Cauliflower && CurDay_ != Time::TimeSet->GetGameDay_())
+	else if (_Tile->Seed_ == SeedType::Cauliflower)
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -698,7 +691,7 @@ void Player::CropsGrowDay(PlayerTile* _Tile)
 
 
 	}
-	else if (_Tile->Seed_ == SeedType::Kale && CurDay_ != Time::TimeSet->GetGameDay_())
+	else if (_Tile->Seed_ == SeedType::Kale )
 	{
 		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
 
@@ -831,6 +824,8 @@ void Player::SetSideLevel(std::string _Pre, std::string _Next, std::string _Entr
 	EntryLevel_ = _Entry;
 }
 
+
+///////////////////////////////string변환 함수
 std::string Player::GetHairColorString()
 {
 	if (CurHairColor_ == PlayerHairColor::Black)
@@ -897,6 +892,22 @@ std::string Player::GetItemString()
 		return "Nothing";
 	}
 	return "";
+}
+
+std::string Player::CheckSeedSting(SeedType _Type)
+{
+	if (SeedType::Photato == _Type)
+	{
+		return "Photato" + CropNum_;
+	}
+	else if (SeedType::Kale == _Type)
+	{
+		return "Kale" + CropNum_;
+	}
+	else if (SeedType::Cauliflower == _Type)
+	{
+		return "Cauliflower" + CropNum_;
+	}
 }
 
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
