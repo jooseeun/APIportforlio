@@ -4,8 +4,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 Crops::Crops()
-	:IsHarvest_(false),
-	SeedType_(SeedType::Max)
+	:IsHarvest_(false)
 {
 }
 
@@ -15,22 +14,7 @@ Crops::~Crops()
 
 void Crops::Start()
 {
-	
-}
-
-void Crops::Update()
-{
-	if (SeedType::Max != SeedType_&& IsHarvest_==false)
-	{
-		Harvest();
-		IsHarvest_ = true;
-
-	}
-}
-
-void Crops::Harvest() 
-{
-	Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
+	GameEngineRenderer* Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
 
 	if (SeedType::Photato == SeedType_)
 	{
@@ -51,6 +35,26 @@ void Crops::Harvest()
 		ItemKind_ = PlayerItemKind::CropsItem;
 	}
 
-	CropsCol_ = CreateCollision("Crops", { 64,64 });
-	
+	GameEngineCollision* CropsCol_ = CreateCollision("Crops", { 64,64 });
+}
+
+void Crops::Update()
+{
+	if (IsHarvest_ == true)
+	{
+		Harvest();
+
+		Death();// 이거 렌더링한거 지워줘야하는 것도 다시 해야됨 ㅠ
+		IsHarvest_ = false;
+	}
+}
+
+void Crops::Harvest()
+{
+	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
+	DropItem_->SetPosition(GetPosition());
+	DropItem_->SetCropsType(SeedType_);
+	DropItem_->SetItem(Item_);
+	DropItem_->SetItemKind(ItemKind_);
+
 }

@@ -14,7 +14,7 @@ public:
 	Crops(Crops&& _Other) noexcept = delete;
 	Crops& operator=(const Crops& _Other) = delete;
 	Crops& operator=(Crops&& _Other) noexcept = delete;
-	
+
 	inline void SetCropsType(SeedType _SeedType)
 	{
 		SeedType_ = _SeedType;
@@ -23,13 +23,10 @@ public:
 	{
 		IsHarvest_ = true;
 	}
-	
+
 protected:
 
 private:
-	GameEngineCollision* CropsCol_;
-	GameEngineRenderer* Crops_;
-
 	bool IsHarvest_;
 	void Harvest();
 	SeedType SeedType_;
@@ -39,6 +36,6 @@ private:
 	GameEngineRenderer* CropsHavestAni_;
 	void Start() override;
 	void Update() override;
-	
+
 };
 

@@ -21,10 +21,9 @@ public:
 	{
 
 	}
-	
+
 	TileType Dirt_;
 	SeedType Seed_;
-	PlayerItem Item_;
 	bool IsSeed_;
 	bool Isharvest_;
 	int DirtTilePosX_;
@@ -36,7 +35,7 @@ public:
 
 class GameEngineImage;
 class GameEngineCollision;
-class Player:public GameEngineActor
+class Player :public GameEngineActor
 {
 public:
 	static Player* MainPlayer;
@@ -49,7 +48,7 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	void SetMapScale(float _X,float _Y);
+	void SetMapScale(float _X, float _Y);
 	void SetColMapName(const std::string& _Name);
 	void SetSideLevel(std::string _Pre, std::string _Next, std::string _Entry);
 
@@ -108,7 +107,7 @@ public:
 		}
 
 	}
-	inline void SetIsLeftMouseON() 
+	inline void SetIsLeftMouseON()
 	{
 		IsLeftMouse = true;
 	}
@@ -118,7 +117,7 @@ public:
 	}
 protected:
 private:
-	
+
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;
 	PlayerShirts CurShirts_;
@@ -156,7 +155,7 @@ private:
 	void ChangeAni(std::string _Name);
 	void CameraCheck();
 	void IsDebugModeONOFF();
-	
+
 private:
 	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
@@ -170,8 +169,8 @@ private:
 	int CurDay_;
 	int CurHour_;
 
-	 PlayerItemKind CurItemKind_;
-	 PlayerItem CurItem_;
+	PlayerItemKind CurItemKind_;
+	PlayerItem CurItem_;
 
 	void DirAnimationChange();
 
