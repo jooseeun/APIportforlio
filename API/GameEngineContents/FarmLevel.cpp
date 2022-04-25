@@ -65,36 +65,19 @@ void FarmLevel::Update()
 
 	CurSelectPivot_ = NextSelectPivot_;
 
-	//CreateCropActorUpdate();
 
 }
 
-//void FarmLevel::CreateCropActorUpdate()
-//{
-//	if (true == Player::MainPlayer->IsCreateCropTile_)
-//	{
-//		if (SeedType::Photato == Player::MainPlayer->CreateSeedType_)
-//		{
-//			Photato* Crop = CreateActor<Photato>(static_cast<int>(ORDER::CROP), "Photato");
-//			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
-//		}
-//		else if (SeedType::Kale == Player::MainPlayer->CreateSeedType_)
-//		{
-//			Kale* Crop = CreateActor<Kale>(static_cast<int>(ORDER::CROP), "Kale");
-//			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
-//		}
-//		else if (SeedType::Cauliflower == Player::MainPlayer->CreateSeedType_)
-//		{
-//			Cauliflower* Crop = CreateActor<Cauliflower>(static_cast<int>(ORDER::CROP), "Cauliflower");
-//			Crop->SetPosition(Player::MainPlayer->CreateCropPos_);
-//		}
-//
-//		Player::MainPlayer->IsCreateCropTile_ = false;
-//	}
-//}
 void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
+	if (_PrevLevel->GetNameCopy() == "FarmHouseLevel")
+	{
+		Player::MainPlayer->SetPosition({ 4120.0f,1020.f });
+	}
+	else if (_PrevLevel->GetNameCopy() == "BusStopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 4920.0f,1146.0f });
+	}
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
 	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");

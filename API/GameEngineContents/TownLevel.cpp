@@ -60,6 +60,18 @@ void TownLevel::Update()
 }
 void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	if (_PrevLevel->GetNameCopy() == "BusStopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 144.0f,3442.f });
+	}
+	if (_PrevLevel->GetNameCopy() == "SeedShopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 2810.0f,3720.f });
+	}
+	if (_PrevLevel->GetNameCopy() == "Town2Level")
+	{
+		Player::MainPlayer->SetPosition({ 5216.0f,269.f });
+	}
 	Player::MainPlayer->SetPosition({ 144.0f,3442.f });
 	Player::MainPlayer->SetMapScale(5544.0f, 6200.0f);
 	Player::MainPlayer->SetColMapName("TownColMap.bmp");

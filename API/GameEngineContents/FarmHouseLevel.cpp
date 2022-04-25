@@ -69,8 +69,15 @@ void FarmHouseLevel::Update()
 
 void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 474.0f,648.f });
-	//Player::MainPlayer->SetPosition({ 750.0f,520.f });
+	if (_PrevLevel->GetNameCopy() == "FarmLevel")
+	{
+		Player::MainPlayer->SetPosition({ 474.0f,659 });
+	}
+	else if (_PrevLevel->GetNameCopy() == "TitleLevel")
+	{
+		Player::MainPlayer->SetPosition({ 750.0f,520.f });
+	}
+	
 	Player::MainPlayer->SetMapScale(1280.0f, 840.0f);
 	Player::MainPlayer->SetColMapName("FarmHouseColMap.bmp");
 	Player::MainPlayer->SetSideLevel("BusStopLevel", "FarmLevel", " ");

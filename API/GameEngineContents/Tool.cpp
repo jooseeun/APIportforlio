@@ -120,6 +120,7 @@ void Tool::Start()
 		KaleSeed_->Render->CameraEffectOff();
 		KaleSeed_->InvenFloor_ = InvenFloor::First;
 		KaleSeed_->Click_ = false;
+		KaleSeed_->ItemCount_ = 4;
 		ItemList_.push_back(KaleSeed_);
 
 		ItemData* LongSword_ = new ItemData();

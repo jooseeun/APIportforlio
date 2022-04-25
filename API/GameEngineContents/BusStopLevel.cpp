@@ -50,7 +50,7 @@ void BusStopLevel::Loading()
 
 
 	
-
+	
 }
 void BusStopLevel::Update()
 {
@@ -67,7 +67,14 @@ void BusStopLevel::Update()
 
 void BusStopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 50.0f,1516.f });
+	if (_PrevLevel->GetNameCopy() == "FarmLevel")
+	{
+		Player::MainPlayer->SetPosition({ 50.0f,1516.f });
+	}
+	else if (_PrevLevel->GetNameCopy() == "TownLevel")
+	{
+		Player::MainPlayer->SetPosition({ 2100.0f,1516.f });
+	}
 	Player::MainPlayer->SetMapScale(2240.0f, 1920.0f);
 	Player::MainPlayer->SetColMapName("BusStopColMap.bmp");
 	Player::MainPlayer->SetSideLevel("FarmLevel", "TownLevel", " ");
