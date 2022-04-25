@@ -14,8 +14,8 @@ struct ItemData
 	InvenFloor InvenFloor_;
 	int InvenPivot_;
 	int ItemCount_ = 1;
-	bool Click_;
-	bool IsInven;
+	bool Click_ = false;
+	bool IsInven= true;
 };
 
 class Tool : public GameEngineActor

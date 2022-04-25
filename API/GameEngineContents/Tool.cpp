@@ -186,16 +186,16 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (0 == (*StartIter)->ItemCount_)
+		if((*StartIter)->IsInven == true)
 		{
-			(*StartIter)->InvenPivot_ = 100;
-			(*StartIter)->Render->Off(); // 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
-			//일단 삭제는 x
-		}
-
-		else
-		{
-			if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
+			if (0 == (*StartIter)->ItemCount_ )
+			{
+				(*StartIter)->InvenPivot_ = 100;
+				(*StartIter)->Render->Off();
+				(*StartIter)->IsInven = false;// 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
+				//일단 삭제는 x
+			}
+			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_)+ InventoryModeXPivot_ - 12* (NumPivot_)* static_cast<float>((*StartIter)->InvenFloor_),
 					28+ InventoryModeYPivot_+(InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))});
