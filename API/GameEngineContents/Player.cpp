@@ -805,7 +805,7 @@ void Player::WieldObject()
 		if (_Tile->TileType_ == EnvironmentTileType::Stone)
 		{
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
-			_Tile->TileCol_->Off();
+			_Tile->TileCol_->Death();
 			//_Tile->IsDestroy_ = true;
 
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
@@ -816,6 +816,45 @@ void Player::WieldObject()
 		}
 
 	}
+	
+	else if (CurItem_ == PlayerItem::AxItem && GetLevel()->GetNameCopy() == "FarmLevel")
+	{
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+
+		if (_Tile->TileType_ == EnvironmentTileType::Branch)
+		{
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile->TileCol_->Death();
+			//_Tile->IsDestroy_ = true;
+
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+			DropItem_->SetItem(PlayerItem::BranchItem);
+			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			return;
+		}
+
+		else if (_Tile->TileType_ == EnvironmentTileType::Tree)
+		{
+			if (_Tile->DeathCount_ != 0)
+			{
+				_Tile->DeathCount_ -= 1;
+				return;
+			}
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile->TileCol_->Death();
+			//_Tile->IsDestroy_ = true;
+
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+			DropItem_->SetItem(PlayerItem::TreeItem);
+			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			return;
+		}
+
+	}
+
+	
 }
 
 bool Player::IsIdleKey()

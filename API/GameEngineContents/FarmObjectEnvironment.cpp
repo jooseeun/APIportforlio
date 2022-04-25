@@ -48,6 +48,7 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 {
 	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "TreeBot.bmp", _index, static_cast<int>(ORDER::GROUND));
 	TreeBot_->TileType_ = EnvironmentTileType::Tree;
+	TreeBot_->DeathCount_ = 3;
 	TreeBot_->TileCol_ = CreateCollision("Tree", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 

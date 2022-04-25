@@ -15,7 +15,7 @@ DropItem::~DropItem()
 
 void DropItem::Start()// 감자 192
 {
-	Object_ = CreateRendererToScale("Objects.bmp",{16,16},static_cast<int>(ORDER::ITEM));
+	Object_ = CreateRendererToScale("Objects.bmp",{48,48},static_cast<int>(ORDER::ITEM));
 
 	Object_->CreateAnimation("Objects.bmp", "PhotatoItem", 192, 192, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "KaleItem", 250, 250, 0.8f, true);
@@ -25,7 +25,7 @@ void DropItem::Start()// 감자 192
 	Object_->CreateAnimation("Objects.bmp", "Max", 23, 23, 0.8f, true);
 
 	Object_->ChangeAnimation("Max");
-	ObjectCol_ = CreateCollision("DropItem", { 16,16 });
+	ObjectCol_ = CreateCollision("DropItem", { 48,48 });
 
 
 }
@@ -52,7 +52,7 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		return "StoneItem";
 		
 	}
-	else if (PlayerItem::BranchItem == _Item)
+	else if (PlayerItem::BranchItem == _Item || PlayerItem::TreeItem == _Item)
 	{
 		IndexNum_ = 388;
 		return "BranchItem";
@@ -72,7 +72,7 @@ void DropItem::MoveToPlayer()
 {
 	float4 MoveDir_ = Player::MainPlayer->GetPosition() - GetPosition();
 	float CheckDir_ = MoveDir_.Len2D();
-	if (CheckDir_ >= 400)
+	if (CheckDir_ >= 100)
 	{
 		return;
 	}

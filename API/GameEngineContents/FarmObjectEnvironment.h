@@ -7,6 +7,7 @@
 class EnvironmentTile : public Tile
 {
 public:
+	int DeathCount_;
 	EnvironmentTileType TileType_;
 	GameEngineCollision* TileCol_;
 	bool IsDestroy_;
