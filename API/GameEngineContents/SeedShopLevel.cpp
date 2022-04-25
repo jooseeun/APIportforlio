@@ -8,6 +8,7 @@
 #include "ContentsEnums.h"
 #include "Mouse.h"
 #include "Time.h"
+#include "FrontMap.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -32,6 +33,10 @@ void SeedShopLevel::Loading()
 		float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 		Back->GetRenderer()->SetPivot(BackImageScale.Half());
 
+		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
+		Front_->GetRenderer()->SetImage("SeedShopFront.bmp");
+		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
+		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
 
 		Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
@@ -64,7 +69,7 @@ void SeedShopLevel::Update()
 
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+	//Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
 	Player::MainPlayer->SetPosition({ 414.0f,1770.f });
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");

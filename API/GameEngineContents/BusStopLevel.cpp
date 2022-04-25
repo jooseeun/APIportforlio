@@ -8,6 +8,7 @@
 #include "ContentsEnums.h"
 #include "Mouse.h"
 #include "Time.h"
+#include "FrontMap.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -34,6 +35,11 @@ void BusStopLevel::Loading()
 		Back->GetRenderer()->SetPivot(BackImageScale.Half());
 		Back->GroundTileMap_.TileRangeSetting(35, 30, { 48,48 });
 		Back->CropsTileMap_.TileRangeSetting(35, 30, { 48,48 });
+
+		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
+		Front_->GetRenderer()->SetImage("BusStopFront.bmp");
+		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
+		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
 	}
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
@@ -69,7 +75,7 @@ void BusStopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	if (_PrevLevel->GetNameCopy() == "FarmLevel")
 	{
-		Player::MainPlayer->SetPosition({ 50.0f,1516.f });
+		Player::MainPlayer->SetPosition({ 100.0f,1516.f });
 	}
 	else if (_PrevLevel->GetNameCopy() == "TownLevel")
 	{

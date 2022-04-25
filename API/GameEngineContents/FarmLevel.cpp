@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Tool.h"
 #include "Time.h"
+#include "FrontMap.h"
 #include "FarmObjectEnvironment.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -37,6 +38,11 @@ void FarmLevel::Loading()
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
+
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
+	Front_->GetRenderer()->SetImage("FarmFront.bmp");
+	float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
+	Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
