@@ -319,6 +319,10 @@ void StardewVallyGame::GameInit()
 	CutTree->CutCount(2, 1); 
 	GameEngineImage* FarmObject = GameEngineImageManager::GetInst()->Find("FarmObject.bmp");
 	FarmObject->CutCount(8, 1);
+
+	GameEngineImage* Money = GameEngineImageManager::GetInst()->Find("Money.bmp");
+	Money->CutCount(10, 1); //32,64
+
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
