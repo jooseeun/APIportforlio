@@ -41,7 +41,7 @@ void Mouse::Update()
 	CheckPlayerIsLeftMouse();
 
 
-	if ("TitleLevel" == GetLevel()->GetNameCopy()&& true == GameEngineInput::GetInst()->IsPress("LeftMouse"))
+	if ("TitleLevel" == GetLevel()->GetNameCopy()&& true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
 	{
 		if (true == GetMouseCol()->CollisionCheck("StartCol", CollisionType::Rect, CollisionType::Rect))
 		{

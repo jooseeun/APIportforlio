@@ -9,7 +9,8 @@ class EnvironmentTile : public Tile
 public:
 	EnvironmentTile()
 		:EnvironmentType_(EnvironmentTileType::Max),
-		TreeTop_(nullptr)
+		TreeTop_(nullptr),
+		TreeTopCol_(nullptr)
 	{
 
 	}
@@ -17,6 +18,7 @@ public:
 	EnvironmentTileType EnvironmentType_;
 	GameEngineCollision* TileCol_;
 	GameEngineRenderer* TreeTop_;
+	GameEngineCollision* TreeTopCol_;
 	bool IsDestroy_;
 };
 // Ό³Έν :
@@ -58,6 +60,7 @@ private:
 	void MakeStone(int _Posx, int _Posy, int _index);
 	void MakeBranch(int _Posx, int _Posy, int _index);
 
+	void CheckTreeAlpha();
 
 	void Start() override;
 	void Update() override;
