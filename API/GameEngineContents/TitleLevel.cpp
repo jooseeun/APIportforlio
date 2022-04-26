@@ -29,7 +29,6 @@ void TitleLevel::Loading()
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
-
 }
 
 void TitleLevel::Update()

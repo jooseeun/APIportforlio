@@ -44,7 +44,6 @@ protected:
 private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
-
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Time.h"
 #include "FrontMap.h"
+#include "FadeIn.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -50,6 +51,7 @@ void TownLevel::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 
 	}
+
 }
 
 void TownLevel::Update()
@@ -81,6 +83,8 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetMapScale(5544.0f, 6200.0f);
 	Player::MainPlayer->SetColMapName("TownColMap.bmp");
 	Player::MainPlayer->SetSideLevel("BusStopLevel", "Town2Level", "SeedShopLevel");
+
+	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 }
 
 void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

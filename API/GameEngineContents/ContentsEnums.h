@@ -12,6 +12,7 @@ enum class ORDER
 	UI,
 	TOOLUI,
 	ITEM,
+	FADE,
 	MOUSE
 
 };

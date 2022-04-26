@@ -9,6 +9,7 @@
 #include "Mouse.h"
 #include "Time.h"
 #include "FrontMap.h"
+#include "FadeIn.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -84,6 +85,8 @@ void BusStopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetMapScale(2240.0f, 1920.0f);
 	Player::MainPlayer->SetColMapName("BusStopColMap.bmp");
 	Player::MainPlayer->SetSideLevel("FarmLevel", "TownLevel", " ");
+
+	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 }
 
 void BusStopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

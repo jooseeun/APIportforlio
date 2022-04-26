@@ -10,6 +10,7 @@
 #include "Time.h"
 #include "FrontMap.h"
 #include "NPCShopOnner.h"
+#include "FadeIn.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -78,6 +79,8 @@ void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");
 	Player::MainPlayer->SetSideLevel(" ", "TownLevel", " ");
+
+	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 }
 
 void SeedShopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

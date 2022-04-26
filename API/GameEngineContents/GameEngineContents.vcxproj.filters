@@ -119,6 +119,9 @@
     <ClInclude Include="SeedShopUI.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <Filter>Actor\Play\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -236,6 +239,9 @@
     <ClCompile Include="SeedShopUI.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
+      <Filter>Actor\Play\Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -282,6 +288,9 @@
     </Filter>
     <Filter Include="Actor\Play\Environment">
       <UniqueIdentifier>{13f37d19-b047-43e1-904f-b3ce95abf745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Play\Global">
+      <UniqueIdentifier>{c9181efa-fb39-45b6-8c3c-b7a9a6894b13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

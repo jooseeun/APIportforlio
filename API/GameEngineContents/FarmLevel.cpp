@@ -10,6 +10,7 @@
 #include "Tool.h"
 #include "Time.h"
 #include "FrontMap.h"
+#include "FadeIn.h"
 #include "FarmObjectEnvironment.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -89,6 +90,8 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
 	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
 	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
+
+	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 }
 
 void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
