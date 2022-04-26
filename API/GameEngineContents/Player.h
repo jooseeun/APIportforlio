@@ -172,6 +172,7 @@ private:
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
 	int TileCheckDirX[static_cast<int>(PlayerDir::Max)];
 	int TileCheckDirY[static_cast<int>(PlayerDir::Max)];
+	float4 TileCheckDirPos();
 
 	PlayerState CurState_;
 	PlayerDir CurDir_;

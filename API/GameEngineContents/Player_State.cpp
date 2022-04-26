@@ -2,6 +2,7 @@
 #include "BackGround.h"
 #include "ContentsEnums.h"
 #include "EnergyUI.h"
+#include "TileAnimation.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -222,16 +223,36 @@ void Player::WieldStart()
 	if (true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 함수
 	{
 		WieldObject();
+		return;
 	}
+
+	TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GroundAni");
+	if (CurDir_ == PlayerDir::Back)
+	{
+		TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+	}
+	TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+	TileAni_->SetAniString("GroundAni");
 
 	if (true == IsHoeTileCreate()&&"FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
+
 		DirHoeDirtCreateTile();
 	}
 }
 
 void Player::WaterStart()
 {
+	TileCheckDir();
+	TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "WateringAni");
+	if (CurDir_ == PlayerDir::Back)
+	{
+		TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+	}
+	TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f)* (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f)* (MapScaleY_ / 65) });
+	TileAni_->SetAniString("WateringCanTileAni");
+	
+
 	if (true == IsWaterTileCreate() && "FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
 		DirWaterDirtCreateTile();
