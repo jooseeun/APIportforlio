@@ -57,6 +57,18 @@ void Mouse::Update()
 
 void Mouse::CheckPlayerIsLeftMouse()
 {
+	if ("TitleLevel" == GetLevel()->GetNameCopy())
+	{
+		return;
+	}
+
+	static float Time_ = 1.0f;
+	if (0 <= Time_)
+	{
+		Time_ -= GameEngineTime::GetDeltaTime();
+		return;
+	}
+
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
 		if (true == GetMouseCol()->CollisionCheck("ShopNPC", CollisionType::Rect, CollisionType::Rect))
