@@ -26,6 +26,11 @@ public:
 protected:
 
 private:
+	float4 InitPos_;
+	float4 Move_;
+	bool IsStop_;
+
+
 	SeedType DropSeedType_;
 	PlayerItemKind DropItemKind_;
 	PlayerItem DropItem_;
@@ -37,6 +42,7 @@ private:
 	void Start() override;
 	void Update() override;
 	void MoveToPlayer();
+	void DropMove();
 	std::string ItemToString(PlayerItem _Item);
 };
 

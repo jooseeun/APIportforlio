@@ -15,7 +15,7 @@ DropItem::~DropItem()
 
 void DropItem::Start()// 감자 192
 {
-	Object_ = CreateRendererToScale("Objects.bmp",{48,48},static_cast<int>(ORDER::ITEM));
+	Object_ = CreateRendererToScale("Objects.bmp",{48,48},static_cast<int>(ORDER::DROPITEM));
 
 	Object_->CreateAnimation("Objects.bmp", "PhotatoItem", 192, 192, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "KaleItem", 250, 250, 0.8f, true);
@@ -28,7 +28,7 @@ void DropItem::Start()// 감자 192
 	Object_->ChangeAnimation("Max");
 	ObjectCol_ = CreateCollision("DropItem", { 48,48 });
 
-
+	
 }
 std::string DropItem::ItemToString(PlayerItem _Item)
 {
@@ -64,17 +64,41 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		IndexNum_ = 388;
 		return "BranchItem";
 	}
+
+
 }
 void DropItem::Update()
 {
+	
 	if (CurDropItem_ != DropItem_)
 	{
 		Object_->ChangeAnimation(ItemToString(DropItem_));
+		InitPos_ = GetPosition();
+		Move_ = float4{ 50,-200 };
+		IsStop_ = false;
 		CurDropItem_ = DropItem_;
 	}
-	MoveToPlayer();
-}
 
+	if (IsStop_ == false)
+	{
+		DropMove();
+	}
+	else
+	{
+		MoveToPlayer();
+	}
+	
+}
+void DropItem::DropMove()
+{
+	Move_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 500.0f;
+	SetMove(Move_ * GameEngineTime::GetDeltaTime());
+
+	if (GetPosition().y > InitPos_.y)
+	{
+		IsStop_ = true;
+	}
+}
 void DropItem::MoveToPlayer()
 {
 	float4 MoveDir_ = Player::MainPlayer->GetPosition() - GetPosition();
@@ -83,7 +107,7 @@ void DropItem::MoveToPlayer()
 	{
 		return;
 	}
-	if (CheckDir_ <= 16)
+	if (CheckDir_ <= 30)
 	{
 		ItemData* _Item = new ItemData();
 		_Item->ItemKind_ = DropItemKind_;
@@ -96,6 +120,6 @@ void DropItem::MoveToPlayer()
 	}
 
 	MoveDir_.Normal2D();
-	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 90.0f); // 속도
+	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 120.0f); // 속도
 
 }
