@@ -11,6 +11,7 @@
 #include "Time.h"
 #include "FrontMap.h"
 #include "FadeIn.h"
+#include "Money.h"
 #include "FarmObjectEnvironment.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -55,6 +56,7 @@ void FarmLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
 
 	FarmObjectEnvironment::MainFarmObject = CreateActor< FarmObjectEnvironment>();
@@ -104,5 +106,6 @@ void FarmLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
+		Money::MoneySet->NextLevelOn();
 	}
 }
