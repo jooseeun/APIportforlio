@@ -761,9 +761,13 @@ bool Player::IsWaterTileCreate()
 	}
 	else
 	{
-		if (CurItem_ == PlayerItem::WateringCanItem && TileType::Max != GroundTile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
+		if (CurItem_ == PlayerItem::WateringCanItem )
 		{
-			return true;
+		
+			if (TileType::SeedTile == GroundTile->Dirt_ || TileType::HoeDirt == GroundTile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
+			{
+				return true;
+			}
 		}
 		return false;
 	}

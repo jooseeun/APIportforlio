@@ -21,8 +21,8 @@ Tool::Tool()
 Tool::~Tool()
 {
 	{
-		std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-		std::list<ItemData*>::iterator EndIter = ItemList_.end();
+		std::list<ItemData*>::iterator StartIter = ToolSet->ItemList_.begin();
+		std::list<ItemData*>::iterator EndIter = ToolSet->ItemList_.end();
 
 		for (; StartIter != EndIter; ++StartIter)
 		{

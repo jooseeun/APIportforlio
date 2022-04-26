@@ -92,7 +92,6 @@ private:
 	void CheckInventoryMode();
 	void SetInventoryModePivot();
 	bool IsInvenToryMode;
-
 	
 
 };

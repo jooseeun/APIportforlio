@@ -42,14 +42,14 @@ std::string Crops::CropToString(SeedType _SeedType)
 		ItemKind_ = PlayerItemKind::CropsItem;
 		return "Photato";
 	}
-	else if (SeedType::Cauliflower == _SeedType)
+	else if (SeedType::Kale == _SeedType)
 	{
 		IndexNum_ = 45;
 		Item_ = PlayerItem::KaleItem;
 		ItemKind_ = PlayerItemKind::CropsItem;
 		return "Kale";
 	}
-	else if (SeedType::Kale == _SeedType)
+	else if (SeedType::Cauliflower== _SeedType)
 	{
 		IndexNum_ = 20;
 		Item_ = PlayerItem::CauliFlowerItem;

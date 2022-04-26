@@ -11,7 +11,7 @@ enum class EnvironmentTileType
 
 enum class TileType
 {
-	HoeDirt,
+	HoeDirt=50,
 	SeedTile,
 	WaterDirt,
 	Max,
