@@ -584,7 +584,7 @@ std::string Player::CheckSeedSting(SeedType _Type)
 	{
 		return "Cauliflower" + CropNum_;
 	}
-}
+} //? 경고 있음
 bool Player::IsCheckHarvestTile()
 {
 	TileCheckDir();
