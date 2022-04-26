@@ -876,18 +876,30 @@ void Player::WieldObject()
 
 		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
-			if (_Tile->DeathCount_ != 0)
+			if (_Tile->DeathCount_ != 0 )
 			{
+				if (_Tile->DeathCount_ == 3)
+				{
+					_Tile->TreeTop_->Death();
+					//_Tile->IsDestroy_ = true;
+
+					DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+					DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+					DropItem_->SetItem(PlayerItem::BranchItem);
+					DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+				}
 				_Tile->DeathCount_ -= 1;
 				return;
 			}
+
+			
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 			//_Tile->IsDestroy_ = true;
 
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
-			DropItem_->SetItem(PlayerItem::TreeItem);
+			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
 			return;
 		}

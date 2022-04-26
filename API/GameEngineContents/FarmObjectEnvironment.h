@@ -8,13 +8,15 @@ class EnvironmentTile : public Tile
 {
 public:
 	EnvironmentTile()
-		:EnvironmentType_(EnvironmentTileType::Max)
+		:EnvironmentType_(EnvironmentTileType::Max),
+		TreeTop_(nullptr)
 	{
 
 	}
 	int DeathCount_;
 	EnvironmentTileType EnvironmentType_;
 	GameEngineCollision* TileCol_;
+	GameEngineRenderer* TreeTop_;
 	bool IsDestroy_;
 };
 // Ό³Έν :

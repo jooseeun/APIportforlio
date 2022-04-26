@@ -46,17 +46,17 @@ void FarmObjectEnvironment::Update()
 
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 {
-	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "TreeBot.bmp", _index, static_cast<int>(ORDER::GROUND));
+	EnvironmentTile* TreeBot_ = FarmTileMap_->CreateTile<EnvironmentTile>(_Posx, _Posy, "CutTree.bmp", _index, static_cast<int>(ORDER::GROUND));
 	TreeBot_->EnvironmentType_ = EnvironmentTileType::Tree;
-	TreeBot_->DeathCount_ = 3;
+	TreeBot_->DeathCount_ = 6;
 	TreeBot_->TileCol_ = CreateCollision("Tree", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 
-	GameEngineRenderer* TreeTop = CreateRenderer("TreeTop.bmp");
-	TreeTop->SetIndex(_index);
-	TreeTop->SetOrder(static_cast<int>(ORDER::TREETOP));
-	TreeTop->SetPivotType(RenderPivot::BOT);
-	TreeTop->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 20});
+	TreeBot_->TreeTop_ = CreateRenderer("TreeTop.bmp");
+	TreeBot_->TreeTop_->SetIndex(_index);
+	TreeBot_->TreeTop_->SetOrder(static_cast<int>(ORDER::TREETOP));
+	TreeBot_->TreeTop_->SetPivotType(RenderPivot::BOT);
+	TreeBot_->TreeTop_->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 12});
 }
 
 void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ∫Û≈∏¿œ 31
