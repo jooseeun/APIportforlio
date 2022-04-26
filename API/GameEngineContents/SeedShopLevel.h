@@ -2,6 +2,8 @@
 #include "BackGround.h"
 #include "PlayerEnum.h"
 #include "Tool.h"
+#include "SeedShopUI.h"
+#include "Mouse.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
@@ -32,16 +34,22 @@ public:
 
 	}
 
+	inline void CheckOpenShop_()
+	{
+		IsOpenShop_ = MouseSet->IsOpenShop();
+	}
+
 protected:
 	void Loading() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 private:
-
+	Mouse* MouseSet;
+	SeedShopUI* ShopUI_;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
-
+	bool IsOpenShop_;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

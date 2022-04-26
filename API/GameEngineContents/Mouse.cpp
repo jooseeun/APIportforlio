@@ -11,6 +11,7 @@
 
 
 Mouse::Mouse() 
+	:IsOpenShop_(false)
 {
 }
 
@@ -71,10 +72,17 @@ void Mouse::CheckPlayerIsLeftMouse()
 
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
-		if (true == GetMouseCol()->CollisionCheck("SeedShopNPC", CollisionType::Rect, CollisionType::Rect))
+		if (true == GetMouseCol()->CollisionCheck("SeedShopNPC", CollisionType::Rect, CollisionType::Rect))// 충돌처리가 안됩니다. f9를 타고 가봤더니 RectToRect 의 OverRap 에서 false를 반환합니다.
 		{
-			ToolUI::ToolUISet->SetSelectPivot(0);
+			if (GetLevel()->GetNameCopy() == "SeedShopLevel")
+			{
+				IsOpenShop_ = true; 
+			}
+
+			return;
 		}
+
+		
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))

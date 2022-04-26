@@ -11,6 +11,7 @@
 #include "FrontMap.h"
 #include "ShopNPC.h"
 #include "FadeIn.h"
+#include "Money.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -20,7 +21,8 @@
 
 SeedShopLevel::SeedShopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	IsOpenShop_(false)
 {
 }
 
@@ -35,6 +37,9 @@ void SeedShopLevel::Loading()
 		float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 		Back->GetRenderer()->SetPivot(BackImageScale.Half());
 
+		Back->GroundTileMap_.TileRangeSetting(48, 32, { 48,48 });
+		Back->CropsTileMap_.TileRangeSetting(48, 32, { 48,48 });
+
 		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 		Front_->GetRenderer()->SetImage("SeedShopFront.bmp");
 		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
@@ -42,9 +47,12 @@ void SeedShopLevel::Loading()
 
 
 
-		Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+		MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 		ShopNPC* NPC_= CreateActor<ShopNPC>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
+		NPC_->SetPosition({ 256.0f,1090.f });
 
+		ShopUI_ = CreateActor<SeedShopUI>(static_cast<int>(ORDER::FRONTUI), "SeedShopUI");
+		ShopUI_->Off();
 		if (nullptr == Player::MainPlayer)
 		{
 			Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -53,7 +61,7 @@ void SeedShopLevel::Loading()
 			EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 			Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 			Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
-
+			Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 		}
 
 		
@@ -70,6 +78,11 @@ void SeedShopLevel::Update()
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 
 	CurSelectPivot_ = NextSelectPivot_;
+	CheckOpenShop_();
+	if (IsOpenShop_ == true)
+	{
+		ShopUI_->On();
+	}
 }
 
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -79,6 +92,8 @@ void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");
 	Player::MainPlayer->SetSideLevel(" ", "TownLevel", " ");
+	Player::MainPlayer->SetGroundTileMap(nullptr);
+	Player::MainPlayer->SetCropsTileMap(nullptr);
 
 	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 }
@@ -93,7 +108,7 @@ void SeedShopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
-
+		Money::MoneySet->NextLevelOn();
 
 	}
 }

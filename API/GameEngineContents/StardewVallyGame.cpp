@@ -335,6 +335,7 @@ void StardewVallyGame::GameInit()
 	StoneAni->CutCount(10, 1);
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
+		GameEngineInput::GetInst()->CreateKey("CheckTest", '1');
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
 	}
 

@@ -220,21 +220,25 @@ void Player::WalkStart()
 
 void Player::WieldStart()
 {
-	if (true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 함수
+	if (GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		WieldObject();
-		return;
-	}
+		if (true == IsCheckObjectTile()) //오브젝트가 앞에 있는지 확인하는 함수
+		{
+			WieldObject();
+			return;
+		}
 
-	TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GroundAni");
-	if (CurDir_ == PlayerDir::Back)
-	{
-		TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GroundAni");
+		if (CurDir_ == PlayerDir::Back)
+		{
+			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		}
+		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+		TileAni_->SetAniString("GroundAni");
 	}
-	TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
-	TileAni_->SetAniString("GroundAni");
+	
 
-	if (true == IsHoeTileCreate()&&"FarmLevel" == this->GetLevel()->GetNameCopy())
+	if ("FarmLevel" == this->GetLevel()->GetNameCopy()&& true == IsHoeTileCreate())
 	{
 
 		DirHoeDirtCreateTile();
@@ -243,17 +247,20 @@ void Player::WieldStart()
 
 void Player::WaterStart()
 {
-	TileCheckDir();
-	TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "WateringAni");
-	if (CurDir_ == PlayerDir::Back)
+	if (GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		TileCheckDir();
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "WateringAni");
+		if (CurDir_ == PlayerDir::Back)
+		{
+			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		}
+		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+		TileAni_->SetAniString("WateringCanTileAni");
 	}
-	TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f)* (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f)* (MapScaleY_ / 65) });
-	TileAni_->SetAniString("WateringCanTileAni");
 	
 
-	if (true == IsWaterTileCreate() && "FarmLevel" == this->GetLevel()->GetNameCopy())
+	if ("FarmLevel" == this->GetLevel()->GetNameCopy()&& true == IsWaterTileCreate())
 	{
 		DirWaterDirtCreateTile();
 	}
@@ -261,7 +268,7 @@ void Player::WaterStart()
 
 void Player::SeedStart()
 {
-	if (true == IsSeedTileCreate() && "FarmLevel" == this->GetLevel()->GetNameCopy())
+	if ( "FarmLevel" == this->GetLevel()->GetNameCopy()&&true == IsSeedTileCreate())
 	{
 		DirSeedCreateTile();
 	}

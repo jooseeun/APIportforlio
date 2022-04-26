@@ -66,6 +66,10 @@ void FarmHouseLevel::Loading()
 
 void FarmHouseLevel::Update()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("CheckTest"))
+	{
+		GameEngine::GetInst().ChangeLevel("SeedShopLevel");
+	}
 	GetItemPos();
 
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
@@ -107,7 +111,7 @@ void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
 
-
+		Money::MoneySet->NextLevelOn();
 	}
 
 }

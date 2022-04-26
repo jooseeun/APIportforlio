@@ -30,8 +30,14 @@ public:
 	{
 		return MouseCol_;
 	}
+
+	inline bool IsOpenShop()
+	{
+		return IsOpenShop_;
+	}
 protected:
 private:
+	bool IsOpenShop_;
 	GameEngineCollision* MouseCol_;
 	float4 CurPos_;
 	void Start() override;
