@@ -323,8 +323,16 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* Money = GameEngineImageManager::GetInst()->Find("Money.bmp");
 	Money->CutCount(10, 1); //32,64
 	GameEngineImage* TreeAni = GameEngineImageManager::GetInst()->Find("TreeAni.bmp");
-	TreeAni->CutCount(6, 1); //32,64
+	TreeAni->CutCount(6, 1); 
 	
+	GameEngineImage* WateringAni = GameEngineImageManager::GetInst()->Find("WateringCanTileAni.bmp");
+	WateringAni->CutCount(10, 1);
+	GameEngineImage* GrassAni = GameEngineImageManager::GetInst()->Find("GrassAni.bmp");
+	GrassAni->CutCount(10, 1);
+	GameEngineImage* GroundAni = GameEngineImageManager::GetInst()->Find("GroundAni.bmp");
+	GroundAni->CutCount(10, 1);
+	GameEngineImage* StoneAni = GameEngineImageManager::GetInst()->Find("StoneAni.bmp");
+	StoneAni->CutCount(10, 1);
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
