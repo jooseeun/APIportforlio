@@ -11,6 +11,8 @@
 #include "FrontMap.h"
 #include "Time.h"
 #include "FadeIn.h"
+#include "ShopNPC.h"
+#include "Money.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -47,6 +49,7 @@ void FarmHouseLevel::Loading()
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
+	ShopNPC* NPC_ = CreateActor<ShopNPC>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -55,6 +58,7 @@ void FarmHouseLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 		
 	}
 	

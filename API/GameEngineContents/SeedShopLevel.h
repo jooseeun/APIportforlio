@@ -37,8 +37,8 @@ protected:
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
-
 private:
+
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 

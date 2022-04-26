@@ -9,7 +9,7 @@
 #include "Mouse.h"
 #include "Time.h"
 #include "FrontMap.h"
-#include "NPCShopOnner.h"
+#include "ShopNPC.h"
 #include "FadeIn.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -40,10 +40,10 @@ void SeedShopLevel::Loading()
 		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
 		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
 
-		NPCShopOnner* NPC_= CreateActor<NPCShopOnner>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
 
 
 		Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+		ShopNPC* NPC_= CreateActor<ShopNPC>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
 
 		if (nullptr == Player::MainPlayer)
 		{
@@ -74,7 +74,7 @@ void SeedShopLevel::Update()
 
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	//Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
+
 	Player::MainPlayer->SetPosition({ 414.0f,1770.f });
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");

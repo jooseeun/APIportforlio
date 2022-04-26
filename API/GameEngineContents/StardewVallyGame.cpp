@@ -324,6 +324,7 @@ void StardewVallyGame::GameInit()
 	Money->CutCount(10, 1); //32,64
 	GameEngineImage* TreeAni = GameEngineImageManager::GetInst()->Find("TreeAni.bmp");
 	TreeAni->CutCount(6, 1); //32,64
+	
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);

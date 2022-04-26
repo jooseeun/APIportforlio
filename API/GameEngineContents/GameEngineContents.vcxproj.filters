@@ -71,9 +71,6 @@
     <ClInclude Include="NPCRobin.h">
       <Filter>Actor\Play\NPC</Filter>
     </ClInclude>
-    <ClInclude Include="NPCShopOnner.h">
-      <Filter>Actor\Play\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="NPCAnimalShopOnner.h">
       <Filter>Actor\Play\NPC</Filter>
     </ClInclude>
@@ -121,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="FadeIn.h">
       <Filter>Actor\Play\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopNPC.h">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Money.h">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +194,6 @@
     <ClCompile Include="NPCRobin.cpp">
       <Filter>Actor\Play\NPC</Filter>
     </ClCompile>
-    <ClCompile Include="NPCShopOnner.cpp">
-      <Filter>Actor\Play\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="NPCAnimalShopOnner.cpp">
       <Filter>Actor\Play\NPC</Filter>
     </ClCompile>
@@ -241,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="FadeIn.cpp">
       <Filter>Actor\Play\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopNPC.cpp">
+      <Filter>Actor\Play\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Money.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
