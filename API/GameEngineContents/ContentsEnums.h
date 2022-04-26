@@ -17,6 +17,7 @@ enum class ORDER
 	TOOLUI,
 	UIFONT,
 	ITEM,
+	FRONTUI,
 	FADE,
 	MOUSE
 

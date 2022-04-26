@@ -23,12 +23,17 @@ private:
 	GameEngineRenderer* HourRender_;
 	GameEngineRenderer* MinuteRender_;
 	GameEngineRenderer* AMPMRender_;
+	GameEngineRenderer* NightAlpha_;
 	int Date_;
+	int Alpha_;
 	void MinuteUpdate();
 	void HourUpdate();
 	void AMPMUpdate();
+	void AlphaUpdate();
+
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+
 };
 
