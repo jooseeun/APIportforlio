@@ -10,15 +10,21 @@ public:
 	EnvironmentTile()
 		:EnvironmentType_(EnvironmentTileType::Max),
 		TreeTop_(nullptr),
-		TreeTopCol_(nullptr)
+		TreeTopCol_(nullptr),
+		IsShake_(false)
 	{
 
 	}
 	int DeathCount_;
 	EnvironmentTileType EnvironmentType_;
 	GameEngineCollision* TileCol_;
+
+	float TreeTopX_;
+	float TreeTopY_;
 	GameEngineRenderer* TreeTop_;
+	GameEngineRenderer* TreeAni_;
 	GameEngineCollision* TreeTopCol_;
+	bool IsShake_;
 	bool IsDestroy_;
 };
 // Ό³Έν :
@@ -60,7 +66,9 @@ private:
 	void MakeStone(int _Posx, int _Posy, int _index);
 	void MakeBranch(int _Posx, int _Posy, int _index);
 
-	void CheckTreeAlpha();
+	void TreeAni(GameEngineRenderer* _TreeTop);
+
+	void CheckTreeAnimation();
 
 	void Start() override;
 	void Update() override;

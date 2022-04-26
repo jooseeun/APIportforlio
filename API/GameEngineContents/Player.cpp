@@ -876,8 +876,14 @@ void Player::WieldObject()
 
 		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
+			
 			if (_Tile->DeathCount_ != 0 )
 			{
+				if (_Tile->DeathCount_ >= 3)
+				{
+					_Tile->IsShake_ = true;
+				}
+
 				if (_Tile->DeathCount_ == 3)
 				{
 					_Tile->TreeTop_->Death();
@@ -888,7 +894,9 @@ void Player::WieldObject()
 					DropItem_->SetItem(PlayerItem::BranchItem);
 					DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
 				}
+				
 				_Tile->DeathCount_ -= 1;
+
 				return;
 			}
 

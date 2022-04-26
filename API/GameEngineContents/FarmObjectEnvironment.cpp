@@ -25,12 +25,12 @@ void FarmObjectEnvironment::Update()
 	{
 		MakeTree(55, 18, 0);
 		MakeTree(58, 21, 0);
-		MakeTree(67, 24, 1);
+		MakeTree(67, 24, 0);
 		MakeTree(64, 28, 0);
-		MakeTree(51, 25, 1);
+		MakeTree(51, 25, 0);
 		MakeTree(48, 22, 0);
-		MakeTree(73, 23, 1);
-		MakeTree(59, 29, 1);
+		MakeTree(73, 23, 0);
+		MakeTree(59, 29, 0);
 
 		MakeStone(65, 19, 4);
 		MakeStone(66, 19, 3);
@@ -42,7 +42,7 @@ void FarmObjectEnvironment::Update()
 		CheckMake_ = true;
 	}
 
-	CheckTreeAlpha();
+	CheckTreeAnimation();
 }
 
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
@@ -58,11 +58,25 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 	TreeBot_->TreeTop_->SetOrder(static_cast<int>(ORDER::TREETOP));
 	TreeBot_->TreeTop_->SetPivotType(RenderPivot::BOT);
 	TreeBot_->TreeTop_->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 12});
+	TreeBot_->TreeTopX_ = ((float)_Posx + 0.5f) * (5120.0f / 80);
+	TreeBot_->TreeTopY_ = ((float)_Posy + 0.5f) * (4160.0f / 65) - 12;
+
+	TreeBot_->TreeAni_ = CreateRenderer("TreeAni.bmp");
+	TreeBot_->TreeAni_->SetPivotType(RenderPivot::BOT);
+	TreeBot_->TreeAni_->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 12 });
+	TreeBot_->TreeAni_->CreateAnimation("TreeAni.bmp", "ShakeTree", _index , _index  + 5, 0.06f, true);
+	TreeBot_->TreeAni_->CreateAnimation("TreeAni.bmp", "ShakeTree2", _index , _index + 5, 0.06f, true);
+	TreeBot_->TreeAni_->SetOrder(static_cast<int>(ORDER::TREETOP));
+	TreeBot_->TreeAni_->Off();
 
 	TreeBot_->TreeTopCol_ = CreateCollision("TreeCol", { 192,300 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 180 });
 	Tree.push_back(TreeBot_);
 }
-void FarmObjectEnvironment::CheckTreeAlpha()
+void FarmObjectEnvironment::TreeAni(GameEngineRenderer* _TreeTop)
+{
+	_TreeTop->SetPivot({ _TreeTop->GetImagePivot().x - 10, _TreeTop->GetImagePivot().y });
+}
+void FarmObjectEnvironment::CheckTreeAnimation()
 {
 	std::list<EnvironmentTile*>::iterator StartIter = Tree.begin();
 	std::list<EnvironmentTile*>::iterator EndIter = Tree.end();
@@ -72,6 +86,20 @@ void FarmObjectEnvironment::CheckTreeAlpha()
 		if (nullptr == (*StartIter))
 		{
 			continue;
+		}
+
+		if (true == (*StartIter)->IsShake_)
+		{
+			(*StartIter)->TreeTop_->Off();
+			(*StartIter)->TreeAni_->On();
+			(*StartIter)->TreeAni_->ChangeAnimation("ShakeTree");
+			if (true == (*StartIter)->TreeAni_->IsEndAnimation())
+			{
+				(*StartIter)->TreeAni_->ChangeAnimation("ShakeTree2");
+				(*StartIter)->TreeAni_->Off();
+				(*StartIter)->TreeTop_->On();
+				(*StartIter)->IsShake_ = false;
+			}
 		}
 
 		if (true == (*StartIter)->TreeTopCol_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
