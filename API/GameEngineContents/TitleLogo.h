@@ -20,7 +20,15 @@ public:
 protected:
 	GameEngineCollision* StartCol_;
 	GameEngineCollision* ExitCol_;
+	GameEngineCollision* MultyCol_;
+	GameEngineCollision* LoadCol_;
 
+	GameEngineRenderer* StartButton;
+	GameEngineRenderer* LoadButton;
+	GameEngineRenderer* MultyButton;
+	GameEngineRenderer* ExitButton;
+
+	void IsButtonColUpdate();
 	void Start();
 	void Update() override;
 
