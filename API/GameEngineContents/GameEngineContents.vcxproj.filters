@@ -113,9 +113,6 @@
     <ClInclude Include="FarmObjectEnvironment.h">
       <Filter>Actor\Play\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Actor\Play\Environment</Filter>
-    </ClInclude>
     <ClInclude Include="FrontMap.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
@@ -231,9 +228,6 @@
       <Filter>Actor\Play\Crops</Filter>
     </ClCompile>
     <ClCompile Include="FarmObjectEnvironment.cpp">
-      <Filter>Actor\Play\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
       <Filter>Actor\Play\Environment</Filter>
     </ClCompile>
     <ClCompile Include="FrontMap.cpp">

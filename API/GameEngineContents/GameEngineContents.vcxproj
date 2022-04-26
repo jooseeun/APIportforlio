@@ -320,10 +320,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Tree.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BabyChicken.cpp">
@@ -476,10 +472,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TownLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
       <SubType>
       </SubType>
     </ClCompile>

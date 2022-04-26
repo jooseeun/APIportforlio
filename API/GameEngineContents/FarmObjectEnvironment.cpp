@@ -24,13 +24,13 @@ void FarmObjectEnvironment::Update()
 	if (CheckMake_ == false)
 	{
 		MakeTree(55, 18, 0);
-		/*MakeTree(58, 21, 0);
+		MakeTree(58, 21, 0);
 		MakeTree(67, 24, 1);
 		MakeTree(64, 28, 0);
 		MakeTree(51, 25, 1);
 		MakeTree(48, 22, 0);
 		MakeTree(73, 23, 1);
-		MakeTree(59, 29, 1);*/
+		MakeTree(59, 29, 1);
 
 		MakeStone(65, 19, 4);
 		MakeStone(66, 19, 3);
@@ -59,7 +59,7 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 	TreeBot_->TreeTop_->SetPivotType(RenderPivot::BOT);
 	TreeBot_->TreeTop_->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 12});
 
-	TreeBot_->TreeTopCol_ = CreateCollision("TreeCol", { 192,336 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 60 });
+	TreeBot_->TreeTopCol_ = CreateCollision("TreeCol", { 192,300 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 180 });
 	Tree.push_back(TreeBot_);
 }
 void FarmObjectEnvironment::CheckTreeAlpha()
@@ -76,7 +76,7 @@ void FarmObjectEnvironment::CheckTreeAlpha()
 
 		if (true == (*StartIter)->TreeTopCol_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
 		{
-			(*StartIter)->TreeTop_->SetAlpha(120);
+			(*StartIter)->TreeTop_->SetAlpha(80);
 			return;
 		}
 		else
