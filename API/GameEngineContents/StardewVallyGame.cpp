@@ -308,7 +308,7 @@ void StardewVallyGame::GameInit()
 	GameEngineImage* Time = GameEngineImageManager::GetInst()->Find("Time.bmp");
 	Time->CutCount(2, 13);
 	GameEngineImage* ItemNum = GameEngineImageManager::GetInst()->Find("ItemCountNum.bmp");
-	ItemNum->CutCount(10, 1);
+	ItemNum->CutCount(11, 1);
 
 
 	GameEngineImage* TreeTop = GameEngineImageManager::GetInst()->Find("TreeTop.bmp");

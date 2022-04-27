@@ -112,7 +112,7 @@ private:
 	void UpdateInvenPos();
 	void GetToolUINum();
 
-
+	void ItemCountRender();
 	void CheckInventoryMode();
 	void SetInventoryModePivot();
 	bool IsInvenToryMode;

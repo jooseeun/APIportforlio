@@ -112,7 +112,7 @@ void Tool::Start()
 		PhotatoSeed_->Render->CameraEffectOff();
 		PhotatoSeed_->InvenFloor_ = InvenFloor::First;
 		PhotatoSeed_->Click_ = false;
-		PhotatoSeed_->ItemCount_ = 4;
+		PhotatoSeed_->ItemCount_ = 1;
 		ItemList_.push_back(PhotatoSeed_);
 
 		ItemData* KaleSeed_ = new ItemData();
@@ -234,9 +234,10 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 		{
 			if (0 == (*StartIter)->ItemCount_ )
 			{
-				(*StartIter)->InvenPivot_ = 100;
 				(*StartIter)->Render->Off();
-				(*StartIter)->IsInven = false;// 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
+				(*StartIter)->NumRender->Off();
+				StartIter = ItemList_.erase(StartIter);
+				//(*StartIter)->IsInven = false;// 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
 				//일단 삭제는 x
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
@@ -275,10 +276,9 @@ void Tool::UpdateShopInvenPos()
 		{
 			if (0 == (*StartIter)->ItemCount_)
 			{
-				(*StartIter)->InvenPivot_ = 100;
-				(*StartIter)->Render->Off();
-				(*StartIter)->IsInven = false;// 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
-				//일단 삭제는 x
+				StartIter = ItemList_.erase(StartIter);
+				
+
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
@@ -298,8 +298,29 @@ void Tool::UpdateShopInvenPos()
 		}
 	}
 }
+void Tool::ItemCountRender()
+{
+	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
+	std::list<ItemData*>::iterator EndIter = ItemList_.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
+		if ((*StartIter)->NumRender == nullptr)
+		{
+			(*StartIter)->NumRender = CreateRenderer("ItemCountNum.bmp");
+			(*StartIter)->NumRender->SetIndex(10);
+		}
+	}
+}
 void Tool::ItemCountRenderUpdate()
 {
+	ItemCountRender();
+
 	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	for (; StartIter != EndIter; ++StartIter)
@@ -309,41 +330,25 @@ void Tool::ItemCountRenderUpdate()
 			continue;
 		}
 
-		if (1 < (*StartIter)->ItemCount_) // 아이템이 한개이상일때부터 숫자 렌더링 한다.
+		if ((*StartIter)->ItemCount_ > 1)
 		{
-			if ((*StartIter)->NumRender != nullptr)
-			{
-				(*StartIter)->NumRender->On();
-			}
-			else
-			{
-				(*StartIter)->NumRender = CreateRenderer("ItemCountNum.bmp");
-			}
+
 			(*StartIter)->NumRender->SetIndex((*StartIter)->ItemCount_);
+		}
 
-
-			if (IsShop_ == true)
+			if (IsShop_ == true)//렌더링
 			{
-				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24+148,
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 -145});
+				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24 + 148,
+					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 - 145 });
 			}
 			else
 			{
-				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_)+24,
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))+24 });
+				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24,
+					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 });
 
 			}
 			(*StartIter)->NumRender->CameraEffectOff();
-			
-		}
-		else if(1 == (*StartIter)->ItemCount_)
-		{
-
-			if ((*StartIter)->NumRender != nullptr)
-			{
-				(*StartIter)->NumRender->Death();
-			}
-		}
+		
 	}
 	
 }
