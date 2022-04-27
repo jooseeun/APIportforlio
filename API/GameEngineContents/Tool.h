@@ -100,6 +100,7 @@ private:
 	float NumPivot_;
 	float InventoryModeXPivot_;
 	float InventoryModeYPivot_;
+	float InvenFloorShopYPivot_;
 	float InvenFloorYPivot_;
 	float MouseX_;
 	float MouseY_;

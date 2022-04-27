@@ -18,6 +18,7 @@ Tool::Tool()
 	FirstPivot_ = 288.0;
 	NumPivot_ = 64.0;
 	InvenFloorYPivot_ = 78;
+	InvenFloorShopYPivot_ = 70;
 }
 
 Tool::~Tool()
@@ -183,6 +184,10 @@ void Tool::SetInventoryModePivot()
 			if (InvenFloor::Second == (*StartIter)->InvenFloor_)
 			{
 				(*StartIter)->Render->On(); // 가방안에 있으면 Render꺼버림
+				if ((*StartIter)->NumRender != nullptr)
+				{
+					(*StartIter)->NumRender->On();
+				}
 			}
 		}
 	}
@@ -202,6 +207,10 @@ void Tool::SetInventoryModePivot()
 				if (InvenFloor::Second == (*StartIter)->InvenFloor_)
 				{
 					(*StartIter)->Render->Off(); // 가방안에 있으면 Render꺼버림
+					if ((*StartIter)->NumRender != nullptr)
+					{
+						(*StartIter)->NumRender->Off();
+					}
 				}
 			}
 		}
@@ -273,14 +282,15 @@ void Tool::UpdateShopInvenPos()
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
+				(*StartIter)->Render->On();
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 148 ,
-					28 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))  -145});
+					28 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))  -145});
 			}
 			else
 			{
-			
+				(*StartIter)->Render->On(); //2번째줄아이들 상점에 렌더링하기위해서
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 148,
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
+					0 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
 				ItemCountRenderUpdate();
 			}
 
@@ -331,7 +341,7 @@ void Tool::ItemCountRenderUpdate()
 
 			if ((*StartIter)->NumRender != nullptr)
 			{
-				(*StartIter)->NumRender->Off();
+				(*StartIter)->NumRender->Death();
 			}
 		}
 	}
