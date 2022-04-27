@@ -3,6 +3,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // Ό³Έν :
 struct ItemData
@@ -13,6 +14,8 @@ struct ItemData
 		ItemCount_(1),
 		Click_(false),
 		IsInven(true),
+		IsSell_(false),
+		SellValue_(0),
 		ItemName_(PlayerItem::Max),
 		ItemKind_(PlayerItemKind::NoItem),
 		InvenFloor_(InvenFloor::Max)
@@ -25,7 +28,9 @@ struct ItemData
 	InvenFloor InvenFloor_;
 	int InvenPivot_;
 	int ItemCount_;
+	size_t SellValue_;
 	bool Click_;
+	bool IsSell_;
 	bool IsInven;
 };
 
@@ -77,18 +82,22 @@ public:
 	{
 		IsShop_ = false;
 	}
-
+	inline bool IsShopCheck()
+	{
+		return IsShop_;
+	}
 	void ItemUse(PlayerItem _Item);
-	void CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex);
+	void CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex, size_t _SellValue);
 	void SetClickItem(int _Pivot);
 
 protected:
 
 private:
-	
+
+	std::vector<GameEngineCollision*> ShopColl_;
 	bool IsShop_;
 	void UpdateShopInvenPos();
-
+	void ShopUpdate();
 	std::list<ItemData*> ItemList_;
 	PlayerItem ItemPos_[24];
 	int ItemCount_[24];

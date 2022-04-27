@@ -5,7 +5,8 @@
 
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
-DropItem::DropItem() 
+DropItem::DropItem()
+	:SellValue_(0)
 {
 
 }
@@ -45,58 +46,69 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 	if (PlayerItem::PhotatoItem == _Item)
 	{
 		IndexNum_= 192;
+		SellValue_ = 80;
 		return "PhotatoItem";
 	}
 	else if (PlayerItem::KaleItem == _Item)
 	{
 		IndexNum_ = 250;
+		SellValue_ = 110;
 		return "KaleItem";
 	}
 	else if (PlayerItem::CauliFlowerItem == _Item)
 	{
 		IndexNum_ = 190;
+		SellValue_ = 175;
 		return "CauliFlowerItem";
 	}
 	else if (PlayerItem::ParsnipItem == _Item)
 	{
 		IndexNum_ = 24;
+		SellValue_ = 35;
 		return "ParsnipItem";
 	}
 	else if (PlayerItem::BeanItem == _Item)
 	{
 		IndexNum_ = 188;
+		SellValue_ = 40;
 		return "BeanItem";
 	}
 	else if (PlayerItem::MelonItem == _Item)
 	{
 		IndexNum_ = 254;
+		SellValue_ = 250;
 		return "MelonItem";
 	}
 	else if (PlayerItem::PepperItem == _Item)
 	{
 		IndexNum_ = 260;
+		SellValue_ = 40;
 		return "PepperItem";
 	}
 	else if (PlayerItem::BlueberrieItem == _Item)
 	{
 		IndexNum_ = 258;
+		SellValue_ = 50;
 		return "BlueberrieItem";
 	}
 	else if (PlayerItem::StoneItem == _Item)
 	{
 		IndexNum_ = 390;
+		SellValue_ = 10;
 		return "StoneItem";
 		
 	}
 	else if (PlayerItem::GrassItem == _Item)
 	{
 		IndexNum_ = 771;
+		SellValue_ = 10;
 		return "GrassItem";
 
 	}
 	else if (PlayerItem::BranchItem == _Item || PlayerItem::TreeItem == _Item)
 	{
 		IndexNum_ = 388;
+		SellValue_ = 10;
 		return "BranchItem";
 	}
 
@@ -145,7 +157,7 @@ void DropItem::MoveToPlayer()
 	if (CheckDir_ <= 50)
 	{
 
-		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_);
+		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_, SellValue_);
 
 
 		Death();

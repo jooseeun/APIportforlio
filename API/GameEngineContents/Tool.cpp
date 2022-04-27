@@ -1,6 +1,7 @@
 #include "Tool.h"
 #include "ToolUI.h"
 #include "ContentsEnums.h"
+#include "Money.h"
 #include <GameEngine/GameEngineFont.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -137,21 +138,95 @@ void Tool::Start()
 		LongSword_->InvenFloor_ = InvenFloor::First;
 		LongSword_->Click_ = false;
 		ItemList_.push_back(LongSword_);
+
+	}
+
+	{
+		{
+			float InvenFirstXPivot_ = -336.0f + 480.0f;
+			float InvenFirstYPivot_ = -484.0f+340.0f;
+			float InvenNumPivot_ = 64.0f;
+			float InvenFloorPivot_ = 72.0f;
+			ShopColl_.push_back(CreateCollision("Inven1Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven2Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven3Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven4Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven5Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven6Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven7Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven8Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven9Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven10Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven11Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven12Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven13Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven14Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven15Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven16Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven17Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven18Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven19Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven20Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven21Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven22Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven23Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+			ShopColl_.push_back(CreateCollision("Inven24Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+
+			
+			for (int i = 0 ; i<ShopColl_.size(); i++)
+			{
+				if (nullptr == ShopColl_[i])
+				{
+					continue;
+				}
+				ShopColl_[i]->CameraEffectOff();
+			}
+
+			for (int i = 0; i < ShopColl_.size(); i++)
+			{
+				if (nullptr == ShopColl_[i])
+				{
+					continue;
+				}
+				ShopColl_[i]->Off();
+			}
+			
+		}
 	}
 }
-
-void Tool::Update()
+void Tool::ShopUpdate()
 {
-	GetCurMousePos();
-	CheckInventoryMode();
 	if (IsShop_ == true)
 	{
 		UpdateShopInvenPos();
+		for (int i = 0; i < ShopColl_.size(); i++)
+		{
+			if (nullptr == ShopColl_[i])
+			{
+				continue;
+			}
+			ShopColl_[i]->On();
+		}
 	}
 	else
 	{
 		UpdateInvenPos();
+		for (int i = 0; i < ShopColl_.size(); i++)
+		{
+			if (nullptr == ShopColl_[i])
+			{
+				continue;
+			}
+			ShopColl_[i]->Off();
+		}
 	}
+
+}
+void Tool::Update()
+{
+	GetCurMousePos();
+	CheckInventoryMode();
+	ShopUpdate();
 	GetToolUINum();
 
 }
@@ -237,6 +312,7 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
 				(*StartIter)->InvenPivot_=100;
+				(*StartIter)->IsInven = false;
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
@@ -277,9 +353,16 @@ void Tool::UpdateShopInvenPos()
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
 				(*StartIter)->InvenPivot_ = 100;
-				
+				(*StartIter)->IsInven = false;
 
 			}
+			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true ) // 판매기능
+			{
+				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_* (*StartIter)->ItemCount_);
+				(*StartIter)->ItemCount_ = 0;
+				(*StartIter)->Click_ = false;
+			}
+
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
 				(*StartIter)->Render->On();
@@ -352,7 +435,7 @@ void Tool::ItemCountRenderUpdate()
 	}
 	
 }
-void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex)
+void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex , size_t _SellValue)
 {
 	ItemData* _CreateItem = new ItemData();
 	_CreateItem->ItemKind_ = _ItemKind;
@@ -368,7 +451,7 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 			continue;
 		}
 
-		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
+		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_ && (*StartIter)->ItemCount_ != 0) // 이미 아이템이 존재한다면 숫자 up
 		{
 			if ((*StartIter)->ItemCount_ + 1 < 10)
 			{
@@ -404,12 +487,22 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 	_CreateItem->Render = CreateRenderer(_RenderFileName);
 	_CreateItem->Render->SetIndex(_RenderIndex);
 	_CreateItem->Render->CameraEffectOff();
+	if (_ItemKind == PlayerItemKind::CropsItem ||
+		_ItemKind == PlayerItemKind::ObjectItem||
+		_ItemKind == PlayerItemKind::SeedItem)
+	{
+		_CreateItem->IsSell_ = true;
+		_CreateItem->SellValue_ = _SellValue;
+	}
+
+	
 	ToolSet->ItemList_.push_back(_CreateItem);
 }
 
 void Tool::SetClickItem(int _Pivot)
 {
 	// 클릭된 아이템 피봇을 받아 그 피폿을 true로 바꿈 -> 그러면 마우스 옆에 붙음
+
 	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	for (; StartIter != EndIter; ++StartIter)
@@ -418,19 +511,27 @@ void Tool::SetClickItem(int _Pivot)
 		{
 			continue;
 		}
-
-		if (true == (*StartIter)->Click_)
+		if (IsShop_ == false)
 		{
-			(*StartIter)->InvenPivot_ = _Pivot;
-			if (_Pivot < 12)
+			if (true == (*StartIter)->Click_)
 			{
-				(*StartIter)->InvenFloor_ = InvenFloor::First;
+				(*StartIter)->InvenPivot_ = _Pivot;
+				if (_Pivot < 12)
+				{
+					(*StartIter)->InvenFloor_ = InvenFloor::First;
+				}
+				else if (_Pivot > 12 || _Pivot == 12)
+				{
+					(*StartIter)->InvenFloor_ = InvenFloor::Second;
+				}
+				(*StartIter)->Click_ = false;
 			}
-			else if (_Pivot > 12||_Pivot==12)
+
+			else if (_Pivot == (*StartIter)->InvenPivot_)
 			{
-				(*StartIter)->InvenFloor_ = InvenFloor::Second;
+				(*StartIter)->Click_ = true;
+
 			}
-			(*StartIter)->Click_ = false;
 		}
 
 		else if (_Pivot == (*StartIter)->InvenPivot_)
@@ -438,6 +539,7 @@ void Tool::SetClickItem(int _Pivot)
 			(*StartIter)->Click_ = true;
 
 		}
+		
 	}
 
 }

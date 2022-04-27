@@ -93,7 +93,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 		}
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
+	if (true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
 	{
 		if (false == ToolUI::ToolUISet->GetIsInventory())
 		{
@@ -161,7 +161,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 			}
 		}
 
-		if (true == ToolUI::ToolUISet->GetIsInventory())
+		if (true == ToolUI::ToolUISet->GetIsInventory() || true == Tool::ToolSet->IsShopCheck())
 		{
 			if (true == GetMouseCol()->CollisionCheck("Inven1Col", CollisionType::Rect, CollisionType::Rect))
 			{
@@ -205,7 +205,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 			else if (true == GetMouseCol()->CollisionCheck("Inven9Col", CollisionType::Rect, CollisionType::Rect))
 			{
 				Tool::ToolSet->SetClickItem(8);
-			}
+			} 
 			else if (true == GetMouseCol()->CollisionCheck("Inven10Col", CollisionType::Rect, CollisionType::Rect))
 			{
 				Tool::ToolSet->SetClickItem(9);
