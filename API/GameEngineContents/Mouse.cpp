@@ -82,7 +82,15 @@ void Mouse::CheckPlayerIsLeftMouse()
 			return;
 		}
 
-		
+		if (true == GetMouseCol()->CollisionCheck("ShopExit", CollisionType::Rect, CollisionType::Rect))
+		{
+			if (GetLevel()->GetNameCopy() == "SeedShopLevel")
+			{
+				IsOpenShop_ = false;
+			}
+
+			return;
+		}
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))

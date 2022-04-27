@@ -83,6 +83,10 @@ void SeedShopLevel::Update()
 	{
 		ShopUI_->On();
 	}
+	else if (IsOpenShop_ == false)
+	{
+		ShopUI_->Off();
+	}
 }
 
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
