@@ -7,6 +7,11 @@
 // Ό³Έν :
 struct ItemData
 {
+	ItemData()
+		:NumRender(nullptr),
+		Render(nullptr)
+	{
+	}
 	GameEngineRenderer* Render;
 	GameEngineRenderer* NumRender;
 	PlayerItem ItemName_;
@@ -68,13 +73,13 @@ public:
 	}
 
 	void ItemUse(PlayerItem _Item);
-	void CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex);
+	void CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex);
 	void SetClickItem(int _Pivot);
 
 protected:
 
 private:
-
+	ItemData* _CreateItem;
 	bool IsShop_;
 	void UpdateShopInvenPos();
 

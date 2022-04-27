@@ -21,6 +21,11 @@ enum class SeedType
 	Photato,
 	Cauliflower,
 	Kale,
+	Bean,
+	Blueberrie,
+	Melon,
+	Parsnip,
+	Pepper,
 	Max,
 };
 enum class PlayerState 
@@ -59,15 +64,19 @@ enum class PlayerItemKind
 enum class PlayerItem
 {
 	Nothing,
+
 	WieldItem=10,
 	AxItem,
 	HoeItem,
 	PickItem,
+
 	WaterItem=20,
 	WateringCanItem,
+
 	HitItem=30,
 	SickleItem,
 	LongSwordItem,
+
 	SeedItem=40,
 	PhatatoSeedItem,
 	KaleSeedItem,
@@ -77,10 +86,17 @@ enum class PlayerItem
 	BlueberrieSeedItem,
 	MelonSeedItem,
 	PepperSeedItem,
+
 	CropsItem=50,
 	PhotatoItem,
 	KaleItem,
 	CauliFlowerItem,
+	ParsnipItem,
+	BeanItem,
+	BlueberrieItem,
+	MelonItem,
+	PepperItem,
+
 	ObjectItem=60,
 	StoneItem,
 	BranchItem,

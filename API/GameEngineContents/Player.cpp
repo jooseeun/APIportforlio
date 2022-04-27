@@ -487,7 +487,57 @@ bool Player::DirKeyCheck()
 ///////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////농사 타일맵 관련 함수//////////////////////////////////////////////
+bool Player::IsHoeTileCreate()
+{
+	TileCheckDir();
 
+	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+
+	if (nullptr == Tile && PlayerItem::HoeItem == CurItem_) // 맨땅이라면
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool Player::IsWaterTileCreate()
+{
+	TileCheckDir();
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	if (nullptr == GroundTile)
+	{
+		return false;
+	}
+	else
+	{
+		if (CurItem_ == PlayerItem::WateringCanItem)
+		{
+
+			if (TileType::SeedTile == GroundTile->Dirt_ || TileType::HoeDirt == GroundTile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+}
+bool Player::IsSeedTileCreate()
+{
+	TileCheckDir();
+
+	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
+	if (nullptr == GroundTile)
+	{
+		return false;
+	}
+	if (CurItemKind_ == PlayerItemKind::SeedItem && false == GroundTile->IsSeed_)
+	{
+		return true;
+	}
+	return false;
+}
 void Player::DirHoeDirtCreateTile()
 {
 	TileCheckDir();
@@ -523,25 +573,12 @@ void Player::DirSeedCreateTile()
 
 	TileCheckDir();
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	PlayerTile* CropsTile;
-	if (PlayerItem::CauliFlowerSeedItem == CurItem_)
+
+	PlayerTile* CropsTile = SetCropTile();
+
+	if (CropsTile == nullptr)
 	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16, static_cast<int>(ORDER::GROUND));
-		CropsTile->Seed_ = SeedType::Cauliflower;
-	}
-	else if (PlayerItem::PhatatoSeedItem == CurItem_)
-	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24, static_cast<int>(ORDER::GROUND));
-		CropsTile->Seed_ = SeedType::Photato;
-	}
-	else if (PlayerItem::KaleSeedItem == CurItem_)
-	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41, static_cast<int>(ORDER::GROUND));
-		CropsTile->Seed_ = SeedType::Kale;
-	}
-	else //임시
-	{
-		CropsTile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		return;
 	}
 	CropsTile->Dirt_ = GroundTile->Dirt_;
 	CropsTile->SeedDay_ = Time::TimeSet->GetGameDay_(); // 심은 날짜 저장.
@@ -556,9 +593,24 @@ void Player::DirSeedCreateTile()
 	Tool::ToolSet->ItemUse(CurItem_); // 아이템 사용하면 하나 없애기
 
 }
-//감자 24~
-//콜리플라워 16~
-//케일 40 ~
+
+
+void Player::CropsGrowDay(PlayerTile* _Tile)
+{
+	SetCropGrowIndex(_Tile->Seed_);
+
+	int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+
+	_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", TileUpdateIndex_ + (_GrowDay), static_cast<int>(ORDER::GROUND)); // 타일 변경
+
+	if (HarvestDay_ <= _GrowDay)
+	{
+		_Tile->Isharvest_ = true;
+		CropsHarvestSet(_Tile);
+	}
+
+}
+
 void Player::CropsHarvestSet(PlayerTile* _Tile)
 {
 	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_ / 65) };
@@ -573,21 +625,7 @@ void Player::CropsHarvestSet(PlayerTile* _Tile)
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_);
 	GroundTile->IsSeed_ = false;
 }
-std::string Player::CheckSeedSting(SeedType _Type)
-{
-	if (SeedType::Photato == _Type)
-	{
-		return "Photato" + CropNum_;
-	}
-	else if (SeedType::Kale == _Type)
-	{
-		return "Kale" + CropNum_;
-	}
-	else if (SeedType::Cauliflower == _Type)
-	{
-		return "Cauliflower" + CropNum_;
-	}
-} //? 경고 있음
+
 bool Player::IsCheckHarvestTile()
 {
 	TileCheckDir();
@@ -675,51 +713,105 @@ void Player::DayChangeSetCrops()
 
 }
 
-void Player::CropsGrowDay(PlayerTile* _Tile)
+PlayerTile* Player::SetCropTile()
 {
-	if (_Tile->Seed_ == SeedType::Photato)
+	PlayerTile* _Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 6, static_cast<int>(ORDER::GROUND));
+
+	if (PlayerItem::CauliFlowerSeedItem == CurItem_)
 	{
-		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
-
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 24 + (_GrowDay) * 2, static_cast<int>(ORDER::GROUND)); // 타일 변경
-
-		if (3 <= _GrowDay)
-		{
-			_Tile->Isharvest_ = true;
-			CropsHarvestSet(_Tile);
-		}
-
-
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 16, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Cauliflower;
+	}
+	else if (PlayerItem::PhatatoSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 24, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Photato;
+	}
+	else if (PlayerItem::KaleSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 41, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Kale;
+	}
+	else if (PlayerItem::ParsnipSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 0, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Parsnip;
+	}
+	else if (PlayerItem::BeanSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 8, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Bean;
+	}
+	else if (PlayerItem::BlueberrieSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 56, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Blueberrie;
+	}
+	else if (PlayerItem::PepperSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 48, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Pepper;
+	}
+	else if (PlayerItem::MelonSeedItem == CurItem_)
+	{
+		_Tile = CropsTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "Crops.bmp", 32, static_cast<int>(ORDER::GROUND));
+		_Tile->Seed_ = SeedType::Melon;
 	}
 
-	else if (_Tile->Seed_ == SeedType::Cauliflower)
+
+	return _Tile;
+}
+void Player::SetCropGrowIndex(SeedType _Seed)
+{
+	if (_Seed == SeedType::Photato)
 	{
-		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 24;
+	}
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 16 + (_GrowDay) * 2, static_cast<int>(ORDER::GROUND)); // 타일 변경
-
-		if (3 <= _GrowDay)
-		{
-			_Tile->Isharvest_ = true;
-			CropsHarvestSet(_Tile);
-		}
-
+	else if (_Seed == SeedType::Cauliflower)
+	{
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 16;
+	}
+	else if (_Seed == SeedType::Kale)
+	{
+		HarvestDay_ = 5;
+		TileUpdateIndex_ = 41;
 
 	}
-	else if (_Tile->Seed_ == SeedType::Kale)
+	else if (_Seed == SeedType::Bean)
 	{
-		int _GrowDay = Time::TimeSet->GetGameDay_() - _Tile->SeedDay_;
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 8;
 
-		_Tile = CropsTileMap_->CreateTile<PlayerTile>(_Tile->DirtTilePosX_, _Tile->DirtTilePosY_, "Crops.bmp", 41 + (_GrowDay) * 2, static_cast<int>(ORDER::GROUND)); // 타일 변경
+	}
+	else if (_Seed == SeedType::Blueberrie)
+	{
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 56;
 
-		if (2 <= _GrowDay)
-		{
-			_Tile->Isharvest_ = true;
-			CropsHarvestSet(_Tile);
-		}
+	}
+	else if (_Seed == SeedType::Melon)
+	{
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 32;
+
+	}
+	else if (_Seed == SeedType::Parsnip)
+	{
+		HarvestDay_ = 5;
+		TileUpdateIndex_ = 0;
+
+	}
+	else if (_Seed == SeedType::Pepper)
+	{
+		HarvestDay_ = 6;
+		TileUpdateIndex_ = 48;
 
 	}
 }
+
 void Player::TileCheckDir()
 {
 	if (CurDir_ == PlayerDir::Front) {
@@ -758,57 +850,7 @@ float4 Player::TileCheckDirPos()
 	}
 
 }
-bool Player::IsHoeTileCreate()
-{
-	TileCheckDir();
 
-	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-
-	if (nullptr == Tile && PlayerItem::HoeItem == CurItem_) // 맨땅이라면
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool Player::IsWaterTileCreate()
-{
-	TileCheckDir();
-	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == GroundTile)
-	{
-		return false;
-	}
-	else
-	{
-		if (CurItem_ == PlayerItem::WateringCanItem )
-		{
-		
-			if (TileType::SeedTile == GroundTile->Dirt_ || TileType::HoeDirt == GroundTile->Dirt_) // 씨앗상태와 관계없이 물은 준다.
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-}
-bool Player::IsSeedTileCreate()
-{
-	TileCheckDir();
-
-	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-	if (nullptr == GroundTile)
-	{
-		return false;
-	}
-	if (CurItemKind_ == PlayerItemKind::SeedItem && false == GroundTile->IsSeed_)
-	{
-		return true;
-	}
-	return false;
-}
 
 
 
@@ -1009,7 +1051,7 @@ void Player::SetSideLevel(std::string _Pre, std::string _Next, std::string _Entr
 	PreLevel_ = _Pre;
 	EntryLevel_ = _Entry;
 }
-
+//////////////////////string 관련
 std::string Player::GetHairColorString()
 {
 	if (CurHairColor_ == PlayerHairColor::Black)
@@ -1077,7 +1119,45 @@ std::string Player::GetItemString()
 	}
 	return "";
 }
-
+std::string Player::CheckSeedSting(SeedType _Type)
+{
+	if (SeedType::Photato == _Type)
+	{
+		return "Photato" + CropNum_;
+	}
+	else if (SeedType::Kale == _Type)
+	{
+		return "Kale" + CropNum_;
+	}
+	else if (SeedType::Cauliflower == _Type)
+	{
+		return "Cauliflower" + CropNum_;
+	}
+	else if (SeedType::Bean == _Type)
+	{
+		return "Bean" + CropNum_;
+	}
+	else if (SeedType::Blueberrie == _Type)
+	{
+		return "Blueberrie" + CropNum_;
+	}
+	else if (SeedType::Melon == _Type)
+	{
+		return "Melon" + CropNum_;
+	}
+	else if (SeedType::Parsnip == _Type)
+	{
+		return "Parsnip" + CropNum_;
+	}
+	else if (SeedType::Pepper == _Type)
+	{
+		return "Pepper" + CropNum_;
+	}
+	else
+	{
+		return "";
+	}
+}
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;

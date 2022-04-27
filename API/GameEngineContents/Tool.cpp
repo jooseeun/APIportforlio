@@ -36,6 +36,10 @@ Tool::~Tool()
 			(*StartIter) = nullptr;
 		}
 	}
+	{
+		delete _CreateItem;
+		_CreateItem = nullptr;
+	}
 }
 void Tool::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -175,6 +179,10 @@ void Tool::SetInventoryModePivot()
 
 		for (; StartIter != EndIter; ++StartIter)
 		{
+			if (*StartIter == nullptr)
+			{
+				continue;
+			}
 			if (InvenFloor::Second == (*StartIter)->InvenFloor_)
 			{
 				(*StartIter)->Render->On(); // 가방안에 있으면 Render꺼버림
@@ -190,6 +198,10 @@ void Tool::SetInventoryModePivot()
 		{
 			for (; StartIter != EndIter; ++StartIter)
 			{
+				if (*StartIter == nullptr)
+				{
+					continue;
+				}
 				if (InvenFloor::Second == (*StartIter)->InvenFloor_)
 				{
 					(*StartIter)->Render->Off(); // 가방안에 있으면 Render꺼버림
@@ -207,6 +219,11 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
 		if((*StartIter)->IsInven == true)
 		{
 			if (0 == (*StartIter)->ItemCount_ )
@@ -243,6 +260,11 @@ void Tool::UpdateShopInvenPos()
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
 		if ((*StartIter)->IsInven == true)
 		{
 			if (0 == (*StartIter)->ItemCount_)
@@ -275,6 +297,11 @@ void Tool::ItemCountRenderUpdate()
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
 		if (1 < (*StartIter)->ItemCount_) // 아이템이 한개이상일때부터 숫자 렌더링 한다.
 		{
 			if ((*StartIter)->NumRender != nullptr)
@@ -304,22 +331,32 @@ void Tool::ItemCountRenderUpdate()
 		}
 		else if(1 == (*StartIter)->ItemCount_)
 		{
+
 			if ((*StartIter)->NumRender != nullptr)
 			{
-				(*StartIter)->NumRender->Death();
+				(*StartIter)->NumRender->Off();
 			}
 		}
 	}
 	
 }
-void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex)
+void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex)
 {
+	_CreateItem = new ItemData();
+	_CreateItem->ItemKind_ = _ItemKind;
+	_CreateItem->ItemName_ = _ItemName;
+
 	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (_Item->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
+		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
 		{
 			(*StartIter)->ItemCount_ += 1;
 			return;
@@ -332,23 +369,23 @@ void Tool::CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderI
 
 		if (PlayerItem::Nothing == ItemPos_[i])
 		{
-			_Item->InvenPivot_ = i;
+			_CreateItem->InvenPivot_ = i;
 			if (i < 12)
 			{
-				_Item->InvenFloor_ = InvenFloor::First;
+				_CreateItem->InvenFloor_ = InvenFloor::First;
 			}
 			else if (i > 12 || i == 12)
 			{
-				_Item->InvenFloor_ = InvenFloor::Second;
+				_CreateItem->InvenFloor_ = InvenFloor::Second;
 			}
 				i = 24;
 		}
 
 	}
-	_Item->Render = CreateRenderer(_RenderFileName);
-	_Item->Render->SetIndex(_RenderIndex);
-	_Item->Render->CameraEffectOff();
-	ToolSet->ItemList_.push_back(_Item);
+	_CreateItem->Render = CreateRenderer(_RenderFileName);
+	_CreateItem->Render->SetIndex(_RenderIndex);
+	_CreateItem->Render->CameraEffectOff();
+	ToolSet->ItemList_.push_back(_CreateItem);
 }
 
 void Tool::SetClickItem(int _Pivot)
@@ -358,6 +395,11 @@ void Tool::SetClickItem(int _Pivot)
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+
 		if (true == (*StartIter)->Click_)
 		{
 			(*StartIter)->InvenPivot_ = _Pivot;
@@ -393,6 +435,10 @@ void Tool::GetToolUINum()
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
 		ItemPos_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
 		ItemCount_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemCount_;
 	}
@@ -406,6 +452,10 @@ void Tool::ItemUse(PlayerItem _Item)
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
 		if (_Item == (*StartIter)->ItemName_)
 		{
 			(*StartIter)->ItemCount_ -= 1;

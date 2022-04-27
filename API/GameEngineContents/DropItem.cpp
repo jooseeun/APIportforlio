@@ -7,15 +7,12 @@
 #include <GameEngine/GameEngineCollision.h>
 DropItem::DropItem() 
 {
+
 }
 
 DropItem::~DropItem() 
 {
-	if (_Item != nullptr)
-	{
-		delete _Item;
-		_Item = nullptr;
-	}
+
 }
 
 void DropItem::Start()// 감자 192
@@ -25,6 +22,14 @@ void DropItem::Start()// 감자 192
 	Object_->CreateAnimation("Objects.bmp", "PhotatoItem", 192, 192, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "KaleItem", 250, 250, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "CauliFlowerItem", 190, 190, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "ParsnipItem", 24, 24, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "BeanItem", 188, 188, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "MelonItem", 254, 254, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "PepperItem", 260, 260, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "BlueberrieItem", 258, 258, 0.8f, true);
+
+
+
 	Object_->CreateAnimation("Objects.bmp", "StoneItem", 390, 390, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "BranchItem", 388, 388, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "GrassItem", 771, 771, 0.8f, true);
@@ -51,6 +56,31 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 	{
 		IndexNum_ = 190;
 		return "CauliFlowerItem";
+	}
+	else if (PlayerItem::ParsnipItem == _Item)
+	{
+		IndexNum_ = 24;
+		return "ParsnipItem";
+	}
+	else if (PlayerItem::BeanItem == _Item)
+	{
+		IndexNum_ = 188;
+		return "BeanItem";
+	}
+	else if (PlayerItem::MelonItem == _Item)
+	{
+		IndexNum_ = 254;
+		return "MelonItem";
+	}
+	else if (PlayerItem::PepperItem == _Item)
+	{
+		IndexNum_ = 260;
+		return "PepperItem";
+	}
+	else if (PlayerItem::BlueberrieItem == _Item)
+	{
+		IndexNum_ = 258;
+		return "BlueberrieItem";
 	}
 	else if (PlayerItem::StoneItem == _Item)
 	{
@@ -114,11 +144,8 @@ void DropItem::MoveToPlayer()
 	}
 	if (CheckDir_ <= 30)
 	{
-		 _Item = new ItemData();
-		_Item->ItemKind_ = DropItemKind_;
-		_Item->ItemName_ = CurDropItem_;
-		_Item->Click_ = false;
-		Tool::ToolSet->CreateItem(_Item, "Objects.bmp", IndexNum_);
+
+		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_);
 
 
 		Death();

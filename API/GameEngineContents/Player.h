@@ -201,6 +201,11 @@ private:
 	float4 CreateCropPos_;
 	int CropNum_;
 
+	int HarvestDay_;
+	int TileUpdateIndex_;
+	
+	PlayerTile* SetCropTile();
+	void SetCropGrowIndex(SeedType _Seed);
 
 	bool IsCheckHarvestTile();
 	void CropsHarvest();
