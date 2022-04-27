@@ -23,7 +23,6 @@ public:
 protected:
 
 private:
-
 	int Index_;
 	size_t PlayerShopUIMoney_;
 	void ShopUIMoneyStringUpdate();

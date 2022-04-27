@@ -25,7 +25,16 @@ private:
 	void Start() override;
 	void Update() override;
 
-	
+	int Page_;
+	void CheckPage();
+	GameEngineRenderer* ParsnipSeed_;
+	GameEngineRenderer* PhotatoSeed_;
+	GameEngineRenderer* CauliFlowerSeed_;
+	GameEngineRenderer* BeanSeed_;
+	GameEngineRenderer* KaleSeed_;
+	GameEngineRenderer* BlueberrieSeed_;
+	GameEngineRenderer* MelonSeed_;
+	GameEngineRenderer* PepperSeed_;
 
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* ShopUI_;

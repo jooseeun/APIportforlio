@@ -1,9 +1,11 @@
 #include "SeedShopUI.h"
 #include "ContentsEnums.h"
 #include "ShopUIMoney.h"
+#include <GameEngineBase/GameEngineInput.h>
 
-SeedShopUI::SeedShopUI():
-	IsShopOpen_(false)
+SeedShopUI::SeedShopUI() :
+	IsShopOpen_(false),
+	Page_(1)
 {
 }
 
@@ -27,8 +29,32 @@ void SeedShopUI::Start()
 	ShopScroll_ = CreateRenderer("ShopScroll.bmp", static_cast<int>(ORDER::FRONTUI));
 	ShopScroll_->SetPivot({ 530, -110 });
 	ScroppButton_ = CreateRenderer("ShopScrollButton.bmp", static_cast<int>(ORDER::FRONTUI));
-	ScroppButton_->SetPivot({ 530,-110 });
+	ScroppButton_->SetPivot({ 530,-252 });
 	
+
+	ParsnipSeed_ = CreateRenderer("ParsnipSeed.bmp", static_cast<int>(ORDER::ITEM));
+	ParsnipSeed_->SetPivot({ 0,-252 });
+
+	PhotatoSeed_ = CreateRenderer("PhotatoSeed.bmp", static_cast<int>(ORDER::ITEM));
+	PhotatoSeed_->SetPivot({ 0,-157 });
+
+	CauliFlowerSeed_ = CreateRenderer("CauliFlowerSeed.bmp", static_cast<int>(ORDER::ITEM));
+	CauliFlowerSeed_->SetPivot({ 0,-62 });
+
+	BeanSeed_ = CreateRenderer("BeanSeed.bmp", static_cast<int>(ORDER::ITEM));
+	BeanSeed_->SetPivot({ 0,34 });
+
+	KaleSeed_ = CreateRenderer("KaleSeed.bmp", static_cast<int>(ORDER::ITEM));
+	KaleSeed_->SetPivot({ 0,-252 });
+
+	BlueberrieSeed_ = CreateRenderer("BlueberrieSeed.bmp", static_cast<int>(ORDER::ITEM));
+	BlueberrieSeed_->SetPivot({ 0,-157 });
+
+	MelonSeed_ = CreateRenderer("MelonSeed.bmp", static_cast<int>(ORDER::ITEM));
+	MelonSeed_->SetPivot({ 0,-62 });
+
+	PepperSeed_ = CreateRenderer("PepperSeed.bmp", static_cast<int>(ORDER::ITEM));
+	PepperSeed_->SetPivot({ 0,34 });
 
 	FadeIn_->CameraEffectOff();
 	ShopUI_->CameraEffectOff();
@@ -39,10 +65,54 @@ void SeedShopUI::Start()
 	InvenUI_->CameraEffectOff();
 	ShopScroll_->CameraEffectOff();
 	ScroppButton_->CameraEffectOff();
-	
+	ParsnipSeed_->CameraEffectOff();
+	PhotatoSeed_->CameraEffectOff();
+	CauliFlowerSeed_->CameraEffectOff();
+	BeanSeed_->CameraEffectOff();
+	KaleSeed_->CameraEffectOff();
+	BlueberrieSeed_->CameraEffectOff();
+	MelonSeed_->CameraEffectOff();
+	PepperSeed_->CameraEffectOff();
 }
-
-void SeedShopUI::Update()
+void SeedShopUI::CheckPage()
 {
 
+	if (GameEngineInput::GetInst()->GetMouseWheel() > 100)
+	{
+		Page_ = 1;
+		ScroppButton_->SetPivot({ 530,-252 });
+	}
+	else if (GameEngineInput::GetInst()->GetMouseWheel() < -100)
+	{
+		Page_ = 2;
+		ScroppButton_->SetPivot({ 530,30 });
+	}
+}
+void SeedShopUI::Update()
+{
+	CheckPage();
+	if (Page_ == 1)
+	{
+		ParsnipSeed_->On();
+		PhotatoSeed_->On();
+		CauliFlowerSeed_->On();
+		BeanSeed_->On();
+
+		KaleSeed_->Off();
+		BlueberrieSeed_->Off();
+		MelonSeed_->Off();
+		PepperSeed_->Off();
+	}
+	if (Page_ == 2)
+	{
+		ParsnipSeed_->Off();
+		PhotatoSeed_->Off();
+		CauliFlowerSeed_->Off();
+		BeanSeed_->Off();
+
+		KaleSeed_->On();
+		BlueberrieSeed_->On();
+		MelonSeed_->On();
+		PepperSeed_->On();
+	}
 }
