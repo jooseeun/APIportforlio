@@ -370,12 +370,15 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 
 		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
 		{
-			(*StartIter)->ItemCount_ += 1;
+			if ((*StartIter)->ItemCount_ + 1 < 10)
+			{
+				(*StartIter)->ItemCount_ += 1;
 
 
-			delete _CreateItem;
-			_CreateItem = nullptr;
-			return;
+				delete _CreateItem;
+				_CreateItem = nullptr;
+				return;
+			}
 		}
 	}
 
