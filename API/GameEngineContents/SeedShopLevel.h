@@ -4,6 +4,7 @@
 #include "Tool.h"
 #include "SeedShopUI.h"
 #include "Mouse.h"
+#include "ShopUIMoney.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
@@ -45,6 +46,7 @@ protected:
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 private:
+	ShopUIMoney* ShopMoney_;
 	Mouse* MouseSet;
 	SeedShopUI* ShopUI_;
 	PlayerItem ItemPos_[13];

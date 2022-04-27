@@ -39,7 +39,7 @@ void Money::MoneyStringUpdate()
 {
 	size_t _Temp = PlayerMoney_;
 
-	for (int i = 0; i < Index_ +1; i++)//앞에서 부터 검사
+	for (int i = 0;  _Temp > 1; i++)//앞에서 부터 검사
 	{
 		MoneyIndex_[i] = _Temp % 10;
 		_Temp /= 10;

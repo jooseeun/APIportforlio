@@ -1,6 +1,6 @@
 #include "SeedShopUI.h"
 #include "ContentsEnums.h"
-
+#include "ShopUIMoney.h"
 
 SeedShopUI::SeedShopUI():
 	IsShopOpen_(false)
@@ -28,8 +28,7 @@ void SeedShopUI::Start()
 	ShopScroll_->SetPivot({ 530, -110 });
 	ScroppButton_ = CreateRenderer("ShopScrollButton.bmp", static_cast<int>(ORDER::FRONTUI));
 	ScroppButton_->SetPivot({ 530,-110 });
-
-
+	
 
 	FadeIn_->CameraEffectOff();
 	ShopUI_->CameraEffectOff();
@@ -40,22 +39,10 @@ void SeedShopUI::Start()
 	InvenUI_->CameraEffectOff();
 	ShopScroll_->CameraEffectOff();
 	ScroppButton_->CameraEffectOff();
+	
 }
 
 void SeedShopUI::Update()
 {
-	if (IsShopOpen_ = false)
-	{
-		FadeIn_->Off();
-		ShopUI_->Off();
-		Exit_->Off();
-		ExitCol_->Off();
-	}
-	else
-	{
-		FadeIn_->On();
-		ShopUI_->On();
-		Exit_->On();
-		ExitCol_->On();
-	}
+
 }

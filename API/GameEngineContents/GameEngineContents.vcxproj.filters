@@ -128,6 +128,9 @@
     <ClInclude Include="TileAnimation.h">
       <Filter>Actor\Play\Environment</Filter>
     </ClInclude>
+    <ClInclude Include="ShopUIMoney.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="TileAnimation.cpp">
       <Filter>Actor\Play\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopUIMoney.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,8 @@ void SeedShopLevel::Loading()
 
 		ShopUI_ = CreateActor<SeedShopUI>(static_cast<int>(ORDER::FRONTUI), "SeedShopUI");
 		ShopUI_->Off();
+		ShopMoney_ = CreateActor<ShopUIMoney>(static_cast<int>(ORDER::FRONTUI), "ShopMoney");
+		ShopMoney_->Off();
 		if (nullptr == Player::MainPlayer)
 		{
 			Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -82,10 +84,12 @@ void SeedShopLevel::Update()
 	if (IsOpenShop_ == true)
 	{
 		ShopUI_->On();
+		ShopMoney_->On();
 	}
 	else if (IsOpenShop_ == false)
 	{
 		ShopUI_->Off();
+		ShopMoney_->Off();
 	}
 }
 

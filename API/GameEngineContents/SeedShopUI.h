@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
 #include <GameEngine/GameEngineActor.h>
+#include "ShopUIMoney.h"
 
 // Ό³Έν :
 class SeedShopUI : public GameEngineActor
@@ -16,16 +17,15 @@ public:
 	SeedShopUI(SeedShopUI&& _Other) noexcept = delete;
 	SeedShopUI& operator=(const SeedShopUI& _Other) = delete;
 	SeedShopUI& operator=(SeedShopUI&& _Other) noexcept = delete;
-	inline void ShopOpen()
-	{
-		IsShopOpen_ = true;
-	}
+
 protected:
 
 private:
 	bool IsShopOpen_;
 	void Start() override;
 	void Update() override;
+
+	
 
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* ShopUI_;
