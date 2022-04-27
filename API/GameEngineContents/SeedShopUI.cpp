@@ -169,7 +169,7 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			Tool::ToolSet->CreateItem(PlayerItem::KaleItem, PlayerItemKind::SeedItem, "Objects.bmp", 477);
+			Tool::ToolSet->CreateItem(PlayerItem::KaleSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 477);
 
 		}
 		if (true == BlueberrieSeedCol_->CollisionCheck("MouseCol"))
