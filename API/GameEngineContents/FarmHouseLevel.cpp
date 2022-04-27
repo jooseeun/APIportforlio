@@ -49,7 +49,6 @@ void FarmHouseLevel::Loading()
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
-	ShopNPC* NPC_ = CreateActor<ShopNPC>(static_cast<int>(ORDER::PLAYER), "SeedShopOnner");
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");

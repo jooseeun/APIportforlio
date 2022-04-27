@@ -13,12 +13,18 @@ SeedShopUI::~SeedShopUI()
 
 void SeedShopUI::Start()
 {
-	SetPosition({ 640,320 });
-	FadeIn_ = CreateRenderer("FadeIn.bmp", static_cast<int>(ORDER::TOOLUI));
-	FadeIn_->SetAlpha(80);
-	ShopUI_ = CreateRenderer("ShopUI.bmp", static_cast<int>(ORDER::TOOLUI));
-	Exit_ = CreateRenderer("Exit.bmp", static_cast<int>(ORDER::TOOLUI),RenderPivot::CENTER, {500,-200});
-	ExitCol_ = CreateCollision("ShopExit", { 44,44 }, { 500,-200 });
+	SetPosition({ 640,360 });
+	FadeIn_ = CreateRenderer("FadeIn.bmp", static_cast<int>(ORDER::FRONTUI));
+	FadeIn_->SetAlpha(150);
+	ShopUI_ = CreateRenderer("ShopUI.bmp", static_cast<int>(ORDER::FRONTUI));
+	ShopUI_->SetPivot({ 0,-90 });
+	Exit_ = CreateRenderer("Exit.bmp", static_cast<int>(ORDER::FRONTUI),RenderPivot::CENTER, { 580,-320 });
+	ExitCol_ = CreateCollision("ShopExit", { 44,44 }, { 580,-320 });
+
+	FadeIn_->CameraEffectOff();
+	ShopUI_->CameraEffectOff();
+	Exit_->CameraEffectOff();
+	ExitCol_->CameraEffectOff();
 }
 
 void SeedShopUI::Update()

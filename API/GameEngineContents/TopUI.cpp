@@ -21,20 +21,20 @@ void TopUI::Start()
 
 	GameEngineRenderer* Renderer = CreateRenderer("TopUI.bmp");
 	Renderer->CameraEffectOff();
-	DateRender_ = CreateRendererToScale("Date.bmp",{160,40},static_cast<int>(ORDER::FRONTUI),RenderPivot::BOT,{43,-60});
+	DateRender_ = CreateRendererToScale("Date.bmp",{160,40},static_cast<int>(ORDER::UIFONT),RenderPivot::BOT,{43,-60});
 	DateRender_->SetIndex(Date_-1);
 	DateRender_->CameraEffectOff();
-	AMPMRender_= CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::FRONTUI), RenderPivot::BOT, { 80,32 });
+	AMPMRender_= CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::UIFONT), RenderPivot::BOT, { 80,32 });
 	AMPMRender_->SetIndex(0);
 	AMPMRender_->CameraEffectOff();
-	HourRender_=CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::FRONTUI), RenderPivot::BOT, { 10,32 });
+	HourRender_=CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::UIFONT), RenderPivot::BOT, { 10,32 });
 	HourRender_->SetIndex(10);
 	HourRender_->CameraEffectOff();
-	MinuteRender_= CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::FRONTUI), RenderPivot::BOT, { 10,33 });
+	MinuteRender_= CreateRendererToScale("Time.bmp", { 80,40 }, static_cast<int>(ORDER::UIFONT), RenderPivot::BOT, { 10,33 });
 	MinuteRender_->SetIndex(15);
 	MinuteRender_->CameraEffectOff();
 
-	NightAlpha_ = CreateRendererToScale("NightAlpha.bmp", { 1280,720 }, static_cast<int>(ORDER::FADE), RenderPivot::CENTER, { -484,588.5-360 });
+	NightAlpha_ = CreateRendererToScale("NightAlpha.bmp", { 1280,720 }, static_cast<int>(ORDER::NIGHTALPHA), RenderPivot::CENTER, { -484,588.5-360 });
 	NightAlpha_->CameraEffectOff();
 	NightAlpha_->SetAlpha(Alpha_);
 }

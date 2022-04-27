@@ -13,6 +13,8 @@ enum class ORDER
 	DROPITEM,
 	FRONTMAP,
 	TREETOP,
+	NIGHTALPHA,
+	/////////////////ui
 	UI,
 	TOOLUI,
 	UIFONT,
