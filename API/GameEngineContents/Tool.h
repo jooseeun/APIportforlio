@@ -85,7 +85,7 @@ public:
 protected:
 
 private:
-	ItemData* _CreateItem;
+	
 	bool IsShop_;
 	void UpdateShopInvenPos();
 

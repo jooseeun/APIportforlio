@@ -336,25 +336,25 @@ void Tool::ItemCountRenderUpdate()
 			(*StartIter)->NumRender->SetIndex((*StartIter)->ItemCount_);
 		}
 
-			if (IsShop_ == true)//렌더링
-			{
-				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24 + 148,
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 - 145 });
-			}
-			else
-			{
-				(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24,
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 });
+		if (IsShop_ == true)//렌더링
+		{
+			(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24 + 148,
+				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 - 145 });
+		}
+		else
+		{
+			(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24,
+				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 });
 
-			}
-			(*StartIter)->NumRender->CameraEffectOff();
+		}
+		(*StartIter)->NumRender->CameraEffectOff();
 		
 	}
 	
 }
 void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex)
 {
-	_CreateItem = new ItemData();
+	ItemData* _CreateItem = new ItemData();
 	_CreateItem->ItemKind_ = _ItemKind;
 	_CreateItem->ItemName_ = _ItemName;
 
@@ -371,6 +371,7 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
 		{
 			(*StartIter)->ItemCount_ += 1;
+
 
 			delete _CreateItem;
 			_CreateItem = nullptr;

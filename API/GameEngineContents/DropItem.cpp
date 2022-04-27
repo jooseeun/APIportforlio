@@ -142,7 +142,7 @@ void DropItem::MoveToPlayer()
 	{
 		return;
 	}
-	if (CheckDir_ <= 30)
+	if (CheckDir_ <= 50)
 	{
 
 		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_);
@@ -153,6 +153,6 @@ void DropItem::MoveToPlayer()
 	}
 
 	MoveDir_.Normal2D();
-	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 120.0f); // 속도
+	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 300.0f); // 속도
 
 }
