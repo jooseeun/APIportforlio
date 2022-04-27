@@ -27,6 +27,8 @@ private:
 
 	int Page_;
 	void CheckPage();
+	void BuySeed();
+
 	GameEngineRenderer* ParsnipSeed_;
 	GameEngineRenderer* PhotatoSeed_;
 	GameEngineRenderer* CauliFlowerSeed_;
@@ -35,6 +37,15 @@ private:
 	GameEngineRenderer* BlueberrieSeed_;
 	GameEngineRenderer* MelonSeed_;
 	GameEngineRenderer* PepperSeed_;
+
+	GameEngineCollision* ParsnipSeedCol_;
+	GameEngineCollision* PhotatoSeedCol_;
+	GameEngineCollision* CauliFlowerSeedCol_;
+	GameEngineCollision* BeanSeedCol_;
+	GameEngineCollision* KaleSeedCol_;
+	GameEngineCollision* BlueberrieSeedCol_;
+	GameEngineCollision* MelonSeedCol_;
+	GameEngineCollision* PepperSeedCol_;
 
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* ShopUI_;

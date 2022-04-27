@@ -32,16 +32,21 @@ void Money::Start()
 
 void Money::Update()
 {
-	MoneySeatUpdate();
 	MoneyStringUpdate();
+	MoneySeatUpdate();
 }
 void Money::MoneyStringUpdate()
 {
-	size_t _Temp = PlayerMoney_;
+	size_t _Temp = PlayerMoney_; //480 48 
 
-	for (int i = 0;  _Temp > 1; i++)//앞에서 부터 검사
+	for (int i = 0; i<8; i++)
 	{
-		MoneyIndex_[i] = _Temp % 10;
+		MoneyIndex_[i] = 0;
+	}
+
+	for (int i = 0;  _Temp >= 1; i++)//앞에서 부터 검사
+	{
+		MoneyIndex_[i] = _Temp % 10; 
 		_Temp /= 10;
 	}
 
@@ -61,6 +66,7 @@ void Money::MoneySeatUpdate()
 		{
 			Index_ = i;
 
+			i = 0;
 		}
 	}
 	for (int i = Index_ + 1; i < 8; i++)

@@ -95,29 +95,17 @@
     <ClInclude Include="Mouse.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="Tool.h">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="Crops.h">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClInclude>
     <ClInclude Include="DropItem.h">
-      <Filter>Actor\Play\Crops</Filter>
+      <Filter>Actor\Play\Item</Filter>
     </ClInclude>
     <ClInclude Include="FarmObjectEnvironment.h">
-      <Filter>Actor\Play\Environment</Filter>
+      <Filter>Actor\Play\Farm</Filter>
     </ClInclude>
     <ClInclude Include="FrontMap.h">
       <Filter>Actor\Play\PlayUI</Filter>
-    </ClInclude>
-    <ClInclude Include="SeedShopUI.h">
-      <Filter>Actor\Play\PlayUI</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeIn.h">
-      <Filter>Actor\Play\Global</Filter>
     </ClInclude>
     <ClInclude Include="ShopNPC.h">
       <Filter>Actor\Play\NPC</Filter>
@@ -126,10 +114,22 @@
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="TileAnimation.h">
-      <Filter>Actor\Play\Environment</Filter>
+      <Filter>Actor\Play\Farm</Filter>
     </ClInclude>
     <ClInclude Include="ShopUIMoney.h">
       <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>Actor\Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SeedShopUI.h">
+      <Filter>Actor\Play\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Crops.h">
+      <Filter>Actor\Play\Farm</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -224,41 +224,41 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
-    <ClCompile Include="Tool.cpp">
-      <Filter>Actor\Play\Tool</Filter>
-    </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
-    <ClCompile Include="Crops.cpp">
-      <Filter>Actor\Play\Crops</Filter>
-    </ClCompile>
     <ClCompile Include="DropItem.cpp">
-      <Filter>Actor\Play\Crops</Filter>
+      <Filter>Actor\Play\Item</Filter>
     </ClCompile>
     <ClCompile Include="FarmObjectEnvironment.cpp">
-      <Filter>Actor\Play\Environment</Filter>
+      <Filter>Actor\Play\Farm</Filter>
     </ClCompile>
     <ClCompile Include="FrontMap.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
-    </ClCompile>
-    <ClCompile Include="SeedShopUI.cpp">
-      <Filter>Actor\Play\PlayUI</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeIn.cpp">
-      <Filter>Actor\Play\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopNPC.cpp">
-      <Filter>Actor\Play\NPC</Filter>
     </ClCompile>
     <ClCompile Include="Money.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
     <ClCompile Include="TileAnimation.cpp">
-      <Filter>Actor\Play\Environment</Filter>
+      <Filter>Actor\Play\Farm</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>Actor\Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SeedShopUI.cpp">
+      <Filter>Actor\Play\Shop</Filter>
     </ClCompile>
     <ClCompile Include="ShopUIMoney.cpp">
+      <Filter>Actor\Play\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopNPC.cpp">
+      <Filter>Actor\Play\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
       <Filter>Actor\Play\PlayUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Crops.cpp">
+      <Filter>Actor\Play\Farm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,23 +292,20 @@
     <Filter Include="Actor\Play\Mine\Monster">
       <UniqueIdentifier>{bc9d8fd5-53d0-47f8-a28a-3f9e483e1b38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Tool">
-      <UniqueIdentifier>{62c3f873-97c8-4ace-ba03-5b781cf68296}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Play\Player">
       <UniqueIdentifier>{9e4f5438-4aea-4c02-a194-e582b13c115d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Play\PlayUI">
       <UniqueIdentifier>{64eb3a14-efeb-4c13-88ed-4682f2408d9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Crops">
+    <Filter Include="Actor\Play\Item">
       <UniqueIdentifier>{e9e3a408-1419-4c10-b6d0-adf2e20f78be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Environment">
-      <UniqueIdentifier>{13f37d19-b047-43e1-904f-b3ce95abf745}</UniqueIdentifier>
+    <Filter Include="Actor\Play\Shop">
+      <UniqueIdentifier>{3706f715-69b1-4b71-9fc4-bbded785c4ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\Global">
-      <UniqueIdentifier>{c9181efa-fb39-45b6-8c3c-b7a9a6894b13}</UniqueIdentifier>
+    <Filter Include="Actor\Play\Farm">
+      <UniqueIdentifier>{13f37d19-b047-43e1-904f-b3ce95abf745}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

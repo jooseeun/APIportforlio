@@ -39,10 +39,15 @@ void ShopUIMoney::Update()
 void ShopUIMoney::ShopUIMoneyStringUpdate()
 {
 	size_t _Temp = PlayerShopUIMoney_;
+	for (int i = 0; i < 8; i++)
+	{
+		ShopUIMoneyIndex_[i] = 0;
+	}
 
-	for (int i = 0; _Temp > 1; i++)//앞에서 부터 검사
+	for (int i = 0; _Temp >= 1; i++)//앞에서 부터 검사
 	{
 		ShopUIMoneyIndex_[i] = _Temp % 10;
+
 		_Temp /= 10;
 	}
 
@@ -61,6 +66,7 @@ void ShopUIMoney::ShopUIMoneySeatUpdate()
 		if (ShopUIMoneyIndex_[i] != 0)
 		{
 			Index_ = i;
+			i = 0;
 
 		}
 	}
