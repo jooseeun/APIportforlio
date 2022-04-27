@@ -236,9 +236,7 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 			{
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
-				StartIter = ItemList_.erase(StartIter);
-				//(*StartIter)->IsInven = false;// 인벤에 없으면 pivot을 100으로 설정해주고 Render꺼버림
-				//일단 삭제는 x
+				(*StartIter)->InvenPivot_=100;
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
@@ -274,9 +272,11 @@ void Tool::UpdateShopInvenPos()
 
 		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_) // 아이템 삭제될때 릭 생긴다..
+			if (0 == (*StartIter)->ItemCount_) 
 			{
-				StartIter = ItemList_.erase(StartIter);
+				(*StartIter)->Render->Off();
+				(*StartIter)->NumRender->Off();
+				(*StartIter)->InvenPivot_ = 100;
 				
 
 			}
@@ -293,7 +293,7 @@ void Tool::UpdateShopInvenPos()
 					0 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
 				ItemCountRenderUpdate();
 			}
-
+			
 			
 		}
 	}
