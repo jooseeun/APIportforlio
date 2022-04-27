@@ -27,7 +27,6 @@ public:
 protected:
 
 private:
-	ItemData* _Item;
 	float4 InitPos_;
 	float4 Move_;
 	bool IsStop_;

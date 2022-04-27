@@ -23,8 +23,8 @@ Tool::Tool()
 Tool::~Tool()
 {
 	{ //릭남음
-		std::list<ItemData*>::iterator StartIter = this->ItemList_.begin();
-		std::list<ItemData*>::iterator EndIter = this->ItemList_.end();
+		std::list<ItemData*>::iterator StartIter = Tool::ToolSet->ItemList_.begin();
+		std::list<ItemData*>::iterator EndIter = Tool::ToolSet->ItemList_.end();
 
 		for (; StartIter != EndIter; ++StartIter)
 		{
@@ -36,10 +36,7 @@ Tool::~Tool()
 			(*StartIter) = nullptr;
 		}
 	}
-	{
-		delete _CreateItem;
-		_CreateItem = nullptr;
-	}
+
 }
 void Tool::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
@@ -359,6 +356,9 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_) // 이미 아이템이 존재한다면 숫자 up
 		{
 			(*StartIter)->ItemCount_ += 1;
+
+			delete _CreateItem;
+			_CreateItem = nullptr;
 			return;
 		}
 	}

@@ -9,7 +9,13 @@ struct ItemData
 {
 	ItemData()
 		:NumRender(nullptr),
-		Render(nullptr)
+		Render(nullptr),
+		ItemCount_(1),
+		Click_(false),
+		IsInven(true),
+		ItemName_(PlayerItem::Max),
+		ItemKind_(PlayerItemKind::NoItem),
+		InvenFloor_(InvenFloor::Max)
 	{
 	}
 	GameEngineRenderer* Render;
@@ -18,9 +24,9 @@ struct ItemData
 	PlayerItemKind ItemKind_;
 	InvenFloor InvenFloor_;
 	int InvenPivot_;
-	int ItemCount_ = 1;
-	bool Click_ = false;
-	bool IsInven= true;
+	int ItemCount_;
+	bool Click_;
+	bool IsInven;
 };
 
 class Tool : public GameEngineActor
