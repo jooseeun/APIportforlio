@@ -58,6 +58,15 @@ public:
 		}
 	}
 
+	inline void ShopON()
+	{
+		IsShop_ = true;
+	}
+	inline void ShopOff()
+	{
+		IsShop_ = false;
+	}
+
 	void ItemUse(PlayerItem _Item);
 	void CreateItem(ItemData* _Item, std::string _RenderFileName, int _RenderIndex);
 	void SetClickItem(int _Pivot);
@@ -65,6 +74,9 @@ public:
 protected:
 
 private:
+
+	bool IsShop_;
+	void UpdateShopInvenPos();
 
 	std::list<ItemData*> ItemList_;
 	PlayerItem ItemPos_[24];

@@ -85,11 +85,15 @@ void SeedShopLevel::Update()
 	{
 		ShopUI_->On();
 		ShopMoney_->On();
+		ToolUI::ToolUISet->Off();
+		Tool::ToolSet->ShopON();
 	}
 	else if (IsOpenShop_ == false)
 	{
 		ShopUI_->Off();
 		ShopMoney_->Off();
+		ToolUI::ToolUISet->On();
+		Tool::ToolSet->ShopOff();
 	}
 }
 
