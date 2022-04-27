@@ -3,6 +3,7 @@
 #include "GameEngine/GameEngineCollision.h"
 #include <GameEngine/GameEngineActor.h>
 #include "ShopUIMoney.h"
+#include "Tool.h"
 
 // Ό³Έν :
 class SeedShopUI : public GameEngineActor
@@ -21,6 +22,7 @@ public:
 protected:
 
 private:
+	ItemData* _Item;
 	bool IsShopOpen_;
 	void Start() override;
 	void Update() override;

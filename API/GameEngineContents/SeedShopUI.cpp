@@ -13,6 +13,11 @@ SeedShopUI::SeedShopUI() :
 
 SeedShopUI::~SeedShopUI() 
 {
+	if (_Item != nullptr)
+	{
+		delete _Item;
+		_Item = nullptr;
+	}
 }
 
 void SeedShopUI::Start()
@@ -118,10 +123,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::ParsnipSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 472);
+
 		}
 		if (true == PhotatoSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -132,10 +138,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::PhatatoSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 475);
+
 		}
 		if (true == CauliFlowerSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -146,7 +153,7 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			 _Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::CauliFlowerSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 474);
@@ -162,10 +169,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::BeanSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 473);
+
 		}
 		if (true == KaleSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -176,10 +184,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::KaleItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 477);
+
 		}
 		if (true == BlueberrieSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -190,10 +199,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::BlueberrieSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 481);
+
 		}
 		if (true == MelonSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -204,10 +214,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::MelonSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 479);
+
 		}
 		if (true == PepperSeedCol_->CollisionCheck("MouseCol"))
 		{
@@ -218,10 +229,11 @@ void SeedShopUI::BuySeed()
 			}
 			Money::MoneySet->SetMoney(LeftMoney_);
 
-			ItemData* _Item = new ItemData();
+			_Item = new ItemData();
 			_Item->ItemKind_ = PlayerItemKind::SeedItem;
 			_Item->ItemName_ = PlayerItem::PepperSeedItem;
 			Tool::ToolSet->CreateItem(_Item, "Objects.bmp", 482);
+
 		}
 	}
 

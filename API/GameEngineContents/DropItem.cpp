@@ -11,6 +11,11 @@ DropItem::DropItem()
 
 DropItem::~DropItem() 
 {
+	if (_Item != nullptr)
+	{
+		delete _Item;
+		_Item = nullptr;
+	}
 }
 
 void DropItem::Start()// °¨ÀÚ 192
@@ -109,11 +114,12 @@ void DropItem::MoveToPlayer()
 	}
 	if (CheckDir_ <= 30)
 	{
-		ItemData* _Item = new ItemData();
+		 _Item = new ItemData();
 		_Item->ItemKind_ = DropItemKind_;
 		_Item->ItemName_ = CurDropItem_;
 		_Item->Click_ = false;
 		Tool::ToolSet->CreateItem(_Item, "Objects.bmp", IndexNum_);
+
 
 		Death();
 		return;

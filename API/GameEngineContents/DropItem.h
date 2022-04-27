@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerEnum.h"
+#include "Tool.h"
 #include <GameEngine/GameEngineActor.h>
 // Ό³Έν :
 class DropItem : public GameEngineActor
@@ -26,6 +27,7 @@ public:
 protected:
 
 private:
+	ItemData* _Item;
 	float4 InitPos_;
 	float4 Move_;
 	bool IsStop_;
