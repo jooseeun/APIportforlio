@@ -23,7 +23,7 @@ Tool::Tool()
 
 Tool::~Tool()
 {
-	{ //릭남음
+	{ 
 		std::list<ItemData*>::iterator StartIter = Tool::ToolSet->ItemList_.begin();
 		std::list<ItemData*>::iterator EndIter = Tool::ToolSet->ItemList_.end();
 
@@ -274,7 +274,7 @@ void Tool::UpdateShopInvenPos()
 
 		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_)
+			if (0 == (*StartIter)->ItemCount_) // 아이템 삭제될때 릭 생긴다..
 			{
 				StartIter = ItemList_.erase(StartIter);
 				

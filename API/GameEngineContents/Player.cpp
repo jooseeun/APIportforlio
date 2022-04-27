@@ -52,7 +52,6 @@ Player::Player()
 Player::~Player()
 {
 
-
 }
 
 void Player::DirAnimationChange()
@@ -550,8 +549,6 @@ void Player::DirWaterDirtCreateTile()
 {
 	TileCheckDir();
 
-	
-
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 	if (true == GroundTile->IsSeed_)
 	{
@@ -668,7 +665,7 @@ void Player::CropsGrowUpdate()
 		{
 			if (nullptr == *StartIter)
 			{
-				IsCropsTile_.erase(StartIter);
+				continue;
 			}
 
 			else if (false == (*StartIter)->Isharvest_)
@@ -899,6 +896,7 @@ void Player::HitObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::GrassItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -932,6 +930,7 @@ void Player::WieldObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::StoneItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -954,6 +953,7 @@ void Player::WieldObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -976,6 +976,7 @@ void Player::WieldObject()
 					DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 					DropItem_->SetItem(PlayerItem::BranchItem);
 					DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+					FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 				}
 				
 				_Tile->DeathCount_ -= 1;
@@ -992,6 +993,7 @@ void Player::WieldObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 

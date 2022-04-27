@@ -81,7 +81,6 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 5216.0f,269.f });
 	}
-	Player::MainPlayer->SetPosition({ 144.0f,3442.f });
 	Player::MainPlayer->SetMapScale(5544.0f, 6200.0f);
 	Player::MainPlayer->SetColMapName("TownColMap.bmp");
 	Player::MainPlayer->SetSideLevel("BusStopLevel", "Town2Level", "SeedShopLevel");
