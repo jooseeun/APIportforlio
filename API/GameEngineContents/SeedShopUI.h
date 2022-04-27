@@ -30,6 +30,10 @@ private:
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* ShopUI_;
 	GameEngineRenderer* Exit_;
+	GameEngineRenderer* MoneyUI_;
+	GameEngineRenderer* InvenUI_;
+	GameEngineRenderer* ShopScroll_;
+	GameEngineRenderer* ScroppButton_;
 	GameEngineCollision* ExitCol_;
 
 };
