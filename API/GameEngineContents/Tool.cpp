@@ -112,6 +112,8 @@ void Tool::Start()
 		PhotatoSeed_->Render->SetIndex(475);
 		PhotatoSeed_->Render->CameraEffectOff();
 		PhotatoSeed_->InvenFloor_ = InvenFloor::First;
+		PhotatoSeed_->IsSell_ = true;
+		PhotatoSeed_->SellValue_ = 50;
 		PhotatoSeed_->Click_ = false;
 		PhotatoSeed_->ItemCount_ = 1;
 		ItemList_.push_back(PhotatoSeed_);
@@ -125,6 +127,8 @@ void Tool::Start()
 		KaleSeed_->Render->CameraEffectOff();
 		KaleSeed_->InvenFloor_ = InvenFloor::First;
 		KaleSeed_->Click_ = false;
+		KaleSeed_->IsSell_ = true;
+		KaleSeed_->SellValue_ = 70;
 		KaleSeed_->ItemCount_ = 4;
 		ItemList_.push_back(KaleSeed_);
 
@@ -358,8 +362,8 @@ void Tool::UpdateShopInvenPos()
 			}
 			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true ) // 판매기능
 			{
-				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_* (*StartIter)->ItemCount_);
-				(*StartIter)->ItemCount_ = 0;
+				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_);
+				(*StartIter)->ItemCount_ -=1;
 				(*StartIter)->Click_ = false;
 			}
 
