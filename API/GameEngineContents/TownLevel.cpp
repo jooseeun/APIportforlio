@@ -35,10 +35,7 @@ void TownLevel::Loading()
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	//
-	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-	Front_->GetRenderer()->SetImage("TownFront.bmp");
-	float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
-	Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::PLAYER));
 	
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
@@ -54,6 +51,7 @@ void TownLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
 
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void TownLevel::Update()
@@ -75,7 +73,7 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 	if (_PrevLevel->GetNameCopy() == "SeedShopLevel")
 	{
-		Player::MainPlayer->SetPosition({ 2810.0f,3720.f });
+		Player::MainPlayer->SetPosition({ 2810.0f,3550.f });
 	}
 	if (_PrevLevel->GetNameCopy() == "Town2Level")
 	{

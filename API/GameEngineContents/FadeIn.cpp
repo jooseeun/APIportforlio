@@ -29,7 +29,7 @@ void FadeIn::Update()
 			Death();
 		}
 
-		Alpha_ -= (50.0f * GameEngineTime::GetDeltaTime());
+		Alpha_ -= (80.0f * GameEngineTime::GetDeltaTime());
 		Renderer_->SetAlpha(Alpha_);
 	}
 	

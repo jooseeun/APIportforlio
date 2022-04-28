@@ -43,9 +43,7 @@ void FarmHouseLevel::Loading()
 	Back->CropsTileMap_.TileRangeSetting(26, 15, { 48,48 });
 	
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-	Front_->GetRenderer()->SetImage("FarmHouseFront.bmp");
-	float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
-	Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
+
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 

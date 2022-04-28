@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
+class FrontMap;
 class BusStopLevel : public GameEngineLevel
 {
 public:
@@ -41,7 +42,7 @@ protected:
 private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
-
+	FrontMap* Front_;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

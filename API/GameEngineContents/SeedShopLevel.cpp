@@ -40,10 +40,7 @@ void SeedShopLevel::Loading()
 		Back->GroundTileMap_.TileRangeSetting(48, 32, { 48,48 });
 		Back->CropsTileMap_.TileRangeSetting(48, 32, { 48,48 });
 
-		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-		Front_->GetRenderer()->SetImage("SeedShopFront.bmp");
-		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
-		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
+		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::PLAYER));
 
 
 
@@ -66,7 +63,7 @@ void SeedShopLevel::Loading()
 			Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 		}
 
-		
+		YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 

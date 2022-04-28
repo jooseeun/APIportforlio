@@ -8,6 +8,7 @@
 #include "ContentsEnums.h"
 #include "Mouse.h"
 #include "Time.h"
+#include "FrontMap.h"
 #include "Money.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -33,6 +34,7 @@ void MineEntryLevel::Loading()
 	Back->GetRenderer()->SetImage("MineEntry.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
@@ -44,6 +46,7 @@ void MineEntryLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
 
@@ -64,8 +67,15 @@ void MineEntryLevel::Update()
 
 void MineEntryLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	Player::MainPlayer->SetPosition({ 1176.0f,816.f });
+	if (_PrevLevel->GetNameCopy() == "Town2Level")
+	{
+		Player::MainPlayer->SetPosition({ 1176.0f,800 });
+	}
+	else
+	{
+		Player::MainPlayer->SetPosition({ 1412.0f,565.0f });
+	}
+
 	Player::MainPlayer->SetMapScale(3200.0f, 1280.0f);
 	Player::MainPlayer->SetColMapName("MineEntryColMap.bmp");
 	Player::MainPlayer->SetSideLevel("Town2Level", "Mine1Level", " ");
@@ -81,6 +91,8 @@ void MineEntryLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
+
+		Money::MoneySet->NextLevelOn();
 
 	}
 }

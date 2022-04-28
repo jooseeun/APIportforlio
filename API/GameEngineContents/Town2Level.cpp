@@ -59,10 +59,22 @@ void Town2Level::Update()
 }
 void Town2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 1006.0f,2380.f });
+	if (_PrevLevel->GetNameCopy() == "TownLevel")
+	{
+		Player::MainPlayer->SetPosition({ 1006.0f,2380.f });
+	}
+	else if (_PrevLevel->GetNameCopy() == "BackWoodLevel")
+	{
+		Player::MainPlayer->SetPosition({ 241.0f,848.0f});
+	}
+	else if (_PrevLevel->GetNameCopy() == "MineEntryLevel")
+	{
+		Player::MainPlayer->SetPosition({ 3484.0f,476.0f});
+	}
+	
 	Player::MainPlayer->SetMapScale(5448.0f, 2620.0f);
 	Player::MainPlayer->SetColMapName("Town2ColMap.bmp");
-	Player::MainPlayer->SetSideLevel("TownLevel", "MineEntryLevel", "LobinHouseLevel");
+	Player::MainPlayer->SetSideLevel("TownLevel", "MineEntryLevel", "BackWoodLevel");
 }
 
 void Town2Level::LevelChangeEnd(GameEngineLevel* _NextLevel)

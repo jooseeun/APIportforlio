@@ -55,8 +55,8 @@ void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
 
 
 	TreeBot_->TreeTop_ = CreateRenderer("TreeTop.bmp");
+	TreeBot_->TreeTop_->SetOrder(static_cast<int>(ORDER::PLAYER));
 	TreeBot_->TreeTop_->SetIndex(_index);
-	TreeBot_->TreeTop_->SetOrder(static_cast<int>(ORDER::TREETOP));
 	TreeBot_->TreeTop_->SetPivotType(RenderPivot::BOT);
 	TreeBot_->TreeTop_->SetPivot({ ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) - 12});
 	TreeBot_->TreeTopX_ = ((float)_Posx + 0.5f) * (5120.0f / 80);

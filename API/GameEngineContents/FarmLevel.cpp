@@ -41,10 +41,7 @@ void FarmLevel::Loading()
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
 
-	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-	Front_->GetRenderer()->SetImage("FarmFront.bmp");
-	float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
-	Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::PLAYER));
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
@@ -61,6 +58,7 @@ void FarmLevel::Loading()
 
 	FarmObjectEnvironment::MainFarmObject = CreateActor< FarmObjectEnvironment>();
 	FarmObjectEnvironment::MainFarmObject->SetTileMap(&Back->GroundTileMap_);
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 	
 }
 
@@ -87,9 +85,13 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 4920.0f,1146.0f });
 	}
+	else if (_PrevLevel->GetNameCopy() == "BackWoodLevel")
+	{
+		Player::MainPlayer->SetPosition({ 2616.0f,202.0f});
+	}
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
-	Player::MainPlayer->SetSideLevel("FarmHouseLevel", "BusStopLevel", " ");
+	Player::MainPlayer->SetSideLevel("BackWoodLevel", "BusStopLevel", "FarmHouseLevel");
 	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
 	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
 

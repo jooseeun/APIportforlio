@@ -13,6 +13,7 @@
 #include "AnimalShopLevel.h"
 #include "ForestLevel.h"
 #include "LobinHouseLevel.h"
+#include "BackWoodLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
@@ -353,6 +354,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
+	CreateLevel< BackWoodLevel>("BackWoodLevel");
 	//ChangeLevel("FarmHouseLevel");
 	ChangeLevel("TitleLevel");
 	//ChangeLevel("FarmLevel");

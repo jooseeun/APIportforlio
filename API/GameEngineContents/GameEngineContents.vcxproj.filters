@@ -131,6 +131,9 @@
     <ClInclude Include="Crops.h">
       <Filter>Actor\Play\Farm</Filter>
     </ClInclude>
+    <ClInclude Include="BackWoodLevel.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -259,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="Crops.cpp">
       <Filter>Actor\Play\Farm</Filter>
+    </ClCompile>
+    <ClCompile Include="BackWoodLevel.cpp">
+      <Filter>Level\PlayLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

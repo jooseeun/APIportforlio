@@ -39,9 +39,6 @@ void BusStopLevel::Loading()
 		Back->CropsTileMap_.TileRangeSetting(35, 30, { 48,48 });
 
 		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-		Front_->GetRenderer()->SetImage("BusStopFront.bmp");
-		float4 FrontImageScale = Front_->GetRenderer()->GetImage()->GetScale();
-		Front_->GetRenderer()->SetPivot(FrontImageScale.Half());
 	}
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
@@ -58,7 +55,7 @@ void BusStopLevel::Loading()
 	}
 
 
-	
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 	
 }
 void BusStopLevel::Update()
@@ -89,6 +86,8 @@ void BusStopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSideLevel("FarmLevel", "TownLevel", " ");
 
 	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
+
+
 }
 
 void BusStopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

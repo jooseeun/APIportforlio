@@ -1,7 +1,7 @@
 #pragma once
-
-#include "Player.h"
-#include "ToolUI.h"
+#include "BackGround.h"
+#include "PlayerEnum.h"
+#include "Tool.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 
@@ -19,24 +19,29 @@ public:
 	Mine1Level& operator=(const Mine1Level& _Other) = delete;
 	Mine1Level& operator=(Mine1Level&& _Other) noexcept = delete;
 
-	template<typename ItemActor>
-	inline void GetItemPos(ItemActor* _Actor)
+	inline void GetItemPos()
 	{
-		int Num = _Actor->GetInvenPos();
-		ItemPos_[Num] = _Actor->GetItemName();
+		for (int _Num = 0; _Num < 13; _Num++)
+		{
+			ItemPos_[_Num] = Tool::ToolSet->GetToolUIPivotItem(_Num);
+		}
+	}
+
+	inline void SetSelectPivot(int _SelectPivot)
+	{
+		CurSelectPivot_ = _SelectPivot;
 
 	}
 
 protected:
 	void Loading() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
+
 private:
-	Player* PlayerSet;
-	ToolUI* ToolUISet;
-
 	PlayerItem ItemPos_[13];
-
-
+	BackGround* Back;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };
