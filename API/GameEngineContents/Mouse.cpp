@@ -51,7 +51,7 @@ void Mouse::Update()
 
 		else if (true == GetMouseCol()->CollisionCheck("ExitCol", CollisionType::Rect, CollisionType::Rect))
 		{
-			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+			GameEngineWindow::GetInst().Off();
 		}
 	}
 }
