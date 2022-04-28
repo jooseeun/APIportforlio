@@ -238,8 +238,11 @@ private:
 	int TileIndexY_;
 
 private:
-	bool IsCheckObjectTile();
-	void WieldObject();
+	bool IsCheckFarmObjectTile();
+	bool IsCheckMineObjectTile();
+	void WieldFarmObject();
+	void WieldMineObject();
+	PlayerItem ReturnMineItem(MineTileType _Type);
 	void HitObject();
 
 public:

@@ -30,6 +30,13 @@ void DropItem::Start()// 감자 192
 	Object_->CreateAnimation("Objects.bmp", "BlueberrieItem", 258, 258, 0.8f, true);
 
 
+	Object_->CreateAnimation("Objects.bmp", "amethystItem", 66, 66, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "CoalItem", 382, 382, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "CopperItem", 378, 378, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "DiamondItem", 72, 72, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "EmeraldItem", 60, 60, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "RubyItem", 64, 64, 0.8f, true);
+
 
 	Object_->CreateAnimation("Objects.bmp", "StoneItem", 390, 390, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "BranchItem", 388, 388, 0.8f, true);
@@ -111,7 +118,42 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		SellValue_ = 10;
 		return "BranchItem";
 	}
-
+	else if (PlayerItem::amethystItem == _Item)
+	{
+		IndexNum_ = 66;
+		SellValue_ = 100;
+		return "amethystItem";
+	}
+	else if (PlayerItem::CoalItem == _Item)
+	{
+		IndexNum_ = 382;
+		SellValue_ = 10;
+		return "CoalItem";
+	}
+	else if (PlayerItem::CopperItem == _Item)
+	{
+		IndexNum_ = 378;
+		SellValue_ = 15;
+		return "CopperItem";
+	}
+	else if (PlayerItem::DiamondItem == _Item)
+	{
+		IndexNum_ = 72;
+		SellValue_ = 750;
+		return "DiamondItem";
+	}
+	else if (PlayerItem::EmeraldItem == _Item)
+	{
+		IndexNum_ = 60;
+		SellValue_ = 250;
+		return "EmeraldItem";
+	}
+	else if (PlayerItem::RubyItem == _Item)
+	{
+		IndexNum_ = 64;
+		SellValue_ = 250;
+		return "RubyItem";
+	}
 
 }
 void DropItem::Update()
@@ -154,7 +196,7 @@ void DropItem::MoveToPlayer()
 	{
 		return;
 	}
-	if (CheckDir_ <= 50)
+	if (CheckDir_ <= 70.0f)
 	{
 
 		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_, SellValue_);
@@ -165,6 +207,6 @@ void DropItem::MoveToPlayer()
 	}
 
 	MoveDir_.Normal2D();
-	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 300.0f); // 속도
+	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 400.0f); // 속도
 
 }

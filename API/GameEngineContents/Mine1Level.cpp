@@ -36,6 +36,7 @@ void Mine1Level::Loading()
 	Back->GetRenderer()->SetImage("Mine1.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+
 	Back->GroundTileMap_.TileRangeSetting(20, 20, { 64,64 });
 
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));

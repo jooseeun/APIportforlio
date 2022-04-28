@@ -140,6 +140,9 @@
     <ClInclude Include="MineEntryLevel.h">
       <Filter>Level\PlayLevel\MineLevel</Filter>
     </ClInclude>
+    <ClInclude Include="MineTile.h">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />

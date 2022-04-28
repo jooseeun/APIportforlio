@@ -50,7 +50,7 @@ void Mine2Object::RenderObject()
 			MakeObject(27, 28, 3, MineTileType::Stone);
 			MakeObject(28, 22, 3, MineTileType::Stone);
 			MakeObject(29, 25, 0, MineTileType::Stone);
-			MakeObject(30, 52, 0, MineTileType::Stone);
+			MakeObject(30, 20, 0, MineTileType::Stone);
 			MakeObject(29, 17, 3, MineTileType::Stone);
 
 			MakeObject(13, 8, 1, MineTileType::Diamond);

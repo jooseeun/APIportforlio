@@ -38,6 +38,7 @@ void FarmLevel::Loading()
 	Back->GetRenderer()->SetImage("Farm.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+
 	Back->GroundTileMap_.TileRangeSetting(80, 65, { 64,64 });
 	Back->CropsTileMap_.TileRangeSetting(80, 65, { 64,64 });
 

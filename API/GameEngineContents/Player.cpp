@@ -4,6 +4,8 @@
 #include "Tool.h"
 #include "DropItem.h"
 #include "TileAnimation.h"
+#include "Mine1Object.h"
+#include "Mine2Object.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -871,20 +873,58 @@ float4 Player::TileCheckDirPos()
 //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////오브젝트 상호작용 관련 함수/////////////////////////////////////////////
 
-bool Player::IsCheckObjectTile()
+bool Player::IsCheckFarmObjectTile()
 {
 	TileCheckDir();
-
-	EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
-
-	if (nullptr == _Tile)
+	if (GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		return false;
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+
+		if (nullptr == _Tile)
+		{
+			return false;
+		}
+
+		else
+		{
+			return true;
+		}
 	}
 
-	else
+
+}
+bool Player::IsCheckMineObjectTile()
+{
+	TileCheckDir();
+	if (GetLevel()->GetNameCopy() == "Mine1Level")
 	{
-		return true;
+		MineTile* _Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->GetTile<MineTile>(TileIndexX_, TileIndexY_);
+
+		if (nullptr == _Tile)
+		{
+			return false;
+		}
+
+		else
+		{
+			return true;
+		}
+
+	}
+	if (GetLevel()->GetNameCopy() == "Mine2Level")
+	{
+		MineTile* _Tile = Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->GetTile<MineTile>(TileIndexX_, TileIndexY_);
+
+		if (nullptr == _Tile)
+		{
+			return false;
+		}
+
+		else
+		{
+			return true;
+		}
+
 	}
 
 
@@ -919,10 +959,103 @@ void Player::HitObject()
 
 	}
 }
-void Player::WieldObject()
+void Player::WieldMineObject()
 {
 	TileCheckDir();
-	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "FarmLevel")
+	if (CurItem_ == PlayerItem::PickItem&& GetLevel()->GetNameCopy() == "Mine1Level")
+	{
+		MineTile* _Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->GetTile<MineTile>(TileIndexX_, TileIndexY_);
+		if (_Tile == nullptr)
+		{
+			return;
+		}
+		_Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_,"Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+		_Tile->TileCol_->Death();
+
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
+		if (CurDir_ == PlayerDir::Back)
+		{
+			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		}
+		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 20), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 20) });
+		TileAni_->SetAniString("StoneAni");
+		//_Tile->IsDestroy_ = true;
+
+		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 20) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 20) });
+
+		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
+		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+		Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+		return;
+	}
+	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "Mine2Level")
+	{
+		MineTile* _Tile = Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->GetTile<MineTile>(TileIndexX_, TileIndexY_);
+		if (_Tile == nullptr)
+		{
+			return;
+		}
+		_Tile = Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+		_Tile->TileCol_->Death();
+
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
+		if (CurDir_ == PlayerDir::Back)
+		{
+			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+		}
+		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 35), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 35) });
+		TileAni_->SetAniString("StoneAni");
+		//_Tile->IsDestroy_ = true;
+
+		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 35) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 35) });
+
+		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
+		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+		Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+		return;
+	}
+}
+PlayerItem Player::ReturnMineItem(MineTileType _Type)
+{
+	if (_Type == MineTileType::amethyst)
+	{
+		return PlayerItem::amethystItem;
+	}
+	if (_Type == MineTileType::Coal)
+	{
+		return PlayerItem::CoalItem;
+	}	
+	if (_Type == MineTileType::Copper)
+	{
+		return PlayerItem::CopperItem;
+	}	
+	if (_Type == MineTileType::Diamond)
+	{
+		return PlayerItem::DiamondItem;
+	}	
+	if (_Type == MineTileType::Emerald)
+	{
+		return PlayerItem::EmeraldItem;
+	}	
+	if (_Type == MineTileType::Ruby)
+	{
+		return PlayerItem::RubyItem;
+	}	
+	if (_Type == MineTileType::Stone)
+	{
+		return PlayerItem::StoneItem;
+	}
+}
+void Player::WieldFarmObject()
+{
+	if (GetLevel()->GetNameCopy() != "FarmLevel")
+	{
+		return;
+	}
+	TileCheckDir();
+	if (CurItem_ == PlayerItem::PickItem)
 	{
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile == nullptr)
@@ -952,8 +1085,8 @@ void Player::WieldObject()
 		}
 
 	}
-	
-	else if (CurItem_ == PlayerItem::AxItem && GetLevel()->GetNameCopy() == "FarmLevel")
+
+	else if (CurItem_ == PlayerItem::AxItem)
 	{
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile == nullptr)

@@ -259,6 +259,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MineTile.h" />
     <ClInclude Include="Money.h">
       <SubType>
       </SubType>

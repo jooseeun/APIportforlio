@@ -36,7 +36,7 @@ void Mine2Level::Loading()
 	Back->GetRenderer()->SetImage("Mine2.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
-	Back->GroundTileMap_.TileRangeSetting(35, 35, { 48,48 });
+	Back->GroundTileMap_.TileRangeSetting(35, 35, { 64,64  });
 
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
