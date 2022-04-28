@@ -3,7 +3,6 @@
 #include "PlayerEnum.h"
 #include "Tool.h"
 #include <GameEngine/GameEngineLevel.h>
-#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 
 class FarmHouseLevel : public GameEngineLevel
@@ -18,7 +17,6 @@ public:
 	FarmHouseLevel(FarmHouseLevel&& _Other) noexcept = delete;
 	FarmHouseLevel& operator=(const FarmHouseLevel& _Other) = delete;
 	FarmHouseLevel& operator=(FarmHouseLevel&& _Other) noexcept = delete;
-	GameEngineSoundPlayer BgmPlayer;
 
 
 	inline void GetItemPos()

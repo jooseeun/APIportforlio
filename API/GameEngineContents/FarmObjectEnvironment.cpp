@@ -43,6 +43,7 @@ void FarmObjectEnvironment::Update()
 	}
 
 	CheckTreeAnimation();
+	CheckTreeAlpha();
 }
 
 void FarmObjectEnvironment::MakeTree(int _Posx,int _Posy,int _index)
@@ -78,42 +79,54 @@ void FarmObjectEnvironment::TreeAni(GameEngineRenderer* _TreeTop)
 }
 void FarmObjectEnvironment::CheckTreeAnimation()
 {
-	std::list<EnvironmentTile*>::iterator StartIter = Tree.begin();
-	std::list<EnvironmentTile*>::iterator EndIter = Tree.end();
-
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0;i< Tree.size(); i++)
 	{
-		if (nullptr == (*StartIter))
+		if (nullptr == Tree[i] )
 		{
 			continue;
 		}
-
-		if (true == (*StartIter)->IsShake_)
+		
+		if (true == Tree[i]->IsShake_)
 		{
-			(*StartIter)->TreeTop_->Off();
-			(*StartIter)->TreeAni_->On();
-			(*StartIter)->TreeAni_->ChangeAnimation("ShakeTree");
-			if (true == (*StartIter)->TreeAni_->IsEndAnimation())
+			Tree[i]->TreeTop_->Off();
+			Tree[i]->TreeAni_->On();
+			Tree[i]->TreeAni_->ChangeAnimation("ShakeTree");
+			if (true == Tree[i]->TreeAni_->IsEndAnimation())
 			{
-				(*StartIter)->TreeAni_->ChangeAnimation("ShakeTree2");
-				(*StartIter)->TreeAni_->Off();
-				(*StartIter)->TreeTop_->On();
-				(*StartIter)->IsShake_ = false;
+				Tree[i]->TreeAni_->ChangeAnimation("ShakeTree2");
+				Tree[i]->TreeAni_->Off();
+				Tree[i]->TreeTop_->On();
+				Tree[i]->IsShake_ = false;
 			}
-		}
-
-		if (true == (*StartIter)->TreeTopCol_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
-		{
-			(*StartIter)->TreeTop_->SetAlpha(80);
-			return;
-		}
-		else
-		{
-			(*StartIter)->TreeTop_->SetAlpha(255);
 		}
 	}
 }
+void FarmObjectEnvironment::CheckTreeAlpha()
+{
+	for (int i = 0; i < Tree.size(); i++)
+	{
+		if (nullptr == Tree[i])
+		{
+			continue;
+		}
+		else if (Tree[i]->IsDestroy_ == true)
+		{
+			Tree.erase(Tree.begin() + i);
+			continue;
+		}
 
+		if (true == Tree[i]->TreeTopCol_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
+		{
+			Tree[i]->TreeTop_->SetAlpha(80);
+			return;
+		}
+
+		else
+		{
+			Tree[i]->TreeTop_->SetAlpha(255);
+		}
+	}
+}
 
 void FarmObjectEnvironment::MakeGrass(int _Posx, int _Posy, int _index) // 698~ ∫Û≈∏¿œ 31
 {

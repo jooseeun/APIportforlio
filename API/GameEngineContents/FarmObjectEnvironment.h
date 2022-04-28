@@ -11,7 +11,8 @@ public:
 		:EnvironmentType_(EnvironmentTileType::Max),
 		TreeTop_(nullptr),
 		TreeTopCol_(nullptr),
-		IsShake_(false)
+		IsShake_(false),
+		IsDestroy_(false)
 	{
 
 	}
@@ -57,9 +58,9 @@ private:
 	bool CheckMake_;
 	GameEngineRendererTileMap* FarmTileMap_;
 
-	std::list< EnvironmentTile* > Tree;
-	std::list< EnvironmentTile* > Stone;
-	std::list< EnvironmentTile* > Grass;
+	std::vector< EnvironmentTile* > Tree;
+	std::vector< EnvironmentTile* > Stone;
+	std::vector< EnvironmentTile* > Grass;
 
 	void MakeTree(int _Posx, int _Posy, int _index);
 	void MakeGrass(int _Posx, int _Posy, int _index);
@@ -67,7 +68,7 @@ private:
 	void MakeBranch(int _Posx, int _Posy, int _index);
 
 	void TreeAni(GameEngineRenderer* _TreeTop);
-
+	void CheckTreeAlpha();
 	void CheckTreeAnimation();
 
 	void Start() override;

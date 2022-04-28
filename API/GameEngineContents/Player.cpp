@@ -182,6 +182,7 @@ void Player::ChangeAni(std::string _Name)
 
 void Player::Start()
 {
+
 	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
 
 	int HairNum_ = static_cast<int>(CurHairStyle_);
@@ -959,10 +960,12 @@ void Player::WieldObject()
 
 		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
-			
+			_Tile->DeathCount_ -= 1;
+
 			if (_Tile->DeathCount_ != 0 )
 			{
-				if (_Tile->DeathCount_ >= 3)
+
+				if (_Tile->DeathCount_ > 3)
 				{
 					_Tile->IsShake_ = true;
 				}
@@ -970,30 +973,28 @@ void Player::WieldObject()
 				if (_Tile->DeathCount_ == 3)
 				{
 					_Tile->TreeTop_->Death();
-					//_Tile->IsDestroy_ = true;
 
 					DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
 					DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 					DropItem_->SetItem(PlayerItem::BranchItem);
 					DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-					FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 				}
 				
-				_Tile->DeathCount_ -= 1;
-
+			
 				return;
 			}
 
 			
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
-			_Tile->TileCol_->Death();
-			//_Tile->IsDestroy_ = true;
+			_Tile->IsDestroy_ = true; 
 
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			_Tile->EnvironmentType_ = EnvironmentTileType::Max;
+			_Tile->TileCol_-> Death();
+			//FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -1163,6 +1164,11 @@ std::string Player::CheckSeedSting(SeedType _Type)
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
+
+	if ("FarmHouseLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (Wild Horseradish Jam).mp3");
+	}
 }
 
 void Player::IsDebugModeONOFF()

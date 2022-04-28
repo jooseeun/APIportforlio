@@ -32,7 +32,7 @@ FarmHouseLevel::~FarmHouseLevel()
 
 void FarmHouseLevel::Loading()
 {
-	BgmPlayer = GameEngineSound::SoundPlayControl("Spring (Wild Horseradish Jam).mp3");
+
 
 	Back = CreateActor<BackGround>((int)ORDER::BACKGROUND);
 	Back->GetRenderer()->SetImage("FarmHouse.bmp");

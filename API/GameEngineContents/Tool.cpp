@@ -24,7 +24,7 @@ Tool::Tool()
 
 Tool::~Tool()
 {
-	{ 
+	{
 		std::list<ItemData*>::iterator StartIter = Tool::ToolSet->ItemList_.begin();
 		std::list<ItemData*>::iterator EndIter = Tool::ToolSet->ItemList_.end();
 
@@ -104,8 +104,19 @@ void Tool::Start()
 		WateringCan_->Click_ = false;
 		ItemList_.push_back(WateringCan_);
 
+		ItemData* LongSword_ = new ItemData();
+		LongSword_->InvenPivot_ = 5;
+		LongSword_->ItemKind_ = PlayerItemKind::HitItem;
+		LongSword_->ItemName_ = PlayerItem::LongSwordItem;
+		LongSword_->Render = CreateRenderer("Weapons.bmp");
+		LongSword_->Render->SetIndex(0);
+		LongSword_->Render->CameraEffectOff();
+		LongSword_->InvenFloor_ = InvenFloor::First;
+		LongSword_->Click_ = false;
+		ItemList_.push_back(LongSword_);
+
 		ItemData* PhotatoSeed_ = new ItemData();
-		PhotatoSeed_->InvenPivot_ = 5;
+		PhotatoSeed_->InvenPivot_ = 6;
 		PhotatoSeed_->ItemKind_ = PlayerItemKind::SeedItem;
 		PhotatoSeed_->ItemName_ = PlayerItem::PhatatoSeedItem;
 		PhotatoSeed_->Render = CreateRenderer("Objects.bmp");
@@ -119,7 +130,7 @@ void Tool::Start()
 		ItemList_.push_back(PhotatoSeed_);
 
 		ItemData* KaleSeed_ = new ItemData();
-		KaleSeed_->InvenPivot_ = 6;
+		KaleSeed_->InvenPivot_ = 7;
 		KaleSeed_->ItemKind_ = PlayerItemKind::SeedItem;
 		KaleSeed_->ItemName_ = PlayerItem::KaleSeedItem;
 		KaleSeed_->Render = CreateRenderer("Objects.bmp");
@@ -132,71 +143,62 @@ void Tool::Start()
 		KaleSeed_->ItemCount_ = 4;
 		ItemList_.push_back(KaleSeed_);
 
-		ItemData* LongSword_ = new ItemData();
-		LongSword_->InvenPivot_ = 7;
-		LongSword_->ItemKind_ = PlayerItemKind::HitItem;
-		LongSword_->ItemName_ = PlayerItem::LongSwordItem;
-		LongSword_->Render = CreateRenderer("Weapons.bmp");
-		LongSword_->Render->SetIndex(0);
-		LongSword_->Render->CameraEffectOff();
-		LongSword_->InvenFloor_ = InvenFloor::First;
-		LongSword_->Click_ = false;
-		ItemList_.push_back(LongSword_);
+
 
 	}
+
 
 	{
+		float InvenFirstXPivot_ = -336.0f + 480.0f;
+		float InvenFirstYPivot_ = -484.0f + 340.0f;
+		float InvenNumPivot_ = 64.0f;
+		float InvenFloorPivot_ = 72.0f;
+		ShopColl_.push_back(CreateCollision("Inven1Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven2Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven3Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven4Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven5Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven6Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven7Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven8Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven9Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven10Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven11Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven12Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven13Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven14Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven15Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven16Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven17Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven18Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven19Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven20Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven21Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven22Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven23Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+		ShopColl_.push_back(CreateCollision("Inven24Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
+
+
+		for (int i = 0; i < ShopColl_.size(); i++)
 		{
-			float InvenFirstXPivot_ = -336.0f + 480.0f;
-			float InvenFirstYPivot_ = -484.0f+340.0f;
-			float InvenNumPivot_ = 64.0f;
-			float InvenFloorPivot_ = 72.0f;
-			ShopColl_.push_back(CreateCollision("Inven1Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven2Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven3Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven4Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven5Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven6Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven7Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven8Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven9Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven10Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven11Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven12Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven13Col", { 64,64 }, { InvenFirstXPivot_ ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven14Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 1 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven15Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 2 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven16Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 3 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven17Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 4 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven18Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 5 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven19Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 6 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven20Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 7 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven21Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 8 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven22Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 9 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven23Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 10 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-			ShopColl_.push_back(CreateCollision("Inven24Col", { 64,64 }, { InvenFirstXPivot_ + InvenNumPivot_ * 11 ,InvenFirstYPivot_ + InvenFloorPivot_ }));
-
-			
-			for (int i = 0 ; i<ShopColl_.size(); i++)
+			if (nullptr == ShopColl_[i])
 			{
-				if (nullptr == ShopColl_[i])
-				{
-					continue;
-				}
-				ShopColl_[i]->CameraEffectOff();
+				continue;
 			}
-
-			for (int i = 0; i < ShopColl_.size(); i++)
-			{
-				if (nullptr == ShopColl_[i])
-				{
-					continue;
-				}
-				ShopColl_[i]->Off();
-			}
-			
+			ShopColl_[i]->CameraEffectOff();
 		}
+
+		for (int i = 0; i < ShopColl_.size(); i++)
+		{
+			if (nullptr == ShopColl_[i])
+			{
+				continue;
+			}
+			ShopColl_[i]->Off();
+		}
+
 	}
+
 }
 void Tool::ShopUpdate()
 {
@@ -309,30 +311,30 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 			continue;
 		}
 
-		if((*StartIter)->IsInven == true)
+		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_ )
+			if (0 == (*StartIter)->ItemCount_)
 			{
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
-				(*StartIter)->InvenPivot_=100;
+				(*StartIter)->InvenPivot_ = 100;
 				(*StartIter)->IsInven = false;
 			}
 			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
 			{
-				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_)+ InventoryModeXPivot_ - 12* (NumPivot_)* static_cast<float>((*StartIter)->InvenFloor_),
-					28+ InventoryModeYPivot_+(InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))});
+				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
+					28 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
 			}
 			else
 			{
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
-					0+ InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
+					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
 				ItemCountRenderUpdate();
 			}
 
 			if (true == (*StartIter)->Click_)
 			{
-				(*StartIter)->Render->SetPivot({MouseX_ - FirstPivot_+32 , MouseY_ - 664+32});
+				(*StartIter)->Render->SetPivot({ MouseX_ - FirstPivot_ + 32 , MouseY_ - 664 + 32 });
 			}
 		}
 	}
@@ -352,7 +354,7 @@ void Tool::UpdateShopInvenPos()
 
 		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_) 
+			if (0 == (*StartIter)->ItemCount_)
 			{
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
@@ -360,10 +362,10 @@ void Tool::UpdateShopInvenPos()
 				(*StartIter)->IsInven = false;
 
 			}
-			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true ) // 판매기능
+			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true) // 판매기능
 			{
 				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_);
-				(*StartIter)->ItemCount_ -=1;
+				(*StartIter)->ItemCount_ -= 1;
 				(*StartIter)->Click_ = false;
 			}
 
@@ -371,7 +373,7 @@ void Tool::UpdateShopInvenPos()
 			{
 				(*StartIter)->Render->On();
 				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 148 ,
-					28 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_))  -145});
+					28 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
 			}
 			else
 			{
@@ -380,8 +382,8 @@ void Tool::UpdateShopInvenPos()
 					0 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
 				ItemCountRenderUpdate();
 			}
-			
-			
+
+
 		}
 	}
 }
@@ -435,11 +437,11 @@ void Tool::ItemCountRenderUpdate()
 
 		}
 		(*StartIter)->NumRender->CameraEffectOff();
-		
+
 	}
-	
+
 }
-void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex , size_t _SellValue)
+void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::string _RenderFileName, int _RenderIndex, size_t _SellValue)
 {
 	ItemData* _CreateItem = new ItemData();
 	_CreateItem->ItemKind_ = _ItemKind;
@@ -484,7 +486,7 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 			{
 				_CreateItem->InvenFloor_ = InvenFloor::Second;
 			}
-				i = 24;
+			i = 24;
 		}
 
 	}
@@ -492,14 +494,14 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 	_CreateItem->Render->SetIndex(_RenderIndex);
 	_CreateItem->Render->CameraEffectOff();
 	if (_ItemKind == PlayerItemKind::CropsItem ||
-		_ItemKind == PlayerItemKind::ObjectItem||
+		_ItemKind == PlayerItemKind::ObjectItem ||
 		_ItemKind == PlayerItemKind::SeedItem)
 	{
 		_CreateItem->IsSell_ = true;
 		_CreateItem->SellValue_ = _SellValue;
 	}
 
-	
+
 	ToolSet->ItemList_.push_back(_CreateItem);
 }
 
@@ -543,7 +545,7 @@ void Tool::SetClickItem(int _Pivot)
 			(*StartIter)->Click_ = true;
 
 		}
-		
+
 	}
 
 }
@@ -551,10 +553,10 @@ void Tool::GetToolUINum()
 {
 	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
-	
+
 	for (int i = 0; i < 24; i++)
 	{
-		ItemPos_[i]=PlayerItem::Nothing;
+		ItemPos_[i] = PlayerItem::Nothing;
 		ItemCount_[i] = 0;
 	}
 
@@ -573,7 +575,7 @@ void Tool::ItemUse(PlayerItem _Item)
 {
 	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
 	std::list<ItemData*>::iterator EndIter = ItemList_.end();
-	
+
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
@@ -584,7 +586,7 @@ void Tool::ItemUse(PlayerItem _Item)
 		if (_Item == (*StartIter)->ItemName_)
 		{
 			(*StartIter)->ItemCount_ -= 1;
-			return; 
+			return;
 		}
 	}
 

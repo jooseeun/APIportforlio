@@ -5,6 +5,7 @@
 #include "FarmObjectEnvironment.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 class PlayerTile : public Tile
@@ -126,6 +127,9 @@ public:
 	{
 		IsLeftMouse = false;
 	}
+
+
+	GameEngineSoundPlayer BgmPlayer;
 protected:
 private:
 
