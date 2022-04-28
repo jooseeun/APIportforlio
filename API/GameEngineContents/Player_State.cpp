@@ -159,7 +159,11 @@ void Player::WalkUpdate()
 		{
 			Move = float4::ZERO;
 		}
-
+		else if (true == PlayerCol_->NextPosCollisionCheck("MineStone", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			Move = float4::ZERO;
+		}
+		
 
 		if (RGB(255, 0, 0) != Color)
 		{

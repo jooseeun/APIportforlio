@@ -54,6 +54,8 @@ void Mouse::Update()
 			GameEngineWindow::GetInst().Off();
 		}
 	}
+
+	
 }
 
 void Mouse::CheckPlayerIsLeftMouse()
@@ -69,6 +71,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 		Time_ -= GameEngineTime::GetDeltaTime();
 		return;
 	}
+
 
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
@@ -91,9 +94,16 @@ void Mouse::CheckPlayerIsLeftMouse()
 
 			return;
 		}
+
+		if (true == GetMouseCol()->NextPosCollisionCheck("GoMineEntry", GetLevel()->GetCameraPos(), CollisionType::Rect, CollisionType::Rect))
+		{
+			GameEngine::GetInst().ChangeLevel("MineEntryLevel");
+
+			return;
+		}
 	}
 
-	if (true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
+	else if (true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
 	{
 		if (false == ToolUI::ToolUISet->GetIsInventory())
 		{
@@ -273,7 +283,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 			}
 			else
 			{
-				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy())
+				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy() && IsOpenShop_ == false)
 				{
 					Player::MainPlayer->SetIsLeftMouseON();
 				}

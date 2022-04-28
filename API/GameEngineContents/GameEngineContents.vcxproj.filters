@@ -47,15 +47,6 @@
     <ClInclude Include="AnimalShopLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Mine1Level.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="Mine2Level.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="MineEntryLevel.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
     <ClInclude Include="SeedShopLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
@@ -134,8 +125,20 @@
     <ClInclude Include="BackWoodLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="MineObject.h">
+    <ClInclude Include="Mine1Object.h">
       <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine2Object.h">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine1Level.h">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Mine2Level.h">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="MineEntryLevel.h">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -180,15 +183,6 @@
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="AnimalShopLevel.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="Mine1Level.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="Mine2Level.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="MineEntryLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="SeedShopLevel.cpp">
@@ -269,8 +263,20 @@
     <ClCompile Include="BackWoodLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="MineObject.cpp">
+    <ClCompile Include="Mine1Object.cpp">
       <Filter>Actor\Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine2Object.cpp">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine1Level.cpp">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Mine2Level.cpp">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MineEntryLevel.cpp">
+      <Filter>Level\PlayLevel\MineLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +324,9 @@
     </Filter>
     <Filter Include="Actor\Play\Farm">
       <UniqueIdentifier>{13f37d19-b047-43e1-904f-b3ce95abf745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\MineLevel">
+      <UniqueIdentifier>{9ef2984e-540c-426b-96a0-1f0650052c04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

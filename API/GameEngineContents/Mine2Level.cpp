@@ -11,6 +11,7 @@
 #include "FrontMap.h"
 #include "FadeIn.h"
 #include "Money.h"
+#include "Mine2Object.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -30,17 +31,21 @@ Mine2Level::~Mine2Level()
 
 void Mine2Level::Loading()
 {
-	{
-		BackGround* Back = CreateActor<BackGround>(1);
-		Back->GetRenderer()->SetImage("Mine2.bmp");
-		float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
-		Back->GetRenderer()->SetPivot(BackImageScale.Half());
-		Back->GroundTileMap_.TileRangeSetting(35, 35, { 48,48 });
+	
+	BackGround* Back = CreateActor<BackGround>(1);
+	Back->GetRenderer()->SetImage("Mine2.bmp");
+	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
+	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+	Back->GroundTileMap_.TileRangeSetting(35, 35, { 48,48 });
 
-		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-	}
-
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+
+	if (nullptr == Mine2Object::MainMine2Tile)
+	{
+		Mine2Object::MainMine2Tile = CreateActor<Mine2Object>(static_cast<int>(ORDER::GROUND), "Mine2Object");
+		Mine2Object::MainMine2Tile->SetTileMap(&Back->GroundTileMap_);
+	}
 
 	if (nullptr == Player::MainPlayer)
 	{

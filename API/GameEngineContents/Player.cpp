@@ -427,39 +427,37 @@ void Player::CameraCheck()
 
 	float CameraRectX = 1280;
 	float CameraRectY = 720;
-	if (MapScaleX_ > 1280)
+
+	if (0 >= GetLevel()->GetCameraPos().x)
 	{
-		if (0 >= GetLevel()->GetCameraPos().x)
-		{
-			float4 CurCameraPos = GetLevel()->GetCameraPos();
-			CurCameraPos.x = 0;
-			GetLevel()->SetCameraPos(CurCameraPos);
-		}
-		if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
-		{
-			float4 CurCameraPos = GetLevel()->GetCameraPos();
-			CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
-			GetLevel()->SetCameraPos(CurCameraPos);
-		}
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	if (MapScaleY_ > 1280)
+	if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
 	{
-		if (0 >= GetLevel()->GetCameraPos().y)
-		{
-			float4 CurCameraPos = GetLevel()->GetCameraPos();
-			CurCameraPos.y = 0;
-			GetLevel()->SetCameraPos(CurCameraPos);
-		}
-
-
-
-		if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
-		{
-			float4 CurCameraPos = GetLevel()->GetCameraPos();
-			CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
-			GetLevel()->SetCameraPos(CurCameraPos);
-		}
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
+		GetLevel()->SetCameraPos(CurCameraPos);
 	}
+	
+
+	if (0 >= GetLevel()->GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+
+
+	if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
 
 
 }
