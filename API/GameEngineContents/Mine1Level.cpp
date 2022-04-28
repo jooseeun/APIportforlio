@@ -11,6 +11,7 @@
 #include "FrontMap.h"
 #include "FadeIn.h"
 #include "Money.h"
+#include "MineObject.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -30,17 +31,19 @@ Mine1Level::~Mine1Level()
 
 void Mine1Level::Loading()
 {
-	{
-		BackGround* Back = CreateActor<BackGround>(1);
-		Back->GetRenderer()->SetImage("Mine1.bmp");
-		float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
-		Back->GetRenderer()->SetPivot(BackImageScale.Half());
-		Back->GroundTileMap_.TileRangeSetting(20, 20, { 48,48 });
 
-		FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
-	}
+	Back = CreateActor<BackGround>(1);
+	Back->GetRenderer()->SetImage("Mine1.bmp");
+	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
+	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+	Back->GroundTileMap_.TileRangeSetting(20, 20, { 64,64 });
+
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
+
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+	MineObject* MineSet_ = CreateActor<MineObject>(static_cast<int>(ORDER::GROUND), "Mine1Object");
+	MineSet_->SetTileMap(&Back->GroundTileMap_);
 
 	if (nullptr == Player::MainPlayer)
 	{
@@ -76,7 +79,7 @@ void Mine1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetMapScale(1280.0f, 1280.0f);
 	Player::MainPlayer->SetColMapName("Mine1ColMap.bmp");
 	Player::MainPlayer->SetSideLevel("", "", " ");
-
+	Player::MainPlayer->SetMineTileMap(&Back->GroundTileMap_);
 	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
 
 }

@@ -88,6 +88,22 @@ void StardewVallyGame::GameInit()
 		ResourcesDir.MoveParent("API");
 		ResourcesDir.Move("Resources");
 		ResourcesDir.Move("Image");
+		ResourcesDir.Move("Mine");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+	}
+	{
+		// 현재 디렉토리
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
 		ResourcesDir.Move("NPC");
 
 		// 폴더안에 모든 이미지 파일을 찾는다.
@@ -334,6 +350,16 @@ void StardewVallyGame::GameInit()
 	GroundAni->CutCount(10, 1);
 	GameEngineImage* StoneAni = GameEngineImageManager::GetInst()->Find("StoneAni.bmp");
 	StoneAni->CutCount(10, 1);
+
+	GameEngineImage* MineObject = GameEngineImageManager::GetInst()->Find("MineObject.bmp");
+	MineObject->CutCount(8, 2);
+	GameEngineImage* Bug = GameEngineImageManager::GetInst()->Find("Bug.bmp");
+	Bug->CutCount(4, 5);
+	GameEngineImage* GreenSlime = GameEngineImageManager::GetInst()->Find("GreenSlime.bmp");
+	GreenSlime->CutCount(4, 12);
+
+
+
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("CheckTest", '1');

@@ -9,6 +9,18 @@ enum class EnvironmentTileType
 	Max
 };
 
+enum class MineTileType
+{
+	Stone=300,
+	Diamond,
+	Ruby,
+	Emerald,
+	Copper,//구리
+	amethyst,//자수정
+	Coal, // 석탄
+	Max
+};
+
 enum class TileType
 {
 	HoeDirt=50,
@@ -63,7 +75,7 @@ enum class PlayerItemKind
 
 enum class PlayerItem
 {
-	Nothing,
+	Max,
 
 	WieldItem=10,
 	AxItem,
@@ -102,7 +114,12 @@ enum class PlayerItem
 	BranchItem,
 	TreeItem,
 	GrassItem,
-	Max
+	DiamondItem,
+	RubyItem,
+	EmeraldItem,
+	CopperItem,
+	amethystItem,
+	CoalItem
 
 	
 };

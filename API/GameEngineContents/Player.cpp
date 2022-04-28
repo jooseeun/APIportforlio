@@ -30,7 +30,10 @@ Player::Player()
 	CurShirts_(PlayerShirts::First),
 	CurDay_(1),
 	CurHour_(0),
-	CropNum_(0)
+	CropNum_(0),
+	MineTileMap_(nullptr),
+	CropsTileMap_(nullptr),
+	GroundTileMap_(nullptr)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -424,34 +427,40 @@ void Player::CameraCheck()
 
 	float CameraRectX = 1280;
 	float CameraRectY = 720;
-
-	if (0 >= GetLevel()->GetCameraPos().x)
+	if (MapScaleX_ > 1280)
 	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
+		if (0 >= GetLevel()->GetCameraPos().x)
+		{
+			float4 CurCameraPos = GetLevel()->GetCameraPos();
+			CurCameraPos.x = 0;
+			GetLevel()->SetCameraPos(CurCameraPos);
+		}
+		if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
+		{
+			float4 CurCameraPos = GetLevel()->GetCameraPos();
+			CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
+			GetLevel()->SetCameraPos(CurCameraPos);
+		}
+	}
+	if (MapScaleY_ > 1280)
+	{
+		if (0 >= GetLevel()->GetCameraPos().y)
+		{
+			float4 CurCameraPos = GetLevel()->GetCameraPos();
+			CurCameraPos.y = 0;
+			GetLevel()->SetCameraPos(CurCameraPos);
+		}
+
+
+
+		if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
+		{
+			float4 CurCameraPos = GetLevel()->GetCameraPos();
+			CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
+			GetLevel()->SetCameraPos(CurCameraPos);
+		}
 	}
 
-	if (0 >= GetLevel()->GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-
-	if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-
-	if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
 
 }
 
@@ -868,7 +877,7 @@ bool Player::IsCheckObjectTile()
 {
 	TileCheckDir();
 
-	EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+	EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 
 	if (nullptr == _Tile)
 	{
@@ -880,16 +889,17 @@ bool Player::IsCheckObjectTile()
 		return true;
 	}
 
+
 }
 void Player::HitObject()
 {
 	TileCheckDir();
 	if (CurItem_ == PlayerItem::SickleItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Grass)
 		{
-			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
 			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GrassAni");
@@ -905,7 +915,7 @@ void Player::HitObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::GrassItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -916,14 +926,14 @@ void Player::WieldObject()
 	TileCheckDir();
 	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile == nullptr)
 		{
 			return;
 		}
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Stone)
 		{
-			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
 			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
@@ -939,7 +949,7 @@ void Player::WieldObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::StoneItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -947,14 +957,14 @@ void Player::WieldObject()
 	
 	else if (CurItem_ == PlayerItem::AxItem && GetLevel()->GetNameCopy() == "FarmLevel")
 	{
-		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
+		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile == nullptr)
 		{
 			return;
 		}
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Branch)
 		{
-			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 			//_Tile->IsDestroy_ = true;
 
@@ -962,7 +972,7 @@ void Player::WieldObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -993,7 +1003,7 @@ void Player::WieldObject()
 			}
 
 			
-			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->IsDestroy_ = true; 
 
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
@@ -1002,7 +1012,7 @@ void Player::WieldObject()
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
 			_Tile->EnvironmentType_ = EnvironmentTileType::Max;
 			_Tile->TileCol_-> Death();
-			//FarmObjectEnvironment::MainFarmObject->ReturnFarTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			//FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 

@@ -134,6 +134,9 @@
     <ClInclude Include="BackWoodLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
+    <ClInclude Include="MineObject.h">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -265,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="BackWoodLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MineObject.cpp">
+      <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

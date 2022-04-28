@@ -47,7 +47,7 @@ public:
 		FarmTileMap_ = _TileMap;
 	}
 
-	inline GameEngineRendererTileMap* ReturnFarTileObejctMap_()
+	inline GameEngineRendererTileMap* ReturnFarmTileObejctMap_()
 	{
 		return FarmTileMap_;
 	}

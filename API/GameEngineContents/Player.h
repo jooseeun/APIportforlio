@@ -68,6 +68,10 @@ public:
 	{
 		CropsTileMap_ = _TileMap;
 	}
+	inline void SetMineTileMap(GameEngineRendererTileMap* _TileMap)
+	{
+		MineTileMap_ = _TileMap;
+	}
 	inline void SetHairNum(PlayerHairStyle _Num)
 	{
 		CurHairStyle_ = _Num;
@@ -109,11 +113,11 @@ public:
 		{
 			CurItemKind_ = PlayerItemKind::CropsItem;
 		}
-		else if (60 < static_cast<int>(_Item) && static_cast<int>(_Item) < 70)
+		else if (60 < static_cast<int>(_Item))
 		{
 			CurItemKind_ = PlayerItemKind::ObjectItem;
 		}
-		else
+		else // ¸Æ½ºÀÏ °æ¿ì
 		{
 			CurItemKind_ = PlayerItemKind::NoItem;
 		}
@@ -200,6 +204,7 @@ private:
 private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
+	GameEngineRendererTileMap* MineTileMap_;
 	std::list< PlayerTile*> IsCropsTile_;
 
 	float4 CreateCropPos_;

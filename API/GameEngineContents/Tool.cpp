@@ -475,7 +475,7 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 	for (int i = 0; i < 24; i++) // 인벤토리에 없는 아이템이면 인벤토리 빈자리 찾아서 넣어주는 함수
 	{
 
-		if (PlayerItem::Nothing == ItemPos_[i])
+		if (PlayerItem::Max == ItemPos_[i])
 		{
 			_CreateItem->InvenPivot_ = i;
 			if (i < 12)
@@ -556,7 +556,7 @@ void Tool::GetToolUINum()
 
 	for (int i = 0; i < 24; i++)
 	{
-		ItemPos_[i] = PlayerItem::Nothing;
+		ItemPos_[i] = PlayerItem::Max;
 		ItemCount_[i] = 0;
 	}
 
