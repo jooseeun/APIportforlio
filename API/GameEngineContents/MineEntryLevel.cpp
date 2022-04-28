@@ -8,6 +8,7 @@
 #include "ContentsEnums.h"
 #include "Mouse.h"
 #include "Time.h"
+#include "Money.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>

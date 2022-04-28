@@ -19,6 +19,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, IsCameraEffect_(true)
 	, Alpha_(255)
 	, RotZ_(0.0f)
+	, SortingPivot(float4::ZERO)
 {
 }
 
@@ -116,18 +117,17 @@ void GameEngineRenderer::Render()
 	{
 		float4 Scale = RenderScale_.Half();
 		Scale.y *= 2;
-		/////////////엔진 BOT 부분 수정-세은
+
 		if (Alpha_ != 255)
 		{
 			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
-			
 		}
 		else if (RotZ_ != 0.0f)
 		{
 			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
 		}
 		else
-		{	//
+		{
 			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		}
 
