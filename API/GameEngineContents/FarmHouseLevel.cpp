@@ -58,7 +58,8 @@ void FarmHouseLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 		
 	}
-	
+
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void FarmHouseLevel::Update()

@@ -84,6 +84,8 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSideLevel("BusStopLevel", "Town2Level", "SeedShopLevel");
 
 	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
+
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void TownLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

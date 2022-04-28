@@ -51,6 +51,7 @@ void MineEntryLevel::Loading()
 	}
 
 
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void MineEntryLevel::Update()

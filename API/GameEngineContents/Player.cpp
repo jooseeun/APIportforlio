@@ -16,6 +16,7 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineCollision.h>
 
+
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
@@ -658,7 +659,7 @@ void Player::CropsHarvest()
 	TileCheckDir();
 	PlayerTile* _Tile = CropsTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
-	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::CROP));
+	DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 	DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 	DropItem_->SetItem(_Tile->CropsActor_->Item_);
 	DropItem_->SetItemKind(_Tile->CropsActor_->ItemKind_);
@@ -861,7 +862,7 @@ float4 Player::TileCheckDirPos()
 		return GetPosition() + float4(-64, 32);
 	}
 	else if (CurDir_ == PlayerDir::Back) {
-		return GetPosition() + float4(0, -64+32);
+		return GetPosition() + float4(0, -32);
 	}
 
 }
@@ -940,7 +941,7 @@ void Player::HitObject()
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
-			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GrassAni");
+			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "GrassAni");
 			if (CurDir_ == PlayerDir::Back)
 			{
 				TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
@@ -949,7 +950,7 @@ void Player::HitObject()
 			TileAni_->SetAniString("GrassAni");
 
 
-			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::GrassItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
@@ -969,10 +970,17 @@ void Player::WieldMineObject()
 		{
 			return;
 		}
-		_Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_,"Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+		if (TileIndexX_ == 8 && TileIndexY_ == 8)
+		{
+			_Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_, "GoMine2.bmp", static_cast<int>(ORDER::GROUND));
+		}
+		else
+		{
+			_Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_,"Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
+		}
 		_Tile->TileCol_->Death();
 
-		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 		if (CurDir_ == PlayerDir::Back)
 		{
 			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
@@ -981,7 +989,7 @@ void Player::WieldMineObject()
 		TileAni_->SetAniString("StoneAni");
 		//_Tile->IsDestroy_ = true;
 
-		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 20) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 20) });
 
 		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
@@ -999,7 +1007,7 @@ void Player::WieldMineObject()
 		_Tile = Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 		_Tile->TileCol_->Death();
 
-		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 		if (CurDir_ == PlayerDir::Back)
 		{
 			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
@@ -1008,7 +1016,7 @@ void Player::WieldMineObject()
 		TileAni_->SetAniString("StoneAni");
 		//_Tile->IsDestroy_ = true;
 
-		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 35) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 35) });
 
 		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
@@ -1067,7 +1075,7 @@ void Player::WieldFarmObject()
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
-			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "StoneAni");
+			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 			if (CurDir_ == PlayerDir::Back)
 			{
 				TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
@@ -1076,7 +1084,7 @@ void Player::WieldFarmObject()
 			TileAni_->SetAniString("StoneAni");
 			//_Tile->IsDestroy_ = true;
 
-			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::StoneItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
@@ -1099,7 +1107,7 @@ void Player::WieldFarmObject()
 			_Tile->TileCol_->Death();
 			//_Tile->IsDestroy_ = true;
 
-			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
@@ -1123,7 +1131,7 @@ void Player::WieldFarmObject()
 				{
 					_Tile->TreeTop_->Death();
 
-					DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+					DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 					DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 					DropItem_->SetItem(PlayerItem::BranchItem);
 					DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
@@ -1137,7 +1145,7 @@ void Player::WieldFarmObject()
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->IsDestroy_ = true; 
 
-			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::ITEM));
+			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);

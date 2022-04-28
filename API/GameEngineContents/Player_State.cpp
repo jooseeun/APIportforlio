@@ -238,7 +238,7 @@ void Player::WieldStart()
 	}
 	if ("FarmLevel" == this->GetLevel()->GetNameCopy())
 	{
-		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "GroundAni");
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "GroundAni");
 		if (CurDir_ == PlayerDir::Back)
 		{
 			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
@@ -262,7 +262,7 @@ void Player::WaterStart()
 	if (GetLevel()->GetNameCopy() == "FarmLevel")
 	{
 		TileCheckDir();
-		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::TILEEFFECT), "WateringAni");
+		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "WateringAni");
 		if (CurDir_ == PlayerDir::Back)
 		{
 			TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));

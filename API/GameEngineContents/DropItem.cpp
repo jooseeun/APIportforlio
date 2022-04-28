@@ -192,11 +192,11 @@ void DropItem::MoveToPlayer()
 {
 	float4 MoveDir_ = Player::MainPlayer->GetPosition() - GetPosition();
 	float CheckDir_ = MoveDir_.Len2D();
-	if (CheckDir_ >= 100)
+	if (CheckDir_ >= 150)
 	{
 		return;
 	}
-	if (CheckDir_ <= 70.0f)
+	if (CheckDir_ <= 50.0f)
 	{
 
 		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_, SellValue_);
