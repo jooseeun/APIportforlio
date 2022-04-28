@@ -14,15 +14,15 @@ Crops::~Crops()
 
 void Crops::Start()
 {
-	Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::CROP));
+	Crops_ = CreateRenderer("Crops.bmp", static_cast<int>(ORDER::PLAYER));
 	Crops_->CreateAnimation("Crops.bmp", "Photato", 30, 30, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Kale", 45, 45, 0.8f, true);
-	Crops_->CreateAnimation("Crops.bmp", "CauliFlower", 20, 20, 0.8f, true);
+	Crops_->CreateAnimation("Crops.bmp", "CauliFlower", 22, 22, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Parsnip", 5, 5, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Bean", 14, 14, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Melon", 38, 38, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Pepper", 54, 54, 0.8f, true);
-	Crops_->CreateAnimation("Crops.bmp", "Blueberrie", 61, 61, 0.8f, true);
+	Crops_->CreateAnimation("Crops.bmp", "Blueberrie", 62, 62, 0.8f, true);
 	Crops_->CreateAnimation("Crops.bmp", "Max", 6, 6, 0.8f, true);
 
 	Crops_->ChangeAnimation("Max");
@@ -56,7 +56,7 @@ std::string Crops::CropToString(SeedType _SeedType)
 	}
 	else if (SeedType::Cauliflower== _SeedType)
 	{
-		IndexNum_ = 20;
+		IndexNum_ = 22;
 		Item_ = PlayerItem::CauliFlowerItem;
 		ItemKind_ = PlayerItemKind::CropsItem;
 		return "CauliFlower";
@@ -91,7 +91,7 @@ std::string Crops::CropToString(SeedType _SeedType)
 	}
 	else if (SeedType::Blueberrie == _SeedType)
 	{
-		IndexNum_ = 61;
+		IndexNum_ = 62;
 		Item_ = PlayerItem::BlueberrieItem;
 		ItemKind_ = PlayerItemKind::CropsItem;
 		return "Blueberrie";

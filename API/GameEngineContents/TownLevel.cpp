@@ -73,7 +73,7 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 	if (_PrevLevel->GetNameCopy() == "SeedShopLevel")
 	{
-		Player::MainPlayer->SetPosition({ 2810.0f,3550.f });
+		Player::MainPlayer->SetPosition({ 2810.0f,3650.f });
 	}
 	if (_PrevLevel->GetNameCopy() == "Town2Level")
 	{

@@ -313,7 +313,7 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 
 		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_)
+			if (0 >= (*StartIter)->ItemCount_)
 			{
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();
@@ -354,7 +354,7 @@ void Tool::UpdateShopInvenPos()
 
 		if ((*StartIter)->IsInven == true)
 		{
-			if (0 == (*StartIter)->ItemCount_)
+			if (0 >= (*StartIter)->ItemCount_)
 			{
 				(*StartIter)->Render->Off();
 				(*StartIter)->NumRender->Off();

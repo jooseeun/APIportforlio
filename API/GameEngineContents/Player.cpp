@@ -544,7 +544,6 @@ void Player::DirHoeDirtCreateTile()
 	TileCheckDir();
 	PlayerTile* Tile = GroundTileMap_->CreateTile<PlayerTile>(TileIndexX_, TileIndexY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
 	Tile->Dirt_ = TileType::HoeDirt;
-
 }
 
 void Player::DirWaterDirtCreateTile()
@@ -614,7 +613,7 @@ void Player::CropsHarvestSet(PlayerTile* _Tile)
 {
 	CreateCropPos_ = { (static_cast<float>(_Tile->DirtTilePosX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(_Tile->DirtTilePosY_) + 0.5f) * (MapScaleY_ / 65) };
 
-	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::GROUND), CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
+	_Tile->CropsActor_ = GetLevel()->CreateActor<Crops>(static_cast<int>(ORDER::PLAYER), CheckSeedSting(_Tile->Seed_)); // 다 자라면 수확하기 위해 엑터로 변경
 	_Tile->CropsActor_->SetPosition(CreateCropPos_); // 타일 위치 넣어주기
 	_Tile->CropsActor_->SetCropsType(_Tile->Seed_); // 수확할 작물 종류 넣어주기
 
@@ -654,6 +653,7 @@ void Player::CropsHarvest()
 	DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 	DropItem_->SetItem(_Tile->CropsActor_->Item_);
 	DropItem_->SetItemKind(_Tile->CropsActor_->ItemKind_);
+	_Tile->Isharvest_ = false;
 	CropsTileMap_->DeleteTile(TileIndexX_, TileIndexY_);
 }
 void Player::CropsGrowUpdate()
@@ -702,10 +702,17 @@ void Player::DayChangeSetCrops()
 	PlayerTile* GroundTile;
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
-		GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
-		(*StartIter)->Dirt_ = TileType::HoeDirt;
-		GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
+		if (*StartIter == nullptr)
+		{
+			continue;
+		}
+		if ((*StartIter)->DirtTilePosX_ > 0) // 수확된 타일은 검사 안하도록
+		{
+			GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
+			GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			(*StartIter)->Dirt_ = TileType::HoeDirt;
+			GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
+		}
 	}
 
 	CurDay_ = Time::TimeSet->GetGameDay_();
@@ -775,9 +782,9 @@ void Player::SetCropGrowIndex(SeedType _Seed)
 	}
 	else if (_Seed == SeedType::Kale)
 	{
-		HarvestDay_ = 5;
+		HarvestDay_ = 4;
 		TileUpdateIndex_ = 41;
-
+		
 	}
 	else if (_Seed == SeedType::Bean)
 	{
