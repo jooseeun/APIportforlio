@@ -190,7 +190,6 @@ void Player::Start()
 {
 
 	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
-
 	int HairNum_ = static_cast<int>(CurHairStyle_);
 	std::string HairColor_ = GetHairColorString();
 	std::string HairStyle_ = GetHairStyleString();
@@ -1322,10 +1321,36 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
 
-	if ("FarmHouseLevel" == GetLevel()->GetNameCopy())
+	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{
-		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (Wild Horseradish Jam).mp3");
+		BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
+	}	
+	if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
 	}
+	if ("SeedShopLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
+	}
+	if ("SeedShopLevel" == _PrevLevel->GetNameCopy()&& "TownLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
+	}
+	if ("MineEntryLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Mines (Crystal Bells).mp3");
+	}
+	if ("MineEntryLevel" == _PrevLevel->GetNameCopy()&& "Town2Level" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town");
+	}
+
 }
 
 void Player::IsDebugModeONOFF()

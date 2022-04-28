@@ -23,6 +23,7 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
+	BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.mp3");
 	CreateActor<TitleBackGround>(0,"TitleBackground");
 	CreateActor<TitleLogo>(1,"TitleLogo");
 	CreateActor<TitleLogo>(1, "TitleLogo");
@@ -44,5 +45,5 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-
+	BgmPlayer.Stop();
 }
