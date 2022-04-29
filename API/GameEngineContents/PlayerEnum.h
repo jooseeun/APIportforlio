@@ -62,6 +62,14 @@ enum class PlayerDir
 	Max
 };
 
+enum class SlimeDir
+{
+	Front,
+	Jump,
+	Left,
+	Right,
+	Max
+};
 enum class PlayerItemKind
 {
 	HitItem,
@@ -123,6 +131,7 @@ enum class PlayerItem
 
 	
 };
+
 
 enum class PlayerHairColor
 {

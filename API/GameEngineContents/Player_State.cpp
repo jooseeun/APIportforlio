@@ -111,21 +111,21 @@ void Player::WalkUpdate()
 
 	if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
 	{
-		Move += float4::UP;
+		Move = float4::UP;
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
 	{
-		Move += float4::DOWN;
+		Move = float4::DOWN;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
 	{
-		Move += float4::RIGHT;
+		Move = float4::RIGHT;
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
 	{
-		Move += float4::LEFT;
+		Move = float4::LEFT;
 	}
 
 	
@@ -214,6 +214,11 @@ void Player::HitStart()
 	if (true == IsCheckFarmObjectTile()) //오브젝트가 앞에 있다면 
 	{
 		HitObject();
+	}
+
+	if (CurItem_ == PlayerItem::LongSwordItem)
+	{
+		Create
 	}
 }
 

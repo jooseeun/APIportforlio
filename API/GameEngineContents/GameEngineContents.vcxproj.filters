@@ -98,17 +98,11 @@
     <ClInclude Include="FrontMap.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
-    <ClInclude Include="ShopNPC.h">
-      <Filter>Actor\Play\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="Money.h">
       <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="TileAnimation.h">
       <Filter>Actor\Play\Farm</Filter>
-    </ClInclude>
-    <ClInclude Include="ShopUIMoney.h">
-      <Filter>Actor\Play\PlayUI</Filter>
     </ClInclude>
     <ClInclude Include="Tool.h">
       <Filter>Actor\Play\Item</Filter>
@@ -142,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="MineTile.h">
       <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopNPC.h">
+      <Filter>Actor\Play\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopUIMoney.h">
+      <Filter>Actor\Play\Shop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

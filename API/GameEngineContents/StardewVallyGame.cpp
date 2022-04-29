@@ -355,8 +355,8 @@ void StardewVallyGame::GameInit()
 	MineObject->CutCount(8, 2);
 	GameEngineImage* Bug = GameEngineImageManager::GetInst()->Find("Bug.bmp");
 	Bug->CutCount(4, 5);
-	GameEngineImage* GreenSlime = GameEngineImageManager::GetInst()->Find("GreenSlime.bmp");
-	GreenSlime->CutCount(4, 12);
+	GameEngineImage* Slime = GameEngineImageManager::GetInst()->Find("Slime.bmp");
+	Slime->CutCount(4, 11);
 
 
 

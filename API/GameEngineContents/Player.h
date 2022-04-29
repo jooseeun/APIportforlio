@@ -7,7 +7,6 @@
 #include <GameEngine/GameEngineRendererTileMap.h>
 #include <GameEngineBase/GameEngineSound.h>
 
-
 class PlayerTile : public Tile
 {
 public:
@@ -136,7 +135,10 @@ public:
 	GameEngineSoundPlayer BgmPlayer;
 protected:
 private:
+	GameEngineCollision* LongSwordCol_;
+	void LongSwordColCheck();
 
+private:
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;
 	PlayerShirts CurShirts_;

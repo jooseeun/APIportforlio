@@ -185,11 +185,39 @@ void Player::ChangeAni(std::string _Name)
 	Shirts_->ChangeAnimation(_Name);
 	Hair_->ChangeAnimation(_Name);
 }
-
+void Player::LongSwordColCheck()
+{
+	if (CurDir_ == PlayerDir::Right)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 98, 128 });
+		LongSwordCol_->SetPivot({ 49,0 });
+	}
+	else if (CurDir_ == PlayerDir::Right)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 98, 128 });
+		LongSwordCol_->SetPivot({ -49,0 });
+	}
+	else if (CurDir_ == PlayerDir::Front)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 192, 80});
+		LongSwordCol_->SetPivot({ 40,0 });
+	}
+	else if (CurDir_ == PlayerDir::Back)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 192, 80 });
+		LongSwordCol_->SetPivot({ -40,0 });
+	}
+}
 void Player::Start()
 {
 
 	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
+	LongSwordCol_ = CreateCollision("LongSword", { 98,128 });
+	LongSwordCol_->Off();
 	int HairNum_ = static_cast<int>(CurHairStyle_);
 	std::string HairColor_ = GetHairColorString();
 	std::string HairStyle_ = GetHairStyleString();
