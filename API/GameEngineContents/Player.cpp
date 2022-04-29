@@ -411,9 +411,9 @@ void Player::Start()
 void Player::Update()
 {
 	StateUpdate();
-	CameraCheck();
 	IsDebugModeONOFF();
 	CropsGrowUpdate();
+	CameraCheck();
 }
 
 
@@ -436,7 +436,7 @@ void Player::CameraCheck()
 		CurCameraPos.x = 0;
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
-	if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
+	else if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
@@ -453,7 +453,7 @@ void Player::CameraCheck()
 
 
 
-	if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
+	else if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
 		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
