@@ -143,6 +143,9 @@
     <ClInclude Include="ShopUIMoney.h">
       <Filter>Actor\Play\Shop</Filter>
     </ClInclude>
+    <ClInclude Include="MineUI.h">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="MineEntryLevel.cpp">
       <Filter>Level\PlayLevel\MineLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="MineUI.cpp">
+      <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

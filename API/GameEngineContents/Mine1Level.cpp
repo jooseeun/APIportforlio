@@ -11,6 +11,7 @@
 #include "FrontMap.h"
 #include "FadeIn.h"
 #include "Money.h"
+#include "MineUI.h"
 #include "Slime.h"
 #include "Mine1Object.h"
 #include <GameEngineBase/GameEngineInput.h>
@@ -59,6 +60,11 @@ void Mine1Level::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
+	
+	MineUI* MineUISet = CreateActor<MineUI>(static_cast<int>(ORDER::FRONTUI), "MineUI");
+	MineUISet->GetRenderer()->SetImage("MineFloor1.bmp");
+	MineUISet->SetOrder(static_cast<int>(ORDER::FRONTUI));
+	MineUISet->GetRenderer()->CameraEffectOff();
 
 	Slime* SlimeSet1_ = CreateActor<Slime>(static_cast<int>(ORDER::PLAYER), "Slime1");
 	SlimeSet1_->SetPosition(float4{ 916,967 });

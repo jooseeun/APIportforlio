@@ -12,6 +12,7 @@
 #include "FadeIn.h"
 #include "Money.h"
 #include "Mine2Object.h"
+#include "MineUI.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -57,7 +58,10 @@ void Mine2Level::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
-
+	MineUI* MineUISet = CreateActor<MineUI>(static_cast<int>(ORDER::FRONTUI), "MineUI");
+	MineUISet->GetRenderer()->SetImage("MineFloor2.bmp");
+	MineUISet->GetRenderer()->SetOrder(static_cast<int>(ORDER::FRONTUI));
+	MineUISet->GetRenderer()->CameraEffectOff();
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }

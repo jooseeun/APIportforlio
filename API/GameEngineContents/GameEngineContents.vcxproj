@@ -260,6 +260,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MineTile.h" />
+    <ClInclude Include="MineUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Money.h">
       <SubType>
       </SubType>
@@ -440,6 +444,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mine1Object.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MineUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
