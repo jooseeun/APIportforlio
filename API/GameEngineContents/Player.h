@@ -130,14 +130,21 @@ public:
 	{
 		IsLeftMouse = false;
 	}
-
-
+	inline void IsHitOff()
+	{
+		IsHit_ = false;
+	}
+	inline bool IsHitReturn()
+	{
+		return IsHit_;
+	}
 	GameEngineSoundPlayer BgmPlayer;
 protected:
 private:
+	bool IsHit_;
 	GameEngineCollision* LongSwordCol_;
 	void LongSwordColCheck();
-
+	void MonsterCheck_();
 private:
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;

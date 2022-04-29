@@ -21,22 +21,26 @@ public:
 	{
 		MineTileMap_ = _TileMap;
 	}
-
 protected:
 
 private:
+	bool IsDeath_;
+	bool Hit_;
 	bool Start_;
 	float4 InitPos_;
 	float4 Move_;
 	SlimeDir CurDir_;
 	SlimeDir PreDir_;
+	int Hp_;
+
 	GameEngineRendererTileMap* MineTileMap_;
 	GameEngineRenderer* SlimeRender_;
 	GameEngineCollision* SlimeCol_;
 
 	void MoveUpdate(); 
 	void CurAniUpdate();
-	
+	void DeathCheck();
+
 	void Start() override;
 	void Update() override;
 };

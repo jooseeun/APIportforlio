@@ -36,7 +36,8 @@ Player::Player()
 	CropNum_(0),
 	MineTileMap_(nullptr),
 	CropsTileMap_(nullptr),
-	GroundTileMap_(nullptr)
+	GroundTileMap_(nullptr),
+	IsHit_(false)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -211,7 +212,13 @@ void Player::LongSwordColCheck()
 		LongSwordCol_->SetScale({ 192, 80 });
 		LongSwordCol_->SetPivot({ 0,-80 });
 	}
+
+	if (LongSwordCol_->CollisionCheck("Monster")==true)
+	{
+		IsHit_=true;
+	}
 }
+
 void Player::Start()
 {
 

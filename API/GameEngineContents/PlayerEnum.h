@@ -65,7 +65,7 @@ enum class PlayerDir
 enum class SlimeDir
 {
 	Front,
-	Jump,
+	Hit,
 	Left,
 	Right,
 	Max

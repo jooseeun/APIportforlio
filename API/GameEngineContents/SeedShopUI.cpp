@@ -112,7 +112,7 @@ void SeedShopUI::BuySeed()
 	{
 		if (true == ParsnipSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 20;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 20;
 			if (LeftMoney_< 0 )
 			{
 				return;
@@ -124,7 +124,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == PhotatoSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 50;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 50;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -137,7 +137,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == CauliFlowerSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -150,7 +150,7 @@ void SeedShopUI::BuySeed()
 
 		if (true == BeanSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 60;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 60;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -162,7 +162,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == KaleSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 70;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 70;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -174,7 +174,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == BlueberrieSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -186,7 +186,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == MelonSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
 				return;
@@ -198,7 +198,7 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == PepperSeedCol_->CollisionCheck("MouseCol"))
 		{
-			int LeftMoney_ = Money::MoneySet->GetMoney() - 40;
+			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 40;
 			if (LeftMoney_ < 0)
 			{
 				return;
