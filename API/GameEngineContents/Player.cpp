@@ -20,7 +20,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(705.0f),
+	:Speed_(605.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
