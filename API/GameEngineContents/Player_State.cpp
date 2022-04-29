@@ -218,7 +218,7 @@ void Player::HitStart()
 
 	if (CurItem_ == PlayerItem::LongSwordItem)
 	{
-		Create
+		LongSwordColCheck();
 	}
 }
 
