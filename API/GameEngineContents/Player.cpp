@@ -1348,7 +1348,7 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if ("MineEntryLevel" == _PrevLevel->GetNameCopy()&& "Town2Level" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
-		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town");
+		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town.mp3");
 	}
 
 }
