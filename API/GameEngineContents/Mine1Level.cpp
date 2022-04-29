@@ -98,7 +98,6 @@ void Mine1Level::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
-
 		Money::MoneySet->NextLevelOn();
 	}
 }
