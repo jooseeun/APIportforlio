@@ -76,6 +76,7 @@ void Player::HitUpdate()
 	if (true == Arm_->IsEndAnimation())
 	{
 		ChangeState(PlayerState::Idle);
+		LongSwordCol_->Off();
 	}
 }
 void Player::HarvestUpdate()

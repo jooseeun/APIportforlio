@@ -193,7 +193,7 @@ void Player::LongSwordColCheck()
 		LongSwordCol_->SetScale({ 98, 128 });
 		LongSwordCol_->SetPivot({ 49,0 });
 	}
-	else if (CurDir_ == PlayerDir::Right)
+	else if (CurDir_ == PlayerDir::Left)
 	{
 		LongSwordCol_->On();
 		LongSwordCol_->SetScale({ 98, 128 });
@@ -203,13 +203,13 @@ void Player::LongSwordColCheck()
 	{
 		LongSwordCol_->On();
 		LongSwordCol_->SetScale({ 192, 80});
-		LongSwordCol_->SetPivot({ 40,0 });
+		LongSwordCol_->SetPivot({ 0,80 });
 	}
 	else if (CurDir_ == PlayerDir::Back)
 	{
 		LongSwordCol_->On();
 		LongSwordCol_->SetScale({ 192, 80 });
-		LongSwordCol_->SetPivot({ -40,0 });
+		LongSwordCol_->SetPivot({ 0,-80 });
 	}
 }
 void Player::Start()
