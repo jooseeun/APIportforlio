@@ -1340,7 +1340,7 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
 	}
-	if ("MineEntryLevel" == GetLevel()->GetNameCopy())
+	if ("MineEntryLevel" == GetLevel()->GetNameCopy()&& "Mine2Level" != _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Mines (Crystal Bells).mp3");
