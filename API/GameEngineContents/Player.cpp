@@ -167,7 +167,8 @@ void Player::CameraCheck() /// BusStopLevel  카메라 흔들림 문제..
 	else if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_));
+
+		CurCameraPos.x = static_cast<int>(GetLevel()->GetCameraPos().ix() - (GetLevel()->GetCameraPos().ix() + CameraRectX - MapScaleX_));
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
@@ -184,7 +185,7 @@ void Player::CameraCheck() /// BusStopLevel  카메라 흔들림 문제..
 	else if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_));
+		CurCameraPos.y = static_cast<int>(GetLevel()->GetCameraPos().iy() - (GetLevel()->GetCameraPos().iy() + CameraRectY - MapScaleY_));
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
