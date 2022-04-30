@@ -62,9 +62,10 @@ enum class PlayerDir
 	Max
 };
 
-enum class SlimeDir
+enum class MonsterDir
 {
 	Front,
+	Back,
 	Hit,
 	Left,
 	Right,
@@ -127,7 +128,9 @@ enum class PlayerItem
 	EmeraldItem,
 	CopperItem,
 	amethystItem,
-	CoalItem
+	CoalItem,
+	SlimeItem,
+	BugItem
 
 	
 };

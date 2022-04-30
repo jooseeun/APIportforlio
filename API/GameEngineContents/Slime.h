@@ -29,8 +29,8 @@ private:
 	bool Start_;
 	float4 InitPos_;
 	float4 Move_;
-	SlimeDir CurDir_;
-	SlimeDir PreDir_;
+	MonsterDir CurDir_;
+	MonsterDir PreDir_;
 	int Hp_;
 
 	GameEngineRendererTileMap* MineTileMap_;

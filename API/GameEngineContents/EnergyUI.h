@@ -17,7 +17,7 @@ public:
 	EnergyUI& operator=(EnergyUI&& _Other) noexcept = delete;
 	inline void UseEnergy()
 	{
-		EnergyValue_ -= 2.0f;
+		EnergyValue_ -= 1.0f;
 	}
 protected:
 

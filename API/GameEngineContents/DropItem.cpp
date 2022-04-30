@@ -37,6 +37,8 @@ void DropItem::Start()// °¨ÀÚ 192
 	Object_->CreateAnimation("Objects.bmp", "EmeraldItem", 60, 60, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "RubyItem", 64, 64, 0.8f, true);
 
+	Object_->CreateAnimation("Objects.bmp", "SlimeItem", 766, 766, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "BugItem", 684, 684, 0.8f, true);
 
 	Object_->CreateAnimation("Objects.bmp", "StoneItem", 390, 390, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "BranchItem", 388, 388, 0.8f, true);
@@ -154,7 +156,18 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		SellValue_ = 250;
 		return "RubyItem";
 	}
-
+	else if (PlayerItem::SlimeItem == _Item)
+	{
+		IndexNum_ = 766;
+		SellValue_ = 200;
+		return "SlimeItem";
+	}
+	else if (PlayerItem::BugItem == _Item)
+	{
+		IndexNum_ = 684;
+		SellValue_ = 400;
+		return "BugItem";
+	}
 }
 void DropItem::Update()
 {

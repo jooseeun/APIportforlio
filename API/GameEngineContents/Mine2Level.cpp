@@ -14,6 +14,8 @@
 #include "Mine2Object.h"
 #include "MineUI.h"
 #include "HealthUI.h"
+#include "Bug.h"
+#include "Slime.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -67,6 +69,18 @@ void Mine2Level::Loading()
 	MineUISet->GetRenderer()->SetImage("MineFloor2.bmp");
 	MineUISet->GetRenderer()->SetOrder(static_cast<int>(ORDER::FRONTUI));
 	MineUISet->GetRenderer()->CameraEffectOff();
+
+	Slime* SlimeSet1_ = CreateActor<Slime>(static_cast<int>(ORDER::MONSTER), "Slime1");
+	SlimeSet1_->SetPosition(float4{ 364,792 });
+	Slime* SlimeSet2_ = CreateActor<Slime>(static_cast<int>(ORDER::MONSTER), "Slime2");
+	SlimeSet2_->SetPosition(float4{ 1756,1226 });
+
+	Bug* BugSet1_ = CreateActor<Bug>(static_cast<int>(ORDER::MONSTER), "Bug1");
+	BugSet1_->SetPosition(float4{ 678,558 });
+	Bug* BugSet2_ = CreateActor<Bug>(static_cast<int>(ORDER::MONSTER), "Bug2");
+	BugSet2_->SetPosition(float4{ 1305,1404 });
+	Bug* BugSet3_ = CreateActor<Bug>(static_cast<int>(ORDER::MONSTER), "Bug3");
+	BugSet3_->SetPosition(float4{ 2033,1482 });
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }

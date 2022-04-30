@@ -249,7 +249,7 @@ void Player::Start()
 {
 
 	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
-	PlayerMonsterCheckCol_= CreateCollision("Player", { 64,128 });
+	PlayerMonsterCheckCol_= CreateCollision("Player", { 48,128 });
 	LongSwordCol_ = CreateCollision("LongSword", { 98,128 });
 	LongSwordCol_->Off();
 
