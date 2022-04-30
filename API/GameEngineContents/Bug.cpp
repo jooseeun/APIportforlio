@@ -28,8 +28,8 @@ void Bug::Start()
 
 	BugRender_->CreateAnimation("Bug.bmp", "BugFront", 0, 3, 0.3f, true);
 	BugRender_->CreateAnimation("Bug.bmp", "BugBack", 8, 11, 0.3f, true);
-	BugRender_->CreateAnimation("Bug.bmp", "BugHit", 12, 15, 0.1f, true);
-	BugRender_->CreateAnimation("Bug.bmp", "BugDeath", 16, 16, 0.1f, true);
+	BugRender_->CreateAnimation("Bug.bmp", "BugHit", 4, 7, 0.1f, true);
+	BugRender_->CreateAnimation("Bug.bmp", "BugDeath", 16, 16, 0.2f, true);
 	BugRender_->ChangeAnimation("BugFront");
 	BugCol_ = CreateCollision("Monster", { 60,48 }, { 0,24 });
 

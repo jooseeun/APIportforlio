@@ -30,7 +30,7 @@ void Slime::Start()
 	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeLeft", 4, 7, 0.3f, true);
 	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeRight", 8, 11, 0.3f, true);
 	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeHit", 16, 19, 0.1f, true);
-	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeDeath", 20, 20, 0.1f, true);
+	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeDeath", 20, 20, 0.2f, true);
 	SlimeRender_->ChangeAnimation("Slimedefault");
 	SlimeCol_ = CreateCollision("Monster", { 60,48 },{0,24});
 
