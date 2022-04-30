@@ -50,7 +50,7 @@ void Mine2Level::Loading()
 	}
 	if (nullptr == HealthUI::HealthUISet)
 	{
-		HealthUI::HealthUISet == CreateActor<HealthUI>(static_cast<int>(ORDER::UI), "HealthUI");
+		HealthUI::HealthUISet = CreateActor<HealthUI>(static_cast<int>(ORDER::UI), "HealthUI");
 	}
 	
 	if (nullptr == Player::MainPlayer)

@@ -30,7 +30,7 @@ void Slime::Start()
 	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeHit", 16, 19, 0.1f, true);
 	SlimeRender_->CreateAnimation("Slime.bmp", "SlimeDeath", 20, 20, 0.1f, true);
 	SlimeRender_->ChangeAnimation("Slimedefault");
-	SlimeCol_ = CreateCollision("Monster", { 64,64 });
+	SlimeCol_ = CreateCollision("Monster", { 64,64 },{0,16});
 
 }
 void Slime::Update() // 렌더링 해준곳에서 무조건 좌 우로 움직이기 , 플레이어 일정거리 가까이 가면 공격하기

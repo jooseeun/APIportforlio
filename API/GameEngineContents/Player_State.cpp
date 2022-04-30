@@ -113,20 +113,24 @@ void Player::WalkUpdate()
 	if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
 	{
 		Move += float4::UP;
+	
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
 	{
 		Move += float4::DOWN;
+
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("RightWalk"))
 	{
 		Move += float4::RIGHT;
+
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
 	{
 		Move += float4::LEFT;
+
 	}
 
 	
@@ -164,6 +168,7 @@ void Player::WalkUpdate()
 		{
 			Move = float4::ZERO;
 		}
+
 		
 
 		if (RGB(255, 0, 0) != Color)

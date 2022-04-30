@@ -138,13 +138,15 @@ public:
 	{
 		return IsHit_;
 	}
+
 	GameEngineSoundPlayer BgmPlayer;
 protected:
 private:
 	bool IsHit_;
 	GameEngineCollision* LongSwordCol_;
+	GameEngineCollision* PlayerMonsterCheckCol_;
 	void LongSwordColCheck();
-	void MonsterCheck_();
+	void MonsterCheck();
 private:
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;

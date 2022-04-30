@@ -6,6 +6,7 @@
 #include "TileAnimation.h"
 #include "Mine1Object.h"
 #include "Mine2Object.h"
+#include "HealthUI.h"
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -139,6 +140,7 @@ void Player::Update()
 	StateUpdate();
 	IsDebugModeONOFF();
 	CropsGrowUpdate();
+	MonsterCheck();
 	CameraCheck();
 }
 
@@ -246,8 +248,10 @@ void Player::Start()
 {
 
 	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
+	PlayerMonsterCheckCol_= CreateCollision("Player", { 64,128 });
 	LongSwordCol_ = CreateCollision("LongSword", { 98,128 });
 	LongSwordCol_->Off();
+
 	int HairNum_ = static_cast<int>(CurHairStyle_);
 	std::string HairColor_ = GetHairColorString();
 	std::string HairStyle_ = GetHairStyleString();
@@ -465,7 +469,6 @@ void Player::Start()
 	}
 
 }
-
 
 
 bool Player::DirKeyCheck()
@@ -1060,7 +1063,15 @@ void Player::LongSwordColCheck()
 		IsHit_ = true;
 	}
 }
+void Player::MonsterCheck()
+{
+	if (PlayerMonsterCheckCol_->CollisionCheck("Monster"))
+	{
+		HealthUI::HealthUISet->MinusPlayerHP();
+	}
 
+
+}
 PlayerItem Player::ReturnMineItem(MineTileType _Type)
 {
 	if (_Type == MineTileType::amethyst)

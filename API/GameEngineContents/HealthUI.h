@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineTime.h>
 // Ό³Έν :
 class HealthUI :public GameEngineActor
 {
@@ -18,7 +19,7 @@ public:
 
 	inline void MinusPlayerHP()
 	{
-		PlayerHp_ -= 10.0f;
+		PlayerHp_ -= 5.0f*GameEngineTime::GetDeltaTime();
 	}
 protected:
 

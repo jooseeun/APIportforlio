@@ -68,11 +68,11 @@ void Mine1Level::Loading()
 	MineUISet->SetOrder(static_cast<int>(ORDER::FRONTUI));
 	MineUISet->GetRenderer()->CameraEffectOff();
 
-	Slime* SlimeSet1_ = CreateActor<Slime>(static_cast<int>(ORDER::PLAYER), "Slime1");
+	Slime* SlimeSet1_ = CreateActor<Slime>(static_cast<int>(ORDER::MONSTER), "Slime1");
 	SlimeSet1_->SetPosition(float4{ 916,967 });
-	Slime* SlimeSet2_ = CreateActor<Slime>(static_cast<int>(ORDER::PLAYER), "Slime2");
+	Slime* SlimeSet2_ = CreateActor<Slime>(static_cast<int>(ORDER::MONSTER), "Slime2");
 	SlimeSet2_->SetPosition(float4{ 460,653 });
-	Slime* SlimeSet3_ = CreateActor<Slime>(static_cast<int>(ORDER::PLAYER), "Slime3");
+	Slime* SlimeSet3_ = CreateActor<Slime>(static_cast<int>(ORDER::MONSTER), "Slime3");
 	SlimeSet3_->SetPosition(float4{ 411,881 });
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
