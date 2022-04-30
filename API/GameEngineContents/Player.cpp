@@ -186,38 +186,6 @@ void Player::ChangeAni(std::string _Name)
 	Shirts_->ChangeAnimation(_Name);
 	Hair_->ChangeAnimation(_Name);
 }
-void Player::LongSwordColCheck()
-{
-	if (CurDir_ == PlayerDir::Right)
-	{
-		LongSwordCol_->On();
-		LongSwordCol_->SetScale({ 98, 128 });
-		LongSwordCol_->SetPivot({ 49,0 });
-	}
-	else if (CurDir_ == PlayerDir::Left)
-	{
-		LongSwordCol_->On();
-		LongSwordCol_->SetScale({ 98, 128 });
-		LongSwordCol_->SetPivot({ -49,0 });
-	}
-	else if (CurDir_ == PlayerDir::Front)
-	{
-		LongSwordCol_->On();
-		LongSwordCol_->SetScale({ 192, 80});
-		LongSwordCol_->SetPivot({ 0,80 });
-	}
-	else if (CurDir_ == PlayerDir::Back)
-	{
-		LongSwordCol_->On();
-		LongSwordCol_->SetScale({ 192, 80 });
-		LongSwordCol_->SetPivot({ 0,-80 });
-	}
-
-	if (LongSwordCol_->CollisionCheck("Monster")==true)
-	{
-		IsHit_=true;
-	}
-}
 
 void Player::Start()
 {
@@ -458,7 +426,7 @@ void Player::Render()
 
 }
 
-void Player::CameraCheck()
+void Player::CameraCheck() /// BusStopLevel , Mine1Level 카메라 흔들림 문제..
 {
 	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
 
@@ -474,7 +442,7 @@ void Player::CameraCheck()
 	else if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_);
+		CurCameraPos.x = static_cast<int>(GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_));
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 	
@@ -491,7 +459,7 @@ void Player::CameraCheck()
 	else if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
 	{
 		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_);
+		CurCameraPos.y = static_cast<int>(GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_));
 		GetLevel()->SetCameraPos(CurCameraPos);
 	}
 
@@ -1059,6 +1027,39 @@ void Player::WieldMineObject()
 		return;
 	}
 }
+void Player::LongSwordColCheck()
+{
+	if (CurDir_ == PlayerDir::Right)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 98, 128 });
+		LongSwordCol_->SetPivot({ 49,0 });
+	}
+	else if (CurDir_ == PlayerDir::Left)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 98, 128 });
+		LongSwordCol_->SetPivot({ -49,0 });
+	}
+	else if (CurDir_ == PlayerDir::Front)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 192, 80 });
+		LongSwordCol_->SetPivot({ 0,80 });
+	}
+	else if (CurDir_ == PlayerDir::Back)
+	{
+		LongSwordCol_->On();
+		LongSwordCol_->SetScale({ 192, 80 });
+		LongSwordCol_->SetPivot({ 0,-80 });
+	}
+
+	if (LongSwordCol_->CollisionCheck("Monster") == true)
+	{
+		IsHit_ = true;
+	}
+}
+
 PlayerItem Player::ReturnMineItem(MineTileType _Type)
 {
 	if (_Type == MineTileType::amethyst)
