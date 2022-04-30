@@ -1068,6 +1068,8 @@ void Player::MonsterCheck()
 {
 	if (PlayerMonsterCheckCol_->CollisionCheck("Monster"))
 	{
+
+
 		HealthUI::HealthUISet->MinusPlayerHP();
 	}
 

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "DropItem.h"
 #include "ContentsEnums.h"
+#include "Num4.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineActor.h>
@@ -53,10 +54,13 @@ void Bug::DeathCheck()
 		Hp_ -= 4;
 		if (Hp_ <= 0)
 		{
+			Num4* Demage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DemageNum");
+			Demage_->SetPosition(GetPosition() + float4{ 0,-16 });
 			IsDeath_ = true;
 			return;
 		}
-
+		Num4* Demage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DemageNum");
+		Demage_->SetPosition(GetPosition() + float4{ 0,-16 });
 		Hit_ = true;
 		Player::MainPlayer->IsHitOff();
 	}

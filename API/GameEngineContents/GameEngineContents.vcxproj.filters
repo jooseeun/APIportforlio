@@ -149,6 +149,9 @@
     <ClInclude Include="HealthUI.h">
       <Filter>Actor\Play\Mine</Filter>
     </ClInclude>
+    <ClInclude Include="Num4.h">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -291,6 +294,9 @@
       <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
     <ClCompile Include="HealthUI.cpp">
+      <Filter>Actor\Play\Mine</Filter>
+    </ClCompile>
+    <ClCompile Include="Num4.cpp">
       <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
   </ItemGroup>
