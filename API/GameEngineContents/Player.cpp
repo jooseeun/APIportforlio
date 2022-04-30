@@ -134,6 +134,61 @@ void Player::StateUpdate()
 		break;
 	}
 }
+void Player::Update()
+{
+	StateUpdate();
+	IsDebugModeONOFF();
+	CropsGrowUpdate();
+	CameraCheck();
+}
+
+
+
+void Player::Render()
+{
+
+}
+
+void Player::CameraCheck() /// BusStopLevel  카메라 흔들림 문제..
+{
+	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
+
+	float CameraRectX = 1280;
+	float CameraRectY = 720;
+
+	if (0 >= GetLevel()->GetCameraPos().x)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+	else if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.x = static_cast<int>(GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_));
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+
+	if (0 >= GetLevel()->GetCameraPos().y)
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = 0;
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+
+
+	else if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
+	{
+		float4 CurCameraPos = GetLevel()->GetCameraPos();
+		CurCameraPos.y = static_cast<int>(GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_));
+		GetLevel()->SetCameraPos(CurCameraPos);
+	}
+
+
+
+}
 void Player::ChangeAni(std::string _Name)
 {
 	std::string Item_ = GetItemString();
@@ -411,61 +466,7 @@ void Player::Start()
 
 }
 
-void Player::Update()
-{
-	StateUpdate();
-	IsDebugModeONOFF();
-	CropsGrowUpdate();
-	CameraCheck();
-}
 
-
-
-void Player::Render()
-{
-
-}
-
-void Player::CameraCheck() /// BusStopLevel , Mine1Level 카메라 흔들림 문제..
-{
-	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetInst().GetScale().Half());
-
-	float CameraRectX = 1280;
-	float CameraRectY = 720;
-
-	if (0 >= GetLevel()->GetCameraPos().x)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-	else if (MapScaleX_ <= GetLevel()->GetCameraPos().x + CameraRectX)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.x = static_cast<int>(GetLevel()->GetCameraPos().x - (GetLevel()->GetCameraPos().x + CameraRectX - MapScaleX_));
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-	
-
-	if (0 >= GetLevel()->GetCameraPos().y)
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = 0;
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-
-
-
-	else if (MapScaleY_ <= (GetLevel()->GetCameraPos().y + CameraRectY))
-	{
-		float4 CurCameraPos = GetLevel()->GetCameraPos();
-		CurCameraPos.y = static_cast<int>(GetLevel()->GetCameraPos().y - (GetLevel()->GetCameraPos().y + CameraRectY - MapScaleY_));
-		GetLevel()->SetCameraPos(CurCameraPos);
-	}
-
-
-
-}
 
 bool Player::DirKeyCheck()
 {

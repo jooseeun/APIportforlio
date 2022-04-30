@@ -14,6 +14,7 @@
 #include "MineUI.h"
 #include "Slime.h"
 #include "Mine1Object.h"
+#include "HealthUI.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -48,6 +49,7 @@ void Mine1Level::Loading()
 	{
 		Mine1Object::MainMine1Tile = CreateActor<Mine1Object>(static_cast<int>(ORDER::GROUND), "Mine1Object");
 		Mine1Object::MainMine1Tile->SetTileMap(&Back->GroundTileMap_);
+		HealthUI::HealthUISet = CreateActor<HealthUI>(static_cast<int>(ORDER::UI), "HealthUI");
 	}
 
 	if (nullptr == Player::MainPlayer)
@@ -111,5 +113,9 @@ void Mine1Level::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
 		Money::MoneySet->NextLevelOn();
+	}
+	if (_NextLevel->GetNameCopy() == "Mine2Level")
+	{
+		HealthUI::HealthUISet->NextLevelOn();
 	}
 }

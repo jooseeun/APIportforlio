@@ -13,6 +13,7 @@
 #include "Money.h"
 #include "Mine2Object.h"
 #include "MineUI.h"
+#include "HealthUI.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -47,7 +48,11 @@ void Mine2Level::Loading()
 		Mine2Object::MainMine2Tile = CreateActor<Mine2Object>(static_cast<int>(ORDER::GROUND), "Mine2Object");
 		Mine2Object::MainMine2Tile->SetTileMap(&Back->GroundTileMap_);
 	}
-
+	if (nullptr == HealthUI::HealthUISet)
+	{
+		HealthUI::HealthUISet == CreateActor<HealthUI>(static_cast<int>(ORDER::UI), "HealthUI");
+	}
+	
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");

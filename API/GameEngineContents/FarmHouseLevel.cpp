@@ -66,7 +66,7 @@ void FarmHouseLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("CheckTest"))
 	{
-		GameEngine::GetInst().ChangeLevel("BusStopLevel");
+		GameEngine::GetInst().ChangeLevel("Mine1Level");
 	}
 	GetItemPos();
 
