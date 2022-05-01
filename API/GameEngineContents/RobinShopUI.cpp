@@ -34,6 +34,9 @@ void RobinShopUI::Start()
 	RightCol_=CreateCollision("RobinShopRightButton", { 44,30 }, { -180,320 });
 	LeftCol_ = CreateCollision("RobinShopLeftButton", { 44,30 }, { -380,320 });
 
+	CreateButton_= CreateRenderer("CreateButton.bmp", static_cast<int>(ORDER::FRONTUI));
+	CreateButton_->SetPivot({ 470,320 });
+	CreateCol_= CreateCollision("CreateButton", { 44,30 }, { 470,320 });
 	FadeIn_->CameraEffectOff();
 	Page1_->CameraEffectOff();
 	Page2_->CameraEffectOff();
@@ -42,12 +45,29 @@ void RobinShopUI::Start()
 	RightButton_->CameraEffectOff();
 	RightCol_->CameraEffectOff();
 	LeftCol_->CameraEffectOff();
+	CreateButton_->CameraEffectOff();
+	CreateCol_->CameraEffectOff();
 
 	Page1_->Off();
 	Page2_->Off();
 }
-void RobinShopUI::BuyCoop()
+void RobinShopUI::Create()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
+	{
+		if (RightCol_->CollisionCheck("CreateButton"))
+		{
+			if (Page_ == 1)
+			{
+
+			}
+			else if (Page_ == 2)
+			{
+
+			}
+		}
+		
+	}
 	
 }
 
@@ -68,7 +88,7 @@ void RobinShopUI::CheckPage()
 
 void RobinShopUI::Update()
 {
-	BuyCoop();
+	Create();
 	CheckPage();
 	if (Page_ == 1)
 	{

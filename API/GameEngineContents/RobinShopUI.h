@@ -30,14 +30,16 @@ private:
 
 	int Page_;
 	void CheckPage();
-	void BuyCoop();
+	void Create();
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* LeftButton_;
 	GameEngineRenderer* RightButton_;
+	GameEngineRenderer* CreateButton_;
 	GameEngineRenderer* Page1_;
 	GameEngineRenderer* Page2_;
 	GameEngineCollision* ExitCol_;
 	GameEngineCollision* LeftCol_;
 	GameEngineCollision* RightCol_;
+	GameEngineCollision* CreateCol_;
 };
 
