@@ -27,7 +27,7 @@ void Mine1Object::MakeObject(int _Posx, int _Posy, int _index, MineTileType _Til
 {
 	MineTile* Stone = MineTileMap_->CreateTile<MineTile>(_Posx, _Posy, "MineObject.bmp", _index, static_cast<int>(ORDER::GROUND));
 	Stone->TileType_ = _TileType;
-	Stone->TileCol_ = CreateCollision("MineStone", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
+	Stone->TileCol_ = CreateCollision("Object", { 64,64 }, { ((float)_Posx + 0.5f) * (5120.0f / 80), ((float)_Posy + 0.5f) * (4160.0f / 65) });
 
 }
 

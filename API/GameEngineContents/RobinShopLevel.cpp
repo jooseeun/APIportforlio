@@ -85,7 +85,6 @@ void RobinShopLevel::Update()
 
 void RobinShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-
 	Player::MainPlayer->SetPosition({ 415.0f,1485.0f});
 	Player::MainPlayer->SetMapScale(2048.0f, 1600.0f);
 	Player::MainPlayer->SetColMapName("RobinShopColMap.bmp");

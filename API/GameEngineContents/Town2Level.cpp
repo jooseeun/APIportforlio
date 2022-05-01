@@ -15,6 +15,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
+
 Town2Level::Town2Level() :
 	CurSelectPivot_(1),
 	NextSelectPivot_(1)
@@ -44,6 +45,7 @@ void Town2Level::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
+
 }
 
 void Town2Level::Update()
@@ -71,7 +73,11 @@ void Town2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 3484.0f,476.0f});
 	}
-	
+	else if (_PrevLevel->GetNameCopy() == "RobinShopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 797.0f,1695.0f });
+	}
+
 	Player::MainPlayer->SetMapScale(5448.0f, 2620.0f);
 	Player::MainPlayer->SetColMapName("Town2ColMap.bmp");
 	Player::MainPlayer->SetSideLevel("TownLevel", "MineEntryLevel", "BackWoodLevel");

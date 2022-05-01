@@ -148,27 +148,15 @@ void Player::WalkUpdate()
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->NextPosCollisionCheck("Tree", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_->NextPosCollisionCheck("Object", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
 		}
-		else if (true == PlayerCol_->NextPosCollisionCheck("Stone", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		else if (true == PlayerCol_-> NextPosCollisionCheck("MapMoveCol", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
-			Move = float4::ZERO;
-		}
-		else if (true == PlayerCol_->NextPosCollisionCheck("Branch", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
-		{
-			Move = float4::ZERO;
-		}
-		else if (true == PlayerCol_->NextPosCollisionCheck("Grass", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
-		{
-			Move = float4::ZERO;
-		}
-		else if (true == PlayerCol_->NextPosCollisionCheck("MineStone", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
-		{
-			Move = float4::ZERO;
-		}
+			GameEngine::GetInst().ChangeLevel("RobinShopLevel");
 
+		}
 		
 
 		if (RGB(255, 0, 0) != Color)
@@ -192,7 +180,9 @@ void Player::WalkUpdate()
 		{
 			GameEngine::GetInst().ChangeLevel("ForestLevel");
 		}
-
+		
+	
+		
 	
 	} 
 
