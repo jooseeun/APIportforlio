@@ -53,12 +53,6 @@
     <ClInclude Include="ForestLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="Chicken.h">
-      <Filter>Actor\Play\Animal</Filter>
-    </ClInclude>
-    <ClInclude Include="BabyChicken.h">
-      <Filter>Actor\Play\Animal</Filter>
-    </ClInclude>
     <ClInclude Include="Slime.h">
       <Filter>Actor\Play\Mine\Monster</Filter>
     </ClInclude>
@@ -152,6 +146,12 @@
     <ClInclude Include="RobinShopUI.h">
       <Filter>Actor\Play\Animal</Filter>
     </ClInclude>
+    <ClInclude Include="Coop.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="Barn.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -202,12 +202,6 @@
     </ClCompile>
     <ClCompile Include="ForestLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="Chicken.cpp">
-      <Filter>Actor\Play\Animal</Filter>
-    </ClCompile>
-    <ClCompile Include="BabyChicken.cpp">
-      <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
     <ClCompile Include="Slime.cpp">
       <Filter>Actor\Play\Mine\Monster</Filter>
@@ -297,6 +291,12 @@
       <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
     <ClCompile Include="RobinShopUI.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Coop.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Barn.cpp">
       <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
   </ItemGroup>

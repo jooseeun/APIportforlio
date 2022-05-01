@@ -35,6 +35,8 @@ public:
 	{
 		return IsOpenShop_;
 	}
+
+
 protected:
 private:
 	bool IsOpenShop_;

@@ -163,15 +163,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BabyChicken.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="BackWoodLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Barn.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -183,7 +183,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Chicken.h">
+    <ClInclude Include="Coop.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -363,15 +363,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BabyChicken.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="BackWoodLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Barn.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -383,7 +383,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Chicken.cpp">
+    <ClCompile Include="Coop.cpp">
       <SubType>
       </SubType>
     </ClCompile>

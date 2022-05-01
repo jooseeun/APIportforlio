@@ -12,6 +12,8 @@
 #include "FrontMap.h"
 #include "FadeIn.h"
 #include "Money.h"
+#include "Barn.h"
+#include "Coop.h"
 #include "FarmObjectEnvironment.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -56,7 +58,10 @@ void FarmLevel::Loading()
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 	}
-
+	Barn::MainBarn = CreateActor<Barn>(static_cast<int>(ORDER::PLAYER), "Barn");
+	Coop::MainCoop = CreateActor<Coop>(static_cast<int>(ORDER::PLAYER), "Coop");
+	//Barn::MainBarn->Off();
+	//Coop::MainCoop->Off();
 	FarmObjectEnvironment::MainFarmObject = CreateActor< FarmObjectEnvironment>();
 	FarmObjectEnvironment::MainFarmObject->SetTileMap(&Back->GroundTileMap_);
 	YSortOn(static_cast<int>(ORDER::PLAYER));

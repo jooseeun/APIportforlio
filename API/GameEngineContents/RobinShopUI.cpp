@@ -3,6 +3,8 @@
 #include "ShopUIMoney.h"
 #include "Tool.h"
 #include "Money.h"
+#include "Barn.h"
+#include "Coop.h"
 #include <GameEngineBase/GameEngineInput.h>
 
 RobinShopUI::RobinShopUI() :
@@ -55,15 +57,27 @@ void RobinShopUI::Create()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
-		if (RightCol_->CollisionCheck("CreateButton"))
+		if (CreateCol_->CollisionCheck("MouseCol"))
 		{
 			if (Page_ == 1)
 			{
-
+				size_t LeftMoney_ = Money::MoneySet->GetMoney() - 400;
+				if (LeftMoney_ < 0)
+				{
+					return;
+				}
+				Money::MoneySet->SetMoney(LeftMoney_);
+				Coop::MainCoop->On();
 			}
 			else if (Page_ == 2)
 			{
-
+				size_t LeftMoney_ = Money::MoneySet->GetMoney() - 600;
+				if (LeftMoney_ < 0)
+				{
+					return;
+				}
+				Money::MoneySet->SetMoney(LeftMoney_);
+				Barn::MainBarn->On();
 			}
 		}
 		

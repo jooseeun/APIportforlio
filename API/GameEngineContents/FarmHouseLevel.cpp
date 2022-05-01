@@ -13,6 +13,7 @@
 #include "FadeIn.h"
 #include "ShopNPC.h"
 #include "Money.h"
+
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -56,7 +57,7 @@ void FarmHouseLevel::Loading()
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
-		
+
 	}
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));

@@ -1,6 +1,7 @@
 #include "Money.h"
 #include "ContentsEnums.h"
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 
 Money* Money::MoneySet = nullptr;
@@ -28,12 +29,20 @@ void Money::Start()
 	}
 	MoneyList_[2]->SetIndex(5); // 처음 500원 지급
 	MoneyIndex_[2] = 5;
+	if (false == GameEngineInput::GetInst()->IsKey("MoneyUp"))
+	{
+		GameEngineInput::GetInst()->CreateKey("MoneyUp", 'M');
+	}
 }
 
 void Money::Update()
 {
 	MoneyStringUpdate();
 	MoneySeatUpdate();
+	if (true == GameEngineInput::GetInst()->IsDown("MoneyUp"))
+	{
+		PlayerMoney_ += 1000;
+	}
 }
 void Money::MoneyStringUpdate()
 {
