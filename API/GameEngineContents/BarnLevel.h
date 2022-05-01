@@ -5,18 +5,18 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
-class CoopLevel : public GameEngineLevel
+class BarnLevel : public GameEngineLevel
 {
 public:
 	// constrcuter destructer
-	CoopLevel();
-	~CoopLevel();
+	BarnLevel();
+	~BarnLevel();
 
 	// delete Function
-	CoopLevel(const CoopLevel& _Other) = delete;
-	CoopLevel(CoopLevel&& _Other) noexcept = delete;
-	CoopLevel& operator=(const CoopLevel& _Other) = delete;
-	CoopLevel& operator=(CoopLevel&& _Other) noexcept = delete;
+	BarnLevel(const BarnLevel& _Other) = delete;
+	BarnLevel(BarnLevel&& _Other) noexcept = delete;
+	BarnLevel& operator=(const BarnLevel& _Other) = delete;
+	BarnLevel& operator=(BarnLevel&& _Other) noexcept = delete;
 
 	inline void GetItemPos()
 	{

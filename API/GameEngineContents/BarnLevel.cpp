@@ -1,4 +1,4 @@
-#include "CoopLevel.h"
+#include "BarnLevel.h"
 #include "TopUI.h"
 #include "EnergyUI.h"
 #include "BackGround.h"
@@ -17,21 +17,21 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-CoopLevel::CoopLevel() :
+BarnLevel::BarnLevel() :
 	CurSelectPivot_(1),
 	NextSelectPivot_(1)
 {
 }
 
-CoopLevel::~CoopLevel()
+BarnLevel::~BarnLevel()
 {
 }
 
 
-void CoopLevel::Loading()
+void BarnLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
-	Back->GetRenderer()->SetImage("CoopLevel.bmp");
+	Back->GetRenderer()->SetImage("MineEntry.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
@@ -54,23 +54,35 @@ void CoopLevel::Loading()
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
-void CoopLevel::Update()
+void BarnLevel::Update()
 {
 	GetItemPos();
+
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
+
+
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
+
 	CurSelectPivot_ = NextSelectPivot_;
 }
 
-void CoopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void BarnLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 159.0f, 517.0f});
-	Player::MainPlayer->SetMapScale(768.0f, 640.0f);
-	Player::MainPlayer->SetColMapName("CoopColMap.bmp");
-	Player::MainPlayer->SetSideLevel("", "FarmLevel", " ");
+	if (_PrevLevel->GetNameCopy() == "Town2Level")
+	{
+		Player::MainPlayer->SetPosition({ 1176.0f,800 });
+	}
+	else
+	{
+		Player::MainPlayer->SetPosition({ 1412.0f,565.0f });
+	}
+
+	Player::MainPlayer->SetMapScale(3200.0f, 1280.0f);
+	Player::MainPlayer->SetColMapName("MineEntryColMap.bmp");
+	Player::MainPlayer->SetSideLevel("Town2Level", "Mine1Level", " ");
 }
 
-void CoopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+void BarnLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	if (_NextLevel->GetNameCopy() != "TitleLevel")
 	{

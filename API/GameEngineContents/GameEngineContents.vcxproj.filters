@@ -32,9 +32,6 @@
     <ClInclude Include="BusStopLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="CoopLevel.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
     <ClInclude Include="FarmHouseLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
@@ -152,6 +149,12 @@
     <ClInclude Include="Barn.h">
       <Filter>Actor\Play\Animal</Filter>
     </ClInclude>
+    <ClInclude Include="CoopLevel.h">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="BarnLevel.h">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -180,9 +183,6 @@
       <Filter>Actor\Title</Filter>
     </ClCompile>
     <ClCompile Include="BusStopLevel.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="CoopLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="FarmHouseLevel.cpp">
@@ -298,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="Barn.cpp">
       <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="CoopLevel.cpp">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BarnLevel.cpp">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
