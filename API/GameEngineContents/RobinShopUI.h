@@ -32,8 +32,12 @@ private:
 	void CheckPage();
 	void BuyCoop();
 	GameEngineRenderer* FadeIn_;
+	GameEngineRenderer* LeftButton_;
+	GameEngineRenderer* RightButton_;
 	GameEngineRenderer* Page1_;
 	GameEngineRenderer* Page2_;
 	GameEngineCollision* ExitCol_;
+	GameEngineCollision* LeftCol_;
+	GameEngineCollision* RightCol_;
 };
 

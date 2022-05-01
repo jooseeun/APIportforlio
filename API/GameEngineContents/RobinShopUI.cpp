@@ -24,17 +24,27 @@ void RobinShopUI::Start()
 
 	Page1_ = CreateRenderer("RobinShop1.bmp",static_cast<int>(ORDER::FRONTUI));
 	Page2_ = CreateRenderer("RobinShop2.bmp", static_cast<int>(ORDER::FRONTUI));
-	
 	ExitCol_ = CreateCollision("RobinShopExit", { 44,44 }, { 512,-260 });
+
+	RightButton_ = CreateRenderer("RightButton.bmp", static_cast<int>(ORDER::FRONTUI));
+	LeftButton_ = CreateRenderer("LeftButton.bmp", static_cast<int>(ORDER::FRONTUI));
+	RightButton_->SetPivot({-180,320});
+	LeftButton_->SetPivot({ -380,320 });
+
+	RightCol_=CreateCollision("RobinShopRightButton", { 44,30 }, { -180,320 });
+	LeftCol_ = CreateCollision("RobinShopLeftButton", { 44,30 }, { -380,320 });
 
 	FadeIn_->CameraEffectOff();
 	Page1_->CameraEffectOff();
 	Page2_->CameraEffectOff();
 	ExitCol_->CameraEffectOff();
+	LeftButton_->CameraEffectOff();
+	RightButton_->CameraEffectOff();
+	RightCol_->CameraEffectOff();
+	LeftCol_->CameraEffectOff();
 
 	Page1_->Off();
 	Page2_->Off();
-	ExitCol_->Off();
 }
 void RobinShopUI::BuyCoop()
 {
@@ -43,17 +53,16 @@ void RobinShopUI::BuyCoop()
 
 void RobinShopUI::CheckPage()
 {
-	if (Page_ == 1)
+	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 	{
-		Page1_->On();
-		Page2_->Off();
-		ExitCol_->On();
-	}
-	else if (Page_ == 2)
-	{
-		Page1_->Off();
-		Page2_->On();
-		ExitCol_->Off();
+		if (RightCol_->CollisionCheck("MouseCol"))
+		{
+			Page_ = 2;
+		}
+		else if (LeftCol_->CollisionCheck("MouseCol"))
+		{
+			Page_ = 1;
+		}
 	}
 }
 
@@ -61,5 +70,14 @@ void RobinShopUI::Update()
 {
 	BuyCoop();
 	CheckPage();
-
+	if (Page_ == 1)
+	{
+		Page1_->On();
+		Page2_->Off();
+	}
+	else if (Page_ == 2)
+	{
+		Page1_->Off();
+		Page2_->On();
+	}
 }
