@@ -29,16 +29,53 @@ void FarmObjectEnvironment::Update()
 		MakeTree(64, 28, 0);
 		MakeTree(51, 25, 0);
 		MakeTree(48, 22, 0);
+		MakeTree(70, 19, 0);
 		MakeTree(73, 23, 0);
 		MakeTree(59, 29, 0);
 
+		MakeStone(50, 23, 3);
+		MakeStone(52, 26, 3);
+		MakeStone(54, 24, 3);
+		MakeStone(58, 18, 4);
+		MakeStone(57, 17, 4);
 		MakeStone(65, 19, 4);
 		MakeStone(66, 19, 3);
-		MakeGrass(63, 18, 0);
+		MakeStone(40, 30, 3);
+		MakeStone(57, 25, 4);
+		MakeStone(56, 25, 3);
+		MakeStone(74, 27, 4);
+		MakeStone(75, 27, 4);
+		MakeStone(74, 19, 3);
+		MakeStone(60, 19, 3);
+		MakeStone(72, 22, 4);
 
+		MakeGrass(50, 24, 0);
+		MakeGrass(52, 20, 0);
+		MakeGrass(54, 21, 0);
+		MakeGrass(54, 25, 0);
+		MakeGrass(63, 23, 0);
+		MakeGrass(64, 23, 0);
+		MakeGrass(62, 24, 0);
+		MakeGrass(63, 24, 0);
+		MakeGrass(73, 21, 0);
+		MakeGrass(73, 21, 0);
+		MakeGrass(59, 34, 0);
+		MakeGrass(59, 25, 0);
+		MakeGrass(60, 21, 0);
+		MakeGrass(59, 23, 0);
+		MakeGrass(71, 21, 0);
+
+		MakeBranch(60, 26, 6);
 		MakeBranch(63, 22, 5);
-		MakeBranch(70, 18, 6);
-
+		MakeBranch(57, 29, 6);
+		MakeBranch(57, 25, 5);
+		MakeBranch(51, 28, 5);
+		MakeBranch(52, 22, 6);
+		MakeBranch(53, 23, 6);
+		MakeBranch(75, 22, 6);
+		MakeBranch(60, 20, 5);
+		MakeBranch(61, 21, 6);
+		MakeBranch(70, 21, 6);
 		CheckMake_ = true;
 	}
 
