@@ -55,6 +55,14 @@ void FrontMap::Start()
 	{
 		Image_->SetImage("BackWoodFront.bmp");
 	}
+	else if (GetLevel()->GetNameCopy() == "RobinShopLevel")
+	{
+		Image_->SetImage("RobinShopFront.bmp");
+	}
+	else if (GetLevel()->GetNameCopy() == "AnimalShopLevel")
+	{
+		Image_->SetImage("AnimalShopFront.bmp");
+	}
 	else
 	{
 		return;

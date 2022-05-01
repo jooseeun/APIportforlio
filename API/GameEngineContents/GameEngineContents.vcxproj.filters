@@ -41,12 +41,6 @@
     <ClInclude Include="FarmLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
-    <ClInclude Include="LobinHouseLevel.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimalShopLevel.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
     <ClInclude Include="SeedShopLevel.h">
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
@@ -58,12 +52,6 @@
     </ClInclude>
     <ClInclude Include="ForestLevel.h">
       <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="NPCRobin.h">
-      <Filter>Actor\Play\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="NPCAnimalShopOnner.h">
-      <Filter>Actor\Play\NPC</Filter>
     </ClInclude>
     <ClInclude Include="Chicken.h">
       <Filter>Actor\Play\Animal</Filter>
@@ -152,6 +140,18 @@
     <ClInclude Include="Num4.h">
       <Filter>Actor\Play\Mine</Filter>
     </ClInclude>
+    <ClInclude Include="AnimalShopLevel.h">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="RobinShopLevel.h">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCRobin.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="RobinShopUI.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -191,12 +191,6 @@
     <ClCompile Include="FarmLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="LobinHouseLevel.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimalShopLevel.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
     <ClCompile Include="SeedShopLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
@@ -208,12 +202,6 @@
     </ClCompile>
     <ClCompile Include="ForestLevel.cpp">
       <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="NPCRobin.cpp">
-      <Filter>Actor\Play\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="NPCAnimalShopOnner.cpp">
-      <Filter>Actor\Play\NPC</Filter>
     </ClCompile>
     <ClCompile Include="Chicken.cpp">
       <Filter>Actor\Play\Animal</Filter>
@@ -299,6 +287,18 @@
     <ClCompile Include="Num4.cpp">
       <Filter>Actor\Play\Mine</Filter>
     </ClCompile>
+    <ClCompile Include="AnimalShopLevel.cpp">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="RobinShopLevel.cpp">
+      <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCRobin.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="RobinShopUI.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -325,9 +325,6 @@
     <Filter Include="Actor\Play\Animal">
       <UniqueIdentifier>{66428bba-ed27-4a8f-bc5b-effe02311df5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play\NPC">
-      <UniqueIdentifier>{4a275f80-aef1-4a04-95fc-866be7586d49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Play\Mine\Monster">
       <UniqueIdentifier>{bc9d8fd5-53d0-47f8-a28a-3f9e483e1b38}</UniqueIdentifier>
     </Filter>
@@ -348,6 +345,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\MineLevel">
       <UniqueIdentifier>{9ef2984e-540c-426b-96a0-1f0650052c04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\AnimalLevel">
+      <UniqueIdentifier>{dea741ea-6bfa-4d3c-9e95-2ff02ccf8273}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

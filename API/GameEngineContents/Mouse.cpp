@@ -95,6 +95,27 @@ void Mouse::CheckPlayerIsLeftMouse()
 			return;
 		}
 
+		if (true == GetMouseCol()->NextPosCollisionCheck("Robin", GetLevel()->GetCameraPos(), CollisionType::Rect, CollisionType::Rect))//카메라 이펙트 꺼져있는건 이렇게 충돌체크해야됨
+		{
+			if (GetLevel()->GetNameCopy() == "RobinShopLevel")
+			{
+				IsOpenShop_ = true;
+			}
+
+			return;
+		}
+
+		if (true == GetMouseCol()->CollisionCheck("RobinShopExit", CollisionType::Rect, CollisionType::Rect))
+		{
+			if (GetLevel()->GetNameCopy() == "RobinShopLevel")
+			{
+				IsOpenShop_ = false;
+			}
+
+			return;
+		}
+
+
 		if (true == GetMouseCol()->NextPosCollisionCheck("GoMineEntry", GetLevel()->GetCameraPos(), CollisionType::Rect, CollisionType::Rect))
 		{
 			GameEngine::GetInst().ChangeLevel("MineEntryLevel");
@@ -164,7 +185,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 			}
 			else
 			{
-				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy())
+				if ("TitleLevel" != Player::MainPlayer->GetLevel()->GetNameCopy() && IsOpenShop_ == false)
 				{
 					Player::MainPlayer->SetIsLeftMouseON();
 				}

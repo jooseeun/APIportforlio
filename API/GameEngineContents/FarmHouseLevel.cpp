@@ -66,7 +66,7 @@ void FarmHouseLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("CheckTest"))
 	{
-		GameEngine::GetInst().ChangeLevel("Mine1Level");
+		GameEngine::GetInst().ChangeLevel("RobinShopLevel");
 	}
 	GetItemPos();
 

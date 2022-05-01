@@ -12,7 +12,7 @@
 #include "Town2Level.h"
 #include "AnimalShopLevel.h"
 #include "ForestLevel.h"
-#include "LobinHouseLevel.h"
+#include "RobinShopLevel.h"
 #include "BackWoodLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -73,6 +73,22 @@ void StardewVallyGame::GameInit()
 		ResourcesDir.Move("Resources");
 		ResourcesDir.Move("Image");
 		ResourcesDir.Move("UI");
+
+		// 폴더안에 모든 이미지 파일을 찾는다.
+		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
+
+		for (size_t i = 0; i < AllImageFileList.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllImageFileList[i].GetFullPath());
+		}
+	}
+	{
+		// 현재 디렉토리
+		GameEngineDirectory ResourcesDir;
+		ResourcesDir.MoveParent("API");
+		ResourcesDir.Move("Resources");
+		ResourcesDir.Move("Image");
+		ResourcesDir.Move("Animal");
 
 		// 폴더안에 모든 이미지 파일을 찾는다.
 		std::vector<GameEngineFile> AllImageFileList = ResourcesDir.GetAllFile("Bmp");
@@ -374,7 +390,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<ForestLevel>("ForestLevel");
 	CreateLevel<TownLevel>("TownLevel");
 	CreateLevel<Town2Level>("Town2Level");
-	CreateLevel<LobinHouseLevel>("LobinHouseLevel");
+	CreateLevel<RobinShopLevel>("RobinShopLevel");
 	CreateLevel<BusStopLevel>("BusStopLevel");
 	CreateLevel<SeedShopLevel>("SeedShopLevel");
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
