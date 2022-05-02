@@ -105,6 +105,7 @@ void Mouse::CheckPlayerIsLeftMouse()
 			return;
 		}
 
+
 		if (true == GetMouseCol()->CollisionCheck("RobinShopExit", CollisionType::Rect, CollisionType::Rect))
 		{
 			if (GetLevel()->GetNameCopy() == "RobinShopLevel")
@@ -115,7 +116,24 @@ void Mouse::CheckPlayerIsLeftMouse()
 			return;
 		}
 
+		if (true == GetMouseCol()->NextPosCollisionCheck("AnimalShopOnner", GetLevel()->GetCameraPos(), CollisionType::Rect, CollisionType::Rect))
+		{
+			if (GetLevel()->GetNameCopy() == "AnimalShopLevel")
+			{
+				IsOpenShop_ = true;
+			}
 
+			return;
+		}
+		if (true == GetMouseCol()->CollisionCheck("AnimalShopExit", CollisionType::Rect, CollisionType::Rect))
+		{
+			if (GetLevel()->GetNameCopy() == "AnimalShopLevel")
+			{
+				IsOpenShop_ = false;
+			}
+
+			return;
+		}
 		if (true == GetMouseCol()->NextPosCollisionCheck("GoMineEntry", GetLevel()->GetCameraPos(), CollisionType::Rect, CollisionType::Rect))
 		{
 			GameEngine::GetInst().ChangeLevel("MineEntryLevel");

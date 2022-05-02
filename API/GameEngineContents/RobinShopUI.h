@@ -2,7 +2,6 @@
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
 #include <GameEngine/GameEngineActor.h>
-#include "ShopUIMoney.h"
 #include "Tool.h"
 #include "FadeIn.h"
 

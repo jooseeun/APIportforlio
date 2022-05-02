@@ -10,7 +10,7 @@
 #include "Time.h"
 #include "FrontMap.h"
 #include "Money.h"
-#include "NPCRobin.h"
+#include "AnimalShopNPC.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -39,7 +39,7 @@ void AnimalShopLevel::Loading()
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 
 	MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
-	NPCRobin* NPC = CreateActor<NPCRobin>(static_cast<int>(ORDER::PLAYER), "Robin");
+	AnimalShopNPC* NPC = CreateActor<AnimalShopNPC>(static_cast<int>(ORDER::PLAYER), "Marnie");
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
@@ -51,7 +51,7 @@ void AnimalShopLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
-	ShopUI_ = CreateActor<RobinShopUI>(static_cast<int>(ORDER::FRONTUI), "RobinShopUI");
+	ShopUI_ = CreateActor<AnimalShopUI>(static_cast<int>(ORDER::FRONTUI), "AnimalShopUI");
 	ShopUI_->Off();
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));

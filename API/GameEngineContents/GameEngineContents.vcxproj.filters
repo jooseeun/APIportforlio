@@ -155,6 +155,12 @@
     <ClInclude Include="BarnLevel.h">
       <Filter>Level\PlayLevel\AnimalLevel</Filter>
     </ClInclude>
+    <ClInclude Include="AnimalShopNPC.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimalShopUI.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -304,6 +310,12 @@
     </ClCompile>
     <ClCompile Include="BarnLevel.cpp">
       <Filter>Level\PlayLevel\AnimalLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimalShopNPC.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimalShopUI.cpp">
+      <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

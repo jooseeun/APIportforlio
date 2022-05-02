@@ -2,7 +2,7 @@
 #include "BackGround.h"
 #include "PlayerEnum.h"
 #include "Tool.h"
-#include "RobinShopUI.h"
+#include "AnimalShopUI.h"
 #include "Mouse.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
@@ -45,7 +45,7 @@ protected:
 
 private:
 	Mouse* MouseSet;
-	RobinShopUI* ShopUI_;
+	AnimalShopUI* ShopUI_;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 	bool IsOpenShop_;
