@@ -31,7 +31,7 @@ BarnLevel::~BarnLevel()
 void BarnLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
-	Back->GetRenderer()->SetImage("MineEntry.bmp");
+	Back->GetRenderer()->SetImage("BarnLevel.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
@@ -68,18 +68,13 @@ void BarnLevel::Update()
 
 void BarnLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	if (_PrevLevel->GetNameCopy() == "Town2Level")
-	{
-		Player::MainPlayer->SetPosition({ 1176.0f,800 });
-	}
-	else
-	{
-		Player::MainPlayer->SetPosition({ 1412.0f,565.0f });
-	}
 
-	Player::MainPlayer->SetMapScale(3200.0f, 1280.0f);
-	Player::MainPlayer->SetColMapName("MineEntryColMap.bmp");
-	Player::MainPlayer->SetSideLevel("Town2Level", "Mine1Level", " ");
+	Player::MainPlayer->SetPosition({ 797.0f,843.0f});
+
+
+	Player::MainPlayer->SetMapScale(1280.0f, 960.0f);
+	Player::MainPlayer->SetColMapName("BarnColMap.bmp");
+	Player::MainPlayer->SetSideLevel("", "FarmLevel", " ");
 }
 
 void BarnLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

@@ -14,6 +14,7 @@
 #include "ForestLevel.h"
 #include "RobinShopLevel.h"
 #include "BackWoodLevel.h"
+#include "BarnLevel.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
@@ -378,7 +379,7 @@ void StardewVallyGame::GameInit()
 
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
-		GameEngineInput::GetInst()->CreateKey("CheckTest", '1');
+		GameEngineInput::GetInst()->CreateKey("CheckTest", 'P');
 		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
 	}
 
@@ -396,6 +397,7 @@ void StardewVallyGame::GameInit()
 	CreateLevel<MineEntryLevel>("MineEntryLevel");
 	CreateLevel<Mine1Level>("Mine1Level");
 	CreateLevel<Mine2Level>("Mine2Level");
+	CreateLevel<BarnLevel>("BarnLevel");
 	CreateLevel< BackWoodLevel>("BackWoodLevel");
 	//ChangeLevel("FarmHouseLevel");
 	ChangeLevel("TitleLevel");

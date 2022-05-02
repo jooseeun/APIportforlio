@@ -8,6 +8,7 @@
 #include "ContentsEnums.h"
 #include "Money.h"
 #include "Time.h"
+#include "FrontMap.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -32,7 +33,7 @@ void Town2Level::Loading()
 	Back->GetRenderer()->SetImage("Town2.bmp");
 	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
 	Back->GetRenderer()->SetPivot(BackImageScale.Half());
-
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::PLAYER));
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)

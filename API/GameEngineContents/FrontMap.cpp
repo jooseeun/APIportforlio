@@ -33,7 +33,7 @@ void FrontMap::Start()
 	}
 	else if (GetLevel()->GetNameCopy() == "Town2Level")
 	{
-		Image_->SetImage("BusStopFront.bmp");
+		Image_->SetImage("Town2Front.bmp");
 	}
 	else if (GetLevel()->GetNameCopy() == "SeedShopLevel")
 	{
@@ -66,6 +66,10 @@ void FrontMap::Start()
 	else if (GetLevel()->GetNameCopy() == "CoopLevel")
 	{
 		Image_->SetImage("CoopFront.bmp");
+	}
+	else if (GetLevel()->GetNameCopy() == "BarnLevel")
+	{
+		Image_->SetImage("BarnFront.bmp");
 	}
 	else
 	{

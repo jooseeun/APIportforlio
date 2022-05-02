@@ -152,7 +152,10 @@ void Player::WalkUpdate()
 		{
 			GameEngine::GetInst().ChangeLevel("CoopLevel");
 		}
-
+		else if (true == PlayerCol_->NextPosCollisionCheck("BarnDoor", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			GameEngine::GetInst().ChangeLevel("BarnLevel");
+		}
 		if (true == PlayerCol_->NextPosCollisionCheck("Crops", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;

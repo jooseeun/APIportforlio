@@ -97,11 +97,11 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 	else if (_PrevLevel->GetNameCopy() == "CoopLevel")
 	{
-		Player::MainPlayer->SetPosition({ 3320.0f,1080.0f });
+		Player::MainPlayer->SetPosition({ 3320.0f,1070.0f });
 	}
 	else if (_PrevLevel->GetNameCopy() == "BarnLevel")
 	{
-		Player::MainPlayer->SetPosition({ 2616.0f,202.0f });
+		Player::MainPlayer->SetPosition({ 2790.0f,1070.0f });
 	}
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
