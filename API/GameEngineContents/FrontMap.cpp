@@ -71,6 +71,10 @@ void FrontMap::Start()
 	{
 		Image_->SetImage("BarnFront.bmp");
 	}
+	else if (GetLevel()->GetNameCopy() == "ForestLevel")
+	{
+		Image_->SetImage("ForestFront.bmp");
+	}
 	else
 	{
 		return;

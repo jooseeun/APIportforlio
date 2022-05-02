@@ -6,6 +6,7 @@
 #include "ContentsEnums.h"
 #include "BackGround.h"
 #include "Mouse.h"
+#include "FrontMap.h"
 #include "Time.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -33,6 +34,7 @@ void ForestLevel::Loading()
 	Back->CropsTileMap_.TileRangeSetting(90, 34, { 48,48 });
 
 
+	//FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::PLAYER));
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
 	if (nullptr == Player::MainPlayer)
@@ -60,8 +62,15 @@ void ForestLevel::Update()
 }
 void ForestLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	Player::MainPlayer->SetPosition({ 4324.0f,1664.f });
+	if (_PrevLevel->GetNameCopy() == "TownLevel")
+	{
+		Player::MainPlayer->SetPosition({ 4324.0f,1664.f });
+	}
+	if (_PrevLevel->GetNameCopy() == "AnimalShopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 2649,1082.0f});
+	}
+	
 	Player::MainPlayer->SetMapScale(4536.0f, 3084.0f);
 	Player::MainPlayer->SetColMapName("ForestColMap.bmp");
 	Player::MainPlayer->SetSideLevel("TownLevel", "FarmLevel", "AnimalShopLevel");

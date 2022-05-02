@@ -103,6 +103,10 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 2790.0f,1070.0f });
 	}
+	else if (_PrevLevel->GetNameCopy() == "ForestLevel")
+	{
+		Player::MainPlayer->SetPosition({ 658.0f,992.0f });
+	}
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
 	Player::MainPlayer->SetSideLevel("BackWoodLevel", "BusStopLevel", "FarmHouseLevel");

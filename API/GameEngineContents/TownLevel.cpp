@@ -71,6 +71,10 @@ void TownLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 144.0f,3442.f });
 	}
+	if (_PrevLevel->GetNameCopy() == "ForestLevel")
+	{
+		Player::MainPlayer->SetPosition({ 248.0f,5987.0f});
+	}
 	if (_PrevLevel->GetNameCopy() == "SeedShopLevel")
 	{
 		Player::MainPlayer->SetPosition({ 2810.0f,3650.f });

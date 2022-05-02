@@ -1,10 +1,16 @@
 #include "AnimalShopLevel.h"
-#include "Player.h"
-#include "ToolUI.h"
 #include "TopUI.h"
 #include "EnergyUI.h"
-#include "ContentsEnums.h"
 #include "BackGround.h"
+#include "Mouse.h"
+#include "Player.h"
+#include "ToolUI.h"
+#include "ContentsEnums.h"
+#include "Mouse.h"
+#include "Time.h"
+#include "FrontMap.h"
+#include "Money.h"
+#include "NPCRobin.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -12,13 +18,14 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-AnimalShopLevel::AnimalShopLevel():
+AnimalShopLevel::AnimalShopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	IsOpenShop_(false)
 {
 }
 
-AnimalShopLevel::~AnimalShopLevel() 
+AnimalShopLevel::~AnimalShopLevel()
 {
 }
 
@@ -27,27 +34,75 @@ void AnimalShopLevel::Loading()
 {
 	BackGround* Back = CreateActor<BackGround>(1);
 	Back->GetRenderer()->SetImage("AnimalShop.bmp");
-	Back->SetPosition(float4{ Back->GetRenderer()->GetImage()->GetScale().x / 2, Back->GetRenderer()->GetImage()->GetScale().y / 2 });
+	float4 BackImageScale = Back->GetRenderer()->GetImage()->GetScale();
+	Back->GetRenderer()->SetPivot(BackImageScale.Half());
+	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 
-	CreateActor<TopUI>((int)ORDER::UI, "TopUI");
-	CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+	MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+	NPCRobin* NPC = CreateActor<NPCRobin>(static_cast<int>(ORDER::PLAYER), "Robin");
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>(static_cast<int>(ORDER::PLAYER), "Player");
+		ToolUI::ToolUISet = CreateActor<ToolUI>((int)ORDER::TOOLUI, "ToolUI");
+		TopUI::TopUISet = CreateActor<TopUI>((int)ORDER::UI, "TopUI");
+		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
+		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
+		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
-	ToolUISet = CreateActor<ToolUI>((int)ORDER::UI, "ToolUI");
-	PlayerSet =CreateActor<Player>((int)ORDER::PLAYER, "Player");
-	PlayerSet->SetPosition({ 862.0f,1202.f });
-	PlayerSet->SetMapScale(2240.0f, 1280.0f);
-	PlayerSet->SetColMapName("AnimalShopColMap.bmp");
-	PlayerSet->SetSideLevel(" ", "ForestLevel", " ");
+	}
+	ShopUI_ = CreateActor<RobinShopUI>(static_cast<int>(ORDER::FRONTUI), "RobinShopUI");
+	ShopUI_->Off();
+
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void AnimalShopLevel::Update()
 {
+	GetItemPos();
 
-	NextSelectPivot_ = ToolUISet->getSelectPivot();
-	if (CurSelectPivot_ != NextSelectPivot_)
-	{
-		PlayerSet->SetSelectItem(ItemPos_[NextSelectPivot_]);
-	}
+	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
+
+
+	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 
 	CurSelectPivot_ = NextSelectPivot_;
+
+	CheckOpenAnimalShop_();
+	if (IsOpenShop_ == true)
+	{
+		ShopUI_->On();
+		ToolUI::ToolUISet->Off();
+		Tool::ToolSet->Off();
+	}
+	else if (IsOpenShop_ == false)
+	{
+		ShopUI_->Off();
+		ToolUI::ToolUISet->On();
+		Tool::ToolSet->On();
+	}
+}
+
+void AnimalShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	Player::MainPlayer->SetPosition({ 864.0f,1180.0f});
+	Player::MainPlayer->SetMapScale(2240.0f, 1280.0f);
+	Player::MainPlayer->SetColMapName("AnimalShopColMap.bmp");
+	Player::MainPlayer->SetSideLevel("", "ForestLevel", " ");
+}
+
+void AnimalShopLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	if (_NextLevel->GetNameCopy() != "TitleLevel")
+	{
+		Player::MainPlayer->NextLevelOn();
+		ToolUI::ToolUISet->NextLevelOn();
+		TopUI::TopUISet->NextLevelOn();
+		EnergyUI::EnergyUISet->NextLevelOn();
+		Tool::ToolSet->NextLevelOn();
+		Time::TimeSet->NextLevelOn();
+
+		Money::MoneySet->NextLevelOn();
+
+	}
 }

@@ -1,6 +1,9 @@
 #pragma once
-#include "Player.h"
-#include "ToolUI.h"
+#include "BackGround.h"
+#include "PlayerEnum.h"
+#include "Tool.h"
+#include "RobinShopUI.h"
+#include "Mouse.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
@@ -17,24 +20,35 @@ public:
 	AnimalShopLevel& operator=(const AnimalShopLevel& _Other) = delete;
 	AnimalShopLevel& operator=(AnimalShopLevel&& _Other) noexcept = delete;
 
-	template<typename ItemActor>
-	inline void GetItemPos(ItemActor* _Actor)
+	inline void GetItemPos()
 	{
-		int Num = _Actor->GetInvenPos();
-		ItemPos_[Num] = _Actor->GetItemName();
-
+		for (int _Num = 0; _Num < 13; _Num++)
+		{
+			ItemPos_[_Num] = Tool::ToolSet->GetToolUIPivotItem(_Num);
+		}
 	}
 
+	inline void SetSelectPivot(int _SelectPivot)
+	{
+		CurSelectPivot_ = _SelectPivot;
+
+	}
+	inline void CheckOpenAnimalShop_()
+	{
+		IsOpenShop_ = MouseSet->IsOpenShop();
+	}
 protected:
 	void Loading() override;
 	void Update() override;
+	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
+
 private:
-	Player* PlayerSet;
-	ToolUI* ToolUISet;
-
+	Mouse* MouseSet;
+	RobinShopUI* ShopUI_;
 	PlayerItem ItemPos_[13];
-
-
+	BackGround* Back;
+	bool IsOpenShop_;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };
