@@ -143,6 +143,15 @@ void Player::WalkUpdate()
 
 		int Color = MapColImage_->GetImagePixel(CheckPos);
 
+		if (true == PlayerCol_-> NextPosCollisionCheck("MapMoveCol", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			GameEngine::GetInst().ChangeLevel("RobinShopLevel");
+
+		}
+		else if (true == PlayerCol_->NextPosCollisionCheck("CoopDoor", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
+		{
+			GameEngine::GetInst().ChangeLevel("CoopLevel");
+		}
 
 		if (true == PlayerCol_->NextPosCollisionCheck("Crops", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
@@ -151,11 +160,6 @@ void Player::WalkUpdate()
 		else if (true == PlayerCol_->NextPosCollisionCheck("Object", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
 		{
 			Move = float4::ZERO;
-		}
-		else if (true == PlayerCol_-> NextPosCollisionCheck("MapMoveCol", Move * GameEngineTime::GetDeltaTime() * Speed_, CollisionType::Rect, CollisionType::Rect))
-		{
-			GameEngine::GetInst().ChangeLevel("RobinShopLevel");
-
 		}
 		
 

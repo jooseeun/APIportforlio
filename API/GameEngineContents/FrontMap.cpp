@@ -63,6 +63,10 @@ void FrontMap::Start()
 	{
 		Image_->SetImage("AnimalShopFront.bmp");
 	}
+	else if (GetLevel()->GetNameCopy() == "CoopLevel")
+	{
+		Image_->SetImage("CoopFront.bmp");
+	}
 	else
 	{
 		return;

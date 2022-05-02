@@ -64,8 +64,8 @@ void CoopLevel::Update()
 
 void CoopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	Player::MainPlayer->SetPosition({ 159.0f, 517.0f});
-	Player::MainPlayer->SetMapScale(768.0f, 640.0f);
+	Player::MainPlayer->SetPosition({ 416.0f, 500.0f});
+	Player::MainPlayer->SetMapScale(1280.0f, 720.0f);
 	Player::MainPlayer->SetColMapName("CoopColMap.bmp");
 	Player::MainPlayer->SetSideLevel("", "FarmLevel", " ");
 }

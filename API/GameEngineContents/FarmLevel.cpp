@@ -60,8 +60,8 @@ void FarmLevel::Loading()
 	}
 	Barn::MainBarn = CreateActor<Barn>(static_cast<int>(ORDER::PLAYER), "Barn");
 	Coop::MainCoop = CreateActor<Coop>(static_cast<int>(ORDER::PLAYER), "Coop");
-	Barn::MainBarn->Off();
-	Coop::MainCoop->Off();
+	//Barn::MainBarn->Off();
+	//Coop::MainCoop->Off();
 	FarmObjectEnvironment::MainFarmObject = CreateActor< FarmObjectEnvironment>();
 	FarmObjectEnvironment::MainFarmObject->SetTileMap(&Back->GroundTileMap_);
 	YSortOn(static_cast<int>(ORDER::PLAYER));
@@ -94,6 +94,14 @@ void FarmLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	else if (_PrevLevel->GetNameCopy() == "BackWoodLevel")
 	{
 		Player::MainPlayer->SetPosition({ 2616.0f,202.0f});
+	}
+	else if (_PrevLevel->GetNameCopy() == "CoopLevel")
+	{
+		Player::MainPlayer->SetPosition({ 3320.0f,1080.0f });
+	}
+	else if (_PrevLevel->GetNameCopy() == "BarnLevel")
+	{
+		Player::MainPlayer->SetPosition({ 2616.0f,202.0f });
 	}
 	Player::MainPlayer->SetMapScale(5120.0f, 4160.0f);
 	Player::MainPlayer->SetColMapName("FarmColMap.bmp");
