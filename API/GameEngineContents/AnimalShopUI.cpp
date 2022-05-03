@@ -7,10 +7,16 @@
 #include "Coop.h"
 #include "Tool.h"
 #include "FadeIn.h"
+#include "Chicken.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
-AnimalShopUI::AnimalShopUI() 
+
+AnimalShopUI* AnimalShopUI::AnimalShopUISet = nullptr;
+
+AnimalShopUI::AnimalShopUI()
+	:ChickenNum_(0),
+	CowNum_(0)
 {
 }
 
@@ -76,7 +82,22 @@ void AnimalShopUI::CheckMouse()
 		CowMoney_->Off();
 	}
 }
+void AnimalShopUI::BuyCheck()
+{
+	if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
+	{
+		if (Chicken_->CollisionCheck("MouseCol"))
+		{
+			ChickenNum_ += 1;
+		}
+		else if (Cow_->CollisionCheck("MouseCol"))
+		{
+			CowNum_ += 1;
+		}
+	}
+}
 void AnimalShopUI::Update()
 {
 	CheckMouse();
+	BuyCheck();
 }

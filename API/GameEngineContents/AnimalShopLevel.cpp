@@ -11,6 +11,7 @@
 #include "FrontMap.h"
 #include "Money.h"
 #include "AnimalShopNPC.h"
+#include "AnimalShopUI.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -39,6 +40,10 @@ void AnimalShopLevel::Loading()
 	FrontMap* Front_ = CreateActor<FrontMap>(static_cast<int>(ORDER::FRONTMAP));
 
 	MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
+	if (nullptr == AnimalShopUI::AnimalShopUISet)
+	{
+		AnimalShopUI::AnimalShopUISet= CreateActor<AnimalShopUI>(static_cast<int>(ORDER::FRONTUI), "AnimalShopUI");
+	}
 	AnimalShopNPC* NPC = CreateActor<AnimalShopNPC>(static_cast<int>(ORDER::PLAYER), "Marnie");
 	if (nullptr == Player::MainPlayer)
 	{
@@ -51,8 +56,8 @@ void AnimalShopLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
-	ShopUI_ = CreateActor<AnimalShopUI>(static_cast<int>(ORDER::FRONTUI), "AnimalShopUI");
-	ShopUI_->Off();
+
+	AnimalShopUI::AnimalShopUISet->Off();
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
@@ -71,13 +76,13 @@ void AnimalShopLevel::Update()
 	CheckOpenAnimalShop_();
 	if (IsOpenShop_ == true)
 	{
-		ShopUI_->On();
+		AnimalShopUI::AnimalShopUISet->On();
 		ToolUI::ToolUISet->Off();
 		Tool::ToolSet->Off();
 	}
 	else if (IsOpenShop_ == false)
 	{
-		ShopUI_->Off();
+		AnimalShopUI::AnimalShopUISet->Off();
 		ToolUI::ToolUISet->On();
 		Tool::ToolSet->On();
 	}

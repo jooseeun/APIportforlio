@@ -374,9 +374,14 @@ void StardewVallyGame::GameInit()
 	Bug->CutCount(4, 5);
 	GameEngineImage* Slime = GameEngineImageManager::GetInst()->Find("Slime.bmp");
 	Slime->CutCount(4, 11);
-
-
-
+	GameEngineImage* Cow = GameEngineImageManager::GetInst()->Find("Cow.bmp");
+	Cow->CutCount(4, 5);
+	GameEngineImage* Chicken = GameEngineImageManager::GetInst()->Find("Chicken.bmp");
+	Chicken->CutCount(4, 7);
+	GameEngineImage* BabyChicken = GameEngineImageManager::GetInst()->Find("BabyChicken.bmp");
+	BabyChicken->CutCount(4, 14);
+	GameEngineImage* BabyCow = GameEngineImageManager::GetInst()->Find("BabyCow.bmp");
+	BabyCow->CutCount(4, 5);
 	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
 	{
 		GameEngineInput::GetInst()->CreateKey("CheckTest", 'P');

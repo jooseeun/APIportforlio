@@ -161,6 +161,12 @@
     <ClInclude Include="AnimalShopUI.h">
       <Filter>Actor\Play\Animal</Filter>
     </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="Cow.h">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -315,6 +321,12 @@
       <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
     <ClCompile Include="AnimalShopUI.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="Cow.cpp">
       <Filter>Actor\Play\Animal</Filter>
     </ClCompile>
   </ItemGroup>

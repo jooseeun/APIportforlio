@@ -195,11 +195,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Coop.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="CoopLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Cow.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -407,11 +415,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Coop.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="CoopLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Cow.cpp">
       <SubType>
       </SubType>
     </ClCompile>

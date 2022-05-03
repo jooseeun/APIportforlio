@@ -7,6 +7,7 @@ class GameEngineRenderer;
 class AnimalShopUI : public GameEngineActor
 {
 public:
+	static AnimalShopUI* AnimalShopUISet;
 	// constrcuter destructer
 	AnimalShopUI();
 	~AnimalShopUI();
@@ -17,10 +18,11 @@ public:
 	AnimalShopUI& operator=(const AnimalShopUI& _Other) = delete;
 	AnimalShopUI& operator=(AnimalShopUI&& _Other) noexcept = delete;
 
+	int ChickenNum_;
+	int CowNum_;
 protected:
 
 private:
-
 	GameEngineCollision* Chicken_;
 	GameEngineCollision* Cow_;
 	GameEngineRenderer* ChickenName_;
@@ -28,6 +30,7 @@ private:
 	GameEngineRenderer* CowName_;
 	GameEngineRenderer* CowMoney_;
 	void CheckMouse();
+	void BuyCheck();
 	void Start() override;
 	void Update() override;
 };

@@ -42,6 +42,8 @@ private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 
+	void CreateAnimal();
+	int ChickenNum;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

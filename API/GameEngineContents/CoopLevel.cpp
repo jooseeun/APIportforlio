@@ -10,6 +10,8 @@
 #include "Time.h"
 #include "FrontMap.h"
 #include "Money.h"
+#include "Chicken.h"
+#include "AnimalShopUI.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -19,7 +21,8 @@
 
 CoopLevel::CoopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	ChickenNum(0)
 {
 }
 
@@ -53,13 +56,25 @@ void CoopLevel::Loading()
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
-
+void CoopLevel::CreateAnimal()
+{
+	if (0 != AnimalShopUI::AnimalShopUISet->ChickenNum_)
+	{
+		for (int i = 1; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
+		{
+			Chicken* Chicken_ = CreateActor<Chicken>(static_cast<int>(ORDER::PLAYER), "Chicken");
+			Chicken_->SetPosition({ 428,286 });
+		}
+		AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
+	}
+}
 void CoopLevel::Update()
 {
 	GetItemPos();
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
 	CurSelectPivot_ = NextSelectPivot_;
+	CreateAnimal();
 }
 
 void CoopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
