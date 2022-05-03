@@ -35,6 +35,9 @@ protected:
 
 private:
 	bool IsBaby_;
+
+	int FirstDay_;
+
 	GameEngineRenderer* ChickenRender_;
 	GameEngineCollision* ChickenCol_;
 	void Start() override;

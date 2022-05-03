@@ -1,6 +1,7 @@
 #include "Chicken.h"
 #include "PlayerEnum.h"
 #include "ContentsEnums.h"
+#include "Time.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -9,7 +10,8 @@ Chicken::Chicken()
 	:CurState_(AnimalState::Idle),
 	CurDir_(AnimalDir::Front),
 	IsBaby_(true),
-	Time(5.0f)
+	Time(5.0f),
+	FirstDay_(0)
 {
 
 }
@@ -35,9 +37,23 @@ void Chicken::Start()
 	ChickenRender_->CreateAnimation("Chicken.bmp", "WalkBack", 8, 11, 0.3f, true);
 	ChickenRender_->CreateAnimation("Chicken.bmp", "WalkLeft", 12, 15, 0.3f, true);
 	ChickenRender_->ChangeAnimation("BabyIdle");
+	FirstDay_ = Time::TimeSet->GetGameDay_();
+
 }  
 void Chicken::Update()
 {
+	if (FirstDay_ != Time::TimeSet->GetGameDay_())
+	{
+		IsBaby_ = false;
+		ChickenRender_->ChangeAnimation(GetDirString());
+	}
+	if (IsBaby_ == false)
+	{
+		if (Time::TimeSet->GetGameHour_() == 6)
+		{
+			//¾Ë »ý¼º
+		}
+	}
 	StateUpdate();
 }
 
@@ -94,9 +110,9 @@ void Chicken::IdleUpdate()
 	NextPos_.x = Ran_.RandomFloat(360, 852);
 	NextPos_.y = Ran_.RandomFloat(293, 461);
 	CurPos_ = GetPosition();
-	if (GetPosition().y > NextPos_.y)
+	if (GetPosition().y >= NextPos_.y)
 	{
-		CurDir_ == AnimalDir::Back;
+		CurDir_  == AnimalDir::Back;
 	}
 	else
 	{
@@ -137,7 +153,7 @@ void Chicken::ChangeAni()
 	{
 		ChickenRender_->ChangeAnimation("Baby" + GetDirString());
 	}
-	else
+	else if(IsBaby_ == false)
 	{
 		ChickenRender_->ChangeAnimation(GetDirString());
 	}
