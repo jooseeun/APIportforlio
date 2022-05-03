@@ -36,7 +36,6 @@ public:
 	}
 
 
-
 public:
 	// constrcuter destructer
 	GameEngineRandom();

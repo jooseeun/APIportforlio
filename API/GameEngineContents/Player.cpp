@@ -475,6 +475,15 @@ void Player::Start()
 bool Player::DirKeyCheck()
 {
 
+	if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
+	{
+		CurDir_ = PlayerDir::Front;
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
+	{
+		CurDir_ = PlayerDir::Back;
+	}
+
 	if (true == GameEngineInput::GetInst()->IsPress("LeftWalk"))
 	{
 		CurDir_ = PlayerDir::Left;
@@ -484,14 +493,6 @@ bool Player::DirKeyCheck()
 		CurDir_ = PlayerDir::Right;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("FrontWalk"))
-	{
-		CurDir_ = PlayerDir::Front;
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("BackWalk"))
-	{
-		CurDir_ = PlayerDir::Back;
-	}
 
 	if (PrevDir_ != CurDir_)
 	{

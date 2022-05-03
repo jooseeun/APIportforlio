@@ -12,6 +12,7 @@
 #include "Money.h"
 #include "Chicken.h"
 #include "AnimalShopUI.h"
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -21,8 +22,7 @@
 
 CoopLevel::CoopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1),
-	ChickenNum(0)
+	NextSelectPivot_(1)
 {
 }
 
@@ -53,17 +53,26 @@ void CoopLevel::Loading()
 
 	}
 
-
+	float4 Pos_;
+	GameEngineRandom Ran_ ;
+	Pos_.x = Ran_.RandomFloat(360, 852);
+	Pos_.y = Ran_.RandomFloat(293, 461);
+	Chicken* Chicken_ = CreateActor<Chicken>(static_cast<int>(ORDER::PLAYER), "Chicken");
+	Chicken_->SetPosition(Pos_);
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 void CoopLevel::CreateAnimal()
 {
 	if (0 != AnimalShopUI::AnimalShopUISet->ChickenNum_)
 	{
-		for (int i = 1; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
+		for (int i = 0; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
 		{
+			GameEngineRandom Ran_;
+			float4 Pos_;
+			Pos_.x = Ran_.RandomFloat(360, 852);
+			Pos_.y = Ran_.RandomFloat(293, 461);
 			Chicken* Chicken_ = CreateActor<Chicken>(static_cast<int>(ORDER::PLAYER), "Chicken");
-			Chicken_->SetPosition({ 428,286 });
+			Chicken_->SetPosition(Pos_);
 		}
 		AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
 	}
