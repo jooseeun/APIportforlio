@@ -2,6 +2,7 @@
 #include "PlayerEnum.h"
 #include "ContentsEnums.h"
 #include "Time.h"
+#include "DropItem.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -12,7 +13,8 @@ Chicken::Chicken()
 	CurDir_(AnimalDir::Front),
 	IsBaby_(true),
 	Time(5.0f),
-	FirstDay_(0)
+	FirstDay_(0),
+	IsEgg_(false)
 {
 
 }
@@ -43,21 +45,39 @@ void Chicken::Start()
 }  
 void Chicken::Update()
 {
-	if (FirstDay_ != Time::TimeSet->GetGameDay_())
+	if (FirstDay_ != Time::TimeSet->GetGameDay_()&&IsBaby_==true)
 	{
 		IsBaby_ = false;
+		FirstHour_ = Time::TimeSet->GetGameHour_();
 		ChickenRender_->ChangeAnimation(GetDirString());
 	}
 	if (IsBaby_ == false)
 	{
-		if (Time::TimeSet->GetGameHour_() == 6)
+		if (CurHour_ != Time::TimeSet->GetGameHour_())//시간이 바뀌는 순간에 체크
 		{
-			//알 생성
+			IsEgg_ = true;
+			if ((Time::TimeSet->GetGameHour_() - FirstHour_) % 9 == 1) 
+			{
+				CreateEgg();
+			}
 		}
 	}
-	StateUpdate();
-}
 
+	StateUpdate();
+	CurHour_ = Time::TimeSet->GetGameHour_();
+}
+void Chicken::CreateEgg()
+{
+	if (IsEgg_ == true)
+	{
+		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
+		DropItem_->SetPosition(GetPosition());
+		DropItem_->SetItem(PlayerItem::EggItem);
+		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+	}
+
+	IsEgg_ = false;
+}
 void Chicken::ChangeState(AnimalState _State)
 {
 	if (CurState_ != _State)
@@ -103,21 +123,28 @@ void Chicken::IdleUpdate()
 {
 	while (Time > 0)
 	{
-		Time -= 1.0 * GameEngineTime::GetDeltaTime();
+		if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
+		{
+			Time -= 10.0 * GameEngineTime::GetDeltaTime();
+		}
+		else
+		{
+			Time -= 1.0 * GameEngineTime::GetDeltaTime();
+		}
 		return;
 	}
-	//GameEngineRandom Ran_= GameEngineRandom();
+
 	GameEngineRandom Ran_;
 	NextPos_.x = Ran_.RandomFloat(360, 852);
 	NextPos_.y = Ran_.RandomFloat(293, 461);
 	CurPos_ = GetPosition();
 	if (GetPosition().y >= NextPos_.y)
 	{
-		CurDir_  == AnimalDir::Back;
+		CurDir_  = AnimalDir::Back;
 	}
 	else
 	{
-		CurDir_ == AnimalDir::Front;
+		CurDir_ = AnimalDir::Front;
 	}
 	ChangeState(AnimalState::Walk);
 	
@@ -127,7 +154,7 @@ void Chicken::WalkUpdate()
 {
 	float4 MoveDir_ = NextPos_ - GetPosition();
 	float CheckDir_ = MoveDir_.Len2D();
-	if (CheckDir_ < 0)
+	if (CheckDir_ < 10)
 	{
 		CurDir_ = AnimalDir::Front;
 		ChangeState(AnimalState::Idle);
@@ -146,7 +173,8 @@ void Chicken::WalkUpdate()
 
 void Chicken::IdleStart()
 {
-	Time = 5.0f;
+	Time = 10.0f;
+
 }
 
 

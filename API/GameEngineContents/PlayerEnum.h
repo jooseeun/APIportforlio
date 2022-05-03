@@ -130,8 +130,9 @@ enum class PlayerItem
 	amethystItem,
 	CoalItem,
 	SlimeItem,
-	BugItem
-
+	BugItem,
+	EggItem,
+	MilkItem
 	
 };
 

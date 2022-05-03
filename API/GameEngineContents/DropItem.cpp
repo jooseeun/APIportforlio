@@ -45,6 +45,9 @@ void DropItem::Start()// °¨ÀÚ 192
 	Object_->CreateAnimation("Objects.bmp", "GrassItem", 771, 771, 0.8f, true);
 	Object_->CreateAnimation("Objects.bmp", "Max", 23, 23, 0.8f, true);
 
+	Object_->CreateAnimation("Objects.bmp", "EggItem", 174, 174, 0.8f, true);
+	Object_->CreateAnimation("Objects.bmp", "MilkItem", 184, 184, 0.8f, true);
+
 	Object_->ChangeAnimation("Max");
 	ObjectCol_ = CreateCollision("DropItem", { 48,48 });
 
@@ -168,6 +171,18 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 		SellValue_ = 400;
 		return "BugItem";
 	}
+	else if (PlayerItem::EggItem == _Item)
+	{
+	IndexNum_ = 174;
+	SellValue_ = 200;
+	return "EggItem";
+	}
+	else if (PlayerItem::MilkItem == _Item)
+	{
+	IndexNum_ = 184;
+	SellValue_ = 300;
+	return "MilkItem";
+	}
 }
 void DropItem::Update()
 {
@@ -181,7 +196,7 @@ void DropItem::Update()
 		CurDropItem_ = DropItem_;
 	}
 
-	if (IsStop_ == false)
+	if (IsStop_ == false&& PlayerItem::EggItem != CurDropItem_ && PlayerItem::MilkItem != CurDropItem_)
 	{
 		DropMove();
 	}
@@ -209,7 +224,7 @@ void DropItem::MoveToPlayer()
 	{
 		return;
 	}
-	if (CheckDir_ <= 50.0f)
+	if (CheckDir_ <= 30.0f)
 	{
 
 		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_, SellValue_);

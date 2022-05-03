@@ -35,9 +35,12 @@ protected:
 
 private:
 	bool IsBaby_;
-
 	int FirstDay_;
+	int FirstHour_;
+	int CurHour_;
+	bool IsEgg_;
 
+	void CreateEgg();
 	GameEngineRenderer* ChickenRender_;
 	GameEngineCollision* ChickenCol_;
 	void Start() override;
