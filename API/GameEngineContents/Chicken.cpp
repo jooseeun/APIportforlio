@@ -6,6 +6,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineBase/GameEngineInput.h>
 Chicken::Chicken()
 	:CurState_(AnimalState::Idle),
 	CurDir_(AnimalDir::Front),
@@ -132,7 +133,14 @@ void Chicken::WalkUpdate()
 		ChangeState(AnimalState::Idle);
 	}
 	MoveDir_.Normal2D();
-	SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 50.0f);
+	if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
+	{
+		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 500.0f);
+	}
+	else
+	{
+		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 50.0f);
+	}
 
 }
 
