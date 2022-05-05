@@ -10,6 +10,9 @@
 #include "Time.h"
 #include "FrontMap.h"
 #include "Money.h"
+#include "AnimalShopUI.h"
+#include "Cow.h"
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -49,21 +52,38 @@ void BarnLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
-
+	GameEngineRandom Ran_;
+	float4 Pos_;
+	Pos_.x = Ran_.RandomFloat(360, 852);
+	Pos_.y = Ran_.RandomFloat(293, 461);
+	Cow* Cow_ = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+	Cow_->SetPosition(Pos_);
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
-
+void BarnLevel::CreateAnimal()
+{
+	if (0 != AnimalShopUI::AnimalShopUISet->ChickenNum_)
+	{
+		for (int i = 0; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
+		{
+			GameEngineRandom Ran_;
+			float4 Pos_;
+			Pos_.x = Ran_.RandomFloat(360, 852);
+			Pos_.y = Ran_.RandomFloat(293, 461);
+			Cow* Cow_ = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+			Cow_->SetPosition(Pos_);
+		}
+		AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
+	}
+}
 void BarnLevel::Update()
 {
 	GetItemPos();
-
 	NextSelectPivot_ = ToolUI::ToolUISet->getSelectPivot();
-
-
 	Player::MainPlayer->SetSelectItem(ItemPos_[NextSelectPivot_]);
-
 	CurSelectPivot_ = NextSelectPivot_;
+	CreateAnimal();
 }
 
 void BarnLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)

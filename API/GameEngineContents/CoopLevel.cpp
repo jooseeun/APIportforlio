@@ -53,12 +53,6 @@ void CoopLevel::Loading()
 
 	}
 
-	float4 Pos_;
-	GameEngineRandom Ran_ ;
-	Pos_.x = Ran_.RandomFloat(360, 852);
-	Pos_.y = Ran_.RandomFloat(293, 461);
-	Chicken* Chicken_ = CreateActor<Chicken>(static_cast<int>(ORDER::PLAYER), "Chicken");
-	Chicken_->SetPosition(Pos_);
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 void CoopLevel::CreateAnimal()

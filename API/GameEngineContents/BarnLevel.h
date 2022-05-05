@@ -38,6 +38,8 @@ protected:
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
+	void CreateAnimal();
+
 private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
