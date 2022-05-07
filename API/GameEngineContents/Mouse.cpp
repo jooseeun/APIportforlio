@@ -140,6 +140,8 @@ void Mouse::CheckPlayerIsLeftMouse()
 
 			return;
 		}
+
+
 	}
 
 	else if (true == GameEngineInput::GetInst()->IsUp("LeftMouse"))

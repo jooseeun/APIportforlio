@@ -30,7 +30,11 @@ public:
 	Cow(Cow&& _Other) noexcept = delete;
 	Cow& operator=(const Cow& _Other) = delete;
 	Cow& operator=(Cow&& _Other) noexcept = delete;
-
+	inline bool IsBabyReturn()
+	{
+		return IsBaby_;
+	}
+	void CreateMilk();
 protected:
 
 private:
@@ -40,7 +44,6 @@ private:
 	int CurHour_;
 	bool IsMilk_;
 
-	void CreateMilk();
 	GameEngineRenderer* CowRender_;
 	GameEngineCollision* CowCol_;
 	void Start() override;

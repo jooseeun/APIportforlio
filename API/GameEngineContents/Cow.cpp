@@ -51,12 +51,21 @@ void Cow::Update()
 		FirstHour_ = Time::TimeSet->GetGameHour_();
 		CowRender_->ChangeAnimation(GetDirString());
 	}
-	else if (IsBaby_ == false)
+	if (IsBaby_ == false)
 	{
-		if (CurHour_ != Time::TimeSet->GetGameHour_())//시간이 바뀌는 순간에 체크
+		if (CurHour_ != Time::TimeSet->GetGameHour_())
 		{
-			IsMilk_ = true;
-			if ((Time::TimeSet->GetGameHour_() - FirstHour_) % 12 == 0)
+			if ((Time::TimeSet->GetGameHour_() - FirstHour_) % 12 == 0) // 12시간마다 우유 가능
+			{
+				IsMilk_ = true;
+			}
+		}
+
+		float4 M = { -1,-1 };
+		if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
+		{
+			if (true == CowCol_->NextPosCollisionCheck("MouseCol", { GetLevel()->GetCameraPos().x * M.x ,GetLevel()->GetCameraPos().y * M.y },
+				CollisionType::Rect, CollisionType::Rect))//카메라 이펙트 꺼져있는건 이렇게 충돌체크해야됨
 			{
 				CreateMilk();
 			}
@@ -68,15 +77,15 @@ void Cow::Update()
 }
 void Cow::CreateMilk()
 {
-	if (IsMilk_ == true) //클릭하면 우유
+	if (IsMilk_ == true) 
 	{
 		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 		DropItem_->SetPosition(GetPosition());
 		DropItem_->SetItem(PlayerItem::MilkItem);
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+		IsMilk_ = false;
 	}
 
-	IsMilk_ = false;
 }
 void Cow::ChangeState(AnimalState _State)
 {
