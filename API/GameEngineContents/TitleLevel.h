@@ -1,4 +1,5 @@
 #pragma once
+#include "TitleBackGround.h"
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 
@@ -23,6 +24,8 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	TitleBackGround* Back_;
 	int count;
+	bool IsBGM_;
 };
 

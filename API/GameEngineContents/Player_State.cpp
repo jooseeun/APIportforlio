@@ -105,7 +105,6 @@ void Player::SeedUpdate()
 void Player::WalkUpdate()
 {
 	DirKeyCheck();
-
 	float4 NextPos;
 	float4 CheckPos = ArrCheckDir[static_cast<int>(CurDir_)];
 	float4 Move = float4::ZERO;
@@ -204,6 +203,7 @@ void Player::WalkUpdate()
 
 void Player::IdleStart()
 {
+	FootStep.Stop();
 	SetIsLeftMouseOFF();
 }
 
@@ -228,7 +228,8 @@ void Player::HitStart()
 
 void Player::WalkStart()
 {
-	
+	FootStep=GameEngineSound::SoundPlayControl("Cowboy_Footstep.wav",10000);
+	FootStep.PlaySpeed(0.6);
 }
 
 void Player::WieldStart()

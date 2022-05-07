@@ -33,6 +33,8 @@ protected:
 	void Update() override;
 
 private:
+	float Time_;
+	int Count_;
 	bool hide_;
 	bool show_;
 

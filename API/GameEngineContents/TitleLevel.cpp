@@ -1,6 +1,5 @@
 #include "TitleLevel.h"
 #include "TitleLogo.h"
-#include "TitleBackGround.h"
 #include "PlayerCreate.h"
 #include "Mouse.h"
 #include "ContentsEnums.h"
@@ -13,7 +12,8 @@
 
 
 TitleLevel::TitleLevel()
-	:count(0)
+	:count(0),
+	IsBGM_(false)
 {
 }
 
@@ -23,10 +23,7 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
-	BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.mp3");
-	CreateActor<TitleBackGround>(0,"TitleBackground");
-	CreateActor<TitleLogo>(1,"TitleLogo");
-	CreateActor<TitleLogo>(1, "TitleLogo");
+	Back_=CreateActor<TitleBackGround>(0,"TitleBackground");
 
 	Mouse* MouseSet = CreateActor<Mouse>(static_cast<int>(ORDER::MOUSE), "Mouse");
 
@@ -34,8 +31,17 @@ void TitleLevel::Loading()
 
 void TitleLevel::Update()
 {
-	
+	if (Back_->IsBGM() == true&& IsBGM_==false)
+	{
+		BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.mp3");
+		BgmPlayer.Volume(0.6f);
+		IsBGM_ = true;
+	}
 
+	if (Back_->IsLogo() == true)
+	{
+		CreateActor<TitleLogo>(1, "TitleLogo");
+	}
 }
 
 void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)

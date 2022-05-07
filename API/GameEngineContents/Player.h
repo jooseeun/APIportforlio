@@ -138,8 +138,10 @@ public:
 	{
 		return IsHit_;
 	}
-
+private:
 	GameEngineSoundPlayer BgmPlayer;
+	GameEngineSoundPlayer FootStep;
+
 protected:
 private:
 	bool IsHit_;
@@ -151,6 +153,7 @@ private:
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;
 	PlayerShirts CurShirts_;
+
 
 	std::string GetHairColorString();
 	std::string GetHairStyleString();

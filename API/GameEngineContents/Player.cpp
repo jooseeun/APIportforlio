@@ -21,7 +21,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(200.0f),
+	:Speed_(300.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
@@ -47,7 +47,7 @@ Player::Player()
 	ArrAnimationName[static_cast<int>(PlayerState::Hit)] = "Hit";
 	ArrAnimationName[static_cast<int>(PlayerState::Water)] = "Water";
 	ArrAnimationName[static_cast<int>(PlayerState::Seed)] = "Idle";
-	ArrAnimationName[static_cast<int>(PlayerState::Harvest)] = "Hit"; // 낫으로 수확하게 하도록 했기 때문에
+	ArrAnimationName[static_cast<int>(PlayerState::Harvest)] = "Hit"; // 낫으로 수확하게 하도록 했기 때문에 
 
 	ArrCheckDir[static_cast<int>(PlayerDir::Front)] = float4{ 0.0f,64.0f };
 	ArrCheckDir[static_cast<int>(PlayerDir::Right)] = float4{ 32.0f,62.0f };
@@ -1376,11 +1376,13 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
+		BgmPlayer.Volume(0.6f);
 	}	
 	if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("SeedShopLevel" == GetLevel()->GetNameCopy())
 	{
@@ -1391,18 +1393,26 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("MineEntryLevel" == GetLevel()->GetNameCopy()&& "Mine2Level" != _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Mines (Crystal Bells).mp3");
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("MineEntryLevel" == _PrevLevel->GetNameCopy()&& "Town2Level" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town.mp3");
+		BgmPlayer.Volume(0.6f);
 	}
-
+	if ("ForestLevel" == _PrevLevel->GetNameCopy() && "AnimalShopLevel" == GetLevel()->GetNameCopy())
+	{
+		BgmPlayer.Stop();
+		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
+		BgmPlayer.Volume(0.6f);
+	}
 }
 
 void Player::IsDebugModeONOFF()

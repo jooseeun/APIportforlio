@@ -12,7 +12,9 @@
 
 TitleLogo::TitleLogo()
 	:hide_(false),
-	show_(false)
+	show_(false),
+	Count_(0),
+	Time_(0.1f )
 {
 }
 
@@ -53,6 +55,46 @@ void TitleLogo::Start()
 	MultyCol_= CreateCollision("MultyCol", { 222, 174 }, { 123,359 });
 	LoadCol_ = CreateCollision("LoadCol", { 222, 174 }, { -123,359 });
 
+	StartButton->Off();
+	LoadButton->Off();
+	MultyButton->Off();
+	ExitButton->Off();
+}
+void TitleLogo::Update()
+{
+	if (Time_ >= 0.0f)
+	{
+		Time_ -= 0.3f * GameEngineTime::GetDeltaTime();
+	}
+	else
+	{
+		if (Count_ == 0)
+		{
+			StartButton->On();
+			Time_ = 0.1f;
+			Count_++;
+		}
+		else if (Count_ == 1)
+		{
+			LoadButton->On();
+			Time_ = 0.1f;
+			Count_++;
+		}
+		else if (Count_ == 2)
+		{
+			MultyButton->On();
+			Time_ = 0.1f;
+			Count_++;
+		}
+		else if (Count_ == 3)
+		{
+			ExitButton->On();
+			Time_ = 0.1f;
+			Count_++;
+		}
+	}
+	IsButtonColUpdate();
+
 }
 void TitleLogo::IsButtonColUpdate()
 {
@@ -65,23 +107,6 @@ void TitleLogo::IsButtonColUpdate()
 		StartButton->SetIndex(0);
 	}
 
-	if (true == LoadCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		LoadButton->SetIndex(5);
-	}
-	else
-	{
-		LoadButton->SetIndex(1);
-	}
-
-	if (true == MultyCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		MultyButton->SetIndex(6);
-	}
-	else
-	{
-		MultyButton->SetIndex(2);
-	}
 
 	if (true == ExitCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
 	{
@@ -91,29 +116,4 @@ void TitleLogo::IsButtonColUpdate()
 	{
 		ExitButton->SetIndex(3);
 	}
-}
-void TitleLogo::Update()
-{
-
-	IsButtonColUpdate();
-
-	if (true == GameEngineInput::GetInst()->IsDown("GOPlay"))
-	{
-		//hide_ = true;
-
-	}
-
-	if (hide_ == true)
-	{
-		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 900.0f);
-		float4 GetPos_ = GetPosition();
-		if (1800 <= GetPos_.x)
-		{
-			PlayerCreate* Ptr = GetLevel()->CreateActor<PlayerCreate>();
-			Ptr->SetPosition(GameEngineWindow::GetScale().Half());
-			hide_=false;
-		}
-	}
-	
-	
 }

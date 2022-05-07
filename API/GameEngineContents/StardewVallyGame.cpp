@@ -382,10 +382,18 @@ void StardewVallyGame::GameInit()
 	BabyChicken->CutCount(4, 14);
 	GameEngineImage* BabyCow = GameEngineImageManager::GetInst()->Find("BabyCow.bmp");
 	BabyCow->CutCount(4, 5);
-	if (false == GameEngineInput::GetInst()->IsKey("GoPlay"))
+
+	GameEngineImage* TitleStart2 = GameEngineImageManager::GetInst()->Find("TitleStart2.bmp");
+	TitleStart2->CutCount(2, 1);
+	GameEngineImage* TitleStartFish = GameEngineImageManager::GetInst()->Find("TitleStartFish.bmp");
+	TitleStartFish->CutCount(2, 1);
+	GameEngineImage* TitleStart1 = GameEngineImageManager::GetInst()->Find("TitleStart1.bmp");
+	TitleStart1->CutCount(3, 2);
+
+	if (false == GameEngineInput::GetInst()->IsKey("Skip"))
 	{
+		GameEngineInput::GetInst()->CreateKey("Skip", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("CheckTest", 'P');
-		GameEngineInput::GetInst()->CreateKey("GoPlay", VK_SPACE);
 	}
 
 	CreateLevel<TitleLevel>("TitleLevel");
