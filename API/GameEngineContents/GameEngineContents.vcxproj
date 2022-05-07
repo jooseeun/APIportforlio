@@ -309,6 +309,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PlayerEnum.h" />
+    <ClInclude Include="PlayHelpBar.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="RobinShopLevel.h">
       <SubType>
       </SubType>
@@ -524,6 +528,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="PlayHelpBar.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="RobinShopLevel.cpp">
       <SubType>
       </SubType>

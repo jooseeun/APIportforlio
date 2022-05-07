@@ -13,7 +13,7 @@
 #include "FadeIn.h"
 #include "ShopNPC.h"
 #include "Money.h"
-
+#include "PlayHelpBar.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -89,6 +89,7 @@ void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	else if (_PrevLevel->GetNameCopy() == "TitleLevel")
 	{
 		Player::MainPlayer->SetPosition({ 750.0f,520.f });
+		PlayHelpBar* Front_ = CreateActor<PlayHelpBar>(static_cast<int>(ORDER::FRONTUI));
 	}
 	
 	Player::MainPlayer->SetMapScale(1280.0f, 840.0f);

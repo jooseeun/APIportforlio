@@ -167,6 +167,9 @@
     <ClInclude Include="Cow.h">
       <Filter>Actor\Play\Animal</Filter>
     </ClInclude>
+    <ClInclude Include="PlayHelpBar.h">
+      <Filter>Actor\Play\PlayUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StardewVallyGame.cpp" />
@@ -328,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="Cow.cpp">
       <Filter>Actor\Play\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayHelpBar.cpp">
+      <Filter>Actor\Play\PlayUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
