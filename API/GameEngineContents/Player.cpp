@@ -21,7 +21,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(605.0f),
+	:Speed_(200.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
@@ -340,45 +340,45 @@ void Player::Start()
 		{
 			{ // 내려치는 방향 : 앞
 
-				Body_->CreateAnimation("Body.bmp", "FrontWield", 264, 268, 0.08f, false); // 24 한줄에
-				Arm_->CreateAnimation("BodyShirts.bmp", "FrontWield", 270, 274, 0.08f, false);
-				Pants_->CreateAnimation("BodyShirts.bmp", "FrontWield", 282, 287, 0.08f, false);
-				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.08f, false);
-				Shirts_->CreateAnimation("BodyShirts.bmp", "FrontWield", 264, 268, 0.08f, false);
-				WieldItem_->CreateAnimation("FrontHoe.bmp", "FrontHoe", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("FrontAx.bmp", "FrontAx", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("FrontPick.bmp", "FrontPick", 0, 4, 0.08f, false);
+				Body_->CreateAnimation("Body.bmp", "FrontWield", 264, 268, 0.1f, false); // 24 한줄에
+				Arm_->CreateAnimation("BodyShirts.bmp", "FrontWield", 270, 274, 0.1f, false);
+				Pants_->CreateAnimation("BodyShirts.bmp", "FrontWield", 282, 287, 0.1f, false);
+				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.1f, false);
+				Shirts_->CreateAnimation("BodyShirts.bmp", "FrontWield", 264, 268, 0.1f, false);
+				WieldItem_->CreateAnimation("FrontHoe.bmp", "FrontHoe", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("FrontAx.bmp", "FrontAx", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("FrontPick.bmp", "FrontPick", 0, 4, 0.1f, false);
 			}
 			{ // 내려치는 방향 : 오른쪽
-				Body_->CreateAnimation("Body.bmp", "RightWield", 192, 196, 0.08f, false);
-				Arm_->CreateAnimation("BodyShirts.bmp", "RightWield", 198, 202, 0.08f, false);
-				Pants_->CreateAnimation("BodyShirts.bmp", "RightWield", 210, 214, 0.08f, false);
-				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.08f, false);
-				Shirts_->CreateAnimation("BodyShirts.bmp", "RightWield", 192, 196, 0.08f, false);
-				WieldItem_->CreateAnimation("RightHoe.bmp", "RightHoe", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("RightAx.bmp", "RightAx", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("RightPick.bmp", "RightPick", 0, 4, 0.08f, false);
+				Body_->CreateAnimation("Body.bmp", "RightWield", 192, 196, 0.1f, false);
+				Arm_->CreateAnimation("BodyShirts.bmp", "RightWield", 198, 202, 0.1f, false);
+				Pants_->CreateAnimation("BodyShirts.bmp", "RightWield", 210, 214, 0.1f, false);
+				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
+				Shirts_->CreateAnimation("BodyShirts.bmp", "RightWield", 192, 196, 0.1f, false);
+				WieldItem_->CreateAnimation("RightHoe.bmp", "RightHoe", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("RightAx.bmp", "RightAx", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("RightPick.bmp", "RightPick", 0, 4, 0.1f, false);
 			}
 			{ // 내려치는 방향 : 왼쪽
-				Body_->CreateAnimation("Body3.bmp", "LeftWield", 192, 196, 0.08f, false);
-				Arm_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 198, 202, 0.08f, false);
-				Pants_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 210, 214, 0.08f, false);
-				Hair_->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWield", 192, 196, 0.08f, false);
-				Shirts_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 192, 196, 0.08f, false);
-				WieldItem_->CreateAnimation("LeftHoe.bmp", "LeftHoe", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("LeftAx.bmp", "LeftAx", 0, 4, 0.08f, false);
-				WieldItem_->CreateAnimation("LeftPick.bmp", "LeftPick", 0, 4, 0.08f, false);
+				Body_->CreateAnimation("Body3.bmp", "LeftWield", 192, 196, 0.1f, false);
+				Arm_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 198, 202, 0.1f, false);
+				Pants_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 210, 214, 0.1f, false);
+				Hair_->CreateAnimation("HairAniL" + HairStyle_ + HairColor_ + ".bmp", "LeftWield", 192, 196, 0.1f, false);
+				Shirts_->CreateAnimation("Body3Shirts.bmp", "LeftWield", 192, 196, 0.1f, false);
+				WieldItem_->CreateAnimation("LeftHoe.bmp", "LeftHoe", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("LeftAx.bmp", "LeftAx", 0, 4, 0.1f, false);
+				WieldItem_->CreateAnimation("LeftPick.bmp", "LeftPick", 0, 4, 0.1f, false);
 
 			}
 			{ // 내려치는 방향 : 뒤
-				Body_->CreateAnimation("Body.bmp", "BackWield", 242, 243, 0.08f, false);
-				Arm_->CreateAnimation("BodyShirts.bmp", "BackWield", 151, 153, 0.08f, false);
-				Pants_->CreateAnimation("BodyShirts.bmp", "BackWield", 260, 261, 0.08f, false);
-				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.08f, false);
-				Shirts_->CreateAnimation("BodyShirts.bmp", "BackWield", 242, 243, 0.08f, false);
-				BackItem_->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.08f, false);
-				BackItem_->CreateAnimation("Tools.bmp", "BackAx", 66 + 42, 67 + 42, 0.08f, false);
-				BackItem_->CreateAnimation("Tools.bmp", "BackPick", 66, 67, 0.08f, false);
+				Body_->CreateAnimation("Body.bmp", "BackWield", 242, 243, 0.1f, false);
+				Arm_->CreateAnimation("BodyShirts.bmp", "BackWield", 151, 153, 0.1f, false);
+				Pants_->CreateAnimation("BodyShirts.bmp", "BackWield", 260, 261, 0.1f, false);
+				Hair_->CreateAnimation("HairAni" + HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
+				Shirts_->CreateAnimation("BodyShirts.bmp", "BackWield", 242, 243, 0.1f, false);
+				BackItem_->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.1f, false);
+				BackItem_->CreateAnimation("Tools.bmp", "BackAx", 66 + 42, 67 + 42, 0.1f, false);
+				BackItem_->CreateAnimation("Tools.bmp", "BackPick", 66, 67, 0.1f, false);
 			}
 		}
 		////////////////////Hit

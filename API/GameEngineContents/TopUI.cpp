@@ -93,17 +93,20 @@ void TopUI::AlphaUpdate()
 			Alpha_ += 10;
 		}
 	}
-	else if (Time::TimeSet->GetGameHour_() > 0 && Time::TimeSet->GetGameHour_() < 6)
+	else if (Time::TimeSet->GetGameHour_() > 4 && Time::TimeSet->GetGameHour_() < 6)
 	{
-		if (Alpha_ > 10)
+		if (Alpha_ > 100)
 		{
-			Alpha_ -= 10;
+			Alpha_ -= 1;
 		}
 	}
 	
-	else if (Time::TimeSet->GetGameHour_() > 6 && Time::TimeSet->GetGameHour_() < 18)
+	else if (Time::TimeSet->GetGameHour_() > 9 && Time::TimeSet->GetGameHour_() < 18)
 	{
-		Alpha_ = 0;
+		if (Alpha_ > 0)
+		{
+			Alpha_ -= 1*GameEngineTime::GetDeltaTime()*10.0f;
+		}
 	}
 		NightAlpha_->SetAlpha(Alpha_);
 }
