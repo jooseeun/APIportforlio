@@ -115,7 +115,7 @@ void TitleLogo::Update()
 
 	if (hide_ == true)
 	{
-		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 900.0f);
+		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 1000.0f);
 		float4 GetPos_ = GetPosition();
 		if (1800 <= GetPos_.x)
 		{
