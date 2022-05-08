@@ -16,7 +16,7 @@
 AnimalShopUI* AnimalShopUI::AnimalShopUISet = nullptr;
 
 AnimalShopUI::AnimalShopUI()
-	:ChickenNum_(3),
+	:ChickenNum_(0),
 	CowNum_(0)
 {
 }

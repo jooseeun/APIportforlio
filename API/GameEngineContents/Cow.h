@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include "Time.h"
 // Ό³Έν :
 
 enum class AnimalState
@@ -33,6 +34,14 @@ public:
 	inline bool IsBabyReturn()
 	{
 		return IsBaby_;
+	}
+	inline void SetCurDir(AnimalDir _CurDir)
+	{
+		CurDir_ = _CurDir;
+	}
+	inline void SetFirstDay()
+	{
+		FirstDay_ = Time::TimeSet->GetGameDay_();
 	}
 	void CreateMilk();
 protected:

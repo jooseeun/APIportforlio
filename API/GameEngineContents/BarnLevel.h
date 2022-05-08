@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
+class Cow;
 class BarnLevel : public GameEngineLevel
 {
 public:
@@ -44,6 +45,7 @@ private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 
+	Cow* Cow_[4];
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

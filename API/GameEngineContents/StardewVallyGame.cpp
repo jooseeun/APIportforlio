@@ -382,7 +382,10 @@ void StardewVallyGame::GameInit()
 	BabyChicken->CutCount(4, 14);
 	GameEngineImage* BabyCow = GameEngineImageManager::GetInst()->Find("BabyCow.bmp");
 	BabyCow->CutCount(4, 5);
-
+	GameEngineImage* BabyCowL = GameEngineImageManager::GetInst()->Find("BabyCowL.bmp");
+	BabyCowL->CutCount(4, 5);
+	GameEngineImage* CowL = GameEngineImageManager::GetInst()->Find("CowL.bmp");
+	CowL->CutCount(4, 5);
 	GameEngineImage* TitleStart2 = GameEngineImageManager::GetInst()->Find("TitleStart2.bmp");
 	TitleStart2->CutCount(2, 1);
 	GameEngineImage* TitleStartFish = GameEngineImageManager::GetInst()->Find("TitleStartFish.bmp");

@@ -86,6 +86,7 @@ void CoopLevel::CreateAnimal()
 		for(int i = 0 ; i < AnimalShopUI::AnimalShopUISet->ChickenNum_;i++)
 		{
 			Chicken_[i]->On();
+			Chicken_[i]->SetFirstDay();
 		}
 			AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
 	}

@@ -1,11 +1,10 @@
 #include "Chicken.h"
 #include "PlayerEnum.h"
 #include "ContentsEnums.h"
-#include "Time.h"
 #include "DropItem.h"
 #include <GameEngine/GameEngineCollision.h>
-#include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineInput.h>
 Chicken::Chicken()
@@ -13,7 +12,7 @@ Chicken::Chicken()
 	CurDir_(AnimalDir::Front),
 	IsBaby_(true),
 	Time(5.0f),
-	FirstDay_(0),
+	FirstDay_(-1),
 	IsEgg_(false),
 	CurHour_(0)
 {
@@ -41,11 +40,14 @@ void Chicken::Start()
 	ChickenRender_->CreateAnimation("Chicken.bmp", "WalkBack", 8, 11, 0.3f, true);
 	ChickenRender_->CreateAnimation("Chicken.bmp", "WalkLeft", 12, 15, 0.3f, true);
 	ChickenRender_->ChangeAnimation("BabyIdle");
-	FirstDay_ = Time::TimeSet->GetGameDay_();
 
 }  
 void Chicken::Update()
 {
+	if (FirstDay_ == -1)
+	{
+		return;
+	}
 	if (FirstDay_ != Time::TimeSet->GetGameDay_()&&IsBaby_==true)
 	{
 		IsBaby_ = false;
@@ -127,7 +129,7 @@ void Chicken::IdleUpdate()
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 		{
-			Time -= 1.0 * GameEngineTime::GetDeltaTime()*5.0f;
+			Time -= 1.0 * GameEngineTime::GetDeltaTime()*10.0f;
 		}
 		else
 		{

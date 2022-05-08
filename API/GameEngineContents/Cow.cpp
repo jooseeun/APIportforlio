@@ -1,7 +1,6 @@
 #include "Cow.h"
 #include "PlayerEnum.h"
 #include "ContentsEnums.h"
-#include "Time.h"
 #include "DropItem.h"
 #include <GameEngine/GameEngineCollision.h>
 #include <GameEngine/GameEngineRenderer.h>
@@ -13,7 +12,7 @@ Cow::Cow()
 	CurDir_(AnimalDir::Front),
 	IsBaby_(true),
 	Time(5.0f),
-	FirstDay_(0),
+	FirstDay_(-1),
 	IsMilk_(false)
 {
 
@@ -40,11 +39,14 @@ void Cow::Start()
 	CowRender_->CreateAnimation("Cow.bmp", "WalkBack", 8, 11, 0.3f, true);
 	CowRender_->CreateAnimation("CowL.bmp", "WalkLeft", 4, 7, 0.3f, true);
 	CowRender_->ChangeAnimation("BabyIdle");
-	FirstDay_ = Time::TimeSet->GetGameDay_();
 
 }
 void Cow::Update()
 {
+	if (FirstDay_ == -1)
+	{
+		return;
+	}
 	if (FirstDay_ != Time::TimeSet->GetGameDay_() && IsBaby_ == true)
 	{
 		IsBaby_ = false;
@@ -134,7 +136,7 @@ void Cow::IdleUpdate()
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 		{
-			Time -= 10.0 * GameEngineTime::GetDeltaTime();
+			Time -= 1.0 * GameEngineTime::GetDeltaTime() * 10.0f;
 		}
 		else
 		{
@@ -143,19 +145,29 @@ void Cow::IdleUpdate()
 		return;
 	}
 
-	GameEngineRandom Ran_;
-	NextPos_.x = Ran_.RandomFloat(360, 852);
-	NextPos_.y = Ran_.RandomFloat(293, 461);
+	NextPos_ = GetPosition();
 	CurPos_ = GetPosition();
-	if (GetPosition().y >= NextPos_.y)
+
+	
+	if (CurDir_ == AnimalDir::Front)
 	{
-		CurDir_ = AnimalDir::Back;
+		NextPos_.y = 800.0f;
 	}
-	else
+	else if (CurDir_ == AnimalDir::Back)
 	{
-		CurDir_ = AnimalDir::Front;
+		NextPos_.y = 265.0f;
 	}
+	else if (CurDir_ == AnimalDir::Right)
+	{
+		NextPos_.x = 1076.0f;
+	}
+	else if (CurDir_ == AnimalDir::Left)
+	{
+		NextPos_.x = 460.0f;
+	}
+
 	ChangeState(AnimalState::Walk);
+
 
 }
 
@@ -163,12 +175,31 @@ void Cow::WalkUpdate()
 {
 	float4 MoveDir_ = NextPos_ - GetPosition();
 	float CheckDir_ = MoveDir_.Len2D();
-	if (CheckDir_ < 10)
+
+	if (CheckDir_ < 5)
 	{
-		CurDir_ = AnimalDir::Front;
+		if (CurDir_ == AnimalDir::Front)
+		{
+			CurDir_ = AnimalDir::Right;
+		}
+		else if (CurDir_ == AnimalDir::Back)
+		{
+			CurDir_ = AnimalDir::Left;
+		}
+		else if (CurDir_ == AnimalDir::Right)
+		{
+			CurDir_ = AnimalDir::Back;
+		}
+		else if (CurDir_ == AnimalDir::Left)
+		{
+			CurDir_ = AnimalDir::Front;
+		}
+
 		ChangeState(AnimalState::Idle);
 	}
 	MoveDir_.Normal2D();
+
+
 	if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 500.0f);
@@ -182,7 +213,7 @@ void Cow::WalkUpdate()
 
 void Cow::IdleStart()
 {
-	Time = 10.0f;
+	Time = 5.0f;
 
 }
 

@@ -52,24 +52,43 @@ void BarnLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
+	float4 Pos_ = { 370,460 };
 
+	Cow_[0] = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+	Cow_[0]->SetPosition(Pos_);
+	Cow_[0]->SetCurDir(AnimalDir::Right);
+	Cow_[0]->Off();
+
+	Pos_ = { 900,315 };
+	Cow_[1] = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+	Cow_[1]->SetPosition(Pos_);
+	Cow_[1]->SetCurDir(AnimalDir::Left);
+	Cow_[1]->Off();
+
+	Pos_ = { 750,500 };
+	Cow_[2] = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+	Cow_[2]->SetPosition(Pos_);
+	Cow_[2]->SetCurDir(AnimalDir::Front);
+	Cow_[2]->Off();
+
+	Pos_ = { 500,600 };
+	Cow_[3] = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
+	Cow_[3]->SetPosition(Pos_);
+	Cow_[3]->SetCurDir(AnimalDir::Back);
+	Cow_[3]->Off();
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 void BarnLevel::CreateAnimal()
 {
-	if (0 != AnimalShopUI::AnimalShopUISet->ChickenNum_)
+	if (0 != AnimalShopUI::AnimalShopUISet->CowNum_)
 	{
-		for (int i = 0; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
+		for (int i = 0; i < AnimalShopUI::AnimalShopUISet->CowNum_; i++)
 		{
-			GameEngineRandom Ran_;
-			float4 Pos_;
-			Pos_.x = Ran_.RandomFloat(360, 852);
-			Pos_.y = Ran_.RandomFloat(293, 461);
-			Cow* Cow_ = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
-			Cow_->SetPosition(Pos_);
+			Cow_[i]->On();
+			Cow_[i]->SetFirstDay();
 		}
-		AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
+		AnimalShopUI::AnimalShopUISet->CowNum_ = 0;
 	}
 }
 void BarnLevel::Update()
