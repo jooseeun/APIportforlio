@@ -56,7 +56,7 @@ void TitleLogo::Start()
 	ExitButton = CreateRendererToScale("TitleButton.bmp", { 222, 174 },2, RenderPivot::CENTER,
 		{ 369,359 });
 	ExitButton->SetIndex(3);
-	StartCol_ = CreateCollision("StartCol", { 222, 174 }, { -369,359 });
+	StartCol_ = CreateCollision("PlayerCreate", { 222, 174 }, { -369,359 });
 	ExitCol_ = CreateCollision("ExitCol", { 222, 174 }, { 369,359 });
 	MultyCol_= CreateCollision("MultyCol", { 222, 174 }, { 123,359 });
 	LoadCol_ = CreateCollision("LoadCol", { 222, 174 }, { -123,359 });
@@ -105,8 +105,28 @@ void TitleLogo::Update()
 	}
 
 	IsButtonColUpdate();
+	if ("TitleLevel" == GetLevel()->GetNameCopy() && true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
+	{
+		if (true == StartCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
+		{
+			hide_ = true;
+		}
 
+	}
+
+	if (hide_ == true)
+	{
+		SetMove(float4::RIGHT * GameEngineTime::GetDeltaTime() * 900.0f);
+		float4 GetPos_ = GetPosition();
+		if (1800 <= GetPos_.x)
+		{
+			PlayerCreate* Ptr = GetLevel()->CreateActor<PlayerCreate>();
+			Ptr->SetPosition(GameEngineWindow::GetScale().Half());
+			hide_ = false;
+		}
+	}
 }
+
 void TitleLogo::IsButtonColUpdate()
 {
 	if (ButtonOn[0] == true|| ButtonOn[1] == true

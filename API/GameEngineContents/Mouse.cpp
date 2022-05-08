@@ -44,13 +44,9 @@ void Mouse::Update()
 
 	if ("TitleLevel" == GetLevel()->GetNameCopy()&& true == GameEngineInput::GetInst()->IsUp("LeftMouse"))
 	{
-		if (true == GetMouseCol()->CollisionCheck("StartCol", CollisionType::Rect, CollisionType::Rect))
-		{
-			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
-			GameEngineSound::SoundPlayOneShot("select.wav");
-		}
 
-		else if (true == GetMouseCol()->CollisionCheck("ExitCol", CollisionType::Rect, CollisionType::Rect))
+
+		if (true == GetMouseCol()->CollisionCheck("ExitCol", CollisionType::Rect, CollisionType::Rect))
 		{
 			GameEngineWindow::GetInst().Off();
 			GameEngineSound::SoundPlayOneShot("select.wav");

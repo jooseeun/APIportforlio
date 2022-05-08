@@ -138,6 +138,10 @@ public:
 	{
 		return IsHit_;
 	}
+	PlayerHairColor CurHairColor_;
+	PlayerHairStyle CurHairStyle_;
+	PlayerShirts CurShirts_;
+	PlayerPants CurPants_;
 private:
 	GameEngineSoundPlayer BgmPlayer;
 	GameEngineSoundPlayer Sound_;
@@ -150,11 +154,8 @@ private:
 	void LongSwordColCheck();
 	void MonsterCheck();
 private:
-	PlayerHairColor CurHairColor_;
-	PlayerHairStyle CurHairStyle_;
-	PlayerShirts CurShirts_;
-	PlayerPants CurPants_;
-
+	bool IsCreate_;
+	void Create();
 	std::string GetPantsStyleString();
 	std::string GetShirtsStyleString();
 	std::string GetHairColorString();

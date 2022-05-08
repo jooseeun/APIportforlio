@@ -244,10 +244,14 @@ void StardewVallyGame::GameInit()
 	Shirts1->Cut({ 64, 128 });
 	GameEngineImage* Shirts2 = GameEngineImageManager::GetInst()->Find("Shirts2.bmp");
 	Shirts2->Cut({ 64, 128 });
+	GameEngineImage* Shirts3 = GameEngineImageManager::GetInst()->Find("Shirts3.bmp");
+	Shirts3->Cut({ 64, 128 });
 	GameEngineImage* ShirtsL1 = GameEngineImageManager::GetInst()->Find("ShirtsL1.bmp");
 	ShirtsL1->Cut({ 64, 128 });
 	GameEngineImage* ShirtsL2 = GameEngineImageManager::GetInst()->Find("ShirtsL2.bmp");
 	ShirtsL2->Cut({ 64, 128 });
+	GameEngineImage* ShirtsL3 = GameEngineImageManager::GetInst()->Find("ShirtsL3.bmp");
+	ShirtsL3->Cut({ 64, 128 });
 
 	GameEngineImage* Pants1 = GameEngineImageManager::GetInst()->Find("Pants1.bmp");
 	Pants1->Cut({ 64, 128 });

@@ -39,7 +39,8 @@ Player::Player()
 	MineTileMap_(nullptr),
 	CropsTileMap_(nullptr),
 	GroundTileMap_(nullptr),
-	IsHit_(false)
+	IsHit_(false),
+	IsCreate_(false)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -138,6 +139,11 @@ void Player::StateUpdate()
 }
 void Player::Update()
 {
+	if (IsCreate_ == false)
+	{
+		Create();
+		IsCreate_ = true;
+	}
 	StateUpdate();
 	IsDebugModeONOFF();
 	CropsGrowUpdate();
@@ -245,31 +251,12 @@ void Player::ChangeAni(std::string _Name)
 	Shirts_->ChangeAnimation(_Name);
 	Hair_->ChangeAnimation(_Name);
 }
-
-void Player::Start()
+void Player::Create()
 {
-
-	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
-	PlayerMonsterCheckCol_= CreateCollision("Player", { 48,128 });
-	LongSwordCol_ = CreateCollision("LongSword", { 98,128 });
-	LongSwordCol_->Off();
-
-	int HairNum_ = static_cast<int>(CurHairStyle_);
 	std::string HairColor_ = GetHairColorString();
 	std::string HairStyle_ = GetHairStyleString();
 	std::string ShirtsStyle_ = GetShirtsStyleString();
 	std::string PantsStyle_ = GetPantsStyleString();
-
-	BackItem_ = CreateRendererToScale("Tools.bmp", { 56,112 }, static_cast<int>(ORDER::PLAYER));
-	Body_ = CreateRendererToScale("BodyShirts"+ ShirtsStyle_ +".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
-	Pants_ = CreateRendererToScale("Pants"+ PantsStyle_+".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
-	Shirts_ = CreateRendererToScale("Shirts"+ ShirtsStyle_+".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
-	Hair_ = CreateRendererToScale("Hair"+ HairStyle_ + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
-	Arm_ = CreateRendererToScale("BodyShirts" + ShirtsStyle_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
-
-	WieldItem_ = CreateRendererToScale("Tools.bmp", { 224, 160 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0,-17 });
-	HitItem_ = CreateRendererToScale("Tools.bmp", { 224, 200 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0, 32 });
-	WaterItem_ = CreateRendererToScale("Tools.bmp", { 192,128 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0,20 });
 
 
 	////////////idle
@@ -310,7 +297,7 @@ void Player::Start()
 			Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWalk", 1, 4, 0.15f, true);
 			Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWalk", 7, 10, 0.15f, true);
 			Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "FrontWalk", 1, 4, 0.15f, true);
-			Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "FrontWalk", 1,4, 0.15f, true);
+			Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "FrontWalk", 1, 4, 0.15f, true);
 			Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "FrontWalk", 1, 4, 0.15f, true);
 		}
 		{ // 캐릭터 오른쪽으로 걷는 모션
@@ -323,7 +310,7 @@ void Player::Start()
 		{ // 캐릭터 왼쪽으로 걷는 모션
 			Body_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWalk", 25, 29, 0.13f, true);
 			Arm_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWalk", 31, 35, 0.13f, true);
-			Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp","LeftWalk", 25, 29, 0.13f, true);
+			Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp", "LeftWalk", 25, 29, 0.13f, true);
 			Hair_->CreateAnimation("HairL" + HairStyle_ + HairColor_ + ".bmp", "LeftWalk", 25, 29, 0.13f, true);
 			Shirts_->CreateAnimation("ShirtsL" + ShirtsStyle_ + ".bmp", "LeftWalk", 25, 29, 0.13f, true);
 		}
@@ -331,7 +318,7 @@ void Player::Start()
 			Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWalk", 49, 52, 0.15f, true);
 			Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWalk", 55, 58, 0.15f, true);
 			Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "BackWalk", 49, 52, 0.15f, true);
-			Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "BackWalk", 49, 52, 0.15f, true);
+			Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "BackWalk", 49, 52, 0.15f, true);
 			Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "BackWalk", 49, 52, 0.15f, true);
 		}
 
@@ -346,7 +333,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWield", 264, 268, 0.1f, false); // 24 한줄에
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWield", 270, 274, 0.1f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "FrontWield", 264, 268, 0.1f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.1f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "FrontWield", 264, 268, 0.1f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "FrontWield", 264, 268, 0.1f, false);
 
 				WieldItem_->CreateAnimation("FrontHoe.bmp", "FrontHoe", 0, 4, 0.1f, false);
@@ -357,7 +344,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightWield", 198, 202, 0.1f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "RightWield", 192, 196, 0.1f, false);
 
 				WieldItem_->CreateAnimation("RightHoe.bmp", "RightHoe", 0, 4, 0.1f, false);
@@ -367,7 +354,7 @@ void Player::Start()
 			{ // 내려치는 방향 : 왼쪽
 				Body_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWield", 192, 196, 0.1f, false);
 				Arm_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWield", 198, 202, 0.1f, false);
-				Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp","LeftWield", 192, 196, 0.1f, false);
+				Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp", "LeftWield", 192, 196, 0.1f, false);
 				Hair_->CreateAnimation("HairL" + HairStyle_ + HairColor_ + ".bmp", "LeftWield", 192, 196, 0.1f, false);
 				Shirts_->CreateAnimation("ShirtsL" + ShirtsStyle_ + ".bmp", "LeftWield", 192, 196, 0.1f, false);
 
@@ -380,7 +367,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWield", 151, 153, 0.1f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "BackWield", 242, 243, 0.1f, false);
 
 				BackItem_->CreateAnimation("Tools.bmp", "BackHoe", 24, 25, 0.1f, false);
@@ -396,7 +383,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontHit", 96, 101, 0.08f, false); // 24 한줄에
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontHit", 108, 113, 0.08f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "FrontHit", 96, 101, 0.08f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "FrontHit", 96, 101, 0.08f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "FrontHit", 96, 101, 0.08f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "FrontHit", 96, 101, 0.08f, false);
 
 				HitItem_->CreateAnimation("FrontSickle.bmp", "FrontSickle", 0, 5, 0.08f, false);
@@ -406,7 +393,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightHit", 120, 125, 0.08f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightHit", 132, 137, 0.08f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "RightHit", 120, 125, 0.08f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "RightHit", 120, 125, 0.08f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "RightHit", 120, 125, 0.08f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "RightHit", 120, 125, 0.08f, false);
 
 				HitItem_->CreateAnimation("RightSickle.bmp", "RightSickle", 0, 5, 0.08f, false);
@@ -426,7 +413,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackHit", 144, 149, 0.08f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackHit", 156, 161, 0.08f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "BackHit", 144, 149, 0.08f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "BackHit", 144, 149, 0.08f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "BackHit", 144, 149, 0.08f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "BackHit", 144, 149, 0.08f, false);
 
 				BackItem_->CreateAnimation("BackSickle.bmp", "BackSickle", 0, 5, 0.08f, false);
@@ -440,7 +427,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWater", 96, 96, 0.8f, false); // 24 한줄에
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "FrontWater", 103, 103, 0.8f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "FrontWater", 96, 96, 0.8f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "FrontWater", 96, 96, 0.8f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "FrontWater", 96, 96, 0.8f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "FrontWater", 96, 96, 0.8f, false);
 				WaterItem_->CreateAnimation("FrontWateringCan.bmp", "FrontWateringCan", 0, 0, 0.8f, false);
 			}
@@ -448,7 +435,7 @@ void Player::Start()
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightWater", 171, 171, 0.8f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "RightWater", 183, 183, 0.8f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "RightWater", 171, 171, 0.8f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "RightWater", 171 + 24, 171 + 24, 0.8f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "RightWater", 171 + 24, 171 + 24, 0.8f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "RightWater", 171, 171, 0.8f, false);
 
 				WaterItem_->CreateAnimation("RightWateringCan.bmp", "RightWateringCan", 0, 0, 0.8f, false);
@@ -456,22 +443,47 @@ void Player::Start()
 			{ // 물주는 방향  : 왼쪽
 				Body_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWater", 171, 171, 0.8f, false);
 				Arm_->CreateAnimation("BodyLShirts" + ShirtsStyle_ + ".bmp", "LeftWater", 183, 183, 0.8f, false);
-				Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp","LeftWater", 171, 171, 0.8f, false);
+				Pants_->CreateAnimation("PantsL" + PantsStyle_ + ".bmp", "LeftWater", 171, 171, 0.8f, false);
 				Hair_->CreateAnimation("HairL" + HairStyle_ + HairColor_ + ".bmp", "LeftWater", 171, 171, 0.8f, false);
-				Shirts_->CreateAnimation("ShirtsL" + ShirtsStyle_ + ".bmp","LeftWater", 171, 171, 0.8f, false);
+				Shirts_->CreateAnimation("ShirtsL" + ShirtsStyle_ + ".bmp", "LeftWater", 171, 171, 0.8f, false);
 				WaterItem_->CreateAnimation("LeftWateringCan.bmp", "LeftWateringCan", 0, 0, 0.8f, false);
 			}
 			{ // 물주는 방향  : 뒤
 				Body_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWater", 172, 172, 0.8f, false);
 				Arm_->CreateAnimation("BodyShirts" + ShirtsStyle_ + ".bmp", "BackWater", 184, 184, 0.8f, false);
 				Pants_->CreateAnimation("Pants" + PantsStyle_ + ".bmp", "BackWater", 172, 172, 0.8f, false);
-				Hair_->CreateAnimation("Hair"+ HairStyle_ + HairColor_ + ".bmp", "BackWater", 172, 172, 0.8f, false);
+				Hair_->CreateAnimation("Hair" + HairStyle_ + HairColor_ + ".bmp", "BackWater", 172, 172, 0.8f, false);
 				Shirts_->CreateAnimation("Shirts" + ShirtsStyle_ + ".bmp", "BackWater", 172, 172, 0.8f, false);
 				BackItem_->CreateAnimation("Tools.bmp", "BackWateringCan", 151, 151, 0.8f, false);
 			}
 		}
 	}
 	ChangeAni("FrontIdle");
+
+
+}
+void Player::Start()
+{
+	PlayerCol_ = CreateCollision("Player", { 48,16 }, { 0,56 });
+	PlayerMonsterCheckCol_ = CreateCollision("Player", { 48,128 });
+	LongSwordCol_ = CreateCollision("LongSword", { 98,128 });
+	LongSwordCol_->Off();
+
+	std::string HairColor_ = GetHairColorString();
+	std::string HairStyle_ = GetHairStyleString();
+	std::string ShirtsStyle_ = GetShirtsStyleString();
+	std::string PantsStyle_ = GetPantsStyleString();
+
+	BackItem_ = CreateRendererToScale("Tools.bmp", { 56,112 }, static_cast<int>(ORDER::PLAYER));
+	Body_ = CreateRendererToScale("BodyShirts" + ShirtsStyle_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
+	Pants_ = CreateRendererToScale("Pants" + PantsStyle_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER));
+	Shirts_ = CreateRendererToScale("Shirts" + ShirtsStyle_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
+	Hair_ = CreateRendererToScale("Hair" + HairStyle_ + HairColor_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
+	Arm_ = CreateRendererToScale("BodyShirts" + ShirtsStyle_ + ".bmp", { 64, 128 }, static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
+
+	WieldItem_ = CreateRendererToScale("Tools.bmp", { 224, 160 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0,-17 });
+	HitItem_ = CreateRendererToScale("Tools.bmp", { 224, 200 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0, 32 });
+	WaterItem_ = CreateRendererToScale("Tools.bmp", { 192,128 }, static_cast<int>(ORDER::PLAYERITEM), RenderPivot::CENTER, { 0,20 });
 	if (false == GameEngineInput::GetInst()->IsKey("LeftWalk"))
 	{
 		GameEngineInput::GetInst()->CreateKey("LeftWalk", 'A');
@@ -480,7 +492,6 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("FrontWalk", 'S');
 		GameEngineInput::GetInst()->CreateKey("DebugONOFF", 'Q');
 	}
-
 }
 
 
@@ -1289,6 +1300,8 @@ void Player::SetSideLevel(std::string _Pre, std::string _Next, std::string _Entr
 	PreLevel_ = _Pre;
 	EntryLevel_ = _Entry;
 }
+
+
 //////////////////////string 관련
 std::string Player::GetHairColorString()
 {
