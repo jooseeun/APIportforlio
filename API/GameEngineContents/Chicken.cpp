@@ -57,7 +57,7 @@ void Chicken::Update()
 		if (CurHour_ != Time::TimeSet->GetGameHour_())//시간이 바뀌는 순간에 체크
 		{
 			IsEgg_ = true;
-			if ((Time::TimeSet->GetGameHour_() - FirstHour_) % 9 == 1) 
+			if ((Time::TimeSet->GetGameHour_() - FirstHour_) % 12 == 0) 
 			{
 				CreateEgg();
 			}
@@ -127,7 +127,7 @@ void Chicken::IdleUpdate()
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 		{
-			Time -= 10.0 * GameEngineTime::GetDeltaTime();
+			Time -= 1.0 * GameEngineTime::GetDeltaTime()*5.0f;
 		}
 		else
 		{
@@ -136,18 +136,27 @@ void Chicken::IdleUpdate()
 		return;
 	}
 
-	GameEngineRandom Ran_;
-	NextPos_.x = Ran_.RandomFloat(360, 852);
-	NextPos_.y = Ran_.RandomFloat(293, 461);
+	NextPos_ = GetPosition();
 	CurPos_ = GetPosition();
-	if (GetPosition().y >= NextPos_.y)
+
+
+	if (CurDir_ == AnimalDir::Front)
 	{
-		CurDir_  = AnimalDir::Back;
+		NextPos_.y = 461.0f;
 	}
-	else
+	else if (CurDir_ == AnimalDir::Back)
 	{
-		CurDir_ = AnimalDir::Front;
+		NextPos_.y = 293.0f;
 	}
+	else if (CurDir_ == AnimalDir::Right)
+	{
+		NextPos_.x = 852.0f;
+	}
+	else if (CurDir_ == AnimalDir::Left)
+	{
+		NextPos_.x = 360.0f;
+	}
+
 	ChangeState(AnimalState::Walk);
 	
 }
@@ -156,12 +165,31 @@ void Chicken::WalkUpdate()
 {
 	float4 MoveDir_ = NextPos_ - GetPosition();
 	float CheckDir_ = MoveDir_.Len2D();
-	if (CheckDir_ < 10)
+
+	if (CheckDir_ < 5)
 	{
-		CurDir_ = AnimalDir::Front;
+		if (CurDir_ == AnimalDir::Front)
+		{
+			CurDir_ = AnimalDir::Right;
+		}
+		else if (CurDir_ == AnimalDir::Back)
+		{
+			CurDir_ = AnimalDir::Left;
+		}
+		else if (CurDir_ == AnimalDir::Right)
+		{
+			CurDir_ = AnimalDir::Back;
+		}
+		else if (CurDir_ == AnimalDir::Left)
+		{
+			CurDir_ = AnimalDir::Front;
+		}
+
 		ChangeState(AnimalState::Idle);
 	}
 	MoveDir_.Normal2D();
+
+
 	if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 	{
 		SetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * 500.0f);
@@ -175,7 +203,7 @@ void Chicken::WalkUpdate()
 
 void Chicken::IdleStart()
 {
-	Time = 10.0f;
+	Time = 5.0f;
 
 }
 

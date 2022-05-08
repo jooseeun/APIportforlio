@@ -31,6 +31,11 @@ public:
 	Chicken& operator=(const Chicken& _Other) = delete;
 	Chicken& operator=(Chicken&& _Other) noexcept = delete;
 
+	inline void SetCurDir(AnimalDir _CurDir)
+	{
+		CurDir_ = _CurDir;
+	}
+
 protected:
 
 private:

@@ -5,6 +5,7 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
+class Chicken;
 class CoopLevel : public GameEngineLevel
 {
 public:
@@ -41,7 +42,7 @@ protected:
 private:
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
-
+	Chicken* Chicken_[4];
 	void CreateAnimal();
 	int ChickenNum;
 	int CurSelectPivot_;
