@@ -21,7 +21,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(250.0f),
+	:Speed_(800.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
@@ -634,13 +634,17 @@ void Player::DirSeedCreateTile()
 
 	TileCheckDir();
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
-
 	PlayerTile* CropsTile = SetCropTile();
 
+	if (GroundTile == nullptr)
+	{
+		return;
+	}
 	if (CropsTile == nullptr)
 	{
 		return;
 	}
+
 	CropsTile->Dirt_ = GroundTile->Dirt_;
 	CropsTile->SeedDay_ = Time::TimeSet->GetGameDay_(); // 심은 날짜 저장.
 	CropsTile->DirtTilePosX_ = TileIndexX_;
@@ -717,7 +721,7 @@ void Player::CropsHarvest()
 	DropItem_->SetItem(_Tile->CropsActor_->Item_);
 	DropItem_->SetItemKind(_Tile->CropsActor_->ItemKind_);
 	_Tile->Isharvest_ = false;
-	CropsTileMap_->DeleteTile(TileIndexX_, TileIndexY_);
+	_Tile->OffActor();
 	Sound_ = GameEngineSound::SoundPlayControl("cut.wav");
 	Sound_.Volume(0.8f);
 }
@@ -1014,12 +1018,12 @@ void Player::HitObject()
 			TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			TileAni_->SetAniString("GrassAni");
 
-
+			_Tile->TileCol_->Off();
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::GrassItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			//FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -1043,7 +1047,7 @@ void Player::WieldMineObject()
 		{
 			_Tile = Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_,"Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 		}
-		_Tile->TileCol_->Death();
+		_Tile->TileCol_->Off();
 
 		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 		if (CurDir_ == PlayerDir::Back)
@@ -1059,7 +1063,7 @@ void Player::WieldMineObject()
 
 		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-		Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+		//Mine1Object::MainMine1Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 		return;
 	}
 	if (CurItem_ == PlayerItem::PickItem && GetLevel()->GetNameCopy() == "Mine2Level")
@@ -1070,7 +1074,7 @@ void Player::WieldMineObject()
 			return;
 		}
 		_Tile = Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->CreateTile<MineTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
-		_Tile->TileCol_->Death();
+		_Tile->TileCol_->Off();
 
 		TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 		if (CurDir_ == PlayerDir::Back)
@@ -1086,7 +1090,7 @@ void Player::WieldMineObject()
 
 		DropItem_->SetItem(ReturnMineItem(_Tile->TileType_));
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-		Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+		//Mine2Object::MainMine2Tile->ReturnMineTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 		return;
 	}
 }
@@ -1193,7 +1197,7 @@ void Player::WieldFarmObject()
 			Sound_ = GameEngineSound::SoundPlayControl("hammer.wav");
 			Sound_.Volume(0.8f);
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
-			_Tile->TileCol_->Death();
+			_Tile->TileCol_->Off();
 
 			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "StoneAni");
 			if (CurDir_ == PlayerDir::Back)
@@ -1208,7 +1212,7 @@ void Player::WieldFarmObject()
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::StoneItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			//FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -1234,14 +1238,14 @@ void Player::WieldFarmObject()
 
 			Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
-			_Tile->TileCol_->Death();
+			_Tile->TileCol_->Off();
 			//_Tile->IsDestroy_ = true;
 
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
-			FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
+			//FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
 
@@ -1291,7 +1295,7 @@ void Player::WieldFarmObject()
 			DropItem_->SetItem(PlayerItem::BranchItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
 			_Tile->EnvironmentType_ = EnvironmentTileType::Max;
-			_Tile->TileCol_-> Death();
+			_Tile->TileCol_-> Off();
 			//FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->DeleteTile(TileIndexX_, TileIndexY_);
 			return;
 		}
@@ -1370,7 +1374,6 @@ std::string Player::GetHairColorString()
 		return "Red";
 	}
 
-	return "";
 }
 std::string Player::GetHairStyleString()
 {
@@ -1446,7 +1449,7 @@ std::string Player::GetItemString()
 	{
 		return "Nothing";
 	}
-	return "";
+
 }
 std::string Player::CheckSeedSting(SeedType _Type)
 {
@@ -1482,10 +1485,8 @@ std::string Player::CheckSeedSting(SeedType _Type)
 	{
 		return "Pepper" + CropNum_;
 	}
-	else
-	{
-		return "";
-	}
+
+
 }
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {

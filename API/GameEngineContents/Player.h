@@ -24,9 +24,13 @@ public:
 	}
 	~PlayerTile()
 	{
+		
+	}
+	void OffActor()
+	{
 		if (CropsActor_ != nullptr)
 		{
-			CropsActor_->Death();
+			CropsActor_->Off();
 		}
 	}
 
