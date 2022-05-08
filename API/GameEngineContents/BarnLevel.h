@@ -42,6 +42,7 @@ protected:
 	void CreateAnimal();
 
 private:
+	GameEngineSoundPlayer sound;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 

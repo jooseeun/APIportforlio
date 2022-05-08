@@ -172,10 +172,13 @@ void Player::WalkUpdate()
 		
 		if (RGB(0, 255, 255) == Color)
 		{
+
 			GameEngine::GetInst().ChangeLevel(PreLevel_);
+
 		}
 		else if (RGB(0, 0, 255) == Color)
 		{
+	
 			GameEngine::GetInst().ChangeLevel(NextLevel_);
 		}
 		else if (RGB(255, 255, 0) == Color)
@@ -228,8 +231,16 @@ void Player::HitStart()
 
 void Player::WalkStart()
 {
-	FootStep=GameEngineSound::SoundPlayControl("Cowboy_Footstep.wav",10000);
-	FootStep.PlaySpeed(0.6);
+	//if (GetLevel()->GetNameCopy() == "FarmHouseLevel")
+	//{
+	//	FootStep = GameEngineSound::SoundPlayControl("thudStep.wav", 10000);
+	//	FootStep.Volume(0.6);
+	//}
+	//else
+	//{
+	//	FootStep=GameEngineSound::SoundPlayControl("grassyStep.wav",10000);
+
+	//}
 }
 
 void Player::WieldStart()

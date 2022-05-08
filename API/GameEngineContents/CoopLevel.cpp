@@ -102,6 +102,8 @@ void CoopLevel::Update()
 
 void CoopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
+	sound.Volume(0.7);
 	Player::MainPlayer->SetPosition({ 416.0f, 500.0f});
 	Player::MainPlayer->SetMapScale(1280.0f, 720.0f);
 	Player::MainPlayer->SetColMapName("CoopColMap.bmp");

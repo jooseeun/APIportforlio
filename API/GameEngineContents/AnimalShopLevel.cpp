@@ -90,6 +90,8 @@ void AnimalShopLevel::Update()
 
 void AnimalShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
+	sound.Volume(0.7);
 	Player::MainPlayer->SetPosition({ 864.0f,1180.0f});
 	Player::MainPlayer->SetMapScale(2240.0f, 1280.0f);
 	Player::MainPlayer->SetColMapName("AnimalShopColMap.bmp");

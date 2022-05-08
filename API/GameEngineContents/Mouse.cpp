@@ -8,6 +8,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 
 Mouse::Mouse() 
@@ -47,11 +48,13 @@ void Mouse::Update()
 		if (true == GetMouseCol()->CollisionCheck("StartCol", CollisionType::Rect, CollisionType::Rect))
 		{
 			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+			GameEngineSound::SoundPlayOneShot("select.wav");
 		}
 
 		else if (true == GetMouseCol()->CollisionCheck("ExitCol", CollisionType::Rect, CollisionType::Rect))
 		{
 			GameEngineWindow::GetInst().Off();
+			GameEngineSound::SoundPlayOneShot("select.wav");
 		}
 	}
 

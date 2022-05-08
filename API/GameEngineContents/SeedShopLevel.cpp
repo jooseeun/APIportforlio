@@ -96,7 +96,8 @@ void SeedShopLevel::Update()
 
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-
+	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
+	sound.Volume(0.7);
 	Player::MainPlayer->SetPosition({ 414.0f,1770.f });
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");

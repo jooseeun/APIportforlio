@@ -46,6 +46,7 @@ protected:
 	void LevelChangeStart(GameEngineLevel* _NextLevel) override;
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 private:
+	GameEngineSoundPlayer sound;
 	ShopUIMoney* ShopMoney_;
 	Mouse* MouseSet;
 	SeedShopUI* ShopUI_;

@@ -44,6 +44,7 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	GameEngineSoundPlayer sound;
 	Mouse* MouseSet;
 	RobinShopUI* ShopUI_;
 	PlayerItem ItemPos_[13];

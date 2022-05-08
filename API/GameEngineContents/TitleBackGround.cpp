@@ -4,6 +4,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 
+TitleBackGround* TitleBackGround::TitleBackGroundSet=nullptr;
+
 TitleBackGround::TitleBackGround()
 	:Time_(5.0f),
 	Check_(false),
@@ -65,7 +67,11 @@ void TitleBackGround::Update()
 		Title1_->ChangeAnimation("Title1");
 		Title2_->On();
 		Title2_->ChangeAnimation("Title2");
+		sound = GameEngineSound::SoundPlayControl("mouseClick.wav");
+		sound.PlaySpeed(0.8f);
+		sound.Volume(1.0f);
 		Check_ = true;
+		return;
 	}
 
 	if (Time_ >= 0.0f )
@@ -73,6 +79,7 @@ void TitleBackGround::Update()
 		Time_ -= 1.0f * GameEngineTime::GetDeltaTime();
 		return;
 	}
+
 	if (Time_ < 0.0f && Check_ == true)
 	{
 		Title1_->Off();

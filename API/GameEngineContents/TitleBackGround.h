@@ -1,11 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class GameEngineRenderer;
 class TitleBackGround : public GameEngineActor
 {
 public:
+	static TitleBackGround* TitleBackGroundSet;
 	// constrcuter destructer
 	TitleBackGround();
 	~TitleBackGround();
@@ -33,6 +35,7 @@ private:
 	bool StartLogo_;
 	bool IsBGM_;
 	float YPivot_;
+	GameEngineSoundPlayer sound;
 	GameEngineRenderer* BackGround_;
 	GameEngineRenderer* TitleFish_;
 	GameEngineRenderer* Title1_;

@@ -1376,13 +1376,13 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}	
 	if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}
 	if ("SeedShopLevel" == GetLevel()->GetNameCopy())
 	{
@@ -1393,25 +1393,25 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}
 	if ("MineEntryLevel" == GetLevel()->GetNameCopy()&& "Mine2Level" != _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Mines (Crystal Bells).mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}
 	if ("MineEntryLevel" == _PrevLevel->GetNameCopy()&& "Town2Level" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town.mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}
 	if ("ForestLevel" == _PrevLevel->GetNameCopy() && "AnimalShopLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.7f);
 	}
 }
 

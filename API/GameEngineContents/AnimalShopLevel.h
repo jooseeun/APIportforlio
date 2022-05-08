@@ -43,6 +43,7 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	GameEngineSoundPlayer sound;
 	Mouse* MouseSet;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;

@@ -85,6 +85,9 @@ void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if (_PrevLevel->GetNameCopy() == "FarmLevel")
 	{
 		Player::MainPlayer->SetPosition({ 474.0f,659 });
+		sound = GameEngineSound::SoundPlayControl("doorClose.wav");
+		sound.Volume(0.7);
+
 	}
 	else if (_PrevLevel->GetNameCopy() == "TitleLevel")
 	{
@@ -97,7 +100,8 @@ void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer->SetSideLevel("BusStopLevel", "FarmLevel", " ");
 	Player::MainPlayer->SetGroundTileMap(&Back->GroundTileMap_);
 	Player::MainPlayer->SetCropsTileMap(&Back->CropsTileMap_);
-	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE");
+	FadeIn* FadeInSet = CreateActor<FadeIn>(static_cast<int>(ORDER::FADE), "FADE"); 
+
 }
 
 void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -113,5 +117,6 @@ void FarmHouseLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 		Money::MoneySet->NextLevelOn();
 	}
+	
 
 }

@@ -3,8 +3,8 @@
 #include "PlayerEnum.h"
 #include "Tool.h"
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
-
 class FarmHouseLevel : public GameEngineLevel
 {
 public:
@@ -40,6 +40,7 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	GameEngineSoundPlayer sound;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 	int CurSelectPivot_;
