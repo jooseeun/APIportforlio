@@ -8,7 +8,6 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineCollision.h>
-#include <GameEngineBase/GameEngineSound.h>
 
 
 Mouse::Mouse() 
@@ -153,57 +152,81 @@ void Mouse::CheckPlayerIsLeftMouse()
 		{
 			if (true == GetMouseCol()->CollisionCheck("Num1Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(0);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num2Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(1);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num3Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(2);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num4Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(3);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num5Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(4);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num6Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(5);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num7Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(6);
 			}
 
 			else if (true == GetMouseCol()->CollisionCheck("Num8Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(7);
 			}
 			else if (true == GetMouseCol()->CollisionCheck("Num9Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(8);
 			}
 			else if (true == GetMouseCol()->CollisionCheck("Num10Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(9);
 			}
 			else if (true == GetMouseCol()->CollisionCheck("Num11Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(10);
 			}
 			else if (true == GetMouseCol()->CollisionCheck("Num12Col", CollisionType::Rect, CollisionType::Rect))
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("stoneStep.wav");
+				Sound_.Volume(0.5f);
 				ToolUI::ToolUISet->SetSelectPivot(11);
 			}
 			else

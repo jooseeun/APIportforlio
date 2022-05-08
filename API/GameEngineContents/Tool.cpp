@@ -536,6 +536,7 @@ void Tool::SetClickItem(int _Pivot)
 			else if (_Pivot == (*StartIter)->InvenPivot_)
 			{
 				(*StartIter)->Click_ = true;
+				Sound_ = GameEngineSound::SoundPlayControl("pickUpItem.wav");
 
 			}
 		}
@@ -543,7 +544,7 @@ void Tool::SetClickItem(int _Pivot)
 		else if (_Pivot == (*StartIter)->InvenPivot_)
 		{
 			(*StartIter)->Click_ = true;
-
+			Sound_ = GameEngineSound::SoundPlayControl("pickUpItem.wav");
 		}
 
 	}

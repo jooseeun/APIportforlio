@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 class GameEngineCollision;
 class Mouse :public GameEngineActor
@@ -39,6 +40,7 @@ public:
 
 protected:
 private:
+	GameEngineSoundPlayer Sound_;
 	bool IsOpenShop_;
 	GameEngineCollision* MouseCol_;
 	float4 CurPos_;

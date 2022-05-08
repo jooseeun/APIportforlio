@@ -4,7 +4,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineCollision.h>
-
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 struct ItemData
 {
@@ -93,7 +93,7 @@ public:
 protected:
 
 private:
-
+	GameEngineSoundPlayer Sound_;
 	std::vector<GameEngineCollision*> ShopColl_;
 	bool IsShop_;
 	void UpdateShopInvenPos();
