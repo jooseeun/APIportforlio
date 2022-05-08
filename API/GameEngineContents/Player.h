@@ -153,8 +153,10 @@ private:
 	PlayerHairColor CurHairColor_;
 	PlayerHairStyle CurHairStyle_;
 	PlayerShirts CurShirts_;
+	PlayerPants CurPants_;
 
-
+	std::string GetPantsStyleString();
+	std::string GetShirtsStyleString();
 	std::string GetHairColorString();
 	std::string GetHairStyleString();
 	std::string GetItemString();

@@ -141,30 +141,30 @@ enum class PlayerHairColor
 {
 	Black,
 	Red,
-	Grey,
 	Blue,
 	Max
 };
 enum class PlayerHairStyle
 {
-	First=5,
-	Second=2
+	First,
+	Second,
+	Max
 };
 enum class PlayerShirts
 {
-	First=0,
+	First,
 	Second,
 	Third,
-	Fourth,
-	Fifth,
-	Sixth,
-	Secenth,
-	Eighth,
-	Ninth,
-	Tenth
+	Max
 
 };
+enum class PlayerPants
+{
+	First,
+	Second,
+	Max
 
+};
 enum class InvenFloor
 {
 	First,
