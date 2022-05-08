@@ -241,6 +241,16 @@ void PlayerCreate::Update()
 			}
 
 		}
+
+		if (true == Ok_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
+		{
+			Player::MainPlayer->CurHairColor_ = CurHairColor_;
+			Player::MainPlayer->CurHairStyle_ = CurHairStyle_;
+			Player::MainPlayer->CurPants_ = CurPants_;
+			Player::MainPlayer->CurShirts_ = CurShirts_;
+			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+			GameEngineSound::SoundPlayOneShot("select.wav");
+		}
 	}
 	
 
@@ -250,15 +260,7 @@ void PlayerCreate::Update()
 		GetLevel()->IsDebugModeSwitch();
 	}
 
-	if (true == Ok_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
-	{
-		Player::MainPlayer->CurHairColor_ = CurHairColor_;
-		Player::MainPlayer->CurHairStyle_ = CurHairStyle_;
-		Player::MainPlayer->CurPants_ = CurPants_;
-		Player::MainPlayer->CurShirts_ = CurShirts_;
-		GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
-		GameEngineSound::SoundPlayOneShot("select.wav");
-	}
+
 }
 
 
