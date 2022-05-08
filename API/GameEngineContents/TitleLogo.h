@@ -3,9 +3,11 @@
 
 // Ό³Έν :
 class GameEngineCollision;
+class GameEngineSound;
 class TitleLogo : public GameEngineActor
 {
 public:
+	static TitleLogo* TitleLogoSet;
 	// constrcuter destructer
 	TitleLogo();
 	~TitleLogo();
@@ -33,6 +35,9 @@ protected:
 	void Update() override;
 
 private:
+	bool ButtonOn[4];
+	bool SoundOn_;
+	GameEngineSound* Sound_;
 	float Time_;
 	int Count_;
 	bool hide_;

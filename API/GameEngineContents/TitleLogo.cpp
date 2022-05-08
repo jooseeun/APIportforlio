@@ -9,13 +9,19 @@
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineSound.h>
+
+
+TitleLogo* TitleLogo::TitleLogoSet = nullptr;
 
 TitleLogo::TitleLogo()
 	:hide_(false),
 	show_(false),
 	Count_(0),
-	Time_(0.1f )
+	Time_(0.1f ),
+	SoundOn_(false)
 {
+	
 }
 
 TitleLogo::~TitleLogo()
@@ -59,6 +65,10 @@ void TitleLogo::Start()
 	LoadButton->Off();
 	MultyButton->Off();
 	ExitButton->Off();
+	ButtonOn[0] = false;
+	ButtonOn[1] = false;
+	ButtonOn[2] = false;
+	ButtonOn[3] = false;
 }
 void TitleLogo::Update()
 {
@@ -93,27 +103,81 @@ void TitleLogo::Update()
 			Count_++;
 		}
 	}
+
 	IsButtonColUpdate();
 
 }
 void TitleLogo::IsButtonColUpdate()
 {
+	if (ButtonOn[0] == true|| ButtonOn[1] == true
+		|| ButtonOn[2] == true|| ButtonOn[3] == true)
+	{
+		if (SoundOn_ == true)
+		{
+			GameEngineSound::SoundPlayOneShot("Cowboy_Footstep.wav");
+			SoundOn_=false;
+			return;
+		}
+	}
+
 	if (true == StartCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
 	{
+		if (ButtonOn[0] == false)
+		{
+			ButtonOn[0] = true;
+			SoundOn_ = true;
+		}
 		StartButton->SetIndex(4);
 	}
 	else
 	{
 		StartButton->SetIndex(0);
+		ButtonOn[0] = false;
 	}
 
+	if (true ==LoadCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
+	{
+		if (ButtonOn[1] == false)
+		{
+			ButtonOn[1] = true;
+			SoundOn_ = true;
+		}
+		LoadButton->SetIndex(5);
+	}
+	else
+	{
+		ButtonOn[1] = false;
+		LoadButton->SetIndex(1);
+	}
+
+	if (true == MultyCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
+	{
+		if (ButtonOn[2] == false)
+		{
+			ButtonOn[2] = true;
+			SoundOn_ = true;
+		}
+		MultyButton->SetIndex(6);
+	}
+	else
+	{
+		MultyButton->SetIndex(2);
+		ButtonOn[2] = false;
+	}
 
 	if (true == ExitCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
 	{
+		if (ButtonOn[3] == false)
+		{
+			ButtonOn[3] = true;
+			SoundOn_ = true;
+		}
 		ExitButton->SetIndex(7);
 	}
 	else
 	{
 		ExitButton->SetIndex(3);
+		ButtonOn[3] = false;
 	}
+
 }

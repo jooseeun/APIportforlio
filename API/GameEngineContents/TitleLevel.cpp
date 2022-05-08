@@ -34,13 +34,17 @@ void TitleLevel::Update()
 	if (Back_->IsBGM() == true&& IsBGM_==false)
 	{
 		BgmPlayer = GameEngineSound::SoundPlayControl("Stardew Valley Overture.mp3");
-		BgmPlayer.Volume(0.6f);
+		BgmPlayer.Volume(0.4f);
 		IsBGM_ = true;
 	}
 
 	if (Back_->IsLogo() == true)
 	{
-		CreateActor<TitleLogo>(1, "TitleLogo");
+		if (TitleLogo::TitleLogoSet == nullptr)
+		{
+			TitleLogo::TitleLogoSet= CreateActor<TitleLogo>(1, "TitleLogo");
+		}
+		
 	}
 }
 
