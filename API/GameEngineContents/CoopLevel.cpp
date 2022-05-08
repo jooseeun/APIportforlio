@@ -59,7 +59,7 @@ void CoopLevel::CreateAnimal()
 {
 	if (0 != AnimalShopUI::AnimalShopUISet->ChickenNum_)
 	{
-		for (int i = 0; i < AnimalShopUI::AnimalShopUISet->ChickenNum_; i++)
+		if ( 0 < AnimalShopUI::AnimalShopUISet->ChickenNum_)
 		{
 			GameEngineRandom Ran_;
 			float4 Pos_;
@@ -67,8 +67,13 @@ void CoopLevel::CreateAnimal()
 			Pos_.y = Ran_.RandomFloat(293, 461);
 			Chicken* Chicken_ = CreateActor<Chicken>(static_cast<int>(ORDER::PLAYER), "Chicken");
 			Chicken_->SetPosition(Pos_);
+			float Time_ = 5.0f;
+			while ( 0 <Time_)
+			{
+				Time_ -= 1.0f * GameEngineTime::GetDeltaTime();
+			}
+			AnimalShopUI::AnimalShopUISet->ChickenNum_ -= 1;
 		}
-		AnimalShopUI::AnimalShopUISet->ChickenNum_ = 0;
 	}
 }
 void CoopLevel::Update()

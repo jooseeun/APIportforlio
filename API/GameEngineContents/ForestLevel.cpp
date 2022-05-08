@@ -8,6 +8,7 @@
 #include "Mouse.h"
 #include "FrontMap.h"
 #include "Time.h"
+#include "Money.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineLevel.h>
@@ -85,6 +86,6 @@ void ForestLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
-
+		Money::MoneySet->NextLevelOn();
 	}
 }

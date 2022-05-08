@@ -14,7 +14,8 @@ Chicken::Chicken()
 	IsBaby_(true),
 	Time(5.0f),
 	FirstDay_(0),
-	IsEgg_(false)
+	IsEgg_(false),
+	CurHour_(0)
 {
 
 }
@@ -51,7 +52,7 @@ void Chicken::Update()
 		FirstHour_ = Time::TimeSet->GetGameHour_();
 		ChickenRender_->ChangeAnimation(GetDirString());
 	}
-	if (IsBaby_ == false)
+	else if (IsBaby_ == false)
 	{
 		if (CurHour_ != Time::TimeSet->GetGameHour_())//시간이 바뀌는 순간에 체크
 		{
@@ -74,6 +75,7 @@ void Chicken::CreateEgg()
 		DropItem_->SetPosition(GetPosition());
 		DropItem_->SetItem(PlayerItem::EggItem);
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+		IsEgg_ = false;
 	}
 
 	IsEgg_ = false;

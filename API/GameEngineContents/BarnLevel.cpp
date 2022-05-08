@@ -52,12 +52,7 @@ void BarnLevel::Loading()
 		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
-	GameEngineRandom Ran_;
-	float4 Pos_;
-	Pos_.x = Ran_.RandomFloat(360, 852);
-	Pos_.y = Ran_.RandomFloat(293, 461);
-	Cow* Cow_ = CreateActor<Cow>(static_cast<int>(ORDER::PLAYER), "Cow");
-	Cow_->SetPosition(Pos_);
+
 
 	YSortOn(static_cast<int>(ORDER::PLAYER));
 }

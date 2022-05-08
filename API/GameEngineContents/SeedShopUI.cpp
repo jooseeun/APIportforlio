@@ -3,6 +3,7 @@
 #include "ShopUIMoney.h"
 #include "Tool.h"
 #include "Money.h"
+#include "NoMoney.h"
 #include <GameEngineBase/GameEngineInput.h>
 
 SeedShopUI::SeedShopUI() :
@@ -112,24 +113,27 @@ void SeedShopUI::BuySeed()
 	{
 		if (true == ParsnipSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 20;
-			if (LeftMoney_< 0 )
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 20;
+			if (LeftMoney_ < 0)
 			{
+
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem( PlayerItem::ParsnipSeedItem, PlayerItemKind::SeedItem,  "Objects.bmp", 472, 20);
 
 		}
 		if (true == PhotatoSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 50;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 50;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 		
 			Tool::ToolSet->CreateItem(PlayerItem::PhatatoSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 475, 50);
@@ -137,12 +141,14 @@ void SeedShopUI::BuySeed()
 		}
 		if (true == CauliFlowerSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
+
 			Tool::ToolSet->CreateItem(PlayerItem::CauliFlowerSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 474, 80);
 
 		}
@@ -150,60 +156,65 @@ void SeedShopUI::BuySeed()
 
 		if (true == BeanSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 60;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 60;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::BeanSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 473, 60);
 
 		}
 		if (true == KaleSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 70;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 70;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::KaleSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 477, 70);
 
 		}
 		if (true == BlueberrieSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::BlueberrieSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 481, 80);
 
 		}
 		if (true == MelonSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 80;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 80;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::MelonSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 479, 80);
 
 		}
 		if (true == PepperSeedCol_->CollisionCheck("MouseCol"))
 		{
-			size_t LeftMoney_ = Money::MoneySet->GetMoney() - 40;
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 40;
 			if (LeftMoney_ < 0)
 			{
+				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
-			Money::MoneySet->SetMoney(LeftMoney_);
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::PepperSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 482, 40);
 

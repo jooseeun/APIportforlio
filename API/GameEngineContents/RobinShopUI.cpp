@@ -5,6 +5,7 @@
 #include "Money.h"
 #include "Barn.h"
 #include "Coop.h"
+#include "NoMoney.h"
 #include <GameEngineBase/GameEngineInput.h>
 
 RobinShopUI::RobinShopUI() :
@@ -61,22 +62,26 @@ void RobinShopUI::Create()
 		{
 			if (Page_ == 1)
 			{
-				size_t LeftMoney_ = Money::MoneySet->GetMoney() - 400;
+				int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 400;
 				if (LeftMoney_ < 0)
 				{
+
+					GetLevel()->CreateActor<NoMoney>();
 					return;
 				}
-				Money::MoneySet->SetMoney(LeftMoney_);
+				Money::MoneySet->SetMoney((size_t)LeftMoney_);
 				Coop::MainCoop->On();
 			}
 			else if (Page_ == 2)
 			{
-				size_t LeftMoney_ = Money::MoneySet->GetMoney() - 600;
+				int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 600;
 				if (LeftMoney_ < 0)
 				{
+
+					GetLevel()->CreateActor<NoMoney>();
 					return;
 				}
-				Money::MoneySet->SetMoney(LeftMoney_);
+				Money::MoneySet->SetMoney((size_t)LeftMoney_);
 				Barn::MainBarn->On();
 			}
 		}

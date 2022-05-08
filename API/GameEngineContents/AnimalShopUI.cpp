@@ -8,6 +8,7 @@
 #include "Tool.h"
 #include "FadeIn.h"
 #include "Chicken.h"
+#include "NoMoney.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
@@ -34,7 +35,7 @@ void AnimalShopUI::Start()
 	CowName_ = CreateRenderer("CowNameUI.bmp", static_cast<int>(ORDER::FRONTUI));
 	CowMoney_ = CreateRenderer("CowMoneyUI.bmp", static_cast<int>(ORDER::FRONTUI));
 
-	GameEngineCollision* ExitButoon = CreateCollision("AnimalShopExit", { 48,48 }, { 128,128 });
+	GameEngineCollision* ExitButoon = CreateCollision("AnimalShopExit", { 48,48 }, { 268,158 });
 
 	ChickenName_->SetPivot({ 0,260 });
 	ChickenMoney_->SetPivot({ 0,350 });
@@ -88,10 +89,24 @@ void AnimalShopUI::BuyCheck()
 	{
 		if (Chicken_->CollisionCheck("MouseCol"))
 		{
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 400;
+			if(LeftMoney_ < 0)
+			{
+				GetLevel()->CreateActor<NoMoney>();
+				return;
+			}
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 			ChickenNum_ += 1;
 		}
 		else if (Cow_->CollisionCheck("MouseCol"))
 		{
+			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 600;
+			if (LeftMoney_ < 0)
+			{
+				GetLevel()->CreateActor<NoMoney>();
+				return;
+			}
+			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 			CowNum_ += 1;
 		}
 	}
