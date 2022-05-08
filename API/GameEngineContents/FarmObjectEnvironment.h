@@ -12,7 +12,12 @@ public:
 		TreeTop_(nullptr),
 		TreeTopCol_(nullptr),
 		IsShake_(false),
-		IsDestroy_(false)
+		IsDestroy_(false),
+		TreeTopX_(0),
+		TreeTopY_(0),
+		TreeAni_(nullptr),
+		TileCol_(nullptr),
+		DeathCount_(-1)
 	{
 
 	}

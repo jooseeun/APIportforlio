@@ -21,8 +21,15 @@
 RobinShopLevel::RobinShopLevel() :
 	CurSelectPivot_(1),
 	NextSelectPivot_(1),
-	IsOpenShop_(false)
+	IsOpenShop_(false),
+	Back(nullptr),
+	ShopUI_(nullptr),
+	MouseSet(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
 }
 
 RobinShopLevel::~RobinShopLevel()
@@ -86,7 +93,7 @@ void RobinShopLevel::Update()
 void RobinShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
-	sound.Volume(0.7);
+	sound.Volume(0.7f);
 	Player::MainPlayer->SetPosition({ 415.0f,1485.0f});
 	Player::MainPlayer->SetMapScale(2048.0f, 1600.0f);
 	Player::MainPlayer->SetColMapName("RobinShopColMap.bmp");

@@ -23,8 +23,13 @@
 
 FarmHouseLevel::FarmHouseLevel() :
 	CurSelectPivot_(0),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
 }
 
 FarmHouseLevel::~FarmHouseLevel() 
@@ -86,7 +91,7 @@ void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		Player::MainPlayer->SetPosition({ 474.0f,659 });
 		sound = GameEngineSound::SoundPlayControl("doorClose.wav");
-		sound.Volume(0.7);
+		sound.Volume(0.7f);
 
 	}
 	else

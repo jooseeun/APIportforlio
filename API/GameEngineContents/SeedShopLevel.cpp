@@ -22,8 +22,16 @@
 SeedShopLevel::SeedShopLevel() :
 	CurSelectPivot_(1),
 	NextSelectPivot_(1),
-	IsOpenShop_(false)
+	IsOpenShop_(false),
+	ShopUI_(nullptr),
+	ShopMoney_(nullptr),
+	MouseSet(nullptr),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
 }
 
 SeedShopLevel::~SeedShopLevel() 
@@ -97,7 +105,7 @@ void SeedShopLevel::Update()
 void SeedShopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
-	sound.Volume(0.7);
+	sound.Volume(0.7f);
 	Player::MainPlayer->SetPosition({ 414.0f,1770.f });
 	Player::MainPlayer->SetMapScale(3072.0f, 2048.0f);
 	Player::MainPlayer->SetColMapName("SeedShopColMap.bmp");

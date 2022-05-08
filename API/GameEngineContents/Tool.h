@@ -18,7 +18,8 @@ struct ItemData
 		SellValue_(0),
 		ItemName_(PlayerItem::Max),
 		ItemKind_(PlayerItemKind::NoItem),
-		InvenFloor_(InvenFloor::Max)
+		InvenFloor_(InvenFloor::Max),
+		InvenPivot_(-1)
 	{
 	}
 	GameEngineRenderer* Render;

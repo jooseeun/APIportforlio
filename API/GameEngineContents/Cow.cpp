@@ -13,7 +13,11 @@ Cow::Cow()
 	IsBaby_(true),
 	Time(5.0f),
 	FirstDay_(-1),
-	IsMilk_(false)
+	IsMilk_(false),
+	FirstHour_(0),
+	CurHour_(0),
+	CowRender_(nullptr),
+	CowCol_(nullptr)
 {
 
 }
@@ -142,11 +146,11 @@ void Cow::IdleUpdate()
 	{
 		if (true == GameEngineInput::GetInst()->IsPress("TimeFast"))
 		{
-			Time -= 1.0 * GameEngineTime::GetDeltaTime() * 10.0f;
+			Time -= 1.0f * GameEngineTime::GetDeltaTime() * 10.0f;
 		}
 		else
 		{
-			Time -= 1.0 * GameEngineTime::GetDeltaTime();
+			Time -= 1.0f * GameEngineTime::GetDeltaTime();
 		}
 		return;
 	}

@@ -45,7 +45,6 @@ private:
 	BackGround* Back;
 	Chicken* Chicken_[4];
 	void CreateAnimal();
-	int ChickenNum;
 	int CurSelectPivot_;
 	int NextSelectPivot_;
 };

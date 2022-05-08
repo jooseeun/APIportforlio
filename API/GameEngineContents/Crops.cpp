@@ -4,6 +4,12 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 Crops::Crops()
+	:Crops_(nullptr),
+	CropsHavestAni_(nullptr),
+	SeedType_(SeedType::Max),
+	Item_(PlayerItem::Max),
+	ItemKind_(PlayerItemKind::NoItem),
+	IndexNum_(0)
 {
 	CurSeedType_ = SeedType::Max;
 }
@@ -95,5 +101,9 @@ std::string Crops::CropToString(SeedType _SeedType)
 		Item_ = PlayerItem::BlueberrieItem;
 		ItemKind_ = PlayerItemKind::CropsItem;
 		return "Blueberrie";
+	}
+	else
+	{
+		return "";
 	}
 }

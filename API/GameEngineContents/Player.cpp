@@ -40,7 +40,26 @@ Player::Player()
 	CropsTileMap_(nullptr),
 	GroundTileMap_(nullptr),
 	IsHit_(false),
-	IsCreate_(false)
+	IsCreate_(false),
+	PlayerMonsterCheckCol_(nullptr),
+	PlayerCol_(nullptr),
+	Pants_(nullptr),
+	MapScaleX_(0),
+	MapScaleY_(0),
+	MapColImage_(nullptr),
+	LongSwordCol_(nullptr),
+	HitItem_(nullptr),
+	HarvestDay_(0),
+	Hair_(nullptr),
+	Body_(nullptr),
+	BackItem_(nullptr),
+	Arm_(nullptr),
+	WieldItem_(nullptr),
+	WaterItem_(nullptr),
+	TileUpdateIndex_(0),
+	TileIndexY_(0),
+	TileIndexX_(0),
+	Shirts_(nullptr)
 {
 
 	ArrAnimationName[static_cast<int>(PlayerState::Idle)] = "Idle";
@@ -900,7 +919,10 @@ float4 Player::TileCheckDirPos()
 	else if (CurDir_ == PlayerDir::Back) {
 		return GetPosition() + float4(0, -32);
 	}
-
+	else
+	{
+		return GetPosition();
+	}
 }
 
 
@@ -927,7 +949,10 @@ bool Player::IsCheckFarmObjectTile()
 			return true;
 		}
 	}
-
+	else
+	{
+		return false;
+	}
 
 }
 bool Player::IsCheckMineObjectTile()
@@ -963,7 +988,10 @@ bool Player::IsCheckMineObjectTile()
 		}
 
 	}
-
+	else
+	{
+		return false;
+	}
 
 }
 void Player::HitObject()
@@ -1140,6 +1168,10 @@ PlayerItem Player::ReturnMineItem(MineTileType _Type)
 	if (_Type == MineTileType::Stone)
 	{
 		return PlayerItem::StoneItem;
+	}
+	else
+	{
+		return PlayerItem::Max;
 	}
 }
 void Player::WieldFarmObject()

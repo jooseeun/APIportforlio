@@ -22,8 +22,17 @@
 
 CoopLevel::CoopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
+	for (int _Num = 0; _Num < 4; _Num++)
+	{
+		Chicken_[_Num] = nullptr;
+	}
 }
 
 CoopLevel::~CoopLevel()
@@ -103,7 +112,7 @@ void CoopLevel::Update()
 void CoopLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Sound_ = GameEngineSound::SoundPlayControl("doorClose.wav");
-	Sound_.Volume(0.7);
+	Sound_.Volume(0.7f);
 	Player::MainPlayer->SetPosition({ 416.0f, 500.0f});
 	Player::MainPlayer->SetMapScale(1280.0f, 720.0f);
 	Player::MainPlayer->SetColMapName("CoopColMap.bmp");

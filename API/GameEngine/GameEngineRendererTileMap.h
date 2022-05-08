@@ -15,11 +15,17 @@ class GameEngineImage;
 class GameEngineRendererTileMap;
 class Tile
 {
+	
 	friend GameEngineRendererTileMap;
 private:
 	GameEngineRenderer* Renderer;
 
 public:
+	Tile()
+		:Renderer(nullptr)
+	{
+
+	}
 	virtual ~Tile() = 0
 	{
 

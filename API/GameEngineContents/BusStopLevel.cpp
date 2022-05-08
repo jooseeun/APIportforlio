@@ -20,8 +20,14 @@
 
 BusStopLevel::BusStopLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	Front_(nullptr),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
 }
 
 BusStopLevel::~BusStopLevel() 

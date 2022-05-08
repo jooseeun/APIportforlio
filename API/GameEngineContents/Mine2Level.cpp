@@ -25,8 +25,13 @@
 
 Mine2Level::Mine2Level() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
 }
 
 Mine2Level::~Mine2Level()

@@ -22,8 +22,17 @@
 
 BarnLevel::BarnLevel() :
 	CurSelectPivot_(1),
-	NextSelectPivot_(1)
+	NextSelectPivot_(1),
+	Back(nullptr)
 {
+	for (int _Num = 0; _Num < 13; _Num++)
+	{
+		ItemPos_[_Num] = PlayerItem::Max;
+	}
+	for (int _Num = 0; _Num < 4; _Num++)
+	{
+		Cow_[_Num] = nullptr;
+	}
 }
 
 BarnLevel::~BarnLevel()
@@ -103,7 +112,7 @@ void BarnLevel::Update()
 void BarnLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	sound = GameEngineSound::SoundPlayControl("doorClose.wav");
-	sound.Volume(0.7);
+	sound.Volume(0.7f);
 	Player::MainPlayer->SetPosition({ 797.0f,843.0f});
 	Player::MainPlayer->SetMapScale(1280.0f, 960.0f);
 	Player::MainPlayer->SetColMapName("BarnColMap.bmp");

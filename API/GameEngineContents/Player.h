@@ -16,6 +16,7 @@ public:
 		IsSeed_(false),
 		SeedDay_(0),
 		Isharvest_(false),
+		CropsActor_(nullptr),
 		DirtTilePosX_(-1),
 		DirtTilePosY_(-1)
 	{
@@ -195,8 +196,7 @@ private:
 private:
 	const char* ArrAnimationName[static_cast<int>(PlayerState::Max)];
 	float4 ArrCheckDir[static_cast<int>(PlayerDir::Max)];
-	int TileCheckDirX[static_cast<int>(PlayerDir::Max)];
-	int TileCheckDirY[static_cast<int>(PlayerDir::Max)];
+
 	float4 TileCheckDirPos();
 
 	PlayerState CurState_;

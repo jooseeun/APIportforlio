@@ -6,7 +6,15 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
 DropItem::DropItem()
-	:SellValue_(0)
+	:SellValue_(0),
+	IsStop_(false),
+	IndexNum_(0),
+	DropSeedType_(SeedType::Max),
+	DropItem_(PlayerItem::Max),
+	DropItemKind_(PlayerItemKind::NoItem),
+	CurDropItem_(PlayerItem::Max),
+	ObjectCol_(nullptr),
+	Object_(nullptr)
 {
 
 }
@@ -182,6 +190,10 @@ std::string DropItem::ItemToString(PlayerItem _Item)
 	IndexNum_ = 184;
 	SellValue_ = 300;
 	return "MilkItem";
+	}
+	else
+	{
+	return "";
 	}
 }
 void DropItem::Update()
