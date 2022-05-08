@@ -40,6 +40,11 @@ void ToolUI::Start()
 	InvenNumPivot_ = 61.0f;
 	InvenFloorPivot_ = 78.0f;
 
+	GoTitle_ = CreateCollision("GoTitle_", { 252,90 }, { 0,-214 });
+	Exit_ = CreateCollision("Exit_", { 190,80 }, { 0,-90 });
+	GoTitle_->CameraEffectOff();
+	Exit_->CameraEffectOff();
+
 	if (false == GameEngineInput::GetInst()->IsKey("Num1"))
 	{
 		GameEngineInput::GetInst()->CreateKey("Num1", '1');
@@ -176,6 +181,8 @@ void ToolUI::InvenONOFF()
 		Inventory_->Off();
 		ToolUI_->On();
 		Select_->On();
+		GoTitle_->Off();
+		Exit_->Off();
 		for (; InventoryStartIter != InventoryEndIter; ++InventoryStartIter)
 		{
 			(*InventoryStartIter)->Off();
@@ -192,7 +199,8 @@ void ToolUI::InvenONOFF()
 		Inventory_->On();
 		ToolUI_->Off();
 		Select_->Off();
-		
+		GoTitle_->On();
+		Exit_->On();
 		for (; ToolUIStartIter != ToolUIEndIter; ++ToolUIStartIter)
 		{
 			(*ToolUIStartIter)->Off();

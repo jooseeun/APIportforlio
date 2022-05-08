@@ -7,7 +7,7 @@ class GameEngineSound;
 class TitleLogo : public GameEngineActor
 {
 public:
-	static TitleLogo* TitleLogoSet;
+
 	// constrcuter destructer
 	TitleLogo();
 	~TitleLogo();

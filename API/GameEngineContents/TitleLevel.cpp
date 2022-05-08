@@ -14,7 +14,8 @@
 
 TitleLevel::TitleLevel()
 	:count(0),
-	IsBGM_(false)
+	IsBGM_(false),
+	IsCreate_(false)
 {
 }
 
@@ -39,22 +40,24 @@ void TitleLevel::Update()
 		IsBGM_ = true;
 	}
 
-	if (TitleBackGround::TitleBackGroundSet->IsLogo() == true)
+	if (TitleBackGround::TitleBackGroundSet->IsLogo() == true&& IsCreate_==false)
 	{
-		if (TitleLogo::TitleLogoSet == nullptr)
-		{
-			TitleLogo::TitleLogoSet= CreateActor<TitleLogo>(1, "TitleLogo");
-		}
+
+		Logo = CreateActor<TitleLogo>(1, "TitleLogo");
+		IsCreate_=true;
 		
 	}
 }
 
 void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-
+	IsCreate_ = false;
 }
 
 void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
+	
+	Logo->Death();
+	Logo = nullptr;
 	BgmPlayer.Stop();
 }

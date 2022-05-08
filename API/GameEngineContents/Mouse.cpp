@@ -250,7 +250,18 @@ void Mouse::CheckPlayerIsLeftMouse()
 
 		if (true == ToolUI::ToolUISet->GetIsInventory() || true == Tool::ToolSet->IsShopCheck())
 		{
-			if (true == GetMouseCol()->CollisionCheck("Inven1Col", CollisionType::Rect, CollisionType::Rect))
+			if (true == GetMouseCol()->CollisionCheck("GoTitle_", CollisionType::Rect, CollisionType::Rect))
+			{
+				GameEngine::GetInst().ChangeLevel("TitleLevel");
+			}
+			else if (true == GetMouseCol()->CollisionCheck("Exit_", CollisionType::Rect, CollisionType::Rect))
+			{
+				GameEngineWindow::GetInst().Off();
+				GameEngineSound::SoundPlayOneShot("select.wav");
+			}
+
+
+			else if (true == GetMouseCol()->CollisionCheck("Inven1Col", CollisionType::Rect, CollisionType::Rect))
 			{
 				Tool::ToolSet->SetClickItem(0);
 			}

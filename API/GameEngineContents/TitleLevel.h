@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
+class TitleLogo;
 class TitleLevel : public GameEngineLevel
 {
 public:
@@ -24,6 +25,8 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
+	bool IsCreate_;
+	TitleLogo* Logo;
 	int count;
 	bool IsBGM_;
 };

@@ -40,6 +40,8 @@ public:
 protected:
 
 private:
+	GameEngineCollision* GoTitle_;
+	GameEngineCollision* Exit_;
 	GameEngineSoundPlayer Sound_;
 	int ClickPivot_;
 	bool IsClickItem_;

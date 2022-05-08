@@ -12,7 +12,6 @@
 #include <GameEngineBase/GameEngineSound.h>
 
 
-TitleLogo* TitleLogo::TitleLogoSet = nullptr;
 
 TitleLogo::TitleLogo()
 	:hide_(false),
