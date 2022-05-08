@@ -1191,6 +1191,15 @@ void Player::WieldFarmObject()
 		}
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Branch)
 		{
+			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "GroundAni");
+			if (CurDir_ == PlayerDir::Back)
+			{
+				TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+			}
+
+			TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+			TileAni_->SetAniString("GroundAni");
+
 			Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
@@ -1206,6 +1215,15 @@ void Player::WieldFarmObject()
 
 		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
+			TileAnimation* TileAni_ = GetLevel()->CreateActor<TileAnimation>(static_cast<int>(ORDER::PLAYER), "GroundAni");
+			if (CurDir_ == PlayerDir::Back)
+			{
+				TileAni_->SetOrder(static_cast<int>(ORDER::BACKEFFECT));
+			}
+
+			TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
+			TileAni_->SetAniString("GroundAni");
+
 			_Tile->DeathCount_ -= 1;
 			if (_Tile->DeathCount_ != 0 )
 			{
@@ -1219,7 +1237,8 @@ void Player::WieldFarmObject()
 				if (_Tile->DeathCount_ == 3)
 				{
 					_Tile->TreeTop_->Death();
-
+					BgmPlayer = GameEngineSound::SoundPlayControl("barrelBreak.wav");
+					BgmPlayer.Volume(0.8f);
 					DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 					DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 					DropItem_->SetItem(PlayerItem::BranchItem);
@@ -1233,7 +1252,8 @@ void Player::WieldFarmObject()
 			Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->IsDestroy_ = true; 
-
+			BgmPlayer = GameEngineSound::SoundPlayControl("barrelBreak.wav");
+			BgmPlayer.Volume(0.8f);
 			DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 			DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 			DropItem_->SetItem(PlayerItem::BranchItem);
