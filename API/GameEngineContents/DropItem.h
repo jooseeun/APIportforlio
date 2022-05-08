@@ -2,6 +2,7 @@
 #include "PlayerEnum.h"
 #include "Tool.h"
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 class DropItem : public GameEngineActor
 {
@@ -32,7 +33,7 @@ private:
 	float4 Move_;
 	bool IsStop_;
 
-
+	GameEngineSoundPlayer Sound_;
 	SeedType DropSeedType_;
 	PlayerItemKind DropItemKind_;
 	PlayerItem DropItem_;

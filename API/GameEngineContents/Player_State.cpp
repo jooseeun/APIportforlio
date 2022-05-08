@@ -206,7 +206,6 @@ void Player::WalkUpdate()
 
 void Player::IdleStart()
 {
-	FootStep.Stop();
 	SetIsLeftMouseOFF();
 }
 
@@ -224,23 +223,14 @@ void Player::HitStart()
 
 	if (CurItem_ == PlayerItem::LongSwordItem)
 	{
-
+		
 		LongSwordColCheck();
 	}
 }
 
 void Player::WalkStart()
 {
-	//if (GetLevel()->GetNameCopy() == "FarmHouseLevel")
-	//{
-	//	FootStep = GameEngineSound::SoundPlayControl("thudStep.wav", 10000);
-	//	FootStep.Volume(0.6);
-	//}
-	//else
-	//{
-	//	FootStep=GameEngineSound::SoundPlayControl("grassyStep.wav",10000);
 
-	//}
 }
 
 void Player::WieldStart()
@@ -267,6 +257,8 @@ void Player::WieldStart()
 	
 		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 80), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 65) });
 		TileAni_->SetAniString("GroundAni");
+		Sound_ = GameEngineSound::SoundPlayControl("hoe.wav");
+		Sound_.Volume(0.8f);
 	}
 	
 	
@@ -280,6 +272,9 @@ void Player::WieldStart()
 
 void Player::WaterStart()
 {
+	Sound_ = GameEngineSound::SoundPlayControl("slug1.wav");
+	Sound_.Volume(0.8f);
+
 	if (GetLevel()->GetNameCopy() == "FarmLevel")
 	{
 		TileCheckDir();

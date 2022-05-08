@@ -67,7 +67,7 @@ void FarmHouseLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("CheckTest"))
 	{
-		GameEngine::GetInst().ChangeLevel("AnimalShopLevel");
+		GameEngine::GetInst().ChangeLevel("Mine1Level");
 	}
 	GetItemPos();
 
@@ -89,7 +89,7 @@ void FarmHouseLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		sound.Volume(0.7);
 
 	}
-	else if (_PrevLevel->GetNameCopy() == "TitleLevel")
+	else
 	{
 		Player::MainPlayer->SetPosition({ 750.0f,520.f });
 		PlayHelpBar* Front_ = CreateActor<PlayHelpBar>(static_cast<int>(ORDER::FRONTUI));

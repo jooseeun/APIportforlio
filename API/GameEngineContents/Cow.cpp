@@ -49,9 +49,11 @@ void Cow::Update()
 	}
 	if (FirstDay_ != Time::TimeSet->GetGameDay_() && IsBaby_ == true)
 	{
-		IsBaby_ = false;
 		FirstHour_ = Time::TimeSet->GetGameHour_();
 		CowRender_->ChangeAnimation(GetDirString());
+		Sound_ = GameEngineSound::SoundPlayControl("cow_moo1.wav");
+		Sound_.Volume(0.7f);
+		IsBaby_ = false;
 	}
 	if (IsBaby_ == false)
 	{
@@ -67,8 +69,11 @@ void Cow::Update()
 		if (true == GameEngineInput::GetInst()->IsDown("LeftMouse"))
 		{
 			if (true == CowCol_->NextPosCollisionCheck("MouseCol", { GetLevel()->GetCameraPos().x * M.x ,GetLevel()->GetCameraPos().y * M.y },
-				CollisionType::Rect, CollisionType::Rect))//카메라 이펙트 꺼져있는건 이렇게 충돌체크해야됨
+				CollisionType::Rect, CollisionType::Rect))
 			{
+
+				Sound_ = GameEngineSound::SoundPlayControl("cow_moo1.wav");
+				Sound_.Volume(0.7f);
 				CreateMilk();
 			}
 		}
@@ -86,6 +91,7 @@ void Cow::CreateMilk()
 		DropItem_->SetItem(PlayerItem::MilkItem);
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
 		IsMilk_ = false;
+
 	}
 
 }

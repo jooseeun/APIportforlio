@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "Time.h"
 // Ό³Έν :
 
@@ -47,6 +48,7 @@ public:
 protected:
 
 private:
+	GameEngineSoundPlayer Sound_;
 	bool IsBaby_;
 	int FirstDay_;
 	int FirstHour_;

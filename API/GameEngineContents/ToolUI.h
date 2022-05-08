@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class ToolUI : public GameEngineActor
@@ -39,7 +40,7 @@ public:
 protected:
 
 private:
-
+	GameEngineSoundPlayer Sound_;
 	int ClickPivot_;
 	bool IsClickItem_;
 

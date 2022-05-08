@@ -95,6 +95,8 @@ void AnimalShopUI::BuyCheck()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 			ChickenNum_ += 1;
 		}
@@ -103,9 +105,12 @@ void AnimalShopUI::BuyCheck()
 			int LeftMoney_ = (int)Money::MoneySet->GetMoney() - 600;
 			if (LeftMoney_ < 0)
 			{
+				
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 			CowNum_ += 1;
 		}

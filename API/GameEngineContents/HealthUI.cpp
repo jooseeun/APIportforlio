@@ -37,7 +37,10 @@ void HealthUI::UpdateEnergyValue()
 	if (PlayerHp_ <= 0)
 	{
 		PlayerHp_ = 100.0f;
+		Sound_ = GameEngineSound::SoundPlayControl("death.wav");
+		Sound_.Volume(0.8f);
 		GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+
 		//죽으면 집으로 돌아가기
 	}
 	// 만약 0이 사망

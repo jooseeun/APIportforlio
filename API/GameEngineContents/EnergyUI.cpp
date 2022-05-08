@@ -34,6 +34,13 @@ void EnergyUI::UpdateEnergyValue()
 	EnergyUIBar->SetScale({ 52, EnergyValue_ });
 	EnergyUIBar->CameraEffectOff();
 	// 만약 0이 되면 탈진
+	if (EnergyValue_ <= 0)
+	{
+		Sound_ = GameEngineSound::SoundPlayControl("death.wav");
+		Sound_.Volume(0.8f);
+		EnergyValue_ = 50;
+		GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
+	}
 }
 void EnergyUI::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {

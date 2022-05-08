@@ -228,8 +228,8 @@ void DropItem::MoveToPlayer()
 	{
 
 		Tool::ToolSet->CreateItem(CurDropItem_,DropItemKind_, "Objects.bmp", IndexNum_, SellValue_);
-
-
+		Sound_ = GameEngineSound::SoundPlayControl("coin.wav");
+		Sound_.Volume(0.8f);
 		Death();
 		return;
 	}

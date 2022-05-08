@@ -56,9 +56,14 @@ void Bug::DeathCheck()
 		{
 			Num4* Demage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DemageNum");
 			Demage_->SetPosition(GetPosition() + float4{ 0,-16 });
+			
 			IsDeath_ = true;
+
+			
 			return;
 		}
+		Sound_ = GameEngineSound::SoundPlayControl("slimeHit.wav");
+		Sound_.Volume(0.7f);
 		Num4* Demage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DemageNum");
 		Demage_->SetPosition(GetPosition() + float4{ 0,-16 });
 		Hit_ = true;
@@ -112,6 +117,8 @@ void Bug::MoveUpdate()
 			DropItem_->SetPosition(GetPosition());
 			DropItem_->SetItem(PlayerItem::BugItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			Sound_ = GameEngineSound::SoundPlayControl("monsterdead.wav");
+			Sound_.Volume(0.7f);
 			Death();
 		}
 		return;

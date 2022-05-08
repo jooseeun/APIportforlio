@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class GameEngineCollision;
@@ -23,6 +24,8 @@ public:
 protected:
 
 private:
+
+	GameEngineSoundPlayer Sound_;
 	GameEngineCollision* Chicken_;
 	GameEngineCollision* Cow_;
 	GameEngineRenderer* ChickenName_;

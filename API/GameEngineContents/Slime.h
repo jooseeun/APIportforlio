@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerEnum.h"
 #include <GameEngine/GameEngineRendererTileMap.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class GameEngineCollision;
@@ -24,6 +25,8 @@ public:
 protected:
 
 private:
+	GameEngineSoundPlayer Sound_;
+
 	bool IsDeath_;
 	bool Hit_;
 	bool Start_;

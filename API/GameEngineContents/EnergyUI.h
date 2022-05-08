@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 class EnergyUI :public GameEngineActor
 {
@@ -22,6 +23,7 @@ public:
 protected:
 
 private:
+	GameEngineSoundPlayer Sound_;
 	void UpdateEnergyValue();
 	float EnergyValue_;
 	GameEngineRenderer* EnergyUIBar;

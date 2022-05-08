@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 class NoMoney : public GameEngineActor
 {
@@ -17,6 +18,7 @@ public:
 protected:
 
 private:
+	GameEngineSoundPlayer Sound_;
 	void Start() override;
 	void Update() override;
 	float Time;

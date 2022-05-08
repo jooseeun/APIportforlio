@@ -40,7 +40,7 @@ protected:
 	void LevelChangeEnd(GameEngineLevel* _PrevLevel) override;
 
 private:
-	GameEngineSoundPlayer sound;
+	GameEngineSoundPlayer Sound_;
 	PlayerItem ItemPos_[13];
 	BackGround* Back;
 	Chicken* Chicken_[4];

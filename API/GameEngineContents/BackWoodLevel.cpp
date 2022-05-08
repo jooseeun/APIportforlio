@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "ToolUI.h"
 #include "ContentsEnums.h"
-#include "Mouse.h"
+#include "Money.h"
 #include "Time.h"
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
@@ -42,6 +42,7 @@ void BackWoodLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		Money::MoneySet = CreateActor<Money>(static_cast<int>(ORDER::UIFONT), "Money");
 
 	}
 }
@@ -82,6 +83,8 @@ void BackWoodLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		EnergyUI::EnergyUISet->NextLevelOn();
 		Tool::ToolSet->NextLevelOn();
 		Time::TimeSet->NextLevelOn();
+
+		Money::MoneySet->NextLevelOn();
 
 	}
 }

@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "ShopUIMoney.h"
 #include "Tool.h"
 
@@ -30,6 +31,7 @@ private:
 	int Page_;
 	void CheckPage();
 	void BuySeed();
+	GameEngineSoundPlayer Sound_;
 
 	GameEngineRenderer* ParsnipSeed_;
 	GameEngineRenderer* PhotatoSeed_;

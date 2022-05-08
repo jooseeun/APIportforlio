@@ -120,6 +120,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem( PlayerItem::ParsnipSeedItem, PlayerItemKind::SeedItem,  "Objects.bmp", 472, 20);
@@ -133,6 +135,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 		
@@ -147,6 +151,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::CauliFlowerSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 474, 80);
@@ -162,6 +168,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::BeanSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 473, 60);
@@ -175,6 +183,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::KaleSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 477, 70);
@@ -188,6 +198,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::BlueberrieSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 481, 80);
@@ -201,6 +213,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::MelonSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 479, 80);
@@ -214,6 +228,8 @@ void SeedShopUI::BuySeed()
 				GetLevel()->CreateActor<NoMoney>();
 				return;
 			}
+			Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+			Sound_.Volume(0.8f);
 			Money::MoneySet->SetMoney((size_t)LeftMoney_);
 
 			Tool::ToolSet->CreateItem(PlayerItem::PepperSeedItem, PlayerItemKind::SeedItem, "Objects.bmp", 482, 40);

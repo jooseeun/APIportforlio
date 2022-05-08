@@ -2,6 +2,7 @@
 
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineSound.h>
 // Ό³Έν :
 class HealthUI :public GameEngineActor
 {
@@ -24,6 +25,7 @@ public:
 protected:
 
 private:
+	GameEngineSoundPlayer Sound_;
 	void UpdateEnergyValue();
 	float PlayerHp_;
 	GameEngineRenderer* HealthBar_;

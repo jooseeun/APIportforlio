@@ -2,6 +2,7 @@
 #include "GameEngine/GameEngineRenderer.h"
 #include "GameEngine/GameEngineCollision.h"
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngineBase/GameEngineSound.h>
 #include "Tool.h"
 #include "FadeIn.h"
 
@@ -30,6 +31,7 @@ private:
 	int Page_;
 	void CheckPage();
 	void Create();
+	GameEngineSoundPlayer Sound_;
 	GameEngineRenderer* FadeIn_;
 	GameEngineRenderer* LeftButton_;
 	GameEngineRenderer* RightButton_;

@@ -140,7 +140,7 @@ public:
 	}
 private:
 	GameEngineSoundPlayer BgmPlayer;
-	GameEngineSoundPlayer FootStep;
+	GameEngineSoundPlayer Sound_;
 
 protected:
 private:

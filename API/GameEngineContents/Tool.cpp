@@ -115,34 +115,6 @@ void Tool::Start()
 		LongSword_->Click_ = false;
 		ItemList_.push_back(LongSword_);
 
-		ItemData* PhotatoSeed_ = new ItemData();
-		PhotatoSeed_->InvenPivot_ = 6;
-		PhotatoSeed_->ItemKind_ = PlayerItemKind::SeedItem;
-		PhotatoSeed_->ItemName_ = PlayerItem::PhatatoSeedItem;
-		PhotatoSeed_->Render = CreateRenderer("Objects.bmp");
-		PhotatoSeed_->Render->SetIndex(475);
-		PhotatoSeed_->Render->CameraEffectOff();
-		PhotatoSeed_->InvenFloor_ = InvenFloor::First;
-		PhotatoSeed_->IsSell_ = true;
-		PhotatoSeed_->SellValue_ = 50;
-		PhotatoSeed_->Click_ = false;
-		PhotatoSeed_->ItemCount_ = 1;
-		ItemList_.push_back(PhotatoSeed_);
-
-		ItemData* KaleSeed_ = new ItemData();
-		KaleSeed_->InvenPivot_ = 7;
-		KaleSeed_->ItemKind_ = PlayerItemKind::SeedItem;
-		KaleSeed_->ItemName_ = PlayerItem::KaleSeedItem;
-		KaleSeed_->Render = CreateRenderer("Objects.bmp");
-		KaleSeed_->Render->SetIndex(477);
-		KaleSeed_->Render->CameraEffectOff();
-		KaleSeed_->InvenFloor_ = InvenFloor::First;
-		KaleSeed_->Click_ = false;
-		KaleSeed_->IsSell_ = true;
-		KaleSeed_->SellValue_ = 70;
-		KaleSeed_->ItemCount_ = 4;
-		ItemList_.push_back(KaleSeed_);
-
 
 
 	}
@@ -364,6 +336,8 @@ void Tool::UpdateShopInvenPos()
 			}
 			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true) // 판매기능
 			{
+				Sound_ = GameEngineSound::SoundPlayControl("purchaseClick.wav");
+				Sound_.Volume(0.8f);
 				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_);
 				(*StartIter)->ItemCount_ -= 1;
 				(*StartIter)->Click_ = false;

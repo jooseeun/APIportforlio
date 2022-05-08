@@ -57,9 +57,12 @@ void Slime::DeathCheck()
 		{
 			Num4* Damage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DamageNum");
 			Damage_->SetPosition(GetPosition() + float4{ 0,-16 });
+			
 			IsDeath_ = true;
 			return;
 		}
+		Sound_ = GameEngineSound::SoundPlayControl("slimeHit.wav");
+		Sound_.Volume(0.7f);
 		Num4* Damage_ = GetLevel()->CreateActor<Num4>(static_cast<int>(ORDER::MONSTER), "DamageNum");
 		Damage_->SetPosition(GetPosition() + float4{ 0,-16 });
 
@@ -117,6 +120,8 @@ void Slime::MoveUpdate()
 			DropItem_->SetPosition(GetPosition());
 			DropItem_->SetItem(PlayerItem::SlimeItem);
 			DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+			Sound_ = GameEngineSound::SoundPlayControl("monsterdead.wav");
+			Sound_.Volume(0.7f);
 			Death();
 		}
 		return;

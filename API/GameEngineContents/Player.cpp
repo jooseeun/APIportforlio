@@ -510,6 +510,8 @@ bool Player::IsHoeTileCreate()
 {
 	TileCheckDir();
 
+	Sound_ = GameEngineSound::SoundPlayControl("hoeHit.wav");
+	Sound_.Volume(0.8f);
 	PlayerTile* Tile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 
 	if (nullptr == Tile && PlayerItem::HoeItem == CurItem_) // ¸Ç¶¥ÀÌ¶ó¸é
@@ -545,7 +547,8 @@ bool Player::IsWaterTileCreate()
 bool Player::IsSeedTileCreate()
 {
 	TileCheckDir();
-
+	Sound_ = GameEngineSound::SoundPlayControl("sandstep2.wav");
+	Sound_.Volume(0.8f);
 	PlayerTile* GroundTile = GroundTileMap_->GetTile<PlayerTile>(TileIndexX_, TileIndexY_);
 	if (nullptr == GroundTile)
 	{
@@ -673,6 +676,8 @@ void Player::CropsHarvest()
 	DropItem_->SetItemKind(_Tile->CropsActor_->ItemKind_);
 	_Tile->Isharvest_ = false;
 	CropsTileMap_->DeleteTile(TileIndexX_, TileIndexY_);
+	Sound_ = GameEngineSound::SoundPlayControl("cut.wav");
+	Sound_.Volume(0.8f);
 }
 void Player::CropsGrowUpdate()
 {
@@ -946,6 +951,7 @@ void Player::HitObject()
 		EnvironmentTile* _Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->GetTile<EnvironmentTile>(TileIndexX_, TileIndexY_);
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Grass)
 		{
+			Sound_ = GameEngineSound::SoundPlayControl("cut.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
@@ -996,7 +1002,7 @@ void Player::WieldMineObject()
 		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 20), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 20) });
 		TileAni_->SetAniString("StoneAni");
 		//_Tile->IsDestroy_ = true;
-
+		Sound_ = GameEngineSound::SoundPlayControl("hammer.wav");
 		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 20) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 20) });
 
@@ -1023,7 +1029,7 @@ void Player::WieldMineObject()
 		TileAni_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 35), (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 35) });
 		TileAni_->SetAniString("StoneAni");
 		//_Tile->IsDestroy_ = true;
-
+		Sound_ = GameEngineSound::SoundPlayControl("hammer.wav");
 		DropItem* DropItem_ = GetLevel()->CreateActor<DropItem>(static_cast<int>(ORDER::PLAYER));
 		DropItem_->SetPosition({ (static_cast<float>(TileIndexX_) + 0.5f) * (MapScaleX_ / 35) , (static_cast<float>(TileIndexY_) + 0.5f) * (MapScaleY_ / 35) });
 
@@ -1062,16 +1068,22 @@ void Player::LongSwordColCheck()
 
 	if (LongSwordCol_->CollisionCheck("Monster") == true)
 	{
+	
 		IsHit_ = true;
+	}
+	else
+	{
+		Sound_ = GameEngineSound::SoundPlayControl("cast.wav");
+		Sound_.Volume(0.8f);
 	}
 }
 void Player::MonsterCheck()
 {
 	if (PlayerMonsterCheckCol_->CollisionCheck("Monster"))
 	{
-
-
+		
 		HealthUI::HealthUISet->MinusPlayerHP();
+
 	}
 
 
@@ -1123,6 +1135,8 @@ void Player::WieldFarmObject()
 		}
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Stone)
 		{
+			Sound_ = GameEngineSound::SoundPlayControl("hammer.wav");
+			Sound_.Volume(0.8f);
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 
@@ -1154,6 +1168,7 @@ void Player::WieldFarmObject()
 		}
 		if (_Tile->EnvironmentType_ == EnvironmentTileType::Branch)
 		{
+			Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->TileCol_->Death();
 			//_Tile->IsDestroy_ = true;
@@ -1169,10 +1184,10 @@ void Player::WieldFarmObject()
 		else if (_Tile->EnvironmentType_ == EnvironmentTileType::Tree)
 		{
 			_Tile->DeathCount_ -= 1;
-
 			if (_Tile->DeathCount_ != 0 )
 			{
-
+				Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
+				Sound_.Volume(0.8f);
 				if (_Tile->DeathCount_ > 3)
 				{
 					_Tile->IsShake_ = true;
@@ -1192,7 +1207,7 @@ void Player::WieldFarmObject()
 				return;
 			}
 
-			
+			Sound_ = GameEngineSound::SoundPlayControl("axchop.wav");
 			_Tile = FarmObjectEnvironment::MainFarmObject->ReturnFarmTileObejctMap_()->CreateTile<EnvironmentTile>(TileIndexX_, TileIndexY_, "Objects.bmp", 23, static_cast<int>(ORDER::GROUND));
 			_Tile->IsDestroy_ = true; 
 
@@ -1376,13 +1391,13 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}	
 	if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("SeedShopLevel" == GetLevel()->GetNameCopy())
 	{
@@ -1393,25 +1408,25 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("MineEntryLevel" == GetLevel()->GetNameCopy()&& "Mine2Level" != _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Mines (Crystal Bells).mp3");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("MineEntryLevel" == _PrevLevel->GetNameCopy()&& "Town2Level" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Pelican Town.mp3");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("ForestLevel" == _PrevLevel->GetNameCopy() && "AnimalShopLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
-		BgmPlayer.Volume(0.7f);
+		BgmPlayer.Volume(0.6f);
 	}
 }
 

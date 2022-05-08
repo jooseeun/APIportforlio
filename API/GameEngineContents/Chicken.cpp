@@ -50,9 +50,11 @@ void Chicken::Update()
 	}
 	if (FirstDay_ != Time::TimeSet->GetGameDay_()&&IsBaby_==true)
 	{
-		IsBaby_ = false;
 		FirstHour_ = Time::TimeSet->GetGameHour_();
 		ChickenRender_->ChangeAnimation(GetDirString());
+		Sound_ = GameEngineSound::SoundPlayControl("chicken_cluck.wav");
+		Sound_.Volume(0.7f);
+		IsBaby_ = false;
 	}
 	else if (IsBaby_ == false)
 	{
@@ -77,6 +79,8 @@ void Chicken::CreateEgg()
 		DropItem_->SetPosition(GetPosition());
 		DropItem_->SetItem(PlayerItem::EggItem);
 		DropItem_->SetItemKind(PlayerItemKind::ObjectItem);
+		Sound_ = GameEngineSound::SoundPlayControl("chicken_cluck.wav");
+		Sound_.Volume(0.7f);
 		IsEgg_ = false;
 	}
 

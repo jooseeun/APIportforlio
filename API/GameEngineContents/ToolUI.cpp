@@ -156,10 +156,23 @@ void ToolUI::InvenONOFF()
 	if (true == GameEngineInput::GetInst()->IsDown("InvenSwitch"))
 	{
 		InventorySwitch();
+		if (false == GetIsInventory())
+		{
+			Sound_ = GameEngineSound::SoundPlayControl("bigDeSelect.wav");
+			Sound_.Volume(0.8f);
+		}
+		if (true == GetIsInventory())
+		{
+			Sound_ = GameEngineSound::SoundPlayControl("bigSelect.wav");
+			Sound_.Volume(0.8f);
+		}
+		
 	}
 
 	if (false == GetIsInventory())
 	{
+		
+
 		Inventory_->Off();
 		ToolUI_->On();
 		Select_->On();
@@ -175,6 +188,7 @@ void ToolUI::InvenONOFF()
 
 	else if (true == GetIsInventory())
 	{
+		
 		Inventory_->On();
 		ToolUI_->Off();
 		Select_->Off();

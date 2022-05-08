@@ -46,6 +46,7 @@ void ForestLevel::Loading()
 		EnergyUI::EnergyUISet = CreateActor<EnergyUI>((int)ORDER::UI, "EnergyUI");
 		Tool::ToolSet = CreateActor<Tool>(static_cast<int>(ORDER::ITEM), "Tool");
 		Time::TimeSet = CreateActor<Time>(static_cast<int>(ORDER::UI), "Time");
+		
 
 	}
 }

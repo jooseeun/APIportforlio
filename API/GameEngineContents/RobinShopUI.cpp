@@ -69,6 +69,8 @@ void RobinShopUI::Create()
 					GetLevel()->CreateActor<NoMoney>();
 					return;
 				}
+				Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+				Sound_.Volume(0.8f);
 				Money::MoneySet->SetMoney((size_t)LeftMoney_);
 				Coop::MainCoop->On();
 			}
@@ -81,6 +83,8 @@ void RobinShopUI::Create()
 					GetLevel()->CreateActor<NoMoney>();
 					return;
 				}
+				Sound_ = GameEngineSound::SoundPlayControl("coins.wav");
+				Sound_.Volume(0.8f);
 				Money::MoneySet->SetMoney((size_t)LeftMoney_);
 				Barn::MainBarn->On();
 			}
