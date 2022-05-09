@@ -21,7 +21,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(800.0f),
+	:Speed_(260.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
@@ -1486,23 +1486,25 @@ std::string Player::CheckSeedSting(SeedType _Type)
 }
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	MainPlayer = this;
+	
 
 	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{
+		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("spring_day.wav");
 		BgmPlayer.Volume(0.6f);
 	}	
-	if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
+	else if ("FarmHouseLevel" == _PrevLevel->GetNameCopy() && "FarmLevel" == GetLevel()->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Spring (It's A Big World Outside).mp3");
 		BgmPlayer.Volume(0.6f);
 	}
-	if ("SeedShopLevel" == GetLevel()->GetNameCopy())
+	if ("SeedShopLevel" == GetLevel()->GetNameCopy()&& "TownLevel" == _PrevLevel->GetNameCopy())
 	{
 		BgmPlayer.Stop();
 		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
+		BgmPlayer.Volume(0.6f);
 	}
 	if ("SeedShopLevel" == _PrevLevel->GetNameCopy()&& "TownLevel" == GetLevel()->GetNameCopy())
 	{
@@ -1528,6 +1530,8 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		BgmPlayer = GameEngineSound::SoundPlayControl("Country Shop.mp3");
 		BgmPlayer.Volume(0.6f);
 	}
+
+	MainPlayer = this;
 }
 
 void Player::IsDebugModeONOFF()
