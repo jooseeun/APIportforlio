@@ -206,6 +206,7 @@ void Player::WalkUpdate()
 
 void Player::IdleStart()
 {
+	FootStep_.Stop();
 	SetIsLeftMouseOFF();
 }
 
@@ -230,7 +231,26 @@ void Player::HitStart()
 
 void Player::WalkStart()
 {
-
+	if (GetLevel()->GetNameCopy() == "FarmHouseLevel" || GetLevel()->GetNameCopy() == "AnimalShopLevel" ||
+		GetLevel()->GetNameCopy() == "SeedShopLevel" || GetLevel()->GetNameCopy() == "RobinShopLevel"
+		|| GetLevel()->GetNameCopy() == "CoopLevel" || GetLevel()->GetNameCopy() == "BarnLevel")
+	{
+		FootStep_ = GameEngineSound::SoundPlayControl("woodyStep.wav", 10000000000);
+		FootStep_.Volume(0.45f);
+	}
+	else if (GetLevel()->GetNameCopy() == "MineEntryLevel"|| GetLevel()->GetNameCopy() == "Mine1Level"||
+		GetLevel()->GetNameCopy() == "Mine2Level")
+	{
+		FootStep_ = GameEngineSound::SoundPlayControl("stoneStep.wav", 10000000000);
+		FootStep_.Volume(0.35f);
+		FootStep_.PlaySpeed(0.9f);
+	}
+	else
+	{
+		FootStep_ = GameEngineSound::SoundPlayControl("sandyStep.wav", 10000000000);
+		FootStep_.Volume(0.5f);
+		FootStep_.PlaySpeed(0.9f);
+	}
 }
 
 void Player::WieldStart()

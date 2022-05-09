@@ -1487,6 +1487,7 @@ std::string Player::CheckSeedSting(SeedType _Type)
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	
+	FootStep_.Stop();
 
 	if ("TitleLevel" == _PrevLevel->GetNameCopy())
 	{

@@ -150,7 +150,7 @@ public:
 private:
 	GameEngineSoundPlayer BgmPlayer;
 	GameEngineSoundPlayer Sound_;
-
+	GameEngineSoundPlayer FootStep_;
 protected:
 private:
 	bool IsHit_;
