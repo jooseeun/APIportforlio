@@ -250,7 +250,7 @@ void PlayerCreate::Update()
 			Player::MainPlayer->CurShirts_ = CurShirts_;
 			GameEngine::GetInst().ChangeLevel("FarmHouseLevel");
 			GameEngineSound::SoundPlayOneShot("select.wav");
-			//Death();
+			Death();
 		}
 	}
 	

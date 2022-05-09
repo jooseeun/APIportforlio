@@ -99,7 +99,7 @@ private:
 	bool IsShop_;
 	void UpdateShopInvenPos();
 	void ShopUpdate();
-	std::list<ItemData*> ItemList_;
+	std::vector<ItemData*> ItemList_;
 	PlayerItem ItemPos_[24];
 	int ItemCount_[24];
 

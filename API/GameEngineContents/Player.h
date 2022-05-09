@@ -226,7 +226,7 @@ private:
 	GameEngineRendererTileMap* GroundTileMap_;
 	GameEngineRendererTileMap* CropsTileMap_;
 	GameEngineRendererTileMap* MineTileMap_;
-	std::list< PlayerTile*> IsCropsTile_;
+	std::vector< PlayerTile*> IsCropsTile_;
 
 	float4 CreateCropPos_;
 	int CropNum_;

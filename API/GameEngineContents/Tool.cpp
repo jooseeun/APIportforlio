@@ -24,20 +24,7 @@ Tool::Tool()
 
 Tool::~Tool()
 {
-	{
-		std::list<ItemData*>::iterator StartIter = Tool::ToolSet->ItemList_.begin();
-		std::list<ItemData*>::iterator EndIter = Tool::ToolSet->ItemList_.end();
 
-		for (; StartIter != EndIter; ++StartIter)
-		{
-			if (nullptr == (*StartIter))
-			{
-				continue;
-			}
-			delete (*StartIter);
-			(*StartIter) = nullptr;
-		}
-	}
 
 }
 void Tool::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -219,8 +206,6 @@ void Tool::CheckInventoryMode()
 
 void Tool::SetInventoryModePivot()
 {
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
 	if (true == IsInvenToryMode)
 	{
@@ -228,18 +213,18 @@ void Tool::SetInventoryModePivot()
 		InventoryModeYPivot_ = -484.0f;
 		NumPivot_ = 61.0f;
 
-		for (; StartIter != EndIter; ++StartIter)
+		for (int i = 0; i < ItemList_.size(); i++)
 		{
-			if (*StartIter == nullptr)
+			if (ItemList_[i] == nullptr)
 			{
 				continue;
 			}
-			if (InvenFloor::Second == (*StartIter)->InvenFloor_)
+			if (InvenFloor::Second == ItemList_[i]->InvenFloor_)
 			{
-				(*StartIter)->Render->On(); // 가방안에 있으면 Render꺼버림
-				if ((*StartIter)->NumRender != nullptr)
+				ItemList_[i]->Render->On(); // 가방안에 있으면 Render꺼버림
+				if (ItemList_[i]->NumRender != nullptr)
 				{
-					(*StartIter)->NumRender->On();
+					ItemList_[i]->NumRender->On();
 				}
 			}
 		}
@@ -251,18 +236,18 @@ void Tool::SetInventoryModePivot()
 		NumPivot_ = 64.0f;
 
 		{
-			for (; StartIter != EndIter; ++StartIter)
+			for (int i = 0; i < ItemList_.size(); i++)
 			{
-				if (*StartIter == nullptr)
+				if (ItemList_[i] == nullptr)
 				{
 					continue;
 				}
-				if (InvenFloor::Second == (*StartIter)->InvenFloor_)
+				if (InvenFloor::Second == ItemList_[i]->InvenFloor_)
 				{
-					(*StartIter)->Render->Off(); // 가방안에 있으면 Render꺼버림
-					if ((*StartIter)->NumRender != nullptr)
+					ItemList_[i]->Render->Off(); // 가방안에 있으면 Render꺼버림
+					if (ItemList_[i]->NumRender != nullptr)
 					{
-						(*StartIter)->NumRender->Off();
+						ItemList_[i]->NumRender->Off();
 					}
 				}
 			}
@@ -273,40 +258,39 @@ void Tool::SetInventoryModePivot()
 void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 {
 	SetInventoryModePivot();
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
-	for (; StartIter != EndIter; ++StartIter)
+
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 
-		if ((*StartIter)->IsInven == true)
+		if (ItemList_[i] ->IsInven == true)
 		{
-			if (0 >= (*StartIter)->ItemCount_)
+			if (0 >= ItemList_[i]->ItemCount_)
 			{
-				(*StartIter)->Render->Off();
-				(*StartIter)->NumRender->Off();
-				(*StartIter)->InvenPivot_ = 100;
-				(*StartIter)->IsInven = false;
+				ItemList_[i]->Render->Off();
+				ItemList_[i]->NumRender->Off();
+				ItemList_[i]->InvenPivot_ = 100;
+				ItemList_[i]->IsInven = false;
 			}
-			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
+			else if (PlayerItemKind::WieldItem == ItemList_[i]->ItemKind_ || PlayerItemKind::WaterItem == ItemList_[i]->ItemKind_)
 			{
-				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
-					28 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
+				ItemList_[i]->Render->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_),
+					28 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) });
 			}
 			else
 			{
-				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_),
-					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) });
+				ItemList_[i]->Render->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_),
+					0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) });
 				ItemCountRenderUpdate();
 			}
 
-			if (true == (*StartIter)->Click_)
+			if (true == ItemList_[i]->Click_)
 			{
-				(*StartIter)->Render->SetPivot({ MouseX_ - FirstPivot_ + 32 , MouseY_ - 664 + 32 });
+				ItemList_[i]->Render->SetPivot({ MouseX_ - FirstPivot_ + 32 , MouseY_ - 664 + 32 });
 			}
 		}
 	}
@@ -314,46 +298,45 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 void Tool::UpdateShopInvenPos()
 {
 	SetInventoryModePivot();
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
-	for (; StartIter != EndIter; ++StartIter)
+
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 
-		if ((*StartIter)->IsInven == true)
+		if (ItemList_[i]->IsInven == true)
 		{
-			if (0 >= (*StartIter)->ItemCount_)
+			if (0 >= ItemList_[i]->ItemCount_)
 			{
-				(*StartIter)->Render->Off();
-				(*StartIter)->NumRender->Off();
-				(*StartIter)->InvenPivot_ = 100;
-				(*StartIter)->IsInven = false;
+				ItemList_[i]->Render->Off();
+				ItemList_[i]->NumRender->Off();
+				ItemList_[i]->InvenPivot_ = 100;
+				ItemList_[i]->IsInven = false;
 
 			}
-			else if (true == (*StartIter)->Click_ && (*StartIter)->IsSell_ == true) // 판매기능
+			else if (true == ItemList_[i]->Click_ && ItemList_[i]->IsSell_ == true) // 판매기능
 			{
 				Sound_ = GameEngineSound::SoundPlayControl("purchaseClick.wav");
 				Sound_.Volume(0.8f);
-				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + (*StartIter)->SellValue_);
-				(*StartIter)->ItemCount_ -= 1;
-				(*StartIter)->Click_ = false;
+				Money::MoneySet->SetMoney(Money::MoneySet->GetMoney() + ItemList_[i]->SellValue_);
+				ItemList_[i]->ItemCount_ -= 1;
+				ItemList_[i]->Click_ = false;
 			}
 
-			else if (PlayerItemKind::WieldItem == (*StartIter)->ItemKind_ || PlayerItemKind::WaterItem == (*StartIter)->ItemKind_)
+			else if (PlayerItemKind::WieldItem == ItemList_[i]->ItemKind_ || PlayerItemKind::WaterItem == ItemList_[i]->ItemKind_)
 			{
-				(*StartIter)->Render->On();
-				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 148 ,
-					28 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
+				ItemList_[i]->Render->On();
+				ItemList_[i]->Render->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_) + 148 ,
+					28 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) - 145 });
 			}
 			else
 			{
-				(*StartIter)->Render->On(); //2번째줄아이들 상점에 렌더링하기위해서
-				(*StartIter)->Render->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 148,
-					0 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) - 145 });
+				ItemList_[i]->Render->On(); //2번째줄아이들 상점에 렌더링하기위해서
+				ItemList_[i]->Render->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_) + 148,
+					0 + InventoryModeYPivot_ + (InvenFloorShopYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) - 145 });
 				ItemCountRenderUpdate();
 			}
 
@@ -363,20 +346,18 @@ void Tool::UpdateShopInvenPos()
 }
 void Tool::ItemCountRender()
 {
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 
-		if ((*StartIter)->NumRender == nullptr)
+		if (ItemList_[i]->NumRender == nullptr)
 		{
-			(*StartIter)->NumRender = CreateRenderer("ItemCountNum.bmp");
-			(*StartIter)->NumRender->SetIndex(10);
+			ItemList_[i]->NumRender = CreateRenderer("ItemCountNum.bmp");
+			ItemList_[i]->NumRender->SetIndex(10);
 		}
 	}
 }
@@ -384,33 +365,31 @@ void Tool::ItemCountRenderUpdate()
 {
 	ItemCountRender();
 
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 
-		if ((*StartIter)->ItemCount_ > 1)
+		if (ItemList_[i]->ItemCount_ > 1)
 		{
 
-			(*StartIter)->NumRender->SetIndex((*StartIter)->ItemCount_);
+			ItemList_[i]->NumRender->SetIndex(ItemList_[i]->ItemCount_);
 		}
 
 		if (IsShop_ == true)//렌더링
 		{
-			(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24 + 148,
-				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 - 145 });
+			ItemList_[i]->NumRender->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_) + 24 + 148,
+				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) + 24 - 145 });
 		}
 		else
 		{
-			(*StartIter)->NumRender->SetPivot({ (NumPivot_ * (*StartIter)->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>((*StartIter)->InvenFloor_) + 24,
-				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>((*StartIter)->InvenFloor_)) + 24 });
+			ItemList_[i]->NumRender->SetPivot({ (NumPivot_ * ItemList_[i]->InvenPivot_) + InventoryModeXPivot_ - 12 * (NumPivot_) * static_cast<float>(ItemList_[i]->InvenFloor_) + 24,
+				0 + InventoryModeYPivot_ + (InvenFloorYPivot_ * static_cast<float>(ItemList_[i]->InvenFloor_)) + 24 });
 
 		}
-		(*StartIter)->NumRender->CameraEffectOff();
+		ItemList_[i]->NumRender->CameraEffectOff();
 
 	}
 
@@ -421,21 +400,19 @@ void Tool::CreateItem(PlayerItem _ItemName, PlayerItemKind _ItemKind, std::strin
 	_CreateItem->ItemKind_ = _ItemKind;
 	_CreateItem->ItemName_ = _ItemName;
 
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 
-		if (_CreateItem->ItemName_ == (*StartIter)->ItemName_ && (*StartIter)->ItemCount_ != 0) // 이미 아이템이 존재한다면 숫자 up
+		if (_CreateItem->ItemName_ == ItemList_[i]->ItemName_ && ItemList_[i]->ItemCount_ != 0) // 이미 아이템이 존재한다면 숫자 up
 		{
-			if ((*StartIter)->ItemCount_ + 1 < 10)
+			if (ItemList_[i]->ItemCount_ + 1 < 10)
 			{
-				(*StartIter)->ItemCount_ += 1;
+				ItemList_[i]->ItemCount_ += 1;
 
 
 				delete _CreateItem;
@@ -483,41 +460,40 @@ void Tool::SetClickItem(int _Pivot)
 {
 	// 클릭된 아이템 피봇을 받아 그 피폿을 true로 바꿈 -> 그러면 마우스 옆에 붙음
 
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
-	for (; StartIter != EndIter; ++StartIter)
+
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
 		if (IsShop_ == false)
 		{
-			if (true == (*StartIter)->Click_)
+			if (true == ItemList_[i]->Click_)
 			{
-				(*StartIter)->InvenPivot_ = _Pivot;
+				ItemList_[i]->InvenPivot_ = _Pivot;
 				if (_Pivot < 12)
 				{
-					(*StartIter)->InvenFloor_ = InvenFloor::First;
+					ItemList_[i]->InvenFloor_ = InvenFloor::First;
 				}
 				else if (_Pivot > 12 || _Pivot == 12)
 				{
-					(*StartIter)->InvenFloor_ = InvenFloor::Second;
+					ItemList_[i]->InvenFloor_ = InvenFloor::Second;
 				}
-				(*StartIter)->Click_ = false;
+				ItemList_[i]->Click_ = false;
 			}
 
-			else if (_Pivot == (*StartIter)->InvenPivot_)
+			else if (_Pivot == ItemList_[i]->InvenPivot_)
 			{
-				(*StartIter)->Click_ = true;
+				ItemList_[i]->Click_ = true;
 				Sound_ = GameEngineSound::SoundPlayControl("pickUpItem.wav");
 
 			}
 		}
 
-		else if (_Pivot == (*StartIter)->InvenPivot_)
+		else if (_Pivot == ItemList_[i]->InvenPivot_)
 		{
-			(*StartIter)->Click_ = true;
+			ItemList_[i]->Click_ = true;
 			Sound_ = GameEngineSound::SoundPlayControl("pickUpItem.wav");
 		}
 
@@ -526,8 +502,7 @@ void Tool::SetClickItem(int _Pivot)
 }
 void Tool::GetToolUINum()
 {
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
+
 
 	for (int i = 0; i < 24; i++)
 	{
@@ -535,32 +510,29 @@ void Tool::GetToolUINum()
 		ItemCount_[i] = 0;
 	}
 
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
-		ItemPos_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemName_;
-		ItemCount_[(*StartIter)->InvenPivot_] = (*StartIter)->ItemCount_;
+		ItemPos_[ItemList_[i]->InvenPivot_] = ItemList_[i]->ItemName_;
+		ItemCount_[ItemList_[i]->InvenPivot_] = ItemList_[i]->ItemCount_;
 	}
 
 }
 void Tool::ItemUse(PlayerItem _Item)
 {
-	std::list<ItemData*>::iterator StartIter = ItemList_.begin();
-	std::list<ItemData*>::iterator EndIter = ItemList_.end();
 
-
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0; i < ItemList_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (ItemList_[i] == nullptr)
 		{
 			continue;
 		}
-		if (_Item == (*StartIter)->ItemName_)
+		if (_Item == ItemList_[i]->ItemName_)
 		{
-			(*StartIter)->ItemCount_ -= 1;
+			ItemList_[i]->ItemCount_ -= 1;
 			return;
 		}
 	}

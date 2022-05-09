@@ -729,27 +729,24 @@ void Player::CropsGrowUpdate()
 {
 	if (CurDay_ != Time::TimeSet->GetGameDay_())
 	{
-		std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
-		std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
-
-		for (; StartIter != EndIter; ++StartIter)
+		for (int i=0; i<IsCropsTile_.size(); i++)
 		{
-			if (nullptr == *StartIter)
+			if (nullptr == IsCropsTile_[i])
 			{
 				continue;
 			}
 
-			else if (false == (*StartIter)->Isharvest_)
+			else if (false == IsCropsTile_[i]->Isharvest_)
 			{
-				if (TileType::WaterDirt == (*StartIter)->Dirt_) // 물을 줬을때
+				if (TileType::WaterDirt == IsCropsTile_[i]->Dirt_) // 물을 줬을때
 				{
-					CropsGrowDay(*StartIter);
+					CropsGrowDay(IsCropsTile_[i]);
 				}
 				else //물을 안줬을때
 				{
 					if (CurDay_ != Time::TimeSet->GetGameDay_())
 					{
-						(*StartIter)->SeedDay_ += 1;
+						IsCropsTile_[i]->SeedDay_ += 1;
 					}
 				}
 			}
@@ -765,21 +762,20 @@ void Player::CropsGrowUpdate()
 }
 void Player::DayChangeSetCrops()
 {
-	std::list<PlayerTile*>::iterator StartIter = IsCropsTile_.begin();
-	std::list<PlayerTile*>::iterator EndIter = IsCropsTile_.end();
+
 
 	PlayerTile* GroundTile;
-	for (; StartIter != EndIter; ++StartIter)
+	for (int i = 0;  i < IsCropsTile_.size(); i++)
 	{
-		if (*StartIter == nullptr)
+		if (IsCropsTile_[i] == nullptr)
 		{
 			continue;
 		}
-		if ((*StartIter)->DirtTilePosX_ > 0) // 수확된 타일은 검사 안하도록
+		if (IsCropsTile_[i]->DirtTilePosX_ > 0) // 수확된 타일은 검사 안하도록
 		{
-			GroundTile = GroundTileMap_->GetTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_);
-			GroundTile = GroundTileMap_->CreateTile<PlayerTile>((*StartIter)->DirtTilePosX_, (*StartIter)->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
-			(*StartIter)->Dirt_ = TileType::HoeDirt;
+			GroundTile = GroundTileMap_->GetTile<PlayerTile>(IsCropsTile_[i]->DirtTilePosX_, IsCropsTile_[i]->DirtTilePosY_);
+			GroundTile = GroundTileMap_->CreateTile<PlayerTile>(IsCropsTile_[i]->DirtTilePosX_, IsCropsTile_[i]->DirtTilePosY_, "hoeDirt.bmp", 0, static_cast<int>(ORDER::GROUND));
+			IsCropsTile_[i]->Dirt_ = TileType::HoeDirt;
 			GroundTile->Dirt_ = TileType::HoeDirt; //마른땅으로 초기화
 		}
 	}
