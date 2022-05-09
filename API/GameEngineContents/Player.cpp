@@ -21,7 +21,7 @@
 Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	:Speed_(260.0f),
+	:Speed_(290.0f),
 	IsLeftMouse(false),
 	ColMap_(" "),
 	CurDir_(PlayerDir::Front),
@@ -509,6 +509,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("RightWalk", 'D');
 		GameEngineInput::GetInst()->CreateKey("BackWalk", 'W');
 		GameEngineInput::GetInst()->CreateKey("FrontWalk", 'S');
+		GameEngineInput::GetInst()->CreateKey("SpeedOn", 'R');
 		GameEngineInput::GetInst()->CreateKey("DebugONOFF", 'Q');
 	}
 }
@@ -1540,5 +1541,16 @@ void Player::IsDebugModeONOFF()
 	if (true == GameEngineInput::GetInst()->IsDown("DebugONOFF"))
 	{
 		GetLevel()->IsDebugModeSwitch();
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("SpeedOn"))
+	{
+		if (Speed_ == 290.0f)
+		{
+			Speed_ = 700.0f;
+		}
+		else
+		{
+			Speed_ = 290.0f;
+		}
 	}
 }
