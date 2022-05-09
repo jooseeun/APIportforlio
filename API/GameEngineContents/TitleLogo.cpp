@@ -108,6 +108,7 @@ void TitleLogo::Update()
 	{
 		if (true == StartCol_->CollisionCheck("MouseCol", CollisionType::Rect, CollisionType::Rect))
 		{
+			GameEngineSound::SoundPlayOneShot("select.wav");
 			hide_ = true;
 		}
 

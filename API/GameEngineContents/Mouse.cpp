@@ -256,8 +256,8 @@ void Mouse::CheckPlayerIsLeftMouse()
 			}
 			else if (true == GetMouseCol()->CollisionCheck("Exit_", CollisionType::Rect, CollisionType::Rect))
 			{
-				GameEngineWindow::GetInst().Off();
 				GameEngineSound::SoundPlayOneShot("select.wav");
+				GameEngineWindow::GetInst().Off();
 			}
 
 
