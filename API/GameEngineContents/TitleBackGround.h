@@ -40,5 +40,8 @@ private:
 	GameEngineRenderer* TitleFish_;
 	GameEngineRenderer* Title1_;
 	GameEngineRenderer* Title2_;
+	GameEngineRenderer* TreeRight_;
+	GameEngineRenderer* TreeLeft_;
+	GameEngineRenderer* TitleCloud_;
 };
 

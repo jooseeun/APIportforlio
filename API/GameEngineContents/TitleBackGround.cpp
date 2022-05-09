@@ -11,7 +11,10 @@ TitleBackGround::TitleBackGround()
 	Check_(false),
 	YPivot_(-248.0f),
 	StartLogo_(false),
-	IsBGM_(false)
+	IsBGM_(false),
+	TreeRight_(nullptr),
+	TreeLeft_(nullptr),
+	TitleCloud_(nullptr)
 {
 	// Level_ = nullptr;
 }
@@ -90,8 +93,10 @@ void TitleBackGround::Update()
 		Check_ = false;
 	}
 
-	if (Time_ < 0.0f)
+	if (Time_ < 0.0f && Check_ == false)
 	{
+
+
 		if (YPivot_ <= 240)
 		{
 			YPivot_ += 1 * GameEngineTime::GetDeltaTime() * 100.f;
