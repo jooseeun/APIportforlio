@@ -272,7 +272,6 @@ void Tool::UpdateInvenPos() // 위치 항상 업데이트하는 기능
 			if (0 >= ItemList_[i]->ItemCount_)
 			{
 				ItemList_[i]->Render->Off();
-				ItemList_[i]->NumRender->Off();
 				ItemList_[i]->InvenPivot_ = 100;
 				ItemList_[i]->IsInven = false;
 			}
@@ -306,13 +305,17 @@ void Tool::UpdateShopInvenPos()
 		{
 			continue;
 		}
+		if (ItemList_[i]->IsInven == false)
+		{
+			ItemList_[i]->Render->Off();
+			ItemList_[i]->NumRender->Off();
+		}
 
 		if (ItemList_[i]->IsInven == true)
 		{
 			if (0 >= ItemList_[i]->ItemCount_)
 			{
 				ItemList_[i]->Render->Off();
-				ItemList_[i]->NumRender->Off();
 				ItemList_[i]->InvenPivot_ = 100;
 				ItemList_[i]->IsInven = false;
 
@@ -533,6 +536,10 @@ void Tool::ItemUse(PlayerItem _Item)
 		if (_Item == ItemList_[i]->ItemName_)
 		{
 			ItemList_[i]->ItemCount_ -= 1;
+			if (ItemList_[i]->ItemCount_ == 1)
+			{
+				ItemList_[i]->NumRender->Off();
+			}
 			return;
 		}
 	}
